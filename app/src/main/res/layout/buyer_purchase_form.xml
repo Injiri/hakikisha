@@ -1,0 +1,191 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <include layout="@layout/form_top_section_layout"/>
+
+    <TextView
+        android:padding="22dp"
+        android:textColor="@android:color/black"
+        android:textSize="16sp"
+        android:text="Purchase Platform"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+    <Spinner
+        android:padding="18dp"
+        android:id="@+id/purchase_platforms_spinner"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
+
+    <LinearLayout
+        android:paddingTop="22dp"
+        android:paddingBottom="22dp"
+        android:paddingStart="12dp"
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <ImageView
+            android:src="@drawable/ic_action_wallet_light"
+            android:layout_width="24dp"
+            android:layout_height="24dp" />
+
+        <EditText
+            android:textColor="@color/dark_grey"
+            android:textSize="16sp"
+            android:layout_marginStart="18dp"
+            android:background="@null"
+            android:hint="Enter Cost in Ksh"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:paddingTop="22dp"
+        android:paddingBottom="22dp"
+        android:paddingStart="12dp"
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <ImageView
+            android:src="@drawable/ic_action_wallet_light"
+            android:layout_width="24dp"
+            android:layout_height="24dp" />
+
+        <EditText
+            android:id="@+id/buyer_purchase_order_id_edit_text"
+            android:background="@null"
+            android:textColor="@color/dark_grey"
+            android:textSize="16sp"
+            android:layout_marginStart="18dp"
+            android:hint="Enter Order Id"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:paddingTop="22dp"
+        android:paddingBottom="22dp"
+        android:paddingStart="12dp"
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <ImageView
+            android:src="@drawable/ic_action_seller_light"
+            android:layout_width="24dp"
+            android:layout_height="24dp" />
+
+        <TextView
+            android:text="Select Seller"
+            android:textColor="@android:color/black"
+            android:textSize="16sp"
+            android:layout_marginStart="18dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:paddingTop="8dp"
+        android:paddingBottom="2dp"
+        android:paddingStart="12dp"
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <Spinner
+            android:textColor="@android:color/black"
+            android:textSize="16sp"
+            android:layout_marginStart="22dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+
+        <ImageView
+            android:layout_marginStart="12dp"
+            android:src="@drawable/ic_action_add_light"
+            android:layout_width="24dp"
+            android:layout_height="24dp" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:paddingTop="22dp"
+        android:paddingBottom="22dp"
+        android:paddingStart="12dp"
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <ImageView
+            android:src="@drawable/ic_action_list_light"
+            android:layout_width="24dp"
+            android:layout_height="24dp" />
+
+        <EditText
+            android:textColor="@color/dark_grey"
+            android:textSize="16sp"
+            android:layout_marginStart="18dp"
+            android:hint="Enter Product Description"
+            android:background="@null"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:paddingTop="22dp"
+        android:paddingBottom="22dp"
+        android:paddingStart="12dp"
+        android:orientation="horizontal"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+
+        <ImageView
+            android:src="@drawable/ic_action_close_light"
+            android:layout_width="24dp"
+            android:layout_height="24dp" />
+
+        <EditText
+            android:textColor="@color/dark_grey"
+            android:textSize="16sp"
+            android:layout_marginStart="18dp"
+            android:background="@null"
+            android:hint="Enter Delivery Address"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:paddingTop="22dp"
+        android:paddingBottom="22dp"
+        android:paddingStart="12dp"
+        android:orientation="horizontal"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+
+        <ImageView
+            android:src="@drawable/ic_action_close_light"
+            android:layout_width="24dp"
+            android:layout_height="24dp" />
+
+        <EditText
+            android:layout_marginStart="18dp"
+            android:textColor="@color/dark_grey"
+            android:textSize="16sp"
+            android:background="@null"
+            android:hint="Enter Quantity"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+    </LinearLayout>
+
+
+</LinearLayout>
