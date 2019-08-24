@@ -10,7 +10,7 @@
         android:layout_height="wrap_content">
 
         <androidx.appcompat.widget.Toolbar
-            android:id="@+id/buyer_dashboard_toolbar"
+            android:id="@+id/seller_dashboard_toolbar"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"/>
 
@@ -18,7 +18,7 @@
             android:textColor="@android:color/black"
             android:padding="8dp"
             android:textSize="18sp"
-            android:text="Today's Purchases"
+            android:text="Today's Orders"
             android:textAllCaps="true"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
@@ -33,7 +33,7 @@
             android:textColor="@android:color/black"
             android:padding="8dp"
             android:textSize="18sp"
-            android:text="Pending Purchases"
+            android:text="Pending Orders"
             android:textAllCaps="true"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
@@ -48,7 +48,7 @@
             android:textColor="@android:color/black"
             android:padding="8dp"
             android:textSize="18sp"
-            android:text="Complete Purchases"
+            android:text="Complete Orders"
             android:textAllCaps="true"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />

@@ -1,0 +1,215 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <include layout="@layout/form_top_section_layout"/>
+
+    <TextView
+        android:padding="22dp"
+        android:textColor="@android:color/black"
+        android:textSize="16sp"
+        android:text="Select category"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+    <Spinner
+        android:padding="18dp"
+        android:id="@+id/product_categories_spinner"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
+
+    <LinearLayout
+        android:paddingTop="22dp"
+        android:paddingBottom="22dp"
+        android:paddingStart="12dp"
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <ImageView
+            android:src="@drawable/ic_action_wallet_light"
+            android:layout_width="24dp"
+            android:layout_height="24dp" />
+
+        <EditText
+            android:textColor="@color/dark_grey"
+            android:textSize="16sp"
+            android:layout_marginStart="18dp"
+            android:background="@null"
+            android:hint="Enter Cost in Ksh"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:paddingTop="22dp"
+        android:paddingBottom="22dp"
+        android:paddingStart="12dp"
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <ImageView
+            android:src="@drawable/ic_action_quantity_light"
+            android:layout_width="24dp"
+            android:layout_height="24dp" />
+
+        <EditText
+            android:id="@+id/buyer_purchase_order_id_edit_text"
+            android:background="@null"
+            android:textColor="@color/dark_grey"
+            android:textSize="16sp"
+            android:layout_marginStart="18dp"
+            android:hint="Available Quantity"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:paddingTop="22dp"
+        android:paddingBottom="22dp"
+        android:paddingStart="12dp"
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <ImageView
+            android:src="@drawable/ic_arrow_camera_light"
+            android:layout_width="24dp"
+            android:layout_height="24dp" />
+
+        <TextView
+            android:background="@null"
+            android:textColor="@color/dark_grey"
+            android:textSize="16sp"
+            android:layout_marginStart="18dp"
+            android:hint="Take product photo"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:paddingTop="22dp"
+        android:paddingBottom="22dp"
+        android:paddingStart="12dp"
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <ImageView
+            android:src="@drawable/ic_arrow_fragile_light"
+            android:layout_width="24dp"
+            android:layout_height="24dp" />
+
+        <Switch
+            android:text="Fragile product"
+            android:textColor="@android:color/black"
+            android:textSize="16sp"
+            android:layout_marginStart="18dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:paddingTop="22dp"
+        android:paddingBottom="22dp"
+        android:paddingStart="12dp"
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <ImageView
+            android:src="@drawable/ic_arrow_umberella_light"
+            android:layout_width="24dp"
+            android:layout_height="24dp" />
+
+        <Switch
+            android:text="Perishable goods"
+            android:textColor="@android:color/black"
+            android:textSize="16sp"
+            android:layout_marginStart="18dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:paddingTop="22dp"
+        android:paddingBottom="22dp"
+        android:paddingStart="12dp"
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <ImageView
+            android:src="@drawable/ic_arrow_bubbles_light"
+            android:layout_width="24dp"
+            android:layout_height="24dp" />
+
+        <Switch
+            android:text="Second hand sale product"
+            android:textColor="@android:color/black"
+            android:textSize="16sp"
+            android:layout_marginStart="18dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+    </LinearLayout>
+
+
+    <LinearLayout
+        android:paddingTop="22dp"
+        android:paddingBottom="22dp"
+        android:paddingStart="12dp"
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <ImageView
+            android:src="@drawable/ic_action_text_light"
+            android:layout_width="24dp"
+            android:layout_height="24dp" />
+
+        <EditText
+            android:textColor="@color/dark_grey"
+            android:textSize="16sp"
+            android:layout_marginStart="18dp"
+            android:hint="Enter Product Description"
+            android:background="@null"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:paddingTop="22dp"
+        android:paddingBottom="22dp"
+        android:paddingStart="12dp"
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <ImageView
+            android:src="@drawable/ic_action_attachment_light"
+            android:layout_width="24dp"
+            android:layout_height="24dp" />
+
+        <EditText
+            android:textColor="@color/dark_grey"
+            android:textSize="16sp"
+            android:layout_marginStart="18dp"
+            android:hint="Add Attachments ... Receipts ... Delivery notes ... photos"
+            android:background="@null"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+    </LinearLayout>
+
+
+</LinearLayout>

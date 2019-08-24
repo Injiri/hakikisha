@@ -19,7 +19,14 @@
             </intent-filter>
         </activity>
         <activity android:name=".views.common.LoginActivity" />
-        <activity android:name=".views.buyer.ActivityBuyerDashboard" />
+        <activity android:name=".views.buyer.BuyerDashboard" />
+        <activity android:name=".views.seller.SellerDashboard" />
+        <activity android:name=".views.buyer.GoodsRejectActivity" />
+        <activity android:name=".views.buyer.MakePaymentActivity" />
+        <activity android:name=".views.seller.PaymentReceiptActivity" />
+        <activity android:name=".views.buyer.GoodsReceiptActivity" />
+        <activity android:name=".views.seller.RegisterOrderActivity" />
+        <activity android:name=".views.seller.RegisterProductActivity" />
     </application>
 
 </manifest>

@@ -30,7 +30,7 @@
         android:paddingBottom="18dp"
         android:id="@+id/event_title_edit_text"
         android:layout_marginTop="18dp"
-        android:hint="Product name"
+        android:hint="Amount Received"
         android:textColor="@color/dark_grey"
         android:textSize="24sp"
         android:background="@null"
