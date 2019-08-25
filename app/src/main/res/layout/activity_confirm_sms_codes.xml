@@ -1,14 +1,46 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout
+    android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:android="http://schemas.android.com/apk/res/android">
 
-    <androidx.appcompat.widget.Toolbar
-        android:id="@+id/confirm_sms_code_toolbar"
-        android:background="@color/colorPrimaryDark"
+    <TextView
+        android:id="@+id/verification_code_text_view"
+        android:gravity="center"
+        android:layout_margin="22dp"
+        android:textSize="26sp"
+        android:textColor="@android:color/black"
+        android:text="@string/please_enter_the_verification_code_sent_to_s"
         android:layout_width="match_parent"
-        android:layout_height="?attr/actionBarSize"/>
+        android:layout_height="wrap_content" />
+
+    <ImageView
+        android:layout_gravity="center_horizontal"
+        android:src="@drawable/shield"
+        android:layout_marginBottom="38dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+
+    <include layout="@layout/verification_code_view"/>
+
+    <ImageView
+        android:id="@+id/wrong_code_image_view"
+        android:layout_marginTop="16dp"
+        android:layout_marginBottom="16dp"
+        android:layout_gravity="center_horizontal"
+        android:src="@drawable/ic_action_cnacel_light"
+        android:layout_width="100dp"
+        android:layout_height="100dp" />
+
+    <Button
+        android:id="@+id/submit_verification_code_button"
+        android:layout_margin="21dp"
+        android:text="Submit"
+        android:textColor="@android:color/white"
+        android:background="@drawable/blue_curved_background"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
 
 
 </LinearLayout>
