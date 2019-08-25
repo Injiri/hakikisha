@@ -172,7 +172,7 @@
         android:layout_height="wrap_content">
 
         <ImageView
-            android:src="@drawable/ic_action_close_light"
+            android:src="@drawable/ic_action_quantity_light"
             android:layout_width="24dp"
             android:layout_height="24dp" />
 

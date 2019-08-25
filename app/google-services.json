@@ -1,0 +1,69 @@
+{
+  "project_info": {
+    "project_number": "661573172367",
+    "firebase_url": "https://consulting-projects-e722f.firebaseio.com",
+    "project_id": "consulting-projects-e722f",
+    "storage_bucket": "consulting-projects-e722f.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:661573172367:android:2aa67bce4c8ee490",
+        "android_client_info": {
+          "package_name": "org.aplusscreators.hakikisha"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "661573172367-bepbkqqr683o99sv763s228qant0fu7r.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDXgGak8poQs-DvFhkwTH9_OdN5K9RcyEk"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "661573172367-bepbkqqr683o99sv763s228qant0fu7r.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:661573172367:android:7e1d310f14e9244f",
+        "android_client_info": {
+          "package_name": "org.aplusscreators.nabacab"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "661573172367-bepbkqqr683o99sv763s228qant0fu7r.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDXgGak8poQs-DvFhkwTH9_OdN5K9RcyEk"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "661573172367-bepbkqqr683o99sv763s228qant0fu7r.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

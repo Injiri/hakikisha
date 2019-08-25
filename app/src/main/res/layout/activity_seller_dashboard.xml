@@ -11,6 +11,7 @@
 
         <androidx.appcompat.widget.Toolbar
             android:id="@+id/seller_dashboard_toolbar"
+            android:background="@color/colorPrimaryDark"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"/>
 
@@ -24,45 +25,10 @@
             android:layout_height="wrap_content" />
 
         <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/today_orders_recycler_view"
+            android:id="@+id/orders_recycler_view"
             android:paddingTop="12dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"/>
-
-        <TextView
-            android:textColor="@android:color/black"
-            android:padding="8dp"
-            android:textSize="18sp"
-            android:text="Pending Orders"
-            android:textAllCaps="true"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
-
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/pending_orders_recycler_view"
-            android:paddingTop="12dp"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"/>
-
-        <TextView
-            android:textColor="@android:color/black"
-            android:padding="8dp"
-            android:textSize="18sp"
-            android:text="Complete Orders"
-            android:textAllCaps="true"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
-
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/complete_orders_recycler_view"
-            android:paddingTop="12dp"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"/>
-
-        <com.google.android.material.floatingactionbutton.FloatingActionButton
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
-
 
     </LinearLayout>
 

@@ -27,6 +27,9 @@
         <activity android:name=".views.buyer.GoodsReceiptActivity" />
         <activity android:name=".views.seller.RegisterOrderActivity" />
         <activity android:name=".views.seller.RegisterProductActivity" />
+        <activity android:name=".views.buyer.BuyerProfileFormActivity" />
+        <activity android:name=".views.seller.SellerProfileFormActivity" />
+        <activity android:name=".views.common.ConfirmationCodesActivity" />
     </application>
 
 </manifest>
