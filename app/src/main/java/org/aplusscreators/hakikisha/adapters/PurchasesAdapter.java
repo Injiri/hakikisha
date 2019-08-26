@@ -40,25 +40,6 @@ public class PurchasesAdapter extends RecyclerView.Adapter<PurchasesAdapter.View
         return new ViewHolder(view, onTaskClickedListener);
     }
 
-    private String getTodayAM_PM(){
-        String today = "";
-
-        String AM_PM = "";
-        Calendar calendar = Calendar.getInstance();
-        boolean isAm = calendar.get(Calendar.AM_PM) == Calendar.AM;
-        boolean isPm = calendar.get(Calendar.AM_PM) == Calendar.PM;
-
-        AM_PM = isAm ? "AM" : "PM";
-
-        String hour = Integer.toString(calendar.get(Calendar.HOUR_OF_DAY));
-        String minute = Integer.toString(calendar.get(Calendar.MINUTE));
-
-        today = String.format(context.getResources().getConfiguration().locale,"%s:%s %s",hour,minute,AM_PM);
-
-        return today;
-
-    }
-
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         ViewHolder viewHolder = (ViewHolder) holder;

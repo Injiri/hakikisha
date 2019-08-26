@@ -10,7 +10,6 @@ import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ProgressBar;
 import android.widget.Spinner;
-import android.widget.SpinnerAdapter;
 import android.widget.TextView;
 import android.widget.TimePicker;
 import android.widget.Toast;
@@ -19,6 +18,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.AppCompatRatingBar;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -27,62 +27,66 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
 import org.aplusscreators.hakikisha.R;
+import org.aplusscreators.hakikisha.adapters.OrdersFormAdapter;
+import org.aplusscreators.hakikisha.adapters.SellerFormAdapter;
 import org.aplusscreators.hakikisha.model.BadGoodsReport;
+import org.aplusscreators.hakikisha.model.Order;
+import org.aplusscreators.hakikisha.model.Seller;
 import org.aplusscreators.hakikisha.settings.HakikishaPreference;
 import org.aplusscreators.hakikisha.utils.DateTimeUtils;
 
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.List;
 import java.util.UUID;
 
 public class GoodsRejectActivity extends AppCompatActivity {
 
     SimpleDateFormat simpleDateFormat = new SimpleDateFormat("EEE MMM dd, yyyy");
-    Spinner orderIdSpinner;
+
+    RecyclerView ordersRecyclerView;
     Spinner rejectGoodsReasonSpinner;
     TextView deliveryDateEditText;
     TextView deliveryTimeEditText;
-    Spinner selectSellerSpinner;
-    EditText addAttachmentEditText;
+    RecyclerView sellerRecyclerView;
+    TextView addAttachmentEditText;
     AppCompatRatingBar rateServiceBar;
     EditText notesEditText;
     ProgressBar progressBar;
     Button submitButton;
     BadGoodsReport goodsReport;
-    String[] orderIds = {"222","111","333","444"};
-    String[] sellerCompanyNames = {"Jumier Branch Ltd","Good Ware Lts","Woolworth Co."};
+
+    OrdersFormAdapter ordersAdapter;
+    SellerFormAdapter sellersAdapter;
+    List<Order> orders = new ArrayList<>();
+    List<Seller> sellers = new ArrayList<>();
+    Order selectedOrder = new Order();
+    Seller selectedSeller = new Seller();
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_goods_reject_form);
 
-        orderIdSpinner = findViewById(R.id.goods_reject_order_id_spinner);
-        rejectGoodsReasonSpinner = findViewById(R.id.reject_goods_reason_spinner);
+        ordersRecyclerView = findViewById(R.id.goods_reject_orders_recycler_view);
+        rejectGoodsReasonSpinner = findViewById(R.id.reject_goods_reason_recycler_view);
         deliveryDateEditText = findViewById(R.id.reject_goods_delivery_date_editText);
         deliveryTimeEditText = findViewById(R.id.reject_goods_delivery_time_editText);
-        selectSellerSpinner = findViewById(R.id.reject_goods_select_seller_spinner);
+        sellerRecyclerView = findViewById(R.id.reject_goods_select_seller_recyler_view);
         addAttachmentEditText = findViewById(R.id.reject_goods_add_attachment_view);
         rateServiceBar = findViewById(R.id.reject_goods_rating_bar);
         notesEditText = findViewById(R.id.reject_goods_more_note_edit_text);
         submitButton = findViewById(R.id.reject_goods_submit_button);
         progressBar = findViewById(R.id.submit_reject_goods_progress_bar);
 
-        ArrayAdapter<String> orderIdsAdapter = new ArrayAdapter<String>(
-                GoodsRejectActivity.this,android.R.layout.simple_spinner_dropdown_item,orderIds
-        );
-
         ArrayAdapter<String> rejectReasonAdapter = new ArrayAdapter<String>(
                 GoodsRejectActivity.this,android.R.layout.simple_spinner_dropdown_item,getResources().getStringArray(R.array.good_reject_reasons_arr)
         );
 
-        ArrayAdapter<String> sellerSpinnerAdapter = new ArrayAdapter<String>(
-                GoodsRejectActivity.this,android.R.layout.simple_spinner_dropdown_item,sellerCompanyNames
-        );
-
-        orderIdSpinner.setAdapter(orderIdsAdapter);
+        ordersRecyclerView.setAdapter(ordersAdapter);
         rejectGoodsReasonSpinner.setAdapter(rejectReasonAdapter);
-        selectSellerSpinner.setAdapter(sellerSpinnerAdapter);
+        sellerRecyclerView.setAdapter(sellersAdapter);
 
         goodsReport = new BadGoodsReport();
 
@@ -144,11 +148,11 @@ public class GoodsRejectActivity extends AppCompatActivity {
 
     private void extractAndSubmitData() {
         goodsReport.setUuid(UUID.randomUUID().toString());
-        goodsReport.setOrderId(orderIdSpinner.getSelectedItem().toString());
+        goodsReport.setOrderId(ordersRecyclerView.getSelectedItem().toString());
         goodsReport.setRejectReasone(rejectGoodsReasonSpinner.getSelectedItem().toString());
         goodsReport.setDeliveryDate(deliveryDateEditText.getText().toString());
         goodsReport.setDeliveryTime(deliveryTimeEditText.getText().toString());
-        goodsReport.setSellerName(selectSellerSpinner.getSelectedItem().toString());
+        goodsReport.setSellerName(sellerRecyclerView.getSelectedItem().toString());
         goodsReport.setSellerUuid(UUID.randomUUID().toString());
         goodsReport.setAttachmentUri(addAttachmentEditText.getText().toString());
         goodsReport.setRating(rateServiceBar.getRating());

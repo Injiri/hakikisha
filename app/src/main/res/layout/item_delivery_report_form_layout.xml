@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:padding="8dp"
+    android:id="@+id/item_delivery_report_parent_layout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <ImageView
+            android:id="@+id/item_delivery_report_image_view"
+            android:padding="6dp"
+            android:src="@drawable/ic_action_delivery_accepted_light"
+            android:layout_width="42dp"
+            android:layout_height="42dp" />
+
+        <TextView
+            android:id="@+id/item_delivery_report_status_text_view"
+            android:textColor="@android:color/black"
+            android:padding="6dp"
+            android:textSize="18sp"
+            android:text="Delivery Accepted"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/item_delivery_report_order_id_text_view"
+        android:layout_marginStart="52dp"
+        android:text="Order id: 1242"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+
+
+
+</LinearLayout>
