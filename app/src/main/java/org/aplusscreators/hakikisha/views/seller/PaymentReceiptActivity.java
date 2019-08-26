@@ -5,12 +5,10 @@ import android.app.TimePickerDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ProgressBar;
-import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.TimePicker;
 import android.widget.Toast;
@@ -19,6 +17,8 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.AppCompatRatingBar;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -27,34 +27,40 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
 import org.aplusscreators.hakikisha.R;
+import org.aplusscreators.hakikisha.adapters.BuyersFormAdapter;
+import org.aplusscreators.hakikisha.adapters.OrdersFormAdapter;
+import org.aplusscreators.hakikisha.model.Buyer;
+import org.aplusscreators.hakikisha.model.Order;
 import org.aplusscreators.hakikisha.model.PaymentReport;
+import org.aplusscreators.hakikisha.model.Seller;
 import org.aplusscreators.hakikisha.settings.HakikishaPreference;
 import org.aplusscreators.hakikisha.utils.DateTimeUtils;
-import org.aplusscreators.hakikisha.views.buyer.GoodsRejectActivity;
 
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.List;
 import java.util.UUID;
 
-public class PaymentReceiptActivity extends AppCompatActivity {
+public class PaymentReceiptActivity extends AppCompatActivity implements OrdersFormAdapter.OnOrderClickedListener, BuyersFormAdapter.OnBuyerClickedListener {
 
     SimpleDateFormat simpleDateFormat = new SimpleDateFormat("EEE MMM dd, yyyy");
 
     EditText amountReceivedEditText;
-    Spinner orderIdSpinner;
+    RecyclerView ordersRecyclerView;
     TextView receivedDateTextView;
     TextView receivedTimeTextView;
-    Spinner buyerSpinner;
+    RecyclerView buyerRecyclerView;
     EditText commentEditText;
     AppCompatRatingBar ratingBar;
     ProgressBar progressBar;
     Button submitButton;
     PaymentReport paymentReport;
-    ArrayAdapter<String> orderSpinnerAdapter;
-    ArrayAdapter<String> buyersSpinnerAdapter;
+    OrdersFormAdapter ordersAdapter;
+    BuyersFormAdapter buyersAdapter;
     View cancelView;
-    String[] orderIds = {"order-123-12","order-463-12","order-523-12"};
-    String[] buyerNames = {"Joel Mukami","Munai Munene"};
+    List<Order> orderList = new ArrayList<>();
+    List<Buyer> buyerList = new ArrayList<>();
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -62,26 +68,24 @@ public class PaymentReceiptActivity extends AppCompatActivity {
         setContentView(R.layout.activity_payment_receipt_form);
 
         amountReceivedEditText = findViewById(R.id.payment_receipt_amount_received_edit_text);
-        orderIdSpinner = findViewById(R.id.payment_receved_order_id_spinner);
+        ordersRecyclerView = findViewById(R.id.payment_receved_order_id_recyclerview);
         receivedDateTextView = findViewById(R.id.payment_receved_date_edit_text);
         receivedTimeTextView = findViewById(R.id.payment_receved_time_edit_text);
-        buyerSpinner = findViewById(R.id.payment_receved_buyer_spinner);
+        buyerRecyclerView = findViewById(R.id.payment_receved_buyer_recycler_view);
         commentEditText = findViewById(R.id.payment_receved_comments_edit_text);
         ratingBar = findViewById(R.id.payment_receved_rating_bar);
         progressBar = findViewById(R.id.payment_receipt_progress_bar);
         cancelView = findViewById(R.id.payment_receipt_cancel_button);
         submitButton = findViewById(R.id.payment_receved_submit_button);
 
-        orderSpinnerAdapter = new ArrayAdapter<>(
-                PaymentReceiptActivity.this,android.R.layout.simple_spinner_dropdown_item,orderIds
-        );
+        ordersAdapter = new OrdersFormAdapter(PaymentReceiptActivity.this,orderList,this);
+        buyersAdapter = new BuyersFormAdapter(PaymentReceiptActivity.this, buyerList,this);
 
-        buyersSpinnerAdapter = new ArrayAdapter<>(
-                PaymentReceiptActivity.this,android.R.layout.simple_spinner_dropdown_item,buyerNames
-        );
+        ordersRecyclerView.setLayoutManager(new LinearLayoutManager(PaymentReceiptActivity.this));
+        buyerRecyclerView.setLayoutManager(new LinearLayoutManager(PaymentReceiptActivity.this));
+        buyerRecyclerView.setAdapter(buyersAdapter);
+        ordersRecyclerView.setAdapter(ordersAdapter);
 
-        orderIdSpinner.setAdapter(orderSpinnerAdapter);
-        buyerSpinner.setAdapter(buyersSpinnerAdapter);
 
         paymentReport = new PaymentReport();
 
@@ -149,6 +153,42 @@ public class PaymentReceiptActivity extends AppCompatActivity {
                 datePickerDialog.show();
             }
         });
+
+        populateBuyersList();
+
+        populateOrdersRecyclerView();
+    }
+
+    private void populateOrdersRecyclerView(){
+        Order order = new Order();
+        order.setUuid(UUID.randomUUID().toString());
+        order.setCustomer_uuid("uuid");
+        order.setOrder_id("order-id-1232");
+
+        orderList.add(order);
+        orderList.add(order);
+        orderList.add(order);
+        orderList.add(order);
+
+        ordersAdapter.notifyDataSetChanged();
+    }
+
+    private void populateBuyersList(){
+        Buyer buyer = new Buyer();
+        buyer.setUuid(UUID.randomUUID().toString());
+        buyer.setFirstName("Michael");
+        buyer.setLastName("Obunga");
+        buyer.setEmail("munga@gmail.com");
+        buyer.setRating(3.2f);
+        buyer.setDob("dob");
+        buyer.setAddress_1("address 1");
+        buyer.setAddress_2("address 2");
+
+        buyerList.add(buyer);
+        buyerList.add(buyer);
+        buyerList.add(buyer);
+
+        buyersAdapter.notifyDataSetChanged();
     }
 
     private void extractAndSubmitData() {
@@ -186,5 +226,15 @@ public class PaymentReceiptActivity extends AppCompatActivity {
                 Toast.makeText(PaymentReceiptActivity.this,"Unable to save form, try again later...",Toast.LENGTH_LONG).show();
             }
         });
+    }
+
+    @Override
+    public void onOrderClicked(int position) {
+
+    }
+
+    @Override
+    public void onBuyerClicked(int position) {
+
     }
 }

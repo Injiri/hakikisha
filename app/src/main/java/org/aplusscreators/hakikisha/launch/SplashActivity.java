@@ -9,6 +9,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.google.firebase.FirebaseApp;
 
 import org.aplusscreators.hakikisha.settings.HakikishaPreference;
+import org.aplusscreators.hakikisha.views.buyer.GoodsRejectActivity;
 import org.aplusscreators.hakikisha.views.seller.PaymentReceiptActivity;
 
 import java.util.UUID;

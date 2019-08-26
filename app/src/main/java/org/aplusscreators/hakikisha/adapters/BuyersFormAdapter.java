@@ -23,10 +23,10 @@ public class BuyersFormAdapter extends RecyclerView.Adapter<BuyersFormAdapter.Vi
     List<Buyer> buyerList;
     OnBuyerClickedListener onBuyerClickedListener;
 
-    public BuyersFormAdapter(AppCompatActivity context, List<Buyer> buyerList, OnBuyerClickedListener onOrdersClickedListener) {
+    public BuyersFormAdapter(AppCompatActivity context, List<Buyer> buyerList, OnBuyerClickedListener onBuyerClickedListener) {
         this.context = context;
         this.buyerList = buyerList;
-        this.onBuyerClickedListener = onOrdersClickedListener;
+        this.onBuyerClickedListener = onBuyerClickedListener;
     }
 
     @NonNull
@@ -62,12 +62,12 @@ public class BuyersFormAdapter extends RecyclerView.Adapter<BuyersFormAdapter.Vi
 
         @Override
         public void onClick(View v) {
-            onBuyerClickedListener.onTaskClicked(getAdapterPosition());
+            onBuyerClickedListener.onBuyerClicked(getAdapterPosition());
         }
     }
 
     public interface OnBuyerClickedListener {
 
-        public void onTaskClicked(int position);
+        public void onBuyerClicked(int position);
     }
 }

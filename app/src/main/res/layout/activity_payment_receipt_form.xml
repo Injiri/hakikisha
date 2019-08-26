@@ -23,9 +23,9 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content" />
 
-            <Spinner
-                android:padding="18dp"
-                android:id="@+id/payment_receved_order_id_spinner"
+            <androidx.recyclerview.widget.RecyclerView
+                android:padding="6dp"
+                android:id="@+id/payment_receved_order_id_recyclerview"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"/>
 
@@ -110,8 +110,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
 
-                <Spinner
-                    android:id="@+id/payment_receved_buyer_spinner"
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/payment_receved_buyer_recycler_view"
                     android:textColor="@android:color/black"
                     android:textSize="16sp"
                     android:layout_marginStart="44dp"

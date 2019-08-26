@@ -22,19 +22,19 @@ public class SellerFormAdapter extends RecyclerView.Adapter<SellerFormAdapter.Vi
 
     AppCompatActivity context;
     List<Seller> sellerList;
-    SellerFormAdapter.OnTaskClickedListener onTaskClickedListener;
+    OnSellerClickedListener onSellerClickedListener;
 
-    public SellerFormAdapter(AppCompatActivity context, List<Seller> sellerList, SellerFormAdapter.OnTaskClickedListener onTaskClickedListener) {
+    public SellerFormAdapter(AppCompatActivity context, List<Seller> sellerList, OnSellerClickedListener onSellerClickedListener) {
         this.context = context;
         this.sellerList = sellerList;
-        this.onTaskClickedListener = onTaskClickedListener;
+        this.onSellerClickedListener = onSellerClickedListener;
     }
 
     @NonNull
     @Override
     public SellerFormAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_seller_form_layout, parent, false);
-        return new SellerFormAdapter.ViewHolder(view, onTaskClickedListener);
+        return new SellerFormAdapter.ViewHolder(view, onSellerClickedListener);
     }
 
     @Override
@@ -53,12 +53,12 @@ public class SellerFormAdapter extends RecyclerView.Adapter<SellerFormAdapter.Vi
 
         LinearLayout parentLayout;
         TextView sellerNameTextView;
-        SellerFormAdapter.OnTaskClickedListener onTaskClickedListener;
+        OnSellerClickedListener onSellerClickedListener;
 
-        public ViewHolder(@NonNull View itemView, SellerFormAdapter.OnTaskClickedListener onTaskClickedListener) {
+        public ViewHolder(@NonNull View itemView, OnSellerClickedListener onSellerClickedListener) {
             super(itemView);
 
-            this.onTaskClickedListener = onTaskClickedListener;
+            this.onSellerClickedListener = onSellerClickedListener;
             this.parentLayout = itemView.findViewById(R.id.item_seller_parent_layout);
             this.sellerNameTextView = itemView.findViewById(R.id.item_seller_names_text_view);
 
@@ -67,12 +67,12 @@ public class SellerFormAdapter extends RecyclerView.Adapter<SellerFormAdapter.Vi
 
         @Override
         public void onClick(View v) {
-            onTaskClickedListener.onTaskClicked(getAdapterPosition());
+            onSellerClickedListener.onSellerClicked(getAdapterPosition());
         }
     }
 
-    public interface OnTaskClickedListener {
+    public interface OnSellerClickedListener {
 
-        public void onTaskClicked(int position);
+        public void onSellerClicked(int position);
     }
 }

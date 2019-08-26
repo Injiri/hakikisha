@@ -3,13 +3,13 @@ package org.aplusscreators.hakikisha.model;
 public class Order {
 
     private String uuid;
-    private int order_id;
+    private String order_id;
     private String customer_uuid;
     private String seller_uuid;
     private String product_uuid;
     private int status;
 
-    public Order(String uuid, int order_id, String customer_uuid, String seller_uuid, String product_uuid, int status) {
+    public Order(String uuid, String order_id, String customer_uuid, String seller_uuid, String product_uuid, int status) {
         this.uuid = uuid;
         this.order_id = order_id;
         this.customer_uuid = customer_uuid;
@@ -29,11 +29,11 @@ public class Order {
         this.uuid = uuid;
     }
 
-    public int getOrder_id() {
+    public String getOrder_id() {
         return order_id;
     }
 
-    public void setOrder_id(int order_id) {
+    public void setOrder_id(String order_id) {
         this.order_id = order_id;
     }
 

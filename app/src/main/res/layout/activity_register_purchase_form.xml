@@ -34,6 +34,7 @@
             android:layout_height="24dp" />
 
         <EditText
+            android:id="@+id/register_purchase_cost_edittext"
             android:textColor="@color/dark_grey"
             android:textSize="16sp"
             android:layout_marginStart="18dp"
@@ -58,7 +59,7 @@
             android:layout_height="24dp" />
 
         <EditText
-            android:id="@+id/buyer_purchase_order_id_edit_text"
+            android:id="@+id/register_purchase_order_id_edit_text"
             android:background="@null"
             android:textColor="@color/dark_grey"
             android:textSize="16sp"
@@ -100,7 +101,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
-        <Spinner
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/register_purchase_seller_recycler_view"
             android:textColor="@android:color/black"
             android:textSize="16sp"
             android:layout_marginStart="44dp"
@@ -129,6 +131,7 @@
             android:layout_height="24dp" />
 
         <EditText
+            android:id="@+id/register_purchase_description"
             android:textColor="@color/dark_grey"
             android:textSize="16sp"
             android:layout_marginStart="18dp"
@@ -153,6 +156,7 @@
             android:layout_height="24dp" />
 
         <EditText
+            android:id="@+id/register_purchase_delivery_address_edit_text"
             android:textColor="@color/dark_grey"
             android:textSize="16sp"
             android:layout_marginStart="18dp"
@@ -177,6 +181,7 @@
             android:layout_height="24dp" />
 
         <EditText
+            android:id="@+id/register_purchase_qty_edit_text"
             android:layout_marginStart="18dp"
             android:textColor="@color/dark_grey"
             android:textSize="16sp"

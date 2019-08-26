@@ -9,7 +9,7 @@ public class Buyer {
     private String address_2;
     private String email;
     private String dob;
-    private int rating;
+    private float rating;
 
     public Buyer() {
     }
@@ -81,11 +81,11 @@ public class Buyer {
         this.dob = dob;
     }
 
-    public int getRating() {
+    public float getRating() {
         return rating;
     }
 
-    public void setRating(int rating) {
+    public void setRating(float rating) {
         this.rating = rating;
     }
 }

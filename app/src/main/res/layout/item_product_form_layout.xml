@@ -4,7 +4,7 @@
     android:padding="12dp"
     android:id="@+id/item_product_parent_layout"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="wrap_content">
 
     <ImageView
         android:src="@drawable/ic_action_product_light"

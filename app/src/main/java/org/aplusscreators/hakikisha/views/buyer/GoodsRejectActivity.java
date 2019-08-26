@@ -1,5 +1,6 @@
 package org.aplusscreators.hakikisha.views.buyer;
 
+import android.annotation.SuppressLint;
 import android.app.DatePickerDialog;
 import android.app.TimePickerDialog;
 import android.os.Bundle;
@@ -18,6 +19,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.AppCompatRatingBar;
+import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.android.gms.tasks.OnFailureListener;
@@ -30,6 +32,7 @@ import org.aplusscreators.hakikisha.R;
 import org.aplusscreators.hakikisha.adapters.OrdersFormAdapter;
 import org.aplusscreators.hakikisha.adapters.SellerFormAdapter;
 import org.aplusscreators.hakikisha.model.BadGoodsReport;
+import org.aplusscreators.hakikisha.model.Buyer;
 import org.aplusscreators.hakikisha.model.Order;
 import org.aplusscreators.hakikisha.model.Seller;
 import org.aplusscreators.hakikisha.settings.HakikishaPreference;
@@ -41,7 +44,7 @@ import java.util.Calendar;
 import java.util.List;
 import java.util.UUID;
 
-public class GoodsRejectActivity extends AppCompatActivity {
+public class GoodsRejectActivity extends AppCompatActivity implements OrdersFormAdapter.OnOrderClickedListener, SellerFormAdapter.OnSellerClickedListener {
 
     SimpleDateFormat simpleDateFormat = new SimpleDateFormat("EEE MMM dd, yyyy");
 
@@ -81,11 +84,16 @@ public class GoodsRejectActivity extends AppCompatActivity {
         progressBar = findViewById(R.id.submit_reject_goods_progress_bar);
 
         ArrayAdapter<String> rejectReasonAdapter = new ArrayAdapter<String>(
-                GoodsRejectActivity.this,android.R.layout.simple_spinner_dropdown_item,getResources().getStringArray(R.array.good_reject_reasons_arr)
+                GoodsRejectActivity.this, android.R.layout.simple_spinner_dropdown_item, getResources().getStringArray(R.array.good_reject_reasons_arr)
         );
 
+        ordersAdapter = new OrdersFormAdapter(GoodsRejectActivity.this, orders, this);
+        ordersRecyclerView.setLayoutManager(new LinearLayoutManager(GoodsRejectActivity.this));
         ordersRecyclerView.setAdapter(ordersAdapter);
         rejectGoodsReasonSpinner.setAdapter(rejectReasonAdapter);
+
+        sellersAdapter = new SellerFormAdapter(GoodsRejectActivity.this,sellers,this);
+        sellerRecyclerView.setLayoutManager( new LinearLayoutManager(GoodsRejectActivity.this));
         sellerRecyclerView.setAdapter(sellersAdapter);
 
         goodsReport = new BadGoodsReport();
@@ -99,9 +107,8 @@ public class GoodsRejectActivity extends AppCompatActivity {
         });
 
 
-
         deliveryDateEditText.setText(simpleDateFormat.format(Calendar.getInstance().getTime()));
-        String timeAmPm = DateTimeUtils.getTimeAM_PM(Calendar.getInstance(),GoodsRejectActivity.this);
+        String timeAmPm = DateTimeUtils.getTimeAM_PM(Calendar.getInstance(), GoodsRejectActivity.this);
         deliveryTimeEditText.setText(timeAmPm);
 
         deliveryDateEditText.setOnClickListener(new View.OnClickListener() {
@@ -112,9 +119,9 @@ public class GoodsRejectActivity extends AppCompatActivity {
                     @Override
                     public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
                         Calendar selectedCalendar = calendar.getInstance();
-                        selectedCalendar.set(Calendar.YEAR,year);
-                        selectedCalendar.set(Calendar.MONTH,month);
-                        selectedCalendar.set(Calendar.DAY_OF_MONTH,dayOfMonth);
+                        selectedCalendar.set(Calendar.YEAR, year);
+                        selectedCalendar.set(Calendar.MONTH, month);
+                        selectedCalendar.set(Calendar.DAY_OF_MONTH, dayOfMonth);
 
                         deliveryDateEditText.setText(simpleDateFormat.format(selectedCalendar.getTime()));
                     }
@@ -134,25 +141,64 @@ public class GoodsRejectActivity extends AppCompatActivity {
                     @Override
                     public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
                         Calendar selectCalendar = calendar.getInstance();
-                        selectCalendar.set(Calendar.HOUR_OF_DAY,hourOfDay);
-                        selectCalendar.set(Calendar.MINUTE,minute);
+                        selectCalendar.set(Calendar.HOUR_OF_DAY, hourOfDay);
+                        selectCalendar.set(Calendar.MINUTE, minute);
 
-                        String time = DateTimeUtils.getTimeAM_PM(selectCalendar,GoodsRejectActivity.this);
+                        String time = DateTimeUtils.getTimeAM_PM(selectCalendar, GoodsRejectActivity.this);
                         deliveryTimeEditText.setText(time);
                     }
                 }, hour, minute, true);
                 timePickerDialog.show();
             }
         });
+
+        populateSellersRecyclerView();
+
+        populateOrdersRecyclerView();
     }
 
+
+    private void populateOrdersRecyclerView(){
+        Order order = new Order();
+        order.setUuid(UUID.randomUUID().toString());
+        order.setCustomer_uuid("uuid");
+        order.setOrder_id("order-id-1232");
+
+        orders.add(order);
+        orders.add(order);
+        orders.add(order);
+        orders.add(order);
+
+        ordersAdapter.notifyDataSetChanged();
+    }
+
+    private void populateSellersRecyclerView(){
+        Seller seller = new Seller();
+        seller.setUuid(UUID.randomUUID().toString());
+        seller.setDob("12/1995/11");
+        seller.setEmail("seller@email.com");
+        seller.setAddress_2("address Ln 1");
+        seller.setAddress_1("address Ln 2");
+        seller.setCompany("Company");
+        seller.setFirstName("Maxwell");
+        seller.setLastName("Munene");
+
+        sellers.add(seller);
+        sellers.add(seller);
+        sellers.add(seller);
+        sellers.add(seller);
+
+        sellersAdapter.notifyDataSetChanged();
+    }
+
+    @SuppressLint("DefaultLocale")
     private void extractAndSubmitData() {
         goodsReport.setUuid(UUID.randomUUID().toString());
-        goodsReport.setOrderId(ordersRecyclerView.getSelectedItem().toString());
+        goodsReport.setOrderId(String.format("%d ",selectedOrder.getOrder_id()));
         goodsReport.setRejectReasone(rejectGoodsReasonSpinner.getSelectedItem().toString());
         goodsReport.setDeliveryDate(deliveryDateEditText.getText().toString());
         goodsReport.setDeliveryTime(deliveryTimeEditText.getText().toString());
-        goodsReport.setSellerName(sellerRecyclerView.getSelectedItem().toString());
+        goodsReport.setSellerName(String.format("%s %s",selectedSeller.getFirstName(),selectedSeller.getLastName()));
         goodsReport.setSellerUuid(UUID.randomUUID().toString());
         goodsReport.setAttachmentUri(addAttachmentEditText.getText().toString());
         goodsReport.setRating(rateServiceBar.getRating());
@@ -171,7 +217,7 @@ public class GoodsRejectActivity extends AppCompatActivity {
             @Override
             public void onSuccess(Object o) {
                 progressBar.setVisibility(View.GONE);
-                Toast.makeText(GoodsRejectActivity.this,"Delivery Report Sent Successfully...",Toast.LENGTH_LONG).show();
+                Toast.makeText(GoodsRejectActivity.this, "Delivery Report Sent Successfully...", Toast.LENGTH_LONG).show();
             }
         });
 
@@ -179,9 +225,19 @@ public class GoodsRejectActivity extends AppCompatActivity {
             @Override
             public void onFailure(@NonNull Exception e) {
                 progressBar.setVisibility(View.GONE);
-                Toast.makeText(GoodsRejectActivity.this,"Delivery Failed, Please try again later...",Toast.LENGTH_LONG).show();
+                Toast.makeText(GoodsRejectActivity.this, "Delivery Failed, Please try again later...", Toast.LENGTH_LONG).show();
             }
         });
+
+    }
+
+    @Override
+    public void onSellerClicked(int position) {
+
+    }
+
+    @Override
+    public void onOrderClicked(int position) {
 
     }
 }

@@ -22,19 +22,19 @@ public class OrdersFormAdapter extends RecyclerView.Adapter<OrdersFormAdapter.Vi
 
     AppCompatActivity context;
     List<Order> orderList;
-    OrdersFormAdapter.OnTaskClickedListener onTaskClickedListener;
+    OnOrderClickedListener onOrderClickedListener;
 
-    public OrdersFormAdapter(AppCompatActivity context, List<Order> orderList, OrdersFormAdapter.OnTaskClickedListener onOrdersClickedListener) {
+    public OrdersFormAdapter(AppCompatActivity context, List<Order> orderList, OnOrderClickedListener onOrdersClickedListener) {
         this.context = context;
         this.orderList = orderList;
-        this.onTaskClickedListener = onOrdersClickedListener;
+        this.onOrderClickedListener = onOrdersClickedListener;
     }
 
     @NonNull
     @Override
     public OrdersFormAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_orders_form_layout, parent, false);
-        return new OrdersFormAdapter.ViewHolder(view, onTaskClickedListener);
+        return new OrdersFormAdapter.ViewHolder(view, onOrderClickedListener);
     }
 
     @Override
@@ -50,13 +50,13 @@ public class OrdersFormAdapter extends RecyclerView.Adapter<OrdersFormAdapter.Vi
 
     public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
 
-        OrdersFormAdapter.OnTaskClickedListener onTaskClickedListener;
+        OnOrderClickedListener onOrderClickedListener;
         TextView productNameTextView;
         TextView orderDateTimeTextView;
         TextView buyerNamesTextView;
         LinearLayout parentView;
 
-        public ViewHolder(@NonNull View itemView, OrdersFormAdapter.OnTaskClickedListener onTaskClickedListener) {
+        public ViewHolder(@NonNull View itemView, OnOrderClickedListener onOrderClickedListener) {
             super(itemView);
 
             this.productNameTextView = itemView.findViewById(R.id.item_order_form_product_name_text_view);
@@ -65,18 +65,18 @@ public class OrdersFormAdapter extends RecyclerView.Adapter<OrdersFormAdapter.Vi
             this.parentView = itemView.findViewById(R.id.item_orders_form_parent_layout);
 
 
-            this.onTaskClickedListener = onTaskClickedListener;
+            this.onOrderClickedListener = onOrderClickedListener;
 
         }
 
         @Override
         public void onClick(View v) {
-            onTaskClickedListener.onTaskClicked(getAdapterPosition());
+            onOrderClickedListener.onOrderClicked(getAdapterPosition());
         }
     }
 
-    public interface OnTaskClickedListener {
+    public interface OnOrderClickedListener {
 
-        public void onTaskClicked(int position);
+        public void onOrderClicked(int position);
     }
 }
