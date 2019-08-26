@@ -27,11 +27,15 @@ import com.google.firebase.auth.PhoneAuthProvider;
 
 import org.aplusscreators.hakikisha.R;
 import org.aplusscreators.hakikisha.settings.HakikishaPreference;
+import org.aplusscreators.hakikisha.utils.Constants;
 import org.aplusscreators.hakikisha.utils.Sound;
 import org.aplusscreators.hakikisha.views.buyer.BuyerDashboard;
+import org.aplusscreators.hakikisha.views.buyer.BuyerProfileFormActivity;
 import org.aplusscreators.hakikisha.views.seller.SellerDashboard;
+import org.aplusscreators.hakikisha.views.seller.SellerProfileFormActivity;
 
 import static org.aplusscreators.hakikisha.utils.Constants.CUSTOMER_ACCOUNT_TYPE;
+import static org.aplusscreators.hakikisha.utils.Constants.SELLER_ACCOUNT_TYPE;
 
 public class ConfirmationCodesActivity extends AppCompatActivity {
     private static final String TAG = "ConfirmationCodesActivi";
@@ -225,11 +229,14 @@ public class ConfirmationCodesActivity extends AppCompatActivity {
         task.addOnSuccessListener(new OnSuccessListener() {
             @Override
             public void onSuccess(Object o) {
-                HakikishaPreference.setAccountTypePref(ConfirmationCodesActivity.this, CUSTOMER_ACCOUNT_TYPE);
                 Toast.makeText(ConfirmationCodesActivity.this, "Registration Successful", Toast.LENGTH_LONG).show();
-                Intent intent = new Intent(ConfirmationCodesActivity.this, BuyerDashboard.class);
-                startActivity(intent);
-
+                if (HakikishaPreference.getAccountTypePref(ConfirmationCodesActivity.this).equalsIgnoreCase(CUSTOMER_ACCOUNT_TYPE)){
+                    Intent intent = new Intent(ConfirmationCodesActivity.this, BuyerProfileFormActivity.class);
+                    startActivity(intent);
+                } else if (HakikishaPreference.getAccountTypePref(ConfirmationCodesActivity.this).equalsIgnoreCase(SELLER_ACCOUNT_TYPE)){
+                    Intent intent = new Intent(ConfirmationCodesActivity.this, SellerProfileFormActivity.class);
+                    startActivity(intent);
+                }
             }
         });
 

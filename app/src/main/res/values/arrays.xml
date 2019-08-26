@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="good_reject_reasons_arr">
+        <item>Goods detroyed during delivery</item>
+        <item>Wrong goods delivered</item>
+        <item>Expired Goods</item>
+        <item>Incorrect specification</item>
+        <item>Wrong measurements</item>
+    </string-array>
+</resources>

@@ -75,7 +75,7 @@ public class PurchasesAdapter extends RecyclerView.Adapter<PurchasesAdapter.View
         CardView cardView;
         TextView taskTimePeriodTextView;
         TextView taskDateTextView;
-        CheckBox checkBox;
+        CheckBox purchaseTextView;
         OnTaskClickedListener onTaskClickedListener;
 
         public ViewHolder(@NonNull View itemView, OnTaskClickedListener onTaskClickedListener) {
@@ -83,12 +83,12 @@ public class PurchasesAdapter extends RecyclerView.Adapter<PurchasesAdapter.View
 
             this.onTaskClickedListener = onTaskClickedListener;
 
-            checkBox = itemView.findViewById(R.id.item_list_checkbox);
+            purchaseTextView = itemView.findViewById(R.id.item_list_checkbox);
             cardView = itemView.findViewById(R.id.task_parent_card_view);
             taskDateTextView = itemView.findViewById(R.id.task_date_textView);
             taskTimePeriodTextView = itemView.findViewById(R.id.task_event_time);
 
-            checkBox.setOnClickListener(this);
+            purchaseTextView.setOnClickListener(this);
 
             cardView.setCardBackgroundColor(ColorTool.getRandomDarkColor());
 
@@ -96,12 +96,12 @@ public class PurchasesAdapter extends RecyclerView.Adapter<PurchasesAdapter.View
 
         @Override
         public void onClick(View v) {
-            onTaskClickedListener.onTaskClicked(getAdapterPosition(), checkBox);
+            onTaskClickedListener.onTaskClicked(getAdapterPosition(), purchaseTextView);
         }
     }
 
     public interface OnTaskClickedListener {
 
-        public void onTaskClicked(int position, CheckBox checkBox);
+        public void onTaskClicked(int position, TextView checkBox);
     }
 }

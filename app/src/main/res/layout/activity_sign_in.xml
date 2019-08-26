@@ -54,6 +54,7 @@
         </LinearLayout>
 
         <Switch
+            android:id="@+id/account_type_switch"
             android:paddingBottom="14dp"
             android:textSize="18sp"
             android:text="Register as a seller/Supply"

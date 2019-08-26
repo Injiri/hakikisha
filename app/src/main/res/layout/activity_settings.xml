@@ -10,7 +10,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@android:color/white"
-        app:titleTextColor="@color/colorPrimaryDark">
+        app:titleTextColor="@color/colorPrimary">
 
 
         <androidx.appcompat.widget.Toolbar
@@ -18,7 +18,7 @@
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize"
             app:title="Settings"
-            app:titleTextColor="@color/colorPrimaryDark" />
+            app:titleTextColor="@color/colorPrimary" />
 
     </com.google.android.material.appbar.AppBarLayout>
 

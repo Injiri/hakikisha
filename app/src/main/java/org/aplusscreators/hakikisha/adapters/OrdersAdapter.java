@@ -76,7 +76,7 @@ public class OrdersAdapter extends RecyclerView.Adapter<OrdersAdapter.ViewHolder
         CardView cardView;
         TextView taskTimePeriodTextView;
         TextView taskDateTextView;
-        CheckBox checkBox;
+        TextView checkBox;
         PurchasesAdapter.OnTaskClickedListener onTaskClickedListener;
 
         public ViewHolder(@NonNull View itemView, PurchasesAdapter.OnTaskClickedListener onTaskClickedListener) {
@@ -103,6 +103,6 @@ public class OrdersAdapter extends RecyclerView.Adapter<OrdersAdapter.ViewHolder
 
     public interface OnTaskClickedListener {
 
-        public void onTaskClicked(int position, CheckBox checkBox);
+        public void onTaskClicked(int position, TextView checkBox);
     }
 }

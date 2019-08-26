@@ -7,6 +7,7 @@ import android.os.Handler;
 import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.Switch;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -20,15 +21,20 @@ import com.google.firebase.auth.PhoneAuthProvider;
 
 import org.aplusscreators.hakikisha.R;
 import org.aplusscreators.hakikisha.launch.SplashActivity;
+import org.aplusscreators.hakikisha.settings.HakikishaPreference;
 import org.aplusscreators.hakikisha.utils.ExternalAddressFormatter;
 import org.aplusscreators.hakikisha.views.buyer.BuyerDashboard;
 
 import java.util.concurrent.TimeUnit;
 
+import static org.aplusscreators.hakikisha.utils.Constants.CUSTOMER_ACCOUNT_TYPE;
+import static org.aplusscreators.hakikisha.utils.Constants.SELLER_ACCOUNT_TYPE;
+
 public class LoginActivity extends AppCompatActivity {
     private static final String TAG = "LoginActivity";
     View submitView;
     EditText phoneNumberEditText;
+    Switch accountTypeSwitch;
     PhoneAuthProvider.OnVerificationStateChangedCallbacks phoneAuthCallback;
 
     @Override //795384041
@@ -38,6 +44,7 @@ public class LoginActivity extends AppCompatActivity {
 
         submitView = findViewById(R.id.submit_phone_view);
         phoneNumberEditText = findViewById(R.id.phone_number_edit_text);
+        accountTypeSwitch = findViewById(R.id.account_type_switch);
 
         phoneAuthCallback = new PhoneAuthProvider.OnVerificationStateChangedCallbacks() {
             @Override
@@ -54,6 +61,12 @@ public class LoginActivity extends AppCompatActivity {
 
             @Override
             public void onCodeSent(@NonNull String verificationId, @NonNull PhoneAuthProvider.ForceResendingToken forceResendingToken) {
+                if (accountTypeSwitch.isChecked()){
+                    HakikishaPreference.setAccountTypePref(LoginActivity.this, SELLER_ACCOUNT_TYPE);
+                }else {
+                    HakikishaPreference.setAccountTypePref(LoginActivity.this, CUSTOMER_ACCOUNT_TYPE);
+                }
+
                 Intent intent = new Intent(LoginActivity.this, ConfirmationCodesActivity.class);
                 intent.putExtra("phone_number", phoneNumberEditText.getText().toString());
                 intent.putExtra("verification_id", verificationId);

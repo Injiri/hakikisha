@@ -1,6 +1,6 @@
 package org.aplusscreators.hakikisha.model;
 
-public class Customer {
+public class Buyer {
 
     private String uuid;
     private String firstName;
@@ -11,10 +11,10 @@ public class Customer {
     private String dob;
     private int rating;
 
-    public Customer() {
+    public Buyer() {
     }
 
-    public Customer(String uuid, String firstName, String lastName, String address_1, String address_2, String email, String dob, int rating) {
+    public Buyer(String uuid, String firstName, String lastName, String address_1, String address_2, String email, String dob, int rating) {
         this.uuid = uuid;
         this.firstName = firstName;
         this.lastName = lastName;

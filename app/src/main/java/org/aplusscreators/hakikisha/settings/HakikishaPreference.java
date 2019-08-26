@@ -5,6 +5,7 @@ import android.util.Log;
 
 public class HakikishaPreference {
 
+    private final static String ACCOUNT_UUID_PREFS = "account_uuid_prefs";
     private final static String CONTACTS_RETRIEVE_PREF = "contact_retrieve_pref";
     private final static String ACCOUNT_TYPE_PREF = "account_type_pref";
     private final static String DEFAULT_PREFS_FILE_NAME = "org.aplus.planner.prefs";
@@ -18,6 +19,14 @@ public class HakikishaPreference {
     private final static String MONTHLY_SUBSCRIPTION_ACTIVATED = "monthly_subscription_activated";
     private final static String USER_SWIPE_CARD_ONBOARDING_COMPLETE = "user_swipe_onboarding_complete";
     private final static String USER_PROFILE_URI = "usere_profile_uri_prefs";
+
+    public static void setAccountUuidPrefs(Context context,String uuid){
+        setStringPref(context,ACCOUNT_UUID_PREFS,uuid);
+    }
+
+    public static String getAccountUuidPrefs(Context context){
+        return getStringPrefs(context,ACCOUNT_UUID_PREFS,null);
+    }
 
     public static void setAccountTypePref(Context context,String accountType){
         setStringPref(context,ACCOUNT_TYPE_PREF,accountType);

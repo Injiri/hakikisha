@@ -1,220 +1,265 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <androidx.appcompat.widget.Toolbar
-        android:id="@+id/good_reject_toolbar"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-
-    </androidx.appcompat.widget.Toolbar>
-
-    <TextView
-        android:padding="22dp"
-        android:textColor="@android:color/black"
-        android:textSize="16sp"
-        android:text="Select Order"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
-
-    <Spinner
-        android:padding="18dp"
-        android:id="@+id/purchase_platforms_spinner"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"/>
-
-    <TextView
-        android:padding="22dp"
-        android:textColor="@android:color/black"
-        android:textSize="16sp"
-        android:text="Select reason for rejecting goods"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
-
-    <Spinner
-        android:padding="18dp"
-        android:id="@+id/reject_goods_reason_spinner"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"/>
-
     <LinearLayout
-        android:paddingTop="22dp"
-        android:paddingBottom="22dp"
-        android:paddingStart="12dp"
-        android:orientation="horizontal"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
 
-        <ImageView
-            android:src="@drawable/ic_action_wallet_light"
-            android:layout_width="24dp"
-            android:layout_height="24dp" />
-
-        <EditText
-            android:textColor="@color/dark_grey"
-            android:textSize="16sp"
-            android:layout_marginStart="18dp"
-            android:background="@null"
-            android:hint="Delivered On: 19 Aug 2019"
+        <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:padding="4dp">
 
-    </LinearLayout>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentStart="true"
+                android:padding="18dp"
+                android:text="Goods Reject Form"
+                android:textColor="@android:color/black"
+                android:textSize="21sp" />
 
-    <LinearLayout
-        android:paddingTop="22dp"
-        android:paddingBottom="22dp"
-        android:paddingStart="12dp"
-        android:orientation="horizontal"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+            <Button
+                android:id="@+id/reject_goods_submit_button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:layout_margin="12dp"
+                android:background="@drawable/blue_curved_background"
+                android:text="submit"
+                android:textAllCaps="true"
+                android:textColor="@android:color/white" />
 
-        <ImageView
-            android:src="@drawable/ic_action_receipt_light"
-            android:layout_width="24dp"
-            android:layout_height="24dp" />
+        </RelativeLayout>
 
-        <EditText
-            android:id="@+id/buyer_purchase_order_id_edit_text"
-            android:background="@null"
-            android:textColor="@color/dark_grey"
-            android:textSize="16sp"
-            android:layout_marginStart="18dp"
-            android:hint="Delivered At: 17:37 PM"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
-
-    </LinearLayout>
-
-    <LinearLayout
-        android:paddingTop="22dp"
-        android:paddingBottom="22dp"
-        android:paddingStart="12dp"
-        android:orientation="horizontal"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-
-        <ImageView
-            android:src="@drawable/ic_action_seller_light"
-            android:layout_width="24dp"
-            android:layout_height="24dp" />
+        <ProgressBar
+            android:id="@+id/submit_reject_goods_progress_bar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="12dp"
+            android:visibility="gone" />
 
         <TextView
-            android:text="Select Seller"
-            android:textColor="@android:color/black"
-            android:textSize="16sp"
-            android:layout_marginStart="18dp"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
+            android:layout_height="wrap_content"
+            android:padding="8dp"
+            android:text="By filling and submitting this form, you verify that the goods delivered did not meet the quality requirements and/or expectations." />
 
-    </LinearLayout>
-
-    <LinearLayout
-        android:paddingTop="8dp"
-        android:paddingBottom="2dp"
-        android:paddingStart="12dp"
-        android:orientation="horizontal"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="12dp"
+            android:text="Select Order Id"
+            android:textColor="@android:color/black"
+            android:textSize="18sp" />
 
         <Spinner
+            android:id="@+id/goods_reject_order_id_spinner"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="18dp" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="12dp"
+            android:text="Select reason for rejecting goods"
             android:textColor="@android:color/black"
-            android:textSize="16sp"
-            android:layout_marginStart="44dp"
+            android:textSize="18sp" />
+
+        <Spinner
+            android:id="@+id/reject_goods_reason_spinner"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="18dp" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:paddingStart="12dp"
+            android:paddingTop="22dp"
+            android:paddingBottom="22dp">
+
+            <ImageView
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:src="@drawable/ic_action_wallet_light" />
+
+            <TextView
+                android:id="@+id/reject_goods_delivery_date_editText"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="18dp"
+                android:background="@null"
+                android:hint="Delivered On: 19 Aug 2019"
+                android:textColor="@color/dark_grey"
+                android:textSize="18sp" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:paddingStart="12dp"
+            android:paddingTop="22dp"
+            android:paddingBottom="22dp">
+
+            <ImageView
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:src="@drawable/ic_action_receipt_light" />
+
+            <TextView
+                android:id="@+id/reject_goods_delivery_time_editText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="18dp"
+                android:background="@null"
+                android:hint="Delivered At: 17:37 PM"
+                android:textColor="@color/dark_grey"
+                android:textSize="18sp" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:paddingStart="12dp"
+            android:paddingTop="22dp"
+            android:paddingBottom="22dp">
+
+            <ImageView
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:src="@drawable/ic_action_seller_light" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="18dp"
+                android:text="Select Seller"
+                android:textColor="@android:color/black"
+                android:textSize="16sp" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:paddingStart="12dp"
+            android:paddingTop="8dp"
+            android:paddingBottom="2dp">
+
+            <Spinner
+                android:id="@+id/reject_goods_select_seller_spinner"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="44dp"
+                android:textColor="@android:color/black"
+                android:textSize="16sp" />
+
+            <ImageView
+                android:id="@+id/goods_reject_add_seller_imageView"
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:layout_marginStart="12dp"
+                android:src="@drawable/ic_action_add_light" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:paddingStart="12dp"
+            android:paddingTop="22dp"
+            android:paddingBottom="22dp">
+
+            <ImageView
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:src="@drawable/ic_action_attachment_light" />
+
+            <EditText
+                android:id="@+id/reject_goods_add_attachment_view"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="18dp"
+                android:background="@null"
+                android:editable="false"
+                android:hint="Add Attachments ... Receipts ... Delivery notes ... photos"
+                android:textColor="@color/dark_grey"
+                android:textSize="16sp" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:paddingStart="12dp"
+            android:paddingTop="22dp"
+            android:paddingBottom="22dp">
+
+            <ImageView
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:src="@drawable/ic_action_rate_light" />
+
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="18dp"
+                android:background="@null"
+                android:hint="Rate Quality of Service"
+                android:textColor="@color/dark_grey"
+                android:textSize="16sp" />
+
+        </LinearLayout>
+
+        <androidx.appcompat.widget.AppCompatRatingBar
+            android:id="@+id/reject_goods_rating_bar"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"/>
+            android:layout_height="wrap_content"
+            android:layout_marginStart="52dp"
+            android:max="5"
+            android:rating="2.5" />
 
-        <ImageView
-            android:layout_marginStart="12dp"
-            android:src="@drawable/ic_action_add_light"
-            android:layout_width="24dp"
-            android:layout_height="24dp" />
 
-    </LinearLayout>
-
-    <LinearLayout
-        android:paddingTop="22dp"
-        android:paddingBottom="22dp"
-        android:paddingStart="12dp"
-        android:orientation="horizontal"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-
-        <ImageView
-            android:src="@drawable/ic_action_attachment_light"
-            android:layout_width="24dp"
-            android:layout_height="24dp" />
-
-        <EditText
-            android:textColor="@color/dark_grey"
-            android:textSize="16sp"
-            android:layout_marginStart="18dp"
-            android:hint="Add Attachments ... Receipts ... Delivery notes ... photos"
-            android:background="@null"
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:paddingStart="12dp"
+            android:paddingTop="22dp"
+            android:paddingBottom="22dp">
+
+            <ImageView
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:src="@drawable/ic_action_text_light" />
+
+            <EditText
+                android:id="@+id/reject_goods_more_note_edit_text"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="18dp"
+                android:background="@null"
+                android:hint="More notes for the seller/supplier"
+                android:textColor="@color/dark_grey"
+                android:textSize="16sp" />
+
+        </LinearLayout>
+
 
     </LinearLayout>
 
-    <LinearLayout
-        android:paddingTop="22dp"
-        android:paddingBottom="22dp"
-        android:paddingStart="12dp"
-        android:orientation="horizontal"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-
-        <ImageView
-            android:src="@drawable/ic_action_rate_light"
-            android:layout_width="24dp"
-            android:layout_height="24dp" />
-
-        <EditText
-            android:textColor="@color/dark_grey"
-            android:textSize="16sp"
-            android:layout_marginStart="18dp"
-            android:hint="Rate Quality of Service"
-            android:background="@null"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
-
-    </LinearLayout>
-
-    <androidx.appcompat.widget.AppCompatRatingBar
-        android:max="5"
-        android:rating="2.5"
-        android:layout_marginStart="52dp"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
-
-
-    <LinearLayout
-        android:paddingTop="22dp"
-        android:paddingBottom="22dp"
-        android:paddingStart="12dp"
-        android:orientation="horizontal"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-
-        <ImageView
-            android:src="@drawable/ic_action_text_light"
-            android:layout_width="24dp"
-            android:layout_height="24dp" />
-
-        <EditText
-            android:textColor="@color/dark_grey"
-            android:textSize="16sp"
-            android:layout_marginStart="18dp"
-            android:hint="More notes for the seller/supplier"
-            android:background="@null"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
-
-    </LinearLayout>
-
-
-
-
-</LinearLayout>
+</ScrollView>

@@ -12,7 +12,8 @@
 
         <androidx.appcompat.widget.Toolbar
             android:id="@+id/buyer_dashboard_toolbar"
-            android:background="@color/colorPrimaryDark"
+            android:background="@color/colorPrimary"
+            android:theme="@style/ToolbarTheme"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"/>
 

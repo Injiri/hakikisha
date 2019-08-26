@@ -1,173 +1,199 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <androidx.appcompat.widget.Toolbar
-        android:background="@color/colorPrimaryDark"
-        android:layout_width="match_parent"
-        android:layout_height="?attr/actionBarSize"/>
-
-    <ImageView
-        android:layout_marginTop="42dp"
-        android:layout_gravity="center_horizontal"
-        android:src="@drawable/user_add_photo"
-        android:layout_width="150dp"
-        android:layout_height="150dp" />
-
     <LinearLayout
-        android:paddingTop="22dp"
-        android:paddingBottom="22dp"
-        android:paddingStart="12dp"
-        android:orientation="horizontal"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="match_parent"
+        android:orientation="vertical">
 
         <ImageView
-            android:src="@drawable/ic_action_person_light"
-            android:layout_width="24dp"
-            android:layout_height="24dp" />
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="42dp"
+            android:src="@drawable/user_add_photo" />
 
-        <EditText
-            android:textColor="@color/dark_grey"
-            android:textSize="16sp"
-            android:layout_marginStart="18dp"
-            android:hint="First Name..."
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:paddingStart="12dp"
+            android:paddingTop="22dp"
+            android:paddingBottom="22dp">
 
-        <EditText
-            android:textColor="@color/dark_grey"
-            android:textSize="16sp"
-            android:layout_marginStart="18dp"
-            android:hint="Last Name"
+            <ImageView
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:src="@drawable/ic_action_person_light" />
+
+            <EditText
+                android:id="@+id/first_name_edit_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="18dp"
+                android:hint="First Name..."
+                android:textColor="@color/dark_grey"
+                android:textSize="16sp" />
+
+            <EditText
+                android:id="@+id/last_name_edit_text"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="18dp"
+                android:hint="Last Name"
+                android:textColor="@color/dark_grey"
+                android:textSize="16sp" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:paddingStart="12dp"
+            android:paddingTop="22dp"
+            android:paddingBottom="22dp">
+
+            <ImageView
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:src="@drawable/ic_action_seller_light" />
+
+            <EditText
+                android:id="@+id/company_name_edit_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="18dp"
+                android:background="@null"
+                android:hint="Company name (optional)"
+                android:textColor="@color/dark_grey"
+                android:textSize="16sp" />
+
+        </LinearLayout>
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:paddingStart="12dp"
+            android:paddingTop="22dp"
+            android:paddingBottom="22dp">
+
+            <ImageView
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:src="@drawable/ic_action_address_light" />
+
+            <EditText
+                android:id="@+id/address_1_edit_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="18dp"
+                android:background="@null"
+                android:hint="Address 1"
+                android:textColor="@color/dark_grey"
+                android:textSize="16sp" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:paddingStart="12dp"
+            android:paddingTop="22dp"
+            android:paddingBottom="22dp">
+
+            <ImageView
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:src="@drawable/ic_action_person_light"
+                android:visibility="invisible" />
+
+            <EditText
+                android:id="@+id/address_2_edit_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="18dp"
+                android:background="@null"
+                android:hint="Address 2 (optional)"
+                android:textColor="@color/dark_grey"
+                android:textSize="16sp" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:paddingStart="12dp"
+            android:paddingTop="22dp"
+            android:paddingBottom="22dp">
+
+            <ImageView
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:src="@drawable/ic_action_email" />
+
+            <EditText
+                android:id="@+id/seller_email_edit_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="18dp"
+                android:background="@null"
+                android:hint="Email...  account@email.com"
+                android:textColor="@color/dark_grey"
+                android:textSize="16sp" />
+
+        </LinearLayout>
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:paddingStart="12dp"
+            android:paddingTop="22dp"
+            android:paddingBottom="22dp">
+
+            <ImageView
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:src="@drawable/ic_action_date_light" />
+
+            <EditText
+                android:id="@+id/seller_dob_edit_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="18dp"
+                android:background="@null"
+                android:hint="Date of Birth...  mm-dd-yyyy"
+                android:textColor="@color/dark_grey"
+                android:textSize="16sp" />
+
+        </LinearLayout>
+
+        <ProgressBar
+            android:id="@+id/seller_progress_bar"
+            android:layout_marginBottom="12dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
 
-    </LinearLayout>
-
-    <LinearLayout
-        android:paddingTop="22dp"
-        android:paddingBottom="22dp"
-        android:paddingStart="12dp"
-        android:orientation="horizontal"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-
-        <ImageView
-            android:src="@drawable/ic_action_seller_light"
-            android:layout_width="24dp"
-            android:layout_height="24dp" />
-
-        <EditText
-            android:textColor="@color/dark_grey"
-            android:textSize="16sp"
-            android:background="@null"
-            android:layout_marginStart="18dp"
-            android:hint="Company name (optional)"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
+        <Button
+            android:id="@+id/submi_seller_profile_button"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="end"
+            android:layout_marginStart="12dp"
+            android:layout_marginEnd="12dp"
+            android:layout_marginBottom="16dp"
+            android:background="@drawable/blue_curved_background"
+            android:text="Submit"
+            android:textColor="@android:color/white" />
 
     </LinearLayout>
 
-
-    <LinearLayout
-        android:paddingTop="22dp"
-        android:paddingBottom="22dp"
-        android:paddingStart="12dp"
-        android:orientation="horizontal"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-
-        <ImageView
-            android:src="@drawable/ic_action_address_light"
-            android:layout_width="24dp"
-            android:layout_height="24dp" />
-
-        <EditText
-            android:textColor="@color/dark_grey"
-            android:textSize="16sp"
-            android:background="@null"
-            android:layout_marginStart="18dp"
-            android:hint="Address 1"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
-
-    </LinearLayout>
-
-    <LinearLayout
-        android:paddingTop="22dp"
-        android:paddingBottom="22dp"
-        android:paddingStart="12dp"
-        android:orientation="horizontal"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-
-        <ImageView
-            android:visibility="invisible"
-            android:src="@drawable/ic_action_person_light"
-            android:layout_width="24dp"
-            android:layout_height="24dp" />
-
-        <EditText
-            android:textColor="@color/dark_grey"
-            android:textSize="16sp"
-            android:background="@null"
-            android:layout_marginStart="18dp"
-            android:hint="Address 2 (optional)"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
-
-    </LinearLayout>
-
-    <LinearLayout
-        android:paddingTop="22dp"
-        android:paddingBottom="22dp"
-        android:paddingStart="12dp"
-        android:orientation="horizontal"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-
-        <ImageView
-            android:src="@drawable/ic_action_email"
-            android:layout_width="24dp"
-            android:layout_height="24dp" />
-
-        <EditText
-            android:textColor="@color/dark_grey"
-            android:textSize="16sp"
-            android:background="@null"
-            android:layout_marginStart="18dp"
-            android:hint="Email...  account@email.com"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
-
-    </LinearLayout>
-
-
-    <LinearLayout
-        android:paddingTop="22dp"
-        android:paddingBottom="22dp"
-        android:paddingStart="12dp"
-        android:orientation="horizontal"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-
-        <ImageView
-            android:src="@drawable/ic_action_date_light"
-            android:layout_width="24dp"
-            android:layout_height="24dp" />
-
-        <EditText
-            android:textColor="@color/dark_grey"
-            android:textSize="16sp"
-            android:background="@null"
-            android:layout_marginStart="18dp"
-            android:hint="Date of Birth...  mm-dd-yyyy"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
-
-    </LinearLayout>
-
-</LinearLayout>
+</ScrollView>
