@@ -88,7 +88,7 @@
             <ImageView
                 android:layout_width="24dp"
                 android:layout_height="24dp"
-                android:src="@drawable/ic_action_wallet_light" />
+                android:src="@drawable/ic_action_date_light" />
 
             <TextView
                 android:id="@+id/reject_goods_delivery_date_editText"
@@ -113,7 +113,7 @@
             <ImageView
                 android:layout_width="24dp"
                 android:layout_height="24dp"
-                android:src="@drawable/ic_action_receipt_light" />
+                android:src="@drawable/ic_action_time_light" />
 
             <TextView
                 android:id="@+id/reject_goods_delivery_time_editText"
