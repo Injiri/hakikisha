@@ -7,4 +7,23 @@
         <item>Incorrect specification</item>
         <item>Wrong measurements</item>
     </string-array>
+
+    <string-array name="product_categories_arr">
+        <item>Electronics</item>
+        <item>Furniture</item>
+        <item>Computers</item>
+        <item>Phones</item>
+        <item>Kitchen</item>
+        <item>Services</item>
+        <item>Clothes &amp; Fashion</item>
+    </string-array>
+
+    <string-array name="purchase_eplatforms">
+        <item>Hakikisha</item>
+        <item>Jumia</item>
+        <item>Alibaba</item>
+        <item>Olx</item>
+        <item>Other</item>
+    </string-array>
+
 </resources>

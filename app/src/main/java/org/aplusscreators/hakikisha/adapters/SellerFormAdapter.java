@@ -67,12 +67,12 @@ public class SellerFormAdapter extends RecyclerView.Adapter<SellerFormAdapter.Vi
 
         @Override
         public void onClick(View v) {
-            onSellerClickedListener.onSellerClicked(getAdapterPosition());
+            onSellerClickedListener.onSellerClicked(getAdapterPosition(),this.parentLayout);
         }
     }
 
     public interface OnSellerClickedListener {
 
-        public void onSellerClicked(int position);
+        public void onSellerClicked(int position,LinearLayout view);
     }
 }

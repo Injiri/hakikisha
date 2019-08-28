@@ -1,176 +1,195 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
 
-    <include layout="@layout/product_receiept_top_section"/>
+    <include layout="@layout/product_receiept_top_section" />
 
-    <TextView
-        android:padding="22dp"
-        android:textColor="@android:color/black"
-        android:textSize="16sp"
-        android:text="Select Order"
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
+        android:layout_height="match_parent">
 
-    <Spinner
-        android:padding="18dp"
-        android:id="@+id/purchase_platforms_spinner"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"/>
-
-    <LinearLayout
-        android:paddingTop="22dp"
-        android:paddingBottom="22dp"
-        android:paddingStart="12dp"
-        android:orientation="horizontal"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-
-        <ImageView
-            android:src="@drawable/ic_action_date_light"
-            android:layout_width="24dp"
-            android:layout_height="24dp" />
-
-        <EditText
-            android:textColor="@color/dark_grey"
-            android:textSize="16sp"
-            android:layout_marginStart="18dp"
-            android:background="@null"
-            android:hint="Arrival On: 19 Aug 2019"
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
 
-    </LinearLayout>
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="22dp"
+                android:text="Select Order"
+                android:textColor="@android:color/black"
+                android:textSize="16sp" />
 
-    <LinearLayout
-        android:paddingTop="22dp"
-        android:paddingBottom="22dp"
-        android:paddingStart="12dp"
-        android:orientation="horizontal"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/receipt_order_recycler_view"
+                android:layout_marginStart="12dp"
+                android:layout_marginEnd="12dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
 
-        <ImageView
-            android:src="@drawable/ic_action_time_light"
-            android:layout_width="24dp"
-            android:layout_height="24dp" />
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:paddingStart="12dp"
+                android:paddingTop="22dp"
+                android:paddingBottom="22dp">
 
-        <EditText
-            android:id="@+id/buyer_purchase_order_id_edit_text"
-            android:background="@null"
-            android:textColor="@color/dark_grey"
-            android:textSize="16sp"
-            android:layout_marginStart="18dp"
-            android:hint="Arrival At: 17:37 PM"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
+                <ImageView
+                    android:layout_width="24dp"
+                    android:layout_height="24dp"
+                    android:src="@drawable/ic_action_date_light" />
 
-    </LinearLayout>
+                <TextView
+                    android:id="@+id/receipt_arrival_date"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="18dp"
+                    android:background="@null"
+                    android:hint="Arrival On: 19 Aug 2019"
+                    android:textColor="@color/dark_grey"
+                    android:textSize="16sp" />
 
-    <LinearLayout
-        android:paddingTop="22dp"
-        android:paddingBottom="22dp"
-        android:paddingStart="12dp"
-        android:orientation="horizontal"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+            </LinearLayout>
 
-        <ImageView
-            android:src="@drawable/ic_action_seller_light"
-            android:layout_width="24dp"
-            android:layout_height="24dp" />
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:paddingStart="12dp"
+                android:paddingTop="22dp"
+                android:paddingBottom="22dp">
 
-        <TextView
-            android:text="Select Seller"
-            android:textColor="@android:color/black"
-            android:textSize="16sp"
-            android:layout_marginStart="18dp"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
+                <ImageView
+                    android:layout_width="24dp"
+                    android:layout_height="24dp"
+                    android:src="@drawable/ic_action_time_light" />
 
-    </LinearLayout>
+                <TextView
+                    android:id="@+id/receipt_arrival_time"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="18dp"
+                    android:background="@null"
+                    android:hint="Arrival At: 17:37 PM"
+                    android:textColor="@color/dark_grey"
+                    android:textSize="16sp" />
 
-    <LinearLayout
-        android:paddingTop="8dp"
-        android:paddingBottom="2dp"
-        android:paddingStart="12dp"
-        android:orientation="horizontal"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+            </LinearLayout>
 
-        <androidx.recyclerview.widget.RecyclerView
-            android:textColor="@android:color/black"
-            android:textSize="16sp"
-            android:layout_marginStart="44dp"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"/>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:paddingStart="12dp"
+                android:paddingTop="22dp"
+                android:paddingBottom="22dp">
 
-        <ImageView
-            android:layout_marginStart="12dp"
-            android:src="@drawable/ic_action_add_light"
-            android:layout_width="24dp"
-            android:layout_height="24dp" />
+                <ImageView
+                    android:layout_width="24dp"
+                    android:layout_height="24dp"
+                    android:src="@drawable/ic_action_seller_light" />
 
-    </LinearLayout>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="18dp"
+                    android:text="Select Seller"
+                    android:textColor="@android:color/black"
+                    android:textSize="16sp" />
 
-    <LinearLayout
-        android:paddingTop="22dp"
-        android:paddingBottom="22dp"
-        android:paddingStart="12dp"
-        android:orientation="horizontal"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+                <ImageView
+                    android:id="@+id/receipt_add_seller_view"
+                    android:layout_width="24dp"
+                    android:layout_height="24dp"
+                    android:layout_marginStart="12dp"
+                    android:src="@drawable/ic_action_add_light" />
 
-        <ImageView
-            android:src="@drawable/ic_action_attachment_light"
-            android:layout_width="24dp"
-            android:layout_height="24dp" />
+            </LinearLayout>
 
-        <EditText
-            android:textColor="@color/dark_grey"
-            android:textSize="16sp"
-            android:layout_marginStart="18dp"
-            android:hint="Add Attachments ... Receipts ... Delivery notes ... photos"
-            android:background="@null"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:paddingStart="12dp"
+                android:paddingTop="8dp"
+                android:paddingBottom="2dp">
 
-    </LinearLayout>
-
-    <LinearLayout
-        android:paddingTop="22dp"
-        android:paddingBottom="22dp"
-        android:paddingStart="12dp"
-        android:orientation="horizontal"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-
-        <ImageView
-            android:src="@drawable/ic_action_rate_light"
-            android:layout_width="24dp"
-            android:layout_height="24dp" />
-
-        <EditText
-            android:textColor="@color/dark_grey"
-            android:textSize="16sp"
-            android:layout_marginStart="18dp"
-            android:hint="Rate Quality of Service"
-            android:background="@null"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
-
-    </LinearLayout>
-
-    <androidx.appcompat.widget.AppCompatRatingBar
-        android:max="5"
-        android:rating="2.5"
-        android:layout_marginStart="52dp"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/receipt_seller_recycler_view"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="4dp"
+                    android:layout_marginEnd="22dp"
+                    android:textColor="@android:color/black"
+                    android:textSize="16sp" />
 
 
+            </LinearLayout>
 
+            <LinearLayout
+                android:id="@+id/receipt_attachments"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:paddingStart="12dp"
+                android:paddingTop="22dp"
+                android:paddingBottom="22dp">
+
+                <ImageView
+                    android:layout_width="24dp"
+                    android:layout_height="24dp"
+                    android:src="@drawable/ic_action_attachment_light" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="18dp"
+                    android:background="@null"
+                    android:hint="Add Attachments ... Receipts ... Delivery notes ... photos"
+                    android:textColor="@color/dark_grey"
+                    android:textSize="16sp" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:paddingStart="12dp"
+                android:paddingTop="22dp"
+                android:paddingBottom="22dp">
+
+                <ImageView
+                    android:layout_width="24dp"
+                    android:layout_height="24dp"
+                    android:src="@drawable/ic_action_rate_light" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="18dp"
+                    android:background="@null"
+                    android:hint="Rate Quality of Service"
+                    android:textColor="@color/dark_grey"
+                    android:textSize="16sp" />
+
+            </LinearLayout>
+
+            <androidx.appcompat.widget.AppCompatRatingBar
+                android:id="@+id/receipt_ratings_bar"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="52dp"
+                android:max="5"
+                android:rating="2.5" />
+
+
+        </LinearLayout>
+
+    </ScrollView>
 
 </LinearLayout>

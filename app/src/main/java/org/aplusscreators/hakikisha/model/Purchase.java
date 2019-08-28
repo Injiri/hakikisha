@@ -10,12 +10,12 @@ public class Purchase {
     private String sellerUuid;
     private String description;
     private String deliveryAddress;
-    private int quantity;
+    private String quantity;
 
     public Purchase() {
     }
 
-    public Purchase(String uuid, String name, String platform, double cost, int order_id, String sellerUuid, String description, String deliveryAddress, int quantity) {
+    public Purchase(String uuid, String name, String platform, double cost, int order_id, String sellerUuid, String description, String deliveryAddress, String quantity) {
         this.uuid = uuid;
         this.name = name;
         this.platform = platform;
@@ -91,11 +91,11 @@ public class Purchase {
         this.deliveryAddress = deliveryAddress;
     }
 
-    public int getQuantity() {
+    public String getQuantity() {
         return quantity;
     }
 
-    public void setQuantity(int quantity) {
+    public void setQuantity(String quantity) {
         this.quantity = quantity;
     }
 }

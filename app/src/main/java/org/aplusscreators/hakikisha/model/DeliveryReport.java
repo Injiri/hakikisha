@@ -11,6 +11,7 @@ public class DeliveryReport {
     private String comments;
     private String deliveryDate;
     private String deliveryTime;
+    private String attachmentUri;
 
     public DeliveryReport() {
     }
@@ -25,6 +26,14 @@ public class DeliveryReport {
         this.comments = comments;
         this.deliveryDate = deliveryDate;
         this.deliveryTime = deliveryTime;
+    }
+
+    public String getAttachmentUri() {
+        return attachmentUri;
+    }
+
+    public void setAttachmentUri(String attachmentUri) {
+        this.attachmentUri = attachmentUri;
     }
 
     public String getUuid() {

@@ -3,6 +3,7 @@ package org.aplusscreators.hakikisha.model;
 public class Product {
 
     private String uuid;
+    private String name;
     private String category;
     private double cost;
     private String qty;
@@ -27,6 +28,14 @@ public class Product {
         this.second_hand = second_hand;
         this.description = description;
         this.attachment_uri = attachment_uri;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
     }
 
     public String getUuid() {

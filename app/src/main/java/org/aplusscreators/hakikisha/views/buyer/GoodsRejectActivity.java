@@ -9,6 +9,7 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.Spinner;
 import android.widget.TextView;
@@ -232,7 +233,7 @@ public class GoodsRejectActivity extends AppCompatActivity implements OrdersForm
     }
 
     @Override
-    public void onSellerClicked(int position) {
+    public void onSellerClicked(int position, LinearLayout view) {
 
     }
 

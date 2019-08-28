@@ -1,196 +1,211 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:orientation="vertical">
 
-    <include layout="@layout/form_top_section_layout"/>
+    <include layout="@layout/purchase_form_top_section_layout" />
 
-    <TextView
-        android:padding="22dp"
-        android:textColor="@android:color/black"
-        android:textSize="16sp"
-        android:text="Purchase Platform"
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
+        android:layout_height="match_parent">
 
-    <Spinner
-        android:padding="18dp"
-        android:id="@+id/purchase_platforms_spinner"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"/>
-
-    <LinearLayout
-        android:paddingTop="22dp"
-        android:paddingBottom="22dp"
-        android:paddingStart="12dp"
-        android:orientation="horizontal"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-
-        <ImageView
-            android:src="@drawable/ic_action_wallet_light"
-            android:layout_width="24dp"
-            android:layout_height="24dp" />
-
-        <EditText
-            android:id="@+id/register_purchase_cost_edittext"
-            android:textColor="@color/dark_grey"
-            android:textSize="16sp"
-            android:layout_marginStart="18dp"
-            android:background="@null"
-            android:hint="Enter Cost in Ksh"
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
 
-    </LinearLayout>
 
-    <LinearLayout
-        android:paddingTop="22dp"
-        android:paddingBottom="22dp"
-        android:paddingStart="12dp"
-        android:orientation="horizontal"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="22dp"
+                android:text="Purchase Platform"
+                android:textColor="@android:color/black"
+                android:textSize="16sp" />
 
-        <ImageView
-            android:src="@drawable/ic_action_receipt_light"
-            android:layout_width="24dp"
-            android:layout_height="24dp" />
+            <Spinner
+                android:id="@+id/purchase_platforms_spinner"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="18dp" />
 
-        <EditText
-            android:id="@+id/register_purchase_order_id_edit_text"
-            android:background="@null"
-            android:textColor="@color/dark_grey"
-            android:textSize="16sp"
-            android:layout_marginStart="18dp"
-            android:hint="Enter Order Id"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:paddingStart="12dp"
+                android:paddingTop="22dp"
+                android:paddingBottom="22dp">
 
-    </LinearLayout>
+                <ImageView
+                    android:layout_width="24dp"
+                    android:layout_height="24dp"
+                    android:src="@drawable/ic_action_wallet_light" />
 
-    <LinearLayout
-        android:paddingTop="22dp"
-        android:paddingBottom="22dp"
-        android:paddingStart="12dp"
-        android:orientation="horizontal"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+                <EditText
+                    android:id="@+id/register_purchase_cost_edittext"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="18dp"
+                    android:background="@null"
+                    android:hint="Enter Cost in Ksh"
+                    android:textColor="@color/dark_grey"
+                    android:textSize="16sp" />
 
-        <ImageView
-            android:src="@drawable/ic_action_seller_light"
-            android:layout_width="24dp"
-            android:layout_height="24dp" />
+            </LinearLayout>
 
-        <TextView
-            android:text="Select Seller"
-            android:textColor="@android:color/black"
-            android:textSize="16sp"
-            android:layout_marginStart="18dp"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:paddingStart="12dp"
+                android:paddingTop="22dp"
+                android:paddingBottom="22dp">
 
-    </LinearLayout>
+                <ImageView
+                    android:layout_width="24dp"
+                    android:layout_height="24dp"
+                    android:src="@drawable/ic_action_receipt_light" />
 
-    <LinearLayout
-        android:paddingTop="8dp"
-        android:paddingBottom="2dp"
-        android:paddingStart="12dp"
-        android:orientation="horizontal"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+                <EditText
+                    android:id="@+id/register_purchase_order_id_edit_text"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="18dp"
+                    android:background="@null"
+                    android:hint="Enter Order Id"
+                    android:textColor="@color/dark_grey"
+                    android:textSize="16sp" />
 
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/register_purchase_seller_recycler_view"
-            android:textColor="@android:color/black"
-            android:textSize="16sp"
-            android:layout_marginStart="44dp"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"/>
+            </LinearLayout>
 
-        <ImageView
-            android:layout_marginStart="12dp"
-            android:src="@drawable/ic_action_add_light"
-            android:layout_width="24dp"
-            android:layout_height="24dp" />
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:paddingStart="12dp"
+                android:paddingTop="22dp"
+                android:paddingBottom="22dp">
 
-    </LinearLayout>
+                <ImageView
+                    android:layout_width="24dp"
+                    android:layout_height="24dp"
+                    android:src="@drawable/ic_action_seller_light" />
 
-    <LinearLayout
-        android:paddingTop="22dp"
-        android:paddingBottom="22dp"
-        android:paddingStart="12dp"
-        android:orientation="horizontal"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="18dp"
+                    android:text="Select Seller"
+                    android:textColor="@android:color/black"
+                    android:textSize="16sp" />
 
-        <ImageView
-            android:src="@drawable/ic_action_text_light"
-            android:layout_width="24dp"
-            android:layout_height="24dp" />
+                <ImageView
+                    android:id="@+id/purchase_add_seller_buton"
+                    android:layout_width="24dp"
+                    android:layout_height="24dp"
+                    android:layout_marginStart="12dp"
+                    android:src="@drawable/ic_action_add_light" />
 
-        <EditText
-            android:id="@+id/register_purchase_description"
-            android:textColor="@color/dark_grey"
-            android:textSize="16sp"
-            android:layout_marginStart="18dp"
-            android:hint="Enter Product Description"
-            android:background="@null"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
+            </LinearLayout>
 
-    </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:paddingStart="12dp"
+                android:paddingTop="8dp"
+                android:paddingBottom="2dp">
 
-    <LinearLayout
-        android:paddingTop="22dp"
-        android:paddingBottom="22dp"
-        android:paddingStart="12dp"
-        android:orientation="horizontal"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content">
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/register_purchase_seller_recycler_view"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="4dp"
+                    android:layout_marginEnd="20dp"
+                    android:textColor="@android:color/black"
+                    android:textSize="16sp" />
 
-        <ImageView
-            android:src="@drawable/ic_action_address_light"
-            android:layout_width="24dp"
-            android:layout_height="24dp" />
+            </LinearLayout>
 
-        <EditText
-            android:id="@+id/register_purchase_delivery_address_edit_text"
-            android:textColor="@color/dark_grey"
-            android:textSize="16sp"
-            android:layout_marginStart="18dp"
-            android:background="@null"
-            android:hint="Enter Delivery Address"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:paddingStart="12dp"
+                android:paddingTop="22dp"
+                android:paddingBottom="22dp">
 
-    </LinearLayout>
+                <ImageView
+                    android:layout_width="24dp"
+                    android:layout_height="24dp"
+                    android:src="@drawable/ic_action_text_light" />
 
-    <LinearLayout
-        android:paddingTop="22dp"
-        android:paddingBottom="22dp"
-        android:paddingStart="12dp"
-        android:orientation="horizontal"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content">
+                <EditText
+                    android:id="@+id/register_purchase_description"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="18dp"
+                    android:background="@null"
+                    android:hint="Enter Product Description"
+                    android:textColor="@color/dark_grey"
+                    android:textSize="16sp" />
 
-        <ImageView
-            android:src="@drawable/ic_action_quantity_light"
-            android:layout_width="24dp"
-            android:layout_height="24dp" />
+            </LinearLayout>
 
-        <EditText
-            android:id="@+id/register_purchase_qty_edit_text"
-            android:layout_marginStart="18dp"
-            android:textColor="@color/dark_grey"
-            android:textSize="16sp"
-            android:background="@null"
-            android:hint="Enter Quantity"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:paddingStart="12dp"
+                android:paddingTop="22dp"
+                android:paddingBottom="22dp">
 
-    </LinearLayout>
+                <ImageView
+                    android:layout_width="24dp"
+                    android:layout_height="24dp"
+                    android:src="@drawable/ic_action_address_light" />
 
+                <EditText
+                    android:id="@+id/register_purchase_delivery_address_edit_text"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="18dp"
+                    android:background="@null"
+                    android:hint="Enter Delivery Address"
+                    android:textColor="@color/dark_grey"
+                    android:textSize="16sp" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:paddingStart="12dp"
+                android:paddingTop="22dp"
+                android:paddingBottom="22dp">
+
+                <ImageView
+                    android:layout_width="24dp"
+                    android:layout_height="24dp"
+                    android:src="@drawable/ic_action_quantity_light" />
+
+                <EditText
+                    android:id="@+id/register_purchase_qty_edit_text"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="18dp"
+                    android:background="@null"
+                    android:hint="Enter Quantity"
+                    android:textColor="@color/dark_grey"
+                    android:textSize="16sp" />
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+    </ScrollView>
 
 </LinearLayout>

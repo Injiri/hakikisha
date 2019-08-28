@@ -11,14 +11,14 @@
 
     <ImageView
         android:layout_marginStart="12dp"
-        android:id="@+id/product_receipt_exit_button"
+        android:id="@+id/receipt_product_receipt_exit_button"
         android:src="@drawable/ic_action_close_light"
         android:layout_alignParentStart="true"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content" />
 
     <Button
-        android:id="@+id/product_receipt_submit_button"
+        android:id="@+id/receipt_product_receipt_submit_button"
         android:layout_marginEnd="12dp"
         android:text="Save"
         android:textAllCaps="false"
@@ -31,7 +31,7 @@
     <TextView
         android:layout_marginStart="22dp"
         android:id="@+id/product_receipt_title"
-        android:layout_below="@+id/product_receipt_submit_button"
+        android:layout_below="@+id/receipt_product_receipt_submit_button"
         android:textColor="@android:color/black"
         android:textSize="24sp"
         android:text="Product Receipt Form"

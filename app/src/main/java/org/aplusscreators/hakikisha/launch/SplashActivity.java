@@ -9,8 +9,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.google.firebase.FirebaseApp;
 
 import org.aplusscreators.hakikisha.settings.HakikishaPreference;
-import org.aplusscreators.hakikisha.views.buyer.GoodsRejectActivity;
-import org.aplusscreators.hakikisha.views.seller.PaymentReceiptActivity;
+import org.aplusscreators.hakikisha.views.buyer.GoodsReceiptActivity;
 
 import java.util.UUID;
 
@@ -28,7 +27,7 @@ public class SplashActivity extends AppCompatActivity {
 
         //temp code
         HakikishaPreference.setAccountUuidPrefs(SplashActivity.this,UUID.randomUUID().toString());
-        Intent intent = new Intent(SplashActivity.this, PaymentReceiptActivity.class);
+        Intent intent = new Intent(SplashActivity.this, GoodsReceiptActivity.class);
         startActivity(intent);
 
 //
