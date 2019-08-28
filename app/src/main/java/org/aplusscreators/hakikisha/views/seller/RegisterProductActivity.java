@@ -51,7 +51,7 @@ public class RegisterProductActivity extends AppCompatActivity {
         setContentView(R.layout.activity_register_product_form);
 
         productNameEditText = findViewById(R.id.purchase_product_name_editText);
-        submitButton = findViewById(R.id.purchase_product_name_submit_button);
+        submitButton = findViewById(R.id.order_submit_button);
         productCategorySpinner = findViewById(R.id.product_categories_spinner);
         costEditText = findViewById(R.id.register_product_cost_edit_text);
         qtyEditText = findViewById(R.id.product_register_qty_edit_text);

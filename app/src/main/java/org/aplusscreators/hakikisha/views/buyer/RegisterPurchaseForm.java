@@ -28,7 +28,6 @@ import org.aplusscreators.hakikisha.adapters.SellerFormAdapter;
 import org.aplusscreators.hakikisha.model.Purchase;
 import org.aplusscreators.hakikisha.model.Seller;
 import org.aplusscreators.hakikisha.settings.HakikishaPreference;
-import org.aplusscreators.hakikisha.views.seller.RegisterProductActivity;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -60,8 +59,8 @@ public class RegisterPurchaseForm extends AppCompatActivity implements SellerFor
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register_purchase_form);
 
-        submitButton = findViewById(R.id.purchase_product_name_submit_button);
-        cancelButton = findViewById(R.id.purchase_cancel_form_button);
+        submitButton = findViewById(R.id.order_submit_button);
+        cancelButton = findViewById(R.id.order_cancel_form_button);
         purchasePlatformSpinner = findViewById(R.id.purchase_platforms_spinner);
         costEditText = findViewById(R.id.register_purchase_cost_edittext);
         orderEditText = findViewById(R.id.register_purchase_order_id_edit_text);

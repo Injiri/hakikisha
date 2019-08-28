@@ -10,6 +10,7 @@ import com.google.firebase.FirebaseApp;
 
 import org.aplusscreators.hakikisha.settings.HakikishaPreference;
 import org.aplusscreators.hakikisha.views.buyer.GoodsReceiptActivity;
+import org.aplusscreators.hakikisha.views.seller.RegisterOrderActivity;
 
 import java.util.UUID;
 
@@ -27,7 +28,7 @@ public class SplashActivity extends AppCompatActivity {
 
         //temp code
         HakikishaPreference.setAccountUuidPrefs(SplashActivity.this,UUID.randomUUID().toString());
-        Intent intent = new Intent(SplashActivity.this, GoodsReceiptActivity.class);
+        Intent intent = new Intent(SplashActivity.this, RegisterOrderActivity.class);
         startActivity(intent);
 
 //
