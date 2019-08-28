@@ -56,7 +56,7 @@ public class PurchasesAdapter extends RecyclerView.Adapter<PurchasesAdapter.View
         CardView cardView;
         TextView taskTimePeriodTextView;
         TextView taskDateTextView;
-        CheckBox purchaseTextView;
+        TextView purchaseTextView;
         OnTaskClickedListener onTaskClickedListener;
 
         public ViewHolder(@NonNull View itemView, OnTaskClickedListener onTaskClickedListener) {

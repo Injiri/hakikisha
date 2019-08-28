@@ -9,6 +9,7 @@
         android:orientation="vertical">
 
         <ImageView
+            android:id="@+id/seller_photo_capture_image_view"
             android:layout_width="100dp"
             android:layout_height="100dp"
             android:layout_gravity="center_horizontal"
@@ -164,7 +165,7 @@
                 android:layout_height="24dp"
                 android:src="@drawable/ic_action_date_light" />
 
-            <EditText
+            <TextView
                 android:id="@+id/seller_dob_edit_text"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -177,6 +178,7 @@
         </LinearLayout>
 
         <ProgressBar
+            android:visibility="gone"
             android:id="@+id/seller_progress_bar"
             android:layout_marginBottom="12dp"
             android:layout_width="match_parent"

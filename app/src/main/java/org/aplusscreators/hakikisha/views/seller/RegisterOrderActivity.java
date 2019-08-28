@@ -13,6 +13,7 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.android.gms.tasks.OnFailureListener;
@@ -22,6 +23,7 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
 import org.aplusscreators.hakikisha.R;
+import org.aplusscreators.hakikisha.adapters.BuyersFormAdapter;
 import org.aplusscreators.hakikisha.model.Buyer;
 import org.aplusscreators.hakikisha.model.Order;
 import org.aplusscreators.hakikisha.settings.HakikishaPreference;
@@ -31,7 +33,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
-public class RegisterOrderActivity extends AppCompatActivity {
+public class RegisterOrderActivity extends AppCompatActivity implements BuyersFormAdapter.OnBuyerClickedListener {
 
     ImageView cancelButton;
     Button submitButton;
@@ -46,6 +48,8 @@ public class RegisterOrderActivity extends AppCompatActivity {
     EditText addressEditText;
     EditText qtyEditText;
     ProgressBar progressBar;
+
+    BuyersFormAdapter buyersFormAdapter;
 
     Order order = new Order();
     Buyer selectedBuyer = new Buyer();
@@ -85,7 +89,26 @@ public class RegisterOrderActivity extends AppCompatActivity {
             RegisterOrderActivity.this, android.R.layout.simple_spinner_dropdown_item,getResources().getStringArray(R.array.purchase_eplatforms)
         );
 
+        buyersFormAdapter = new BuyersFormAdapter(
+                RegisterOrderActivity.this,buyersList,this
+        );
+
+        buyersRecyclerView.setLayoutManager( new LinearLayoutManager(RegisterOrderActivity.this));
+        buyersRecyclerView.setAdapter(buyersFormAdapter);
+
         platformSpinner.setAdapter(platformsArrayAdapter);
+
+        populateBuyersList();
+
+    }
+
+    private void populateBuyersList(){
+        Buyer buyer = new Buyer();
+        buyer.setFirstName("Angela");
+        buyer.setLastName("Michale");
+        buyer.setEmail("buyer@mail.com");
+        buyersList.add(buyer);
+        buyersList.add(buyer);
 
     }
 
@@ -118,5 +141,10 @@ public class RegisterOrderActivity extends AppCompatActivity {
                 Toast.makeText(RegisterOrderActivity.this, "Unable to save product, try again later...", Toast.LENGTH_LONG).show();
             }
         });
+    }
+
+    @Override
+    public void onBuyerClicked(int position) {
+        selectedBuyer = buyersList.get(position);
     }
 }

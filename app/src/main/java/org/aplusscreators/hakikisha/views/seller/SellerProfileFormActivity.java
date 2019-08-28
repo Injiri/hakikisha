@@ -1,16 +1,26 @@
 package org.aplusscreators.hakikisha.views.seller;
 
+import android.Manifest;
+import android.app.DatePickerDialog;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.os.Bundle;
+import android.provider.MediaStore;
 import android.view.View;
 import android.widget.Button;
+import android.widget.DatePicker;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.ProgressBar;
+import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.annotation.MainThread;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
 
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -21,18 +31,23 @@ import com.google.firebase.database.FirebaseDatabase;
 import org.aplusscreators.hakikisha.R;
 import org.aplusscreators.hakikisha.model.Seller;
 
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.UUID;
 
 public class SellerProfileFormActivity extends AppCompatActivity {
 
+    private static final int CAMERA_PERMISSION_REQUEST_CODE = 1234;
+    SimpleDateFormat simpleDateFormat = new SimpleDateFormat("EEE MMM dd, yyyy");
     EditText firstNameEditText;
     EditText lastNameEditText;
     EditText companyNameEditText;
     EditText address_1_ediEditText;
     EditText address_2_ediEditText;
     EditText emailEditText;
-    EditText dobEditText;
+    TextView dobTextView;
     ProgressBar progressBar;
+    ImageView sellerProfileImageView;
     Button submit;
     Seller seller;
 
@@ -47,9 +62,10 @@ public class SellerProfileFormActivity extends AppCompatActivity {
         address_1_ediEditText = findViewById(R.id.address_1_edit_text);
         address_2_ediEditText = findViewById(R.id.address_2_edit_text);
         emailEditText = findViewById(R.id.seller_email_edit_text);
-        dobEditText = findViewById(R.id.seller_dob_edit_text);
+        dobTextView = findViewById(R.id.seller_dob_edit_text);
         submit = findViewById(R.id.submi_seller_profile_button);
         progressBar = findViewById(R.id.seller_progress_bar);
+        sellerProfileImageView = findViewById(R.id.seller_photo_capture_image_view);
 
         progressBar.setVisibility(View.GONE);
 
@@ -62,6 +78,54 @@ public class SellerProfileFormActivity extends AppCompatActivity {
                 extractAndSubmitFormData();
             }
         });
+
+        sellerProfileImageView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (ContextCompat.checkSelfPermission(SellerProfileFormActivity.this, Manifest.permission.CAMERA)
+                        == PackageManager.PERMISSION_GRANTED){
+                    launchCamera();
+                } else {
+                    ActivityCompat.requestPermissions(SellerProfileFormActivity.this,new String[]{Manifest.permission.CAMERA},CAMERA_PERMISSION_REQUEST_CODE);
+                }
+            }
+        });
+
+        dobTextView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                DatePickerDialog datePickerDialog = new DatePickerDialog(
+                        SellerProfileFormActivity.this, new DatePickerDialog.OnDateSetListener() {
+
+                    @Override
+                    public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
+                        Calendar calendar = Calendar.getInstance();
+                        calendar.set(Calendar.YEAR,year);
+                        calendar.set(Calendar.DAY_OF_MONTH,dayOfMonth);
+                        calendar.set(Calendar.MONTH,month);
+
+                        dobTextView.setText(simpleDateFormat.format(calendar.getTime()));
+                    }
+                }, 1995, 5, 11
+                );
+
+                datePickerDialog.show();
+            }
+        });
+    }
+
+    private void launchCamera() {
+        Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+        startActivity(intent);
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        if (requestCode == CAMERA_PERMISSION_REQUEST_CODE && grantResults[0] == PackageManager.PERMISSION_GRANTED){
+            launchCamera();
+        } else {
+            ActivityCompat.requestPermissions(SellerProfileFormActivity.this,new String[]{Manifest.permission.CAMERA},CAMERA_PERMISSION_REQUEST_CODE);
+        }
     }
 
     private void extractAndSubmitFormData() {
@@ -72,7 +136,7 @@ public class SellerProfileFormActivity extends AppCompatActivity {
         seller.setAddress_1(address_1_ediEditText.getText().toString());
         seller.setAddress_2(address_2_ediEditText.getText().toString());
         seller.setEmail(emailEditText.getText().toString());
-        seller.setDob(dobEditText.getText().toString());
+        seller.setDob(dobTextView.getText().toString());
 
         FirebaseDatabase firebaseDatabase = FirebaseDatabase.getInstance();
         DatabaseReference databaseReference = firebaseDatabase.getReference("hakikisha");
