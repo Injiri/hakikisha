@@ -7,6 +7,7 @@ import android.os.Handler;
 import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.ProgressBar;
 import android.widget.Switch;
 import android.widget.Toast;
 
@@ -35,9 +36,10 @@ public class LoginActivity extends AppCompatActivity {
     View submitView;
     EditText phoneNumberEditText;
     Switch accountTypeSwitch;
+    ProgressBar progressBar;
     PhoneAuthProvider.OnVerificationStateChangedCallbacks phoneAuthCallback;
 
-    @Override //795384041
+    @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sign_in);
@@ -45,16 +47,20 @@ public class LoginActivity extends AppCompatActivity {
         submitView = findViewById(R.id.submit_phone_view);
         phoneNumberEditText = findViewById(R.id.phone_number_edit_text);
         accountTypeSwitch = findViewById(R.id.account_type_switch);
+        progressBar = findViewById(R.id.sign_in_progress_bar);
 
         phoneAuthCallback = new PhoneAuthProvider.OnVerificationStateChangedCallbacks() {
             @Override
             public void onVerificationCompleted(@NonNull PhoneAuthCredential phoneAuthCredential) {
+                progressBar.setVisibility(View.GONE);
                 Intent intent = new Intent(LoginActivity.this, BuyerDashboard.class);
                 startActivity(intent);
+                finish();
             }
 
             @Override
             public void onVerificationFailed(@NonNull FirebaseException e) {
+                progressBar.setVisibility(View.GONE);
                 Toast.makeText(getApplicationContext(), "Verification Failed", Toast.LENGTH_LONG).show();
                 Log.e(TAG, "onVerificationFailed: " + e);
             }
@@ -66,11 +72,12 @@ public class LoginActivity extends AppCompatActivity {
                 }else {
                     HakikishaPreference.setAccountTypePref(LoginActivity.this, CUSTOMER_ACCOUNT_TYPE);
                 }
-
+                progressBar.setVisibility(View.GONE);
                 Intent intent = new Intent(LoginActivity.this, ConfirmationCodesActivity.class);
                 intent.putExtra("phone_number", phoneNumberEditText.getText().toString());
                 intent.putExtra("verification_id", verificationId);
                 startActivity(intent);
+
                 Toast.makeText(getApplicationContext(), "Code is Sent", Toast.LENGTH_LONG).show();
             }
 
@@ -84,6 +91,18 @@ public class LoginActivity extends AppCompatActivity {
         submitView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                if (phoneNumberEditText.getText().toString().isEmpty()){
+                    Toast.makeText(LoginActivity.this,"Enter a valid phone number",Toast.LENGTH_LONG).show();
+                    return;
+                }
+
+                if (phoneNumberEditText.getText().toString().length() < 9){
+                    Toast.makeText(LoginActivity.this,"Enter a valid phone number",Toast.LENGTH_LONG).show();
+                    return;
+                }
+
+
+                progressBar.setVisibility(View.VISIBLE);
                 String phoneNumber = "+254" + phoneNumberEditText.getText().toString();
                 phoneNumber = formatE1PhoneNumber(phoneNumber);
                 requestVerificationCode(phoneNumber, phoneAuthCallback);

@@ -27,26 +27,24 @@ public class SplashActivity extends AppCompatActivity {
     @Override
     protected void onStart() {
         super.onStart();
-        Intent intent = new Intent(SplashActivity.this, SellerDashboard.class);
-        startActivity(intent);
+//        Intent intent = new Intent(SplashActivity.this, SellerDashboard.class);
+//        startActivity(intent);
 
+        String accountType = HakikishaPreference.getAccountTypePref(SplashActivity.this);
+        if (accountType == null) {
+            Intent intent = new Intent(SplashActivity.this, LoginActivity.class);
+            startActivity(intent);
 
-//
-//        String accountType = HakikishaPreference.getAccountTypePref(SplashActivity.this);
-//        if (accountType == null) {
-//            Intent intent = new Intent(SplashActivity.this, LoginActivity.class);
-//            startActivity(intent);
-//
-//            return;
-//        }
-//
-//        if (accountType.equalsIgnoreCase(Constants.CUSTOMER_ACCOUNT_TYPE)){
-//            Intent intent = new Intent(SplashActivity.this, BuyerDashboard.class);
-//            startActivity(intent);
-//        } else if (accountType.equalsIgnoreCase(Constants.SELLER_ACCOUNT_TYPE)){
-//            Intent intent = new Intent(SplashActivity.this, SellerDashboard.class);
-//            startActivity(intent);
-//        }
+            return;
+        }
+
+        if (accountType.equalsIgnoreCase(Constants.CUSTOMER_ACCOUNT_TYPE)) {
+            Intent intent = new Intent(SplashActivity.this, BuyerDashboard.class);
+            startActivity(intent);
+        } else if (accountType.equalsIgnoreCase(Constants.SELLER_ACCOUNT_TYPE)) {
+            Intent intent = new Intent(SplashActivity.this, SellerDashboard.class);
+            startActivity(intent);
+        }
 
     }
 }
