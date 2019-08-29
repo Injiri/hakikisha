@@ -1,5 +1,6 @@
 package org.aplusscreators.hakikisha.views.buyer;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -105,6 +106,9 @@ public class GoodsReceiptActivity extends AppCompatActivity {
             public void onSuccess(Object o) {
                 progressBar.setVisibility(View.GONE);
                 Toast.makeText(GoodsReceiptActivity.this, "Delivery Report Sent Successfully...", Toast.LENGTH_LONG).show();
+                Intent intent = new Intent(GoodsReceiptActivity.this,BuyerDashboard.class);
+                startActivity(intent);
+                finish();
             }
         });
 

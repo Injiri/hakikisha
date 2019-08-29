@@ -1,5 +1,6 @@
 package org.aplusscreators.hakikisha.views.seller;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ArrayAdapter;
@@ -122,6 +123,9 @@ public class RegisterProductActivity extends AppCompatActivity {
             public void onSuccess(Object o) {
                 registerProductProgressBar.setVisibility(View.GONE);
                 Toast.makeText(RegisterProductActivity.this, "Product Saved", Toast.LENGTH_LONG).show();
+                Intent intent = new Intent(RegisterProductActivity.this,SellerDashboard.class);
+                startActivity(intent);
+                finish();
             }
         });
 

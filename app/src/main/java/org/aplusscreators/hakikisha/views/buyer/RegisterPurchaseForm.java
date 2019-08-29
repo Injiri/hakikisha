@@ -1,5 +1,6 @@
 package org.aplusscreators.hakikisha.views.buyer;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ArrayAdapter;
@@ -143,6 +144,9 @@ public class RegisterPurchaseForm extends AppCompatActivity implements SellerFor
             public void onSuccess(Object o) {
                 registerPurchaseProgressBar.setVisibility(View.GONE);
                 Toast.makeText(RegisterPurchaseForm.this, "Purchase Registered", Toast.LENGTH_LONG).show();
+                Intent intent = new Intent(RegisterPurchaseForm.this,BuyerDashboard.class);
+                startActivity(intent);
+                finish();
             }
         });
 

@@ -216,6 +216,9 @@ public class PaymentReceiptActivity extends AppCompatActivity implements OrdersF
             public void onSuccess(Object o) {
                 progressBar.setVisibility(View.GONE);
                 Toast.makeText(PaymentReceiptActivity.this,"Payment Report Saved",Toast.LENGTH_LONG).show();
+                Intent intent = new Intent(PaymentReceiptActivity.this,SellerDashboard.class);
+                startActivity(intent);
+                finish();
             }
         });
 

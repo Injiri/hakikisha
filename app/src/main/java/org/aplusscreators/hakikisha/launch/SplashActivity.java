@@ -27,7 +27,7 @@ public class SplashActivity extends AppCompatActivity {
     @Override
     protected void onStart() {
         super.onStart();
-        Intent intent = new Intent(SplashActivity.this, BuyerDashboard.class);
+        Intent intent = new Intent(SplashActivity.this, SellerDashboard.class);
         startActivity(intent);
 
 

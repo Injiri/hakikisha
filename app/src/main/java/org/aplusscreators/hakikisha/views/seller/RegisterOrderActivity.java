@@ -1,5 +1,6 @@
 package org.aplusscreators.hakikisha.views.seller;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ArrayAdapter;
@@ -139,6 +140,9 @@ public class RegisterOrderActivity extends AppCompatActivity implements BuyersFo
             public void onSuccess(Object o) {
                 progressBar.setVisibility(View.GONE);
                 Toast.makeText(RegisterOrderActivity.this, "Order Registered", Toast.LENGTH_LONG).show();
+                Intent intent = new Intent(RegisterOrderActivity.this,SellerDashboard.class);
+                startActivity(intent);
+                finish();
             }
         });
 

@@ -3,6 +3,7 @@ package org.aplusscreators.hakikisha.views.buyer;
 import android.annotation.SuppressLint;
 import android.app.DatePickerDialog;
 import android.app.TimePickerDialog;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ArrayAdapter;
@@ -219,6 +220,9 @@ public class GoodsRejectActivity extends AppCompatActivity implements OrdersForm
             public void onSuccess(Object o) {
                 progressBar.setVisibility(View.GONE);
                 Toast.makeText(GoodsRejectActivity.this, "Delivery Report Sent Successfully...", Toast.LENGTH_LONG).show();
+                Intent intent = new Intent(GoodsRejectActivity.this,BuyerDashboard.class);
+                startActivity(intent);
+                finish();
             }
         });
 
