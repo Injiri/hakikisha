@@ -41,6 +41,8 @@ dependencies {
 
     //Third Party
     implementation 'com.squareup.picasso:picasso:2.71828'
+    implementation 'com.github.wangjiegulu:rfab:2.0.0'
+    implementation 'com.github.wangjiegulu:ShadowViewHelper:1.0.0'
 
     implementation 'com.fasterxml.jackson.core:jackson-databind:2.9.9.2'
 

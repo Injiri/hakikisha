@@ -5,6 +5,7 @@ import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.Spinner;
 import android.widget.Switch;
@@ -24,6 +25,7 @@ import com.google.firebase.database.FirebaseDatabase;
 import org.aplusscreators.hakikisha.R;
 import org.aplusscreators.hakikisha.model.Product;
 import org.aplusscreators.hakikisha.settings.HakikishaPreference;
+import org.aplusscreators.hakikisha.views.buyer.dialog.ExitFormDialog;
 
 import java.util.UUID;
 
@@ -41,6 +43,7 @@ public class RegisterProductActivity extends AppCompatActivity {
     EditText productDescriptionEditText;
     TextView addAttachmentTextView;
     ProgressBar registerProductProgressBar;
+    ImageView cancelImageView;
     Product product;
 
     ArrayAdapter<String> productCategoriesAdapter;
@@ -50,8 +53,8 @@ public class RegisterProductActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register_product_form);
 
-        productNameEditText = findViewById(R.id.purchase_product_name_editText);
-        submitButton = findViewById(R.id.order_submit_button);
+        productNameEditText = findViewById(R.id.product_name_editText);
+        submitButton = findViewById(R.id.product_submit_button);
         productCategorySpinner = findViewById(R.id.product_categories_spinner);
         costEditText = findViewById(R.id.register_product_cost_edit_text);
         qtyEditText = findViewById(R.id.product_register_qty_edit_text);
@@ -62,6 +65,7 @@ public class RegisterProductActivity extends AppCompatActivity {
         productDescriptionEditText = findViewById(R.id.register_product_description_editText);
         addAttachmentTextView = findViewById(R.id.register_product_add_attachment_textview);
         registerProductProgressBar = findViewById(R.id.register_product_progress_bar);
+        cancelImageView = findViewById(R.id.product_form_cancel_button);
 
         productCategoriesAdapter = new ArrayAdapter<>(
                 RegisterProductActivity.this, android.R.layout.simple_spinner_dropdown_item, getResources().getStringArray(R.array.product_categories_arr)
@@ -76,6 +80,14 @@ public class RegisterProductActivity extends AppCompatActivity {
             public void onClick(View v) {
                 registerProductProgressBar.setVisibility(View.VISIBLE);
                 extractAndSubmitProductData();
+            }
+        });
+
+        cancelImageView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                ExitFormDialog exitFormDialog = new ExitFormDialog(RegisterProductActivity.this,SellerDashboard.class);
+                exitFormDialog.show();
             }
         });
 

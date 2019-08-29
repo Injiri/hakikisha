@@ -4,7 +4,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
 
-    <include layout="@layout/form_top_section_layout" />
+    <include layout="@layout/products_form_top_section_layout" />
 
     <ScrollView
         android:layout_width="match_parent"

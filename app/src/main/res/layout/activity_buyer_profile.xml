@@ -17,6 +17,14 @@
             android:layout_width="100dp"
             android:layout_height="100dp" />
 
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:id="@+id/buyer_profile"
+            android:visibility="gone"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="42dp"
+            android:layout_width="100dp"
+            android:layout_height="100dp" />
+
         <LinearLayout
             android:paddingTop="22dp"
             android:paddingBottom="22dp"

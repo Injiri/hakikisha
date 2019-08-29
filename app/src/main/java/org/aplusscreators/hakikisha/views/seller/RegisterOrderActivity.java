@@ -28,6 +28,7 @@ import org.aplusscreators.hakikisha.model.Buyer;
 import org.aplusscreators.hakikisha.model.Order;
 import org.aplusscreators.hakikisha.settings.HakikishaPreference;
 import org.aplusscreators.hakikisha.views.buyer.RegisterPurchaseForm;
+import org.aplusscreators.hakikisha.views.buyer.dialog.ExitFormDialog;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -82,6 +83,14 @@ public class RegisterOrderActivity extends AppCompatActivity implements BuyersFo
             public void onClick(View v) {
                 progressBar.setVisibility(View.VISIBLE);
                 extractAndSubmitOrderData();
+            }
+        });
+
+        cancelButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                ExitFormDialog exitFormDialog = new ExitFormDialog(RegisterOrderActivity.this,SellerDashboard.class);
+                exitFormDialog.show();
             }
         });
 

@@ -2,9 +2,10 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:id="@+id/today_tasks_no_data_layout"
-    android:layout_gravity="center_vertical"
+    android:id="@+id/seller_dashboard_no_data_layout"
     android:padding="12dp"
+    android:layout_gravity="center_vertical"
+    android:visibility="visible"
     android:orientation="vertical">
 
     <ImageView
@@ -21,17 +22,5 @@
         android:textSize="18sp"
         android:layout_margin="21dp"
         android:text="You have no sales registered yet. Get started by registering your sales." />
-
-    <Button
-        android:id="@+id/set_daily_plan_button"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center_horizontal"
-        android:textColor="@android:color/white"
-        android:textStyle="bold"
-        android:padding="8dp"
-        android:layout_margin="12dp"
-        android:background="@drawable/curved_background_red"
-        android:text="Regiser Sales" />
 
 </LinearLayout>

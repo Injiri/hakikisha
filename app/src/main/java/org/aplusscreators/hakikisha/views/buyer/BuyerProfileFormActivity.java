@@ -1,9 +1,11 @@
 package org.aplusscreators.hakikisha.views.buyer;
 
 import android.Manifest;
+import android.app.Activity;
 import android.app.DatePickerDialog;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
 import android.view.View;
@@ -20,20 +22,27 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
+import androidx.core.content.FileProvider;
 
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.squareup.picasso.Picasso;
 
 import org.aplusscreators.hakikisha.R;
 import org.aplusscreators.hakikisha.model.Buyer;
+import org.aplusscreators.hakikisha.utils.Constants;
+import org.aplusscreators.hakikisha.utils.FileUtils;
 import org.aplusscreators.hakikisha.views.seller.SellerDashboard;
 
+import java.io.File;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.UUID;
+
+import de.hdodenhof.circleimageview.CircleImageView;
 
 public class BuyerProfileFormActivity extends AppCompatActivity {
 
@@ -41,6 +50,7 @@ public class BuyerProfileFormActivity extends AppCompatActivity {
     SimpleDateFormat simpleDateFormat = new SimpleDateFormat("EEE MMM dd, yyyy");
 
     ImageView profileImageView;
+    CircleImageView circleImageView;
     EditText firstNameEditText;
     EditText lastNameEditText;
     EditText address_1_ediEditText;
@@ -51,6 +61,8 @@ public class BuyerProfileFormActivity extends AppCompatActivity {
     ProgressBar progressBar;
     Button submit;
     Buyer buyer;
+    Uri photoUri;
+    File imageFile;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -67,6 +79,7 @@ public class BuyerProfileFormActivity extends AppCompatActivity {
         progressBar = findViewById(R.id.buyer_progress_bar);
         submit = findViewById(R.id.submit_buyer_profile_button);
         profileImageView = findViewById(R.id.buyer_profile_image_view);
+        circleImageView = findViewById(R.id.buyer_profile);
 
         buyer = new Buyer();
 
@@ -79,6 +92,13 @@ public class BuyerProfileFormActivity extends AppCompatActivity {
         });
 
         profileImageView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                launchCamera();
+            }
+        });
+
+        circleImageView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 launchCamera();
@@ -111,7 +131,11 @@ public class BuyerProfileFormActivity extends AppCompatActivity {
         if (ContextCompat.checkSelfPermission(BuyerProfileFormActivity.this, Manifest.permission.CAMERA) ==
                 PackageManager.PERMISSION_GRANTED) {
             Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-            startActivity(intent);
+            imageFile = FileUtils.createImageFile(BuyerProfileFormActivity.this, "hakikisha_profile", ".png");
+            photoUri = FileProvider.getUriForFile(BuyerProfileFormActivity.this, "org.aplusscreators.hakikisha.fileProvider", imageFile);
+
+            intent.putExtra(MediaStore.EXTRA_OUTPUT, photoUri);
+            startActivityForResult(intent, Constants.CAMERA.IMAGE_CAPTURE_REQUEST_CODE);
         } else {
             ActivityCompat.requestPermissions(BuyerProfileFormActivity.this, new String[]{Manifest.permission.CAMERA}, CAMERA_PERMISSION_REQUEST_CODE);
         }
@@ -121,6 +145,18 @@ public class BuyerProfileFormActivity extends AppCompatActivity {
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
         if (requestCode == CAMERA_PERMISSION_REQUEST_CODE && grantResults[0] == PackageManager.PERMISSION_GRANTED)
             launchCamera();
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        if (requestCode == Constants.CAMERA.IMAGE_CAPTURE_REQUEST_CODE && resultCode == Activity.RESULT_OK) {
+            Picasso.get().load(photoUri).into(circleImageView);
+            circleImageView.setVisibility(View.VISIBLE);
+            profileImageView.setVisibility(View.GONE);
+
+        }
+        super.onActivityResult(requestCode, resultCode, data);
+
     }
 
     private void extractAndSubmitFormData() {
@@ -143,7 +179,7 @@ public class BuyerProfileFormActivity extends AppCompatActivity {
         task.addOnSuccessListener(new OnSuccessListener() {
             @Override
             public void onSuccess(Object o) {
-                Intent intent = new Intent(BuyerProfileFormActivity.this, SellerDashboard.class);
+                Intent intent = new Intent(BuyerProfileFormActivity.this, BuyerDashboard.class);
                 startActivity(intent);
                 finish();
             }

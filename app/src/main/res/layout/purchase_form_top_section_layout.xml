@@ -9,14 +9,14 @@
 
     <ImageView
         android:layout_marginStart="12dp"
-        android:id="@+id/order_cancel_form_button"
+        android:id="@+id/purchase_form_cancel_button"
         android:src="@drawable/ic_action_close_light"
         android:layout_alignParentStart="true"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content" />
 
     <Button
-        android:id="@+id/order_submit_button"
+        android:id="@+id/purchase_form_submit_button"
         android:layout_marginEnd="12dp"
         android:text="Save"
         android:textAllCaps="false"

@@ -3,6 +3,7 @@
     package="org.aplusscreators.hakikisha">
 
     <uses-permission android:name="android.permission.VIBRATE" />
+    <uses-permission android:name="android.permission.CAMERA"/>
 
     <application
         android:allowBackup="true"
@@ -33,6 +34,18 @@
         <activity android:name=".views.common.ConfirmationCodesActivity" />
         <activity android:name=".settings.SettingsActivity" />
         <activity android:name=".views.buyer.RegisterPurchaseForm" />
+
+        <provider
+            android:name="androidx.core.content.FileProvider"
+            android:authorities="org.aplusscreators.hakikisha.fileProvider"
+            android:exported="false"
+            android:grantUriPermissions="true">
+
+            <meta-data
+                android:name="android.support.FILE_PROVIDER_PATHS"
+                android:resource="@xml/file_paths"/>
+        </provider>
+
     </application>
 
 </manifest>

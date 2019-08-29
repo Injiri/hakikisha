@@ -1,9 +1,11 @@
 package org.aplusscreators.hakikisha.views.seller;
 
 import android.Manifest;
+import android.app.Activity;
 import android.app.DatePickerDialog;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
 import android.view.View;
@@ -21,19 +23,27 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
+import androidx.core.content.FileProvider;
 
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.squareup.picasso.Picasso;
 
 import org.aplusscreators.hakikisha.R;
 import org.aplusscreators.hakikisha.model.Seller;
+import org.aplusscreators.hakikisha.utils.Constants;
+import org.aplusscreators.hakikisha.utils.FileUtils;
+import org.aplusscreators.hakikisha.views.buyer.BuyerProfileFormActivity;
 
+import java.io.File;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.UUID;
+
+import de.hdodenhof.circleimageview.CircleImageView;
 
 public class SellerProfileFormActivity extends AppCompatActivity {
 
@@ -48,8 +58,12 @@ public class SellerProfileFormActivity extends AppCompatActivity {
     TextView dobTextView;
     ProgressBar progressBar;
     ImageView sellerProfileImageView;
+    CircleImageView circleImageView;
     Button submit;
     Seller seller;
+
+    Uri photoUri;
+    File imageFile;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -65,6 +79,7 @@ public class SellerProfileFormActivity extends AppCompatActivity {
         dobTextView = findViewById(R.id.seller_dob_edit_text);
         submit = findViewById(R.id.submi_seller_profile_button);
         progressBar = findViewById(R.id.seller_progress_bar);
+        circleImageView = findViewById(R.id.seller_profile_view);
         sellerProfileImageView = findViewById(R.id.seller_photo_capture_image_view);
 
         progressBar.setVisibility(View.GONE);
@@ -76,6 +91,13 @@ public class SellerProfileFormActivity extends AppCompatActivity {
             public void onClick(View v) {
                 progressBar.setVisibility(View.VISIBLE);
                 extractAndSubmitFormData();
+            }
+        });
+
+        circleImageView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                launchCamera();
             }
         });
 
@@ -116,7 +138,11 @@ public class SellerProfileFormActivity extends AppCompatActivity {
 
     private void launchCamera() {
         Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-        startActivity(intent);
+        imageFile = FileUtils.createImageFile(SellerProfileFormActivity.this, "hakikisha_profile", ".png");
+        photoUri = FileProvider.getUriForFile(SellerProfileFormActivity.this, "org.aplusscreators.hakikisha.fileProvider", imageFile);
+
+        intent.putExtra(MediaStore.EXTRA_OUTPUT, photoUri);
+        startActivityForResult(intent, Constants.CAMERA.IMAGE_CAPTURE_REQUEST_CODE);
     }
 
     @Override
@@ -126,6 +152,16 @@ public class SellerProfileFormActivity extends AppCompatActivity {
         } else {
             ActivityCompat.requestPermissions(SellerProfileFormActivity.this,new String[]{Manifest.permission.CAMERA},CAMERA_PERMISSION_REQUEST_CODE);
         }
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        if (requestCode == Constants.CAMERA.IMAGE_CAPTURE_REQUEST_CODE && resultCode == Activity.RESULT_OK){
+            circleImageView.setVisibility(View.VISIBLE);
+            sellerProfileImageView.setVisibility(View.GONE);
+            Picasso.get().load(photoUri).into(circleImageView);
+        }
+        super.onActivityResult(requestCode, resultCode, data);
     }
 
     private void extractAndSubmitFormData() {
