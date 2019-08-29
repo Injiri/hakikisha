@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <TextView
+        android:layout_marginTop="41dp"
+        android:layout_marginBottom="32dp"
+        android:padding="6dp"
+        android:textSize="36sp"
+        android:textColor="@android:color/black"
+        android:gravity="center"
+        android:text="Hello what would you like to do ?"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+    <Button
+        android:background="@drawable/curved_light_gray_background"
+        android:text="Buy"
+        android:layout_marginTop="18dp"
+        android:layout_marginEnd="22dp"
+        android:layout_marginStart="22dp"
+        android:textColor="@android:color/black"
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
+
+    <Button
+        android:layout_margin="22dp"
+        android:text="Sell"
+        android:textColor="@android:color/black"
+        android:background="@drawable/curved_light_gray_background"
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
+
+    <RelativeLayout
+        android:padding="12dp"
+        android:layout_marginTop="62dp"
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:layout_toLeftOf="@+id/proceed_check_image_view"
+            android:textSize="21sp"
+            android:textColor="@android:color/black"
+            android:text="Proceed"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+        <ImageView
+            android:id="@+id/proceed_check_image_view"
+            android:layout_alignParentEnd="true"
+            android:layout_marginStart="12dp"
+            android:src="@drawable/ic_action_next_light"
+            android:layout_width="32dp"
+            android:layout_height="32dp" />
+
+    </RelativeLayout>
+
+</LinearLayout>

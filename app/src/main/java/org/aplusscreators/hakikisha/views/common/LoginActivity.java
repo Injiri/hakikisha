@@ -35,7 +35,6 @@ public class LoginActivity extends AppCompatActivity {
     private static final String TAG = "LoginActivity";
     View submitView;
     EditText phoneNumberEditText;
-    Switch accountTypeSwitch;
     ProgressBar progressBar;
     PhoneAuthProvider.OnVerificationStateChangedCallbacks phoneAuthCallback;
 
@@ -46,7 +45,6 @@ public class LoginActivity extends AppCompatActivity {
 
         submitView = findViewById(R.id.submit_phone_view);
         phoneNumberEditText = findViewById(R.id.phone_number_edit_text);
-        accountTypeSwitch = findViewById(R.id.account_type_switch);
         progressBar = findViewById(R.id.sign_in_progress_bar);
 
         phoneAuthCallback = new PhoneAuthProvider.OnVerificationStateChangedCallbacks() {
@@ -67,11 +65,6 @@ public class LoginActivity extends AppCompatActivity {
 
             @Override
             public void onCodeSent(@NonNull String verificationId, @NonNull PhoneAuthProvider.ForceResendingToken forceResendingToken) {
-                if (accountTypeSwitch.isChecked()){
-                    HakikishaPreference.setAccountTypePref(LoginActivity.this, SELLER_ACCOUNT_TYPE);
-                }else {
-                    HakikishaPreference.setAccountTypePref(LoginActivity.this, CUSTOMER_ACCOUNT_TYPE);
-                }
                 progressBar.setVisibility(View.GONE);
                 Intent intent = new Intent(LoginActivity.this, ConfirmationCodesActivity.class);
                 intent.putExtra("phone_number", phoneNumberEditText.getText().toString());
