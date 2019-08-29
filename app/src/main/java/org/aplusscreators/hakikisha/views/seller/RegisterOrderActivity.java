@@ -27,8 +27,7 @@ import org.aplusscreators.hakikisha.adapters.BuyersFormAdapter;
 import org.aplusscreators.hakikisha.model.Buyer;
 import org.aplusscreators.hakikisha.model.Order;
 import org.aplusscreators.hakikisha.settings.HakikishaPreference;
-import org.aplusscreators.hakikisha.views.buyer.RegisterPurchaseForm;
-import org.aplusscreators.hakikisha.views.buyer.dialog.ExitFormDialog;
+import org.aplusscreators.hakikisha.views.common.ExitFormDialog;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -89,7 +88,7 @@ public class RegisterOrderActivity extends AppCompatActivity implements BuyersFo
         cancelButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                ExitFormDialog exitFormDialog = new ExitFormDialog(RegisterOrderActivity.this,SellerDashboard.class);
+                ExitFormDialog exitFormDialog = new ExitFormDialog(RegisterOrderActivity.this,RegisterOrderActivity.this,SellerDashboard.class);
                 exitFormDialog.show();
             }
         });

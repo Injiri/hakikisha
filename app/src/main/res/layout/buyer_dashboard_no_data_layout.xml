@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:id="@+id/seller_dashboard_no_data_layout"
+    android:padding="12dp"
+    android:layout_marginTop="62dp"
+    android:layout_gravity="center_vertical"
+    android:visibility="visible"
+    android:orientation="vertical">
+
+    <ImageView
+        android:layout_gravity="center_horizontal"
+        android:src="@drawable/ic_action_no_sales_light"
+        android:layout_margin="21dp"
+        android:layout_width="52dp"
+        android:layout_height="52dp" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:textSize="18sp"
+        android:layout_margin="21dp"
+        android:text="You have purchases registered yet . Get started by registering your purchases." />
+
+</LinearLayout>

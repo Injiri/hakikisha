@@ -49,8 +49,8 @@ public class SellerDashboard extends AppCompatActivity implements RapidFloatingA
         sellerDataView = findViewById(R.id.seller_dashboad_data_view);
         sellerNoDataLayout = findViewById(R.id.seller_dashboard_no_data_layout);
 
-        rfaBtn = findViewById(R.id.activity_main_rfab);
-        rfaLayout = findViewById(R.id.activity_main_rfal);
+        rfaBtn = findViewById(R.id.activity_seller_dashboard_rfab);
+        rfaLayout = findViewById(R.id.activity_seller_dashboard_rfal);
 
         ordersAdapter = new OrdersAdapter(SellerDashboard.this, ordersList, null);
         ordersRecyclerView.setAdapter(ordersAdapter);
@@ -125,10 +125,12 @@ public class SellerDashboard extends AppCompatActivity implements RapidFloatingA
             case 0:
                 Intent intent = new Intent(SellerDashboard.this,RegisterProductActivity.class);
                 startActivity(intent);
+                finish();
                 break;
             case 1:
                 Intent nextIntent = new Intent(SellerDashboard.this,RegisterOrderActivity.class);
                 startActivity(nextIntent);
+                finish();
                 break;
             default:
                 break;
@@ -142,10 +144,12 @@ public class SellerDashboard extends AppCompatActivity implements RapidFloatingA
             case 0:
                 Intent intent = new Intent(SellerDashboard.this,RegisterProductActivity.class);
                 startActivity(intent);
+                finish();
                 break;
             case 1:
                 Intent nextIntent = new Intent(SellerDashboard.this,RegisterOrderActivity.class);
                 startActivity(nextIntent);
+                finish();
                 break;
             default:
                 break;

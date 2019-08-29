@@ -26,6 +26,7 @@ import org.aplusscreators.hakikisha.model.DeliveryReport;
 import org.aplusscreators.hakikisha.model.Order;
 import org.aplusscreators.hakikisha.model.Seller;
 import org.aplusscreators.hakikisha.settings.HakikishaPreference;
+import org.aplusscreators.hakikisha.views.common.ExitFormDialog;
 
 import java.util.UUID;
 
@@ -68,6 +69,14 @@ public class GoodsReceiptActivity extends AppCompatActivity {
             public void onClick(View v) {
                 progressBar.setVisibility(View.VISIBLE);
                 extractAndSubmitData();
+            }
+        });
+
+        cancelButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                ExitFormDialog exitFormDialog = new ExitFormDialog(GoodsReceiptActivity.this,GoodsReceiptActivity.this,BuyerDashboard.class);
+                exitFormDialog.show();
             }
         });
     }

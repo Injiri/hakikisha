@@ -25,7 +25,7 @@ import com.google.firebase.database.FirebaseDatabase;
 import org.aplusscreators.hakikisha.R;
 import org.aplusscreators.hakikisha.model.Product;
 import org.aplusscreators.hakikisha.settings.HakikishaPreference;
-import org.aplusscreators.hakikisha.views.buyer.dialog.ExitFormDialog;
+import org.aplusscreators.hakikisha.views.common.ExitFormDialog;
 
 import java.util.UUID;
 
@@ -86,7 +86,7 @@ public class RegisterProductActivity extends AppCompatActivity {
         cancelImageView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                ExitFormDialog exitFormDialog = new ExitFormDialog(RegisterProductActivity.this,SellerDashboard.class);
+                ExitFormDialog exitFormDialog = new ExitFormDialog(RegisterProductActivity.this,RegisterProductActivity.this,SellerDashboard.class);
                 exitFormDialog.show();
             }
         });

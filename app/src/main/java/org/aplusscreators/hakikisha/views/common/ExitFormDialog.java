@@ -1,4 +1,4 @@
-package org.aplusscreators.hakikisha.views.buyer.dialog;
+package org.aplusscreators.hakikisha.views.common;
 
 import android.app.Dialog;
 import android.content.Context;
@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.view.View;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
 
 import org.aplusscreators.hakikisha.R;
 import org.aplusscreators.hakikisha.views.seller.SellerDashboard;
@@ -17,11 +18,13 @@ public class ExitFormDialog extends Dialog {
     View keepEditingView;
     Context context;
     Class backStackActivity;
+    AppCompatActivity activity;
 
-    public ExitFormDialog(@NonNull Context context,Class backStackActivity) {
+    public ExitFormDialog(@NonNull Context context,AppCompatActivity activity,Class backStackActivity) {
         super(context);
         this.context = context;
         this.backStackActivity = backStackActivity;
+        this.activity = activity;
     }
 
     @Override
@@ -37,6 +40,7 @@ public class ExitFormDialog extends Dialog {
             public void onClick(View v) {
                 Intent intent = new Intent(context, backStackActivity);
                 context.startActivity(intent);
+                activity.finish();
             }
         });
 

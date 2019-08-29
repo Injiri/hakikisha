@@ -28,6 +28,7 @@ import org.aplusscreators.hakikisha.adapters.SellerFormAdapter;
 import org.aplusscreators.hakikisha.model.Purchase;
 import org.aplusscreators.hakikisha.model.Seller;
 import org.aplusscreators.hakikisha.settings.HakikishaPreference;
+import org.aplusscreators.hakikisha.views.common.ExitFormDialog;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -77,6 +78,14 @@ public class RegisterPurchaseForm extends AppCompatActivity implements SellerFor
             public void onClick(View v) {
                 registerPurchaseProgressBar.setVisibility(View.VISIBLE);
                 extractAndSubmitPurchaseData();
+            }
+        });
+
+        cancelButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                ExitFormDialog exitFormDialog = new ExitFormDialog(RegisterPurchaseForm.this,RegisterPurchaseForm.this,BuyerDashboard.class);
+                exitFormDialog.show();
             }
         });
 

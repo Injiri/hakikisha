@@ -54,7 +54,7 @@
 
     <com.wangjie.rapidfloatingactionbutton.RapidFloatingActionLayout xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:rfal="http://schemas.android.com/apk/res-auto"
-        android:id="@+id/activity_main_rfal"
+        android:id="@+id/activity_seller_dashboard_rfal"
         android:gravity="bottom"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -63,7 +63,7 @@
 
 
         <com.wangjie.rapidfloatingactionbutton.RapidFloatingActionButton xmlns:rfab="http://schemas.android.com/apk/res-auto"
-            android:id="@+id/activity_main_rfab"
+            android:id="@+id/activity_seller_dashboard_rfab"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentRight="true"
