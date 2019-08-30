@@ -65,6 +65,7 @@ public class BuyerDashboard extends AppCompatActivity implements RapidFloatingAc
         sendEmailSmsIfNeccessary();
     }
 
+
     private void sendEmailSmsIfNeccessary(){
         Intent data = getIntent();
         String sellerPhone = data.getStringExtra("send_purchase_sms");

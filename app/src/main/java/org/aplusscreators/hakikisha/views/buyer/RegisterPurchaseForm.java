@@ -4,6 +4,8 @@ import android.Manifest;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
+import android.os.CountDownTimer;
+import android.util.Log;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
@@ -22,6 +24,7 @@ import androidx.core.content.ContextCompat;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
+import com.google.android.material.snackbar.Snackbar;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
@@ -30,13 +33,22 @@ import org.aplusscreators.hakikisha.model.Purchase;
 import org.aplusscreators.hakikisha.model.Seller;
 import org.aplusscreators.hakikisha.settings.HakikishaPreference;
 import org.aplusscreators.hakikisha.utils.HakikishaUtils;
+import org.aplusscreators.hakikisha.utils.Sound;
 import org.aplusscreators.hakikisha.views.common.ExitFormDialog;
 
 import java.util.UUID;
 
 public class RegisterPurchaseForm extends AppCompatActivity {
-
+    private static final String TAG = "RegisterPurchaseForm";
     private static final int SMS_PERMISSION_REQUEST_CODE = 4321;
+    private static final String FORM_DATA_RELOAD_KEY = "form_data_reload_key";
+    private static final String PRODUCT_NAME_KEY = "product_name_key";
+    private static final String COST_KEY = "product_cost_key";
+    private static final String DELIVERY_ADDRESS_KEY = "delivery_address_key";
+    private static final String QTY_KEY = "quantity_key";
+    private static final String SELLER_PHONE_NUMBER_KEY = "seller_phone_key";
+    private static final String SELLER_EMAIL_KEY = "seller_email_key";
+
     Button submitButton;
     ImageView cancelButton;
     Spinner purchasePlatformSpinner;
@@ -76,8 +88,14 @@ public class RegisterPurchaseForm extends AppCompatActivity {
         submitButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                registerPurchaseProgressBar.setVisibility(View.VISIBLE);
-                extractAndSubmitPurchaseData();
+                boolean valid = validateFormData();
+                if (valid) {
+                    Snackbar snackbar = Snackbar.make(findViewById(R.id.activity_register_purchase_layout),"This might take a while, please wait...",Snackbar.LENGTH_LONG);
+                    snackbar.show();
+
+                    registerPurchaseProgressBar.setVisibility(View.VISIBLE);
+                    extractAndSubmitPurchaseData(snackbar);
+                }
             }
         });
 
@@ -99,13 +117,78 @@ public class RegisterPurchaseForm extends AppCompatActivity {
 
     }
 
-    private void requestSmsPermission(){
-        if (ContextCompat.checkSelfPermission(RegisterPurchaseForm.this, Manifest.permission.SEND_SMS) != PackageManager.PERMISSION_GRANTED){
-            ActivityCompat.requestPermissions(RegisterPurchaseForm.this,new String[]{Manifest.permission.SEND_SMS},SMS_PERMISSION_REQUEST_CODE);
+    @Override
+    protected void onStart() {
+        super.onStart();
+        Intent data = getIntent();;
+        boolean isFormReload = data.getBooleanExtra(FORM_DATA_RELOAD_KEY,false);
+
+        if (isFormReload){
+            String productName = data.getStringExtra(PRODUCT_NAME_KEY);
+            String cost = data.getStringExtra(COST_KEY);
+            String sellerPhone = data.getStringExtra(SELLER_PHONE_NUMBER_KEY);
+            String qty = data.getStringExtra(QTY_KEY);
+            String sellerEmail = data.getStringExtra(SELLER_EMAIL_KEY);
+            String deliveryAddress = data.getStringExtra(DELIVERY_ADDRESS_KEY);
+
+            productNameEditText.setText(productName);
+            costEditText.setText(cost);
+            sellerPhoneNumber.setText(sellerPhone);
+            qtyEditText.setText(qty);
+            sellerEmailEditText.setText(sellerEmail);
+            addressEditText.setText(deliveryAddress);
+
+            Toast.makeText(RegisterPurchaseForm.this,"Purchase registration failed...",Toast.LENGTH_LONG).show();
+
+        }
+
+    }
+
+    private boolean validateFormData() {
+        if (productNameEditText.getText().toString().isEmpty()) {
+            productNameEditText.setError("Missing product name");
+            productNameEditText.requestFocus();
+            Sound.vibrateDevice(RegisterPurchaseForm.this);
+            return false;
+        }
+
+        if (costEditText.getText().toString().isEmpty()) {
+            costEditText.setError("Product cost (Ksh) is required");
+            costEditText.requestFocus();
+            Sound.vibrateDevice(RegisterPurchaseForm.this);
+            return false;
+        }
+
+        if (sellerPhoneNumber.getText().toString().isEmpty()) {
+            sellerPhoneNumber.setError("Seller Phone Number is required");
+            sellerPhoneNumber.requestFocus();
+            return false;
+        }
+
+        if (addressEditText.getText().toString().isEmpty()) {
+            addressEditText.setError("Delivery address is required");
+            addressEditText.requestFocus();
+            Sound.vibrateDevice(RegisterPurchaseForm.this);
+            return false;
+        }
+
+        if (qtyEditText.getText().toString().isEmpty()) {
+            qtyEditText.setError("Please tell us how much/how many of the products is to be delivered");
+            qtyEditText.requestFocus();
+            Sound.vibrateDevice(RegisterPurchaseForm.this);
+            return false;
+        }
+
+        return true;
+    }
+
+    private void requestSmsPermission() {
+        if (ContextCompat.checkSelfPermission(RegisterPurchaseForm.this, Manifest.permission.SEND_SMS) != PackageManager.PERMISSION_GRANTED) {
+            ActivityCompat.requestPermissions(RegisterPurchaseForm.this, new String[]{Manifest.permission.SEND_SMS}, SMS_PERMISSION_REQUEST_CODE);
         }
     }
 
-    private void extractAndSubmitPurchaseData() {
+    private void extractAndSubmitPurchaseData(Snackbar snackbar) {
         purchase.setUuid(UUID.randomUUID().toString());
         purchase.setName(productNameEditText.getText().toString());
         purchase.setPlatform(purchasePlatformSpinner.getSelectedItem().toString());
@@ -127,18 +210,17 @@ public class RegisterPurchaseForm extends AppCompatActivity {
                 .child(purchase.getUuid())
                 .setValue(purchase);
 
+        runDataSubmitCountDown(snackbar,task);
+
         task.addOnSuccessListener(new OnSuccessListener() {
             @Override
             public void onSuccess(Object o) {
                 registerPurchaseProgressBar.setVisibility(View.GONE);
+                Intent intent = new Intent(RegisterPurchaseForm.this, MakePaymentActivity.class);
 
-                Intent intent = new Intent(RegisterPurchaseForm.this, BuyerDashboard.class);
-
-                if (!sellerPhoneNumber.getText().toString().isEmpty())
-                    intent.putExtra("send_purchase_sms",sellerPhoneNumber.getText().toString());
-                else if (sellerEmailEditText.getText().toString().isEmpty())
-                    intent.putExtra("send_purchase_email",sellerEmailEditText.getText().toString());
-
+//                String sms = composeSmsMessage("Joel Michael", costEditText.getText().toString(), productNameEditText.getText().toString());
+//
+//                HakikishaUtils.sendSms(RegisterPurchaseForm.this, sms, sellerPhoneNumber.getText().toString());
                 Toast.makeText(RegisterPurchaseForm.this, "Purchase Registered", Toast.LENGTH_LONG).show();
                 startActivity(intent);
                 finish();
@@ -152,5 +234,48 @@ public class RegisterPurchaseForm extends AppCompatActivity {
                 Toast.makeText(RegisterPurchaseForm.this, "Unable to save product, try again later...", Toast.LENGTH_LONG).show();
             }
         });
+    }
+
+    private void runDataSubmitCountDown(Snackbar snackbar,Task task){
+        CountDownTimer countDownTimer = new CountDownTimer(60000,20000) {
+            @Override
+            public void onTick(long millisUntilFinished) {
+                Log.e(TAG, "onTick: millis " + millisUntilFinished );
+                if (millisUntilFinished < 20000){
+                    snackbar.setText("This is taking too long...");
+                }
+
+                if (millisUntilFinished > 20000 && millisUntilFinished < 40000){
+                    snackbar.setText("Unable to register purchase, check your connection and try again...");
+                }
+
+                snackbar.show();
+            }
+
+            @Override
+            public void onFinish() {
+                if (!task.isComplete()){
+                    registerPurchaseProgressBar.setVisibility(View.GONE);
+                    snackbar.setText("Unable to register purchase, check your connection and try again...");
+                    snackbar.show();
+
+                    Intent intent = new Intent(RegisterPurchaseForm.this,RegisterPurchaseForm.class);
+                    intent.putExtra(FORM_DATA_RELOAD_KEY,true);
+                    intent.putExtra(PRODUCT_NAME_KEY,productNameEditText.getText().toString());
+                    intent.putExtra(COST_KEY,costEditText.getText().toString());
+                    intent.putExtra(DELIVERY_ADDRESS_KEY,addressEditText.getText().toString());
+                    intent.putExtra(QTY_KEY,qtyEditText.getText().toString());
+                    intent.putExtra(SELLER_PHONE_NUMBER_KEY,sellerPhoneNumber.getText().toString());
+                    intent.putExtra(SELLER_EMAIL_KEY,sellerEmailEditText.getText().toString());
+                    startActivity(intent);
+                    finish();
+                }
+            }
+        }.start();
+    }
+
+
+    private String composeSmsMessage(String buyerNames, String amount, String productName) {
+        return String.format("Dear Seller, %s has deposited %s on Hakikisha... Please deliver % to complete the transaction on your end.", buyerNames, amount, productName);
     }
 }

@@ -5,6 +5,7 @@ import android.util.Log;
 
 public class HakikishaPreference {
 
+    private final static String BUYER_NAMES_PREFS = "buyer_names_prefs";
     private final static String ACCOUNT_UUID_PREFS = "account_uuid_prefs";
     private final static String CONTACTS_RETRIEVE_PREF = "contact_retrieve_pref";
     private final static String ACCOUNT_TYPE_PREF = "account_type_pref";
@@ -19,6 +20,14 @@ public class HakikishaPreference {
     private final static String MONTHLY_SUBSCRIPTION_ACTIVATED = "monthly_subscription_activated";
     private final static String USER_SWIPE_CARD_ONBOARDING_COMPLETE = "user_swipe_onboarding_complete";
     private final static String USER_PROFILE_URI = "usere_profile_uri_prefs";
+
+    public static void setBuyerNamesPrefs(Context context,String names){
+        setStringPref(context,BUYER_NAMES_PREFS,names);
+    }
+
+    public static String getBuyerNamesPrefs(Context context){
+        return getStringPrefs(context,BUYER_NAMES_PREFS,null);
+    }
 
     public static void setAccountUuidPrefs(Context context,String uuid){
         setStringPref(context,ACCOUNT_UUID_PREFS,uuid);
