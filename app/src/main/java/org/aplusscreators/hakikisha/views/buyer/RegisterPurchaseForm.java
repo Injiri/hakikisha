@@ -1,13 +1,14 @@
 package org.aplusscreators.hakikisha.views.buyer;
 
+import android.Manifest;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.Spinner;
 import android.widget.Toast;
@@ -15,8 +16,8 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
 
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -25,26 +26,24 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
 import org.aplusscreators.hakikisha.R;
-import org.aplusscreators.hakikisha.adapters.SellerFormAdapter;
 import org.aplusscreators.hakikisha.model.Purchase;
 import org.aplusscreators.hakikisha.model.Seller;
 import org.aplusscreators.hakikisha.settings.HakikishaPreference;
 import org.aplusscreators.hakikisha.utils.HakikishaUtils;
 import org.aplusscreators.hakikisha.views.common.ExitFormDialog;
 
-import java.util.ArrayList;
-import java.util.List;
 import java.util.UUID;
 
 public class RegisterPurchaseForm extends AppCompatActivity {
 
+    private static final int SMS_PERMISSION_REQUEST_CODE = 4321;
     Button submitButton;
     ImageView cancelButton;
     Spinner purchasePlatformSpinner;
     EditText productNameEditText;
     EditText costEditText;
     EditText orderEditText;
-    EditText sellerEmail;
+    EditText sellerEmailEditText;
     EditText sellerPhoneNumber;
     ImageView addSellerButton;
     EditText descriptionEditText;
@@ -60,7 +59,7 @@ public class RegisterPurchaseForm extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register_purchase_form);
 
-        sellerEmail = findViewById(R.id.register_purchase_seller_email);
+        sellerEmailEditText = findViewById(R.id.register_purchase_seller_email);
         sellerPhoneNumber = findViewById(R.id.register_purchase_seller_phone);
         submitButton = findViewById(R.id.purchase_form_submit_button);
         cancelButton = findViewById(R.id.purchase_form_cancel_button);
@@ -78,8 +77,6 @@ public class RegisterPurchaseForm extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 registerPurchaseProgressBar.setVisibility(View.VISIBLE);
-                HakikishaUtils.sendEmail(RegisterPurchaseForm.this,"mhakikisha@gmail.com","seller@gmail.com","HAKIKISHA SALE OF PRODUCT x","Hello, hope this email finds you well....");
-                HakikishaUtils.sendSms(RegisterPurchaseForm.this,"SELLER-x SEND PRODUCT y TO CUSTOMER N","0712345678");
                 extractAndSubmitPurchaseData();
             }
         });
@@ -87,17 +84,25 @@ public class RegisterPurchaseForm extends AppCompatActivity {
         cancelButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                ExitFormDialog exitFormDialog = new ExitFormDialog(RegisterPurchaseForm.this,RegisterPurchaseForm.this,BuyerDashboard.class);
+                ExitFormDialog exitFormDialog = new ExitFormDialog(RegisterPurchaseForm.this, RegisterPurchaseForm.this, BuyerDashboard.class);
                 exitFormDialog.show();
             }
         });
 
         platformsArrayAdapter = new ArrayAdapter<>(
-                RegisterPurchaseForm.this,android.R.layout.simple_spinner_dropdown_item,getResources().getStringArray(R.array.purchase_eplatforms)
+                RegisterPurchaseForm.this, android.R.layout.simple_spinner_dropdown_item, getResources().getStringArray(R.array.purchase_eplatforms)
         );
 
         purchasePlatformSpinner.setAdapter(platformsArrayAdapter);
 
+        requestSmsPermission();
+
+    }
+
+    private void requestSmsPermission(){
+        if (ContextCompat.checkSelfPermission(RegisterPurchaseForm.this, Manifest.permission.SEND_SMS) != PackageManager.PERMISSION_GRANTED){
+            ActivityCompat.requestPermissions(RegisterPurchaseForm.this,new String[]{Manifest.permission.SEND_SMS},SMS_PERMISSION_REQUEST_CODE);
+        }
     }
 
     private void extractAndSubmitPurchaseData() {
@@ -108,7 +113,7 @@ public class RegisterPurchaseForm extends AppCompatActivity {
         purchase.setDescription(descriptionEditText.getText().toString());
         purchase.setDeliveryAddress(addressEditText.getText().toString());
         purchase.setQuantity(qtyEditText.getText().toString());
-        purchase.setSellerEmail(sellerEmail.getText().toString());
+        purchase.setSellerEmail(sellerEmailEditText.getText().toString());
         purchase.setBuyerUuid(HakikishaPreference.getAccountUuidPrefs(RegisterPurchaseForm.this));
         purchase.setSellerPhone(sellerPhoneNumber.getText().toString());
 
@@ -116,7 +121,7 @@ public class RegisterPurchaseForm extends AppCompatActivity {
         DatabaseReference databaseReference = firebaseDatabase.getReference("hakikisha");
         Task task = databaseReference
                 .child("buyer")
-              //  .child(HakikishaPreference.getAccountUuidPrefs(RegisterPurchaseForm.this)) todo restore uuid
+                //  .child(HakikishaPreference.getAccountUuidPrefs(RegisterPurchaseForm.this)) todo restore uuid
                 .child(UUID.randomUUID().toString())
                 .child("purchases")
                 .child(purchase.getUuid())
@@ -126,8 +131,15 @@ public class RegisterPurchaseForm extends AppCompatActivity {
             @Override
             public void onSuccess(Object o) {
                 registerPurchaseProgressBar.setVisibility(View.GONE);
+
+                Intent intent = new Intent(RegisterPurchaseForm.this, BuyerDashboard.class);
+
+                if (!sellerPhoneNumber.getText().toString().isEmpty())
+                    intent.putExtra("send_purchase_sms",sellerPhoneNumber.getText().toString());
+                else if (sellerEmailEditText.getText().toString().isEmpty())
+                    intent.putExtra("send_purchase_email",sellerEmailEditText.getText().toString());
+
                 Toast.makeText(RegisterPurchaseForm.this, "Purchase Registered", Toast.LENGTH_LONG).show();
-                Intent intent = new Intent(RegisterPurchaseForm.this,BuyerDashboard.class);
                 startActivity(intent);
                 finish();
             }

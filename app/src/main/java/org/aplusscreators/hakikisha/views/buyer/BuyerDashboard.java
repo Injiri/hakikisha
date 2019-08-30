@@ -21,6 +21,7 @@ import org.aplusscreators.hakikisha.adapters.PurchasesAdapter;
 import org.aplusscreators.hakikisha.fab.ABShape;
 import org.aplusscreators.hakikisha.fab.ABTextUtil;
 import org.aplusscreators.hakikisha.model.Purchase;
+import org.aplusscreators.hakikisha.utils.HakikishaUtils;
 import org.aplusscreators.hakikisha.views.seller.SellerDashboard;
 
 import java.util.ArrayList;
@@ -60,6 +61,20 @@ public class BuyerDashboard extends AppCompatActivity implements RapidFloatingAc
         populatePurchaseList();
 
         intializeExpandableFab();
+
+        sendEmailSmsIfNeccessary();
+    }
+
+    private void sendEmailSmsIfNeccessary(){
+        Intent data = getIntent();
+        String sellerPhone = data.getStringExtra("send_purchase_sms");
+        String sellerEmail = data.getStringExtra("send_purchase_email");
+
+        if (sellerPhone != null && !sellerPhone.isEmpty())
+            HakikishaUtils.sendSms(BuyerDashboard.this,"Sms Message",sellerPhone);
+        else if (sellerEmail != null && !sellerEmail.isEmpty())
+            HakikishaUtils.sendEmail(BuyerDashboard.this,"from@gmail",sellerEmail,"PURCHASE EMAIL","Purchase message...");
+
     }
 
     private void intializeExpandableFab() {
