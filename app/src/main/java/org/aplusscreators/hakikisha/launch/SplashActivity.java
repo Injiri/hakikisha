@@ -12,6 +12,7 @@ import org.aplusscreators.hakikisha.settings.HakikishaPreference;
 import org.aplusscreators.hakikisha.utils.Constants;
 import org.aplusscreators.hakikisha.views.buyer.BuyerDashboard;
 import org.aplusscreators.hakikisha.views.buyer.BuyerProfileFormActivity;
+import org.aplusscreators.hakikisha.views.buyer.RegisterPurchaseForm;
 import org.aplusscreators.hakikisha.views.common.LoginActivity;
 import org.aplusscreators.hakikisha.views.seller.SellerDashboard;
 import org.aplusscreators.hakikisha.views.seller.SellerProfileFormActivity;
@@ -27,7 +28,7 @@ public class SplashActivity extends AppCompatActivity {
     @Override
     protected void onStart() {
         super.onStart();
-        Intent intent = new Intent(SplashActivity.this, ActivityAccountTypeSelect.class);
+        Intent intent = new Intent(SplashActivity.this, RegisterPurchaseForm.class);
         startActivity(intent);
 
 //        String accountType = HakikishaPreference.getAccountTypePref(SplashActivity.this);

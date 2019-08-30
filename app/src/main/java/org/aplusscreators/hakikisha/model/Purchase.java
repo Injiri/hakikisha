@@ -8,9 +8,12 @@ public class Purchase {
     private double cost;
     private int order_id;
     private String sellerUuid;
+    private String sellerPhone;
+    private String sellerEmail;
     private String description;
     private String deliveryAddress;
     private String quantity;
+    private String buyerUuid;
 
     public Purchase() {
     }
@@ -25,6 +28,30 @@ public class Purchase {
         this.description = description;
         this.deliveryAddress = deliveryAddress;
         this.quantity = quantity;
+    }
+
+    public String getBuyerUuid() {
+        return buyerUuid;
+    }
+
+    public void setBuyerUuid(String buyerUuid) {
+        this.buyerUuid = buyerUuid;
+    }
+
+    public String getSellerPhone() {
+        return sellerPhone;
+    }
+
+    public void setSellerPhone(String sellerPhone) {
+        this.sellerPhone = sellerPhone;
+    }
+
+    public String getSellerEmail() {
+        return sellerEmail;
+    }
+
+    public void setSellerEmail(String sellerEmail) {
+        this.sellerEmail = sellerEmail;
     }
 
     public String getUuid() {

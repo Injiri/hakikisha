@@ -29,13 +29,14 @@ import org.aplusscreators.hakikisha.adapters.SellerFormAdapter;
 import org.aplusscreators.hakikisha.model.Purchase;
 import org.aplusscreators.hakikisha.model.Seller;
 import org.aplusscreators.hakikisha.settings.HakikishaPreference;
+import org.aplusscreators.hakikisha.utils.HakikishaUtils;
 import org.aplusscreators.hakikisha.views.common.ExitFormDialog;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
-public class RegisterPurchaseForm extends AppCompatActivity implements SellerFormAdapter.OnSellerClickedListener {
+public class RegisterPurchaseForm extends AppCompatActivity {
 
     Button submitButton;
     ImageView cancelButton;
@@ -43,30 +44,29 @@ public class RegisterPurchaseForm extends AppCompatActivity implements SellerFor
     EditText productNameEditText;
     EditText costEditText;
     EditText orderEditText;
-    RecyclerView sellerRecyclerView;
+    EditText sellerEmail;
+    EditText sellerPhoneNumber;
     ImageView addSellerButton;
     EditText descriptionEditText;
     EditText addressEditText;
     EditText qtyEditText;
     ProgressBar registerPurchaseProgressBar;
-    Purchase purchase;
-    SellerFormAdapter sellerAdapter;
+    Purchase purchase = new Purchase();
     ArrayAdapter<String> platformsArrayAdapter;
     Seller selectedSeller = new Seller();
-
-    List<Seller> sellerList = new ArrayList<>();
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register_purchase_form);
 
+        sellerEmail = findViewById(R.id.register_purchase_seller_email);
+        sellerPhoneNumber = findViewById(R.id.register_purchase_seller_phone);
         submitButton = findViewById(R.id.purchase_form_submit_button);
         cancelButton = findViewById(R.id.purchase_form_cancel_button);
         purchasePlatformSpinner = findViewById(R.id.purchase_platforms_spinner);
         costEditText = findViewById(R.id.register_purchase_cost_edittext);
         orderEditText = findViewById(R.id.register_purchase_order_id_edit_text);
-        sellerRecyclerView = findViewById(R.id.register_purchase_seller_recycler_view);
         addSellerButton = findViewById(R.id.purchase_add_seller_buton);
         descriptionEditText = findViewById(R.id.register_purchase_description);
         addressEditText = findViewById(R.id.register_purchase_delivery_address_edit_text);
@@ -78,6 +78,8 @@ public class RegisterPurchaseForm extends AppCompatActivity implements SellerFor
             @Override
             public void onClick(View v) {
                 registerPurchaseProgressBar.setVisibility(View.VISIBLE);
+                HakikishaUtils.sendEmail(RegisterPurchaseForm.this,"mhakikisha@gmail.com","seller@gmail.com","HAKIKISHA SALE OF PRODUCT x","Hello, hope this email finds you well....");
+                HakikishaUtils.sendSms(RegisterPurchaseForm.this,"SELLER-x SEND PRODUCT y TO CUSTOMER N","0712345678");
                 extractAndSubmitPurchaseData();
             }
         });
@@ -90,34 +92,12 @@ public class RegisterPurchaseForm extends AppCompatActivity implements SellerFor
             }
         });
 
-        sellerAdapter = new SellerFormAdapter(RegisterPurchaseForm.this,sellerList,this);
-        sellerRecyclerView.setLayoutManager(new LinearLayoutManager(RegisterPurchaseForm.this));
-        sellerRecyclerView.setAdapter(sellerAdapter);
-
         platformsArrayAdapter = new ArrayAdapter<>(
                 RegisterPurchaseForm.this,android.R.layout.simple_spinner_dropdown_item,getResources().getStringArray(R.array.purchase_eplatforms)
         );
 
         purchasePlatformSpinner.setAdapter(platformsArrayAdapter);
 
-        populateSellersList();
-
-
-    }
-
-    private void populateSellersList() {
-        Seller seller = new Seller();
-        seller.setFirstName("Michael");
-        seller.setLastName("Dawney");
-        seller.setCompany("Compamy Ltd");
-
-        sellerList.add(seller);
-        sellerList.add(seller);
-        sellerList.add(seller);
-        sellerList.add(seller);
-        sellerList.add(seller);
-
-        selectedSeller = sellerList.get(0);
     }
 
     private void extractAndSubmitPurchaseData() {
@@ -125,16 +105,19 @@ public class RegisterPurchaseForm extends AppCompatActivity implements SellerFor
         purchase.setName(productNameEditText.getText().toString());
         purchase.setPlatform(purchasePlatformSpinner.getSelectedItem().toString());
         purchase.setCost(Double.parseDouble(costEditText.getText().toString()));
-        purchase.setSellerUuid(selectedSeller.getUuid());
         purchase.setDescription(descriptionEditText.getText().toString());
         purchase.setDeliveryAddress(addressEditText.getText().toString());
         purchase.setQuantity(qtyEditText.getText().toString());
+        purchase.setSellerEmail(sellerEmail.getText().toString());
+        purchase.setBuyerUuid(HakikishaPreference.getAccountUuidPrefs(RegisterPurchaseForm.this));
+        purchase.setSellerPhone(sellerPhoneNumber.getText().toString());
 
         FirebaseDatabase firebaseDatabase = FirebaseDatabase.getInstance();
         DatabaseReference databaseReference = firebaseDatabase.getReference("hakikisha");
         Task task = databaseReference
                 .child("buyer")
-                .child(HakikishaPreference.getAccountUuidPrefs(RegisterPurchaseForm.this))
+              //  .child(HakikishaPreference.getAccountUuidPrefs(RegisterPurchaseForm.this)) todo restore uuid
+                .child(UUID.randomUUID().toString())
                 .child("purchases")
                 .child(purchase.getUuid())
                 .setValue(purchase);
@@ -157,12 +140,5 @@ public class RegisterPurchaseForm extends AppCompatActivity implements SellerFor
                 Toast.makeText(RegisterPurchaseForm.this, "Unable to save product, try again later...", Toast.LENGTH_LONG).show();
             }
         });
-    }
-
-    @Override
-    public void onSellerClicked(int position, LinearLayout view) {
-        view.setBackgroundColor(getResources().getColor(android.R.color.holo_blue_bright));
-        selectedSeller = sellerList.get(position);
-
     }
 }
