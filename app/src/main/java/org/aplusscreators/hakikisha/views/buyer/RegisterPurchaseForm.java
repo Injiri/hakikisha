@@ -21,6 +21,8 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
@@ -48,6 +50,7 @@ public class RegisterPurchaseForm extends AppCompatActivity {
     private static final String QTY_KEY = "quantity_key";
     private static final String SELLER_PHONE_NUMBER_KEY = "seller_phone_key";
     private static final String SELLER_EMAIL_KEY = "seller_email_key";
+    public static final String PURCHASE_SERIALIZED_KEY = "purchase_serialized_key";
 
     Button submitButton;
     ImageView cancelButton;
@@ -65,6 +68,9 @@ public class RegisterPurchaseForm extends AppCompatActivity {
     Purchase purchase = new Purchase();
     ArrayAdapter<String> platformsArrayAdapter;
     Seller selectedSeller = new Seller();
+    String purchaseSerialized;
+
+    ObjectMapper objectMapper = new ObjectMapper();
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -199,6 +205,9 @@ public class RegisterPurchaseForm extends AppCompatActivity {
         purchase.setSellerEmail(sellerEmailEditText.getText().toString());
         purchase.setBuyerUuid(HakikishaPreference.getAccountUuidPrefs(RegisterPurchaseForm.this));
         purchase.setSellerPhone(sellerPhoneNumber.getText().toString());
+        purchase.setStatus("payment_pending");
+
+        serializePurchaseModel();
 
         FirebaseDatabase firebaseDatabase = FirebaseDatabase.getInstance();
         DatabaseReference databaseReference = firebaseDatabase.getReference("hakikisha");
@@ -217,6 +226,7 @@ public class RegisterPurchaseForm extends AppCompatActivity {
             public void onSuccess(Object o) {
                 registerPurchaseProgressBar.setVisibility(View.GONE);
                 Intent intent = new Intent(RegisterPurchaseForm.this, MakePaymentActivity.class);
+                intent.putExtra(PURCHASE_SERIALIZED_KEY,purchaseSerialized);
 
 //                String sms = composeSmsMessage("Joel Michael", costEditText.getText().toString(), productNameEditText.getText().toString());
 //
@@ -231,9 +241,19 @@ public class RegisterPurchaseForm extends AppCompatActivity {
             @Override
             public void onFailure(@NonNull Exception e) {
                 registerPurchaseProgressBar.setVisibility(View.GONE);
-                Toast.makeText(RegisterPurchaseForm.this, "Unable to save product, try again later...", Toast.LENGTH_LONG).show();
+                Toast.makeText(RegisterPurchaseForm.this, "Having trouble saving this purchase, check your connection...", Toast.LENGTH_LONG).show();
             }
         });
+    }
+
+    private String serializePurchaseModel() {
+        purchaseSerialized = null;
+        try {
+            purchaseSerialized = objectMapper.writeValueAsString(purchase);
+        } catch (JsonProcessingException e) {
+            e.printStackTrace();
+        }
+        return purchaseSerialized;
     }
 
     private void runDataSubmitCountDown(Snackbar snackbar,Task task){

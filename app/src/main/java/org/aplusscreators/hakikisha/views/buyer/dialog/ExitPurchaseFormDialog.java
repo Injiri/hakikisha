@@ -1,4 +1,4 @@
-package org.aplusscreators.hakikisha.views.common;
+package org.aplusscreators.hakikisha.views.buyer.dialog;
 
 import android.app.Dialog;
 import android.content.Context;
@@ -11,7 +11,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import org.aplusscreators.hakikisha.R;
 
-public class ExitFormDialog extends Dialog {
+public class ExitPurchaseFormDialog extends Dialog {
 
     View discardActionView;
     View keepEditingView;
@@ -19,7 +19,7 @@ public class ExitFormDialog extends Dialog {
     Class backStackActivity;
     AppCompatActivity activity;
 
-    public ExitFormDialog(@NonNull Context context,AppCompatActivity activity,Class backStackActivity) {
+    public ExitPurchaseFormDialog(@NonNull Context context,AppCompatActivity activity,Class backStackActivity) {
         super(context);
         this.context = context;
         this.backStackActivity = backStackActivity;
@@ -29,10 +29,10 @@ public class ExitFormDialog extends Dialog {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.dialog_exit_form);
+        setContentView(R.layout.dialog_cancel_purchase);
 
-        discardActionView = findViewById(R.id.cancel_purchase_action_view);
         keepEditingView = findViewById(R.id.keep_editiong_action_view);
+        discardActionView = findViewById(R.id.cancel_purchase_action_view);
 
         discardActionView.setOnClickListener(new View.OnClickListener() {
             @Override

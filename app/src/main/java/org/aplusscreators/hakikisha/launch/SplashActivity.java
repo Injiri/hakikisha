@@ -12,6 +12,7 @@ import org.aplusscreators.hakikisha.settings.HakikishaPreference;
 import org.aplusscreators.hakikisha.utils.Constants;
 import org.aplusscreators.hakikisha.views.buyer.BuyerDashboard;
 import org.aplusscreators.hakikisha.views.buyer.BuyerProfileFormActivity;
+import org.aplusscreators.hakikisha.views.buyer.MakePaymentActivity;
 import org.aplusscreators.hakikisha.views.buyer.RegisterPurchaseForm;
 import org.aplusscreators.hakikisha.views.common.LoginActivity;
 import org.aplusscreators.hakikisha.views.seller.SellerDashboard;

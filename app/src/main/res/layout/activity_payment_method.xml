@@ -11,8 +11,9 @@
         android:layout_width="match_parent">
 
         <LinearLayout
+            android:id="@+id/close_payment_form_view"
             android:layout_height="wrap_content"
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:orientation="horizontal">
 
             <ImageView
@@ -20,10 +21,10 @@
                 android:layout_height="wrap_content"
                 android:layout_margin="10dp"
                 android:layout_width="wrap_content"
-                android:onClick="goBackConfirmPickup"
-                android:src="@drawable/ic_arrow_back_black_36dp" />
+                android:src="@drawable/ic_action_close_light" />
 
             <TextView
+                android:visibility="gone"
                 android:layout_height="wrap_content"
                 android:layout_margin="10dp"
                 android:layout_width="wrap_content"
@@ -43,29 +44,32 @@
         android:layout_marginBottom="16dp">
 
         <TextView
+            android:id="@+id/product_description_text_view"
             android:textColor="@android:color/black"
             android:textSize="36sp"
             android:gravity="center"
-            android:text="Buy 1, Huawei Y9 From Joel Kunari on Olx"
+            android:text=""
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
 
         <TextView
+            android:id="@+id/product_price_text_view"
             android:textStyle="bold"
             android:padding="12dp"
             android:textSize="21sp"
             android:gravity="center"
-            android:text="Ksh. 23,999.99"
+            android:text=""
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
 
         <TextView
+            android:id="@+id/product_delivery_address_text_view"
             android:layout_marginTop="22dp"
             android:paddingStart="12dp"
             android:paddingEnd="12dp"
             android:textStyle="italic"
             android:textColor="@android:color/black"
-            android:text="This product will be delivered to: Makutano Estate, House B"
+            android:text=""
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
 
@@ -93,12 +97,11 @@
             android:orientation="vertical">
 
             <LinearLayout
-                android:id="@+id/llMpesaPayment"
+                android:id="@+id/mpesa_payment_method_view"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="16dp"
                 android:layout_marginRight="16dp"
                 android:layout_width="match_parent"
-                android:onClick="selectedPayment"
                 android:orientation="horizontal"
                 android:paddingBottom="8dp"
                 android:paddingTop="8dp">
@@ -117,7 +120,7 @@
                     android:textAppearance="?android:attr/textAppearanceLarge" />
 
                 <ImageView
-                    android:id="@+id/ivMpesaSelected"
+                    android:id="@+id/mpesa_method_select_image_view"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:layout_width="0dp"
@@ -126,45 +129,11 @@
             </LinearLayout>
 
             <LinearLayout
-                android:id="@+id/llAirtelPayment"
+                android:id="@+id/card_payment_method_view"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="16dp"
                 android:layout_marginRight="16dp"
                 android:layout_width="match_parent"
-                android:onClick="selectedPayment"
-                android:orientation="horizontal"
-                android:paddingBottom="8dp"
-                android:paddingTop="8dp">
-
-                <ImageView
-                    android:layout_height="match_parent"
-                    android:layout_weight="1"
-                    android:layout_width="0dp"
-                    android:src="@drawable/cash_in_hand_480" />
-
-                <TextView
-                    android:layout_height="wrap_content"
-                    android:layout_weight="5"
-                    android:layout_width="0dp"
-                    android:text="Google Pay"
-                    android:textAppearance="?android:attr/textAppearanceLarge" />
-
-                <ImageView
-                    android:id="@+id/ivAirtelMoneySelected"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:layout_width="0dp"
-                    android:src="@drawable/ic_check_circle_black_24dp"
-                    android:visibility="invisible" />
-            </LinearLayout>
-
-            <LinearLayout
-                android:id="@+id/llCardPayment"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="16dp"
-                android:layout_marginRight="16dp"
-                android:layout_width="match_parent"
-                android:onClick="selectedPayment"
                 android:orientation="horizontal"
                 android:paddingBottom="8dp"
                 android:paddingTop="8dp">
@@ -183,7 +152,7 @@
                     android:textAppearance="?android:attr/textAppearanceLarge" />
 
                 <ImageView
-                    android:id="@+id/ivCreditCardSelected"
+                    android:id="@+id/card_payment_method_selected_image_view"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:layout_width="0dp"
@@ -192,13 +161,45 @@
             </LinearLayout>
 
             <LinearLayout
+                android:id="@+id/google_payment_method_view"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="16dp"
+                android:layout_marginRight="16dp"
+                android:layout_width="match_parent"
+                android:orientation="horizontal"
+                android:paddingBottom="8dp"
+                android:paddingTop="8dp">
+
+                <ImageView
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:layout_width="0dp"
+                    android:src="@drawable/cash_in_hand_480" />
+
+                <TextView
+                    android:layout_height="wrap_content"
+                    android:layout_weight="5"
+                    android:layout_width="0dp"
+                    android:text="Google Pay"
+                    android:textAppearance="?android:attr/textAppearanceLarge" />
+
+                <ImageView
+                    android:id="@+id/google_pay_selected_image_view"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:layout_width="0dp"
+                    android:src="@drawable/ic_check_circle_black_24dp"
+                    android:visibility="invisible" />
+            </LinearLayout>
+
+
+            <LinearLayout
                 android:visibility="gone"
                 android:id="@+id/llCashPayment"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="16dp"
                 android:layout_marginRight="16dp"
                 android:layout_width="match_parent"
-                android:onClick="selectedPayment"
                 android:orientation="horizontal"
                 android:paddingBottom="8dp"
                 android:paddingTop="8dp">
@@ -226,12 +227,13 @@
             </LinearLayout>
 
             <Button
+                android:id="@+id/submit_payment_button"
+                android:visibility="gone"
                 android:background="@drawable/blue_curved_background"
                 android:layout_height="wrap_content"
                 android:layout_margin="16dp"
                 android:layout_width="match_parent"
-                android:onClick="makePayments"
-                android:text="Done"
+                android:text="Proceed"
                 android:textAppearance="?android:attr/textAppearanceLarge"
                 android:textColor="@android:color/white" />
         </LinearLayout>

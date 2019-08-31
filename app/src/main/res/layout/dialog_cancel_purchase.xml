@@ -12,7 +12,7 @@
         android:layout_marginEnd="18dp"
         android:textSize="18sp"
         android:textColor="@android:color/black"
-        android:text="You have unsaved changes, do you want to keep editing ?"
+        android:text="Are you sure you want to cancel this purchase ?"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content" />
 
@@ -24,7 +24,7 @@
         <TextView
             android:id="@+id/cancel_purchase_action_view"
             android:layout_toLeftOf="@+id/keep_editiong_action_view"
-            android:text="Discard"
+            android:text="Cancel Purchase"
             android:textSize="16sp"
             android:textColor="@color/blue_deep"
             android:layout_marginEnd="16dp"
@@ -35,7 +35,7 @@
             android:layout_marginEnd="26dp"
             android:id="@+id/keep_editiong_action_view"
             android:layout_alignParentEnd="true"
-            android:text="Keep editing"
+            android:text="Add Payment Method"
             android:textSize="16sp"
             android:textColor="@color/blue_deep"
             android:layout_width="wrap_content"

@@ -14,20 +14,43 @@ public class Purchase {
     private String deliveryAddress;
     private String quantity;
     private String buyerUuid;
+    private String status;
+    private String paymentMethod;
 
     public Purchase() {
     }
 
-    public Purchase(String uuid, String name, String platform, double cost, int order_id, String sellerUuid, String description, String deliveryAddress, String quantity) {
+    public Purchase(String uuid, String name, String platform, double cost, int order_id, String sellerUuid, String sellerPhone, String sellerEmail, String description, String deliveryAddress, String quantity, String buyerUuid, String status, String paymentMethod) {
         this.uuid = uuid;
         this.name = name;
         this.platform = platform;
         this.cost = cost;
         this.order_id = order_id;
         this.sellerUuid = sellerUuid;
+        this.sellerPhone = sellerPhone;
+        this.sellerEmail = sellerEmail;
         this.description = description;
         this.deliveryAddress = deliveryAddress;
         this.quantity = quantity;
+        this.buyerUuid = buyerUuid;
+        this.status = status;
+        this.paymentMethod = paymentMethod;
+    }
+
+    public String getPaymentMethod() {
+        return paymentMethod;
+    }
+
+    public void setPaymentMethod(String paymentMethod) {
+        this.paymentMethod = paymentMethod;
+    }
+
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
     }
 
     public String getBuyerUuid() {
