@@ -96,7 +96,7 @@ public class RegisterPurchaseForm extends AppCompatActivity {
             public void onClick(View v) {
                 boolean valid = validateFormData();
                 if (valid) {
-                    Snackbar snackbar = Snackbar.make(findViewById(R.id.activity_register_purchase_layout),"This might take a while, please wait...",Snackbar.LENGTH_LONG);
+                    Snackbar snackbar = Snackbar.make(findViewById(R.id.activity_register_purchase_layout), "This might take a while, please wait...", Snackbar.LENGTH_LONG);
                     snackbar.show();
 
                     registerPurchaseProgressBar.setVisibility(View.VISIBLE);
@@ -126,10 +126,11 @@ public class RegisterPurchaseForm extends AppCompatActivity {
     @Override
     protected void onStart() {
         super.onStart();
-        Intent data = getIntent();;
-        boolean isFormReload = data.getBooleanExtra(FORM_DATA_RELOAD_KEY,false);
+        Intent data = getIntent();
+        ;
+        boolean isFormReload = data.getBooleanExtra(FORM_DATA_RELOAD_KEY, false);
 
-        if (isFormReload){
+        if (isFormReload) {
             String productName = data.getStringExtra(PRODUCT_NAME_KEY);
             String cost = data.getStringExtra(COST_KEY);
             String sellerPhone = data.getStringExtra(SELLER_PHONE_NUMBER_KEY);
@@ -144,7 +145,7 @@ public class RegisterPurchaseForm extends AppCompatActivity {
             sellerEmailEditText.setText(sellerEmail);
             addressEditText.setText(deliveryAddress);
 
-            Toast.makeText(RegisterPurchaseForm.this,"Purchase registration failed...",Toast.LENGTH_LONG).show();
+            Toast.makeText(RegisterPurchaseForm.this, "Purchase registration failed...", Toast.LENGTH_LONG).show();
 
         }
 
@@ -213,24 +214,19 @@ public class RegisterPurchaseForm extends AppCompatActivity {
         DatabaseReference databaseReference = firebaseDatabase.getReference("hakikisha");
         Task task = databaseReference
                 .child("buyer")
-                //  .child(HakikishaPreference.getAccountUuidPrefs(RegisterPurchaseForm.this)) todo restore uuid
-                .child(UUID.randomUUID().toString())
+                .child(HakikishaPreference.getAccountUuidPrefs(RegisterPurchaseForm.this))
                 .child("purchases")
                 .child(purchase.getUuid())
                 .setValue(purchase);
 
-        runDataSubmitCountDown(snackbar,task);
+        runDataSubmitCountDown(snackbar, task);
 
         task.addOnSuccessListener(new OnSuccessListener() {
             @Override
             public void onSuccess(Object o) {
                 registerPurchaseProgressBar.setVisibility(View.GONE);
                 Intent intent = new Intent(RegisterPurchaseForm.this, MakePaymentActivity.class);
-                intent.putExtra(PURCHASE_SERIALIZED_KEY,purchaseSerialized);
-
-//                String sms = composeSmsMessage("Joel Michael", costEditText.getText().toString(), productNameEditText.getText().toString());
-//
-//                HakikishaUtils.sendSms(RegisterPurchaseForm.this, sms, sellerPhoneNumber.getText().toString());
+                intent.putExtra(PURCHASE_SERIALIZED_KEY, purchaseSerialized);
                 Toast.makeText(RegisterPurchaseForm.this, "Purchase Registered", Toast.LENGTH_LONG).show();
                 startActivity(intent);
                 finish();
@@ -256,16 +252,16 @@ public class RegisterPurchaseForm extends AppCompatActivity {
         return purchaseSerialized;
     }
 
-    private void runDataSubmitCountDown(Snackbar snackbar,Task task){
-        CountDownTimer countDownTimer = new CountDownTimer(60000,20000) {
+    private void runDataSubmitCountDown(Snackbar snackbar, Task task) {
+        CountDownTimer countDownTimer = new CountDownTimer(60000, 20000) {
             @Override
             public void onTick(long millisUntilFinished) {
-                Log.e(TAG, "onTick: millis " + millisUntilFinished );
-                if (millisUntilFinished < 20000){
+                Log.e(TAG, "onTick: millis " + millisUntilFinished);
+                if (millisUntilFinished < 20000) {
                     snackbar.setText("This is taking too long...");
                 }
 
-                if (millisUntilFinished > 20000 && millisUntilFinished < 40000){
+                if (millisUntilFinished > 20000 && millisUntilFinished < 40000) {
                     snackbar.setText("Unable to register purchase, check your connection and try again...");
                 }
 
@@ -274,28 +270,23 @@ public class RegisterPurchaseForm extends AppCompatActivity {
 
             @Override
             public void onFinish() {
-                if (!task.isComplete()){
+                if (!task.isComplete()) {
                     registerPurchaseProgressBar.setVisibility(View.GONE);
                     snackbar.setText("Unable to register purchase, check your connection and try again...");
                     snackbar.show();
 
-                    Intent intent = new Intent(RegisterPurchaseForm.this,RegisterPurchaseForm.class);
-                    intent.putExtra(FORM_DATA_RELOAD_KEY,true);
-                    intent.putExtra(PRODUCT_NAME_KEY,productNameEditText.getText().toString());
-                    intent.putExtra(COST_KEY,costEditText.getText().toString());
-                    intent.putExtra(DELIVERY_ADDRESS_KEY,addressEditText.getText().toString());
-                    intent.putExtra(QTY_KEY,qtyEditText.getText().toString());
-                    intent.putExtra(SELLER_PHONE_NUMBER_KEY,sellerPhoneNumber.getText().toString());
-                    intent.putExtra(SELLER_EMAIL_KEY,sellerEmailEditText.getText().toString());
+                    Intent intent = new Intent(RegisterPurchaseForm.this, RegisterPurchaseForm.class);
+                    intent.putExtra(FORM_DATA_RELOAD_KEY, true);
+                    intent.putExtra(PRODUCT_NAME_KEY, productNameEditText.getText().toString());
+                    intent.putExtra(COST_KEY, costEditText.getText().toString());
+                    intent.putExtra(DELIVERY_ADDRESS_KEY, addressEditText.getText().toString());
+                    intent.putExtra(QTY_KEY, qtyEditText.getText().toString());
+                    intent.putExtra(SELLER_PHONE_NUMBER_KEY, sellerPhoneNumber.getText().toString());
+                    intent.putExtra(SELLER_EMAIL_KEY, sellerEmailEditText.getText().toString());
                     startActivity(intent);
                     finish();
                 }
             }
         }.start();
-    }
-
-
-    private String composeSmsMessage(String buyerNames, String amount, String productName) {
-        return String.format("Dear Seller, %s has deposited %s on Hakikisha... Please deliver % to complete the transaction on your end.", buyerNames, amount, productName);
     }
 }

@@ -15,6 +15,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 
 import org.aplusscreators.hakikisha.R;
 import org.aplusscreators.hakikisha.model.Purchase;
+import org.aplusscreators.hakikisha.utils.HakikishaUtils;
 import org.aplusscreators.hakikisha.views.buyer.dialog.ExitPurchaseFormDialog;
 import org.aplusscreators.hakikisha.views.common.ExitFormDialog;
 
@@ -63,19 +64,22 @@ public class MakePaymentActivity extends AppCompatActivity {
         submitButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
+                sendSms();
+
                 switch (selectedPaymentMethod) {
                     case M_PESA_PAYMENT_METHOD:
-                        Toast.makeText(MakePaymentActivity.this,"Payment was successfull",Toast.LENGTH_LONG).show();
+                        Toast.makeText(MakePaymentActivity.this, "Payment was successfull", Toast.LENGTH_LONG).show();
                         Intent mPesaIntent = new Intent(MakePaymentActivity.this, BuyerDashboard.class);
                         startActivity(mPesaIntent);
                         break;
                     case CARD_PAYMENT_METHOD:
                         Intent intent = new Intent(MakePaymentActivity.this, CardPaymentActivity.class);
-                        intent.putExtra(RegisterPurchaseForm.PURCHASE_SERIALIZED_KEY,purchaseSerialized);
+                        intent.putExtra(RegisterPurchaseForm.PURCHASE_SERIALIZED_KEY, purchaseSerialized);
                         startActivity(intent);
                         break;
                     case GOOGLE_PAY_PAYMENT_METHOD:
-                        Toast.makeText(MakePaymentActivity.this,"Payment was successfull",Toast.LENGTH_LONG).show();
+                        Toast.makeText(MakePaymentActivity.this, "Payment was successfull", Toast.LENGTH_LONG).show();
                         Intent GPayIntent = new Intent(MakePaymentActivity.this, BuyerDashboard.class);
                         startActivity(GPayIntent);
                         break;
@@ -125,6 +129,15 @@ public class MakePaymentActivity extends AppCompatActivity {
                 exitFormDialog.show();
             }
         });
+    }
+
+    private void sendSms() {
+        String sms = composeSmsMessage("Joel Michael", String.valueOf(purchaseData.getCost()), purchaseData.getName());
+        HakikishaUtils.sendSms(MakePaymentActivity.this, sms, purchaseData.getSellerPhone());
+    }
+
+    private String composeSmsMessage(String buyerNames, String amount, String productName) {
+        return String.format("Dear Seller, %s has deposited %s on Hakikisha... Please deliver % to complete the transaction on your end.", buyerNames, amount, productName);
     }
 
     @Override
