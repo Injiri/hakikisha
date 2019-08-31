@@ -12,11 +12,25 @@
         <TextView
             android:layout_marginTop="41dp"
             android:layout_marginBottom="32dp"
-            android:padding="6dp"
-            android:textSize="36sp"
+            android:padding="4dp"
+            android:textSize="28sp"
             android:textColor="@android:color/black"
             android:gravity="center"
-            android:text="Hello, what would you like to do ?"
+            android:text="Begin to ensure your purchases and sales with Hakikisha"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+        <ImageView
+            android:src="@mipmap/ic_launcher_round"
+            android:layout_width="match_parent"
+            android:layout_height="102dp" />
+
+        <TextView
+            android:layout_marginTop="12dp"
+            android:layout_marginStart="22dp"
+            android:textColor="@android:color/black"
+            android:text="Proceed to:"
+            android:textSize="21sp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
 

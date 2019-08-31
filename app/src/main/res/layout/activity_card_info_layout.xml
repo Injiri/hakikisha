@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:stripe="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/card_payment_toolbar"
+        android:background="@color/colorPrimary"
+        android:theme="@style/ToolbarTheme"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
+
+    <TextView
+        android:layout_marginTop="12dp"
+        android:padding="12dp"
+        android:text="Pay with Card"
+        android:textSize="21sp"
+        android:textColor="@android:color/black"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+    <TextView
+        android:id="@+id/card_info_error_text_view"
+        android:visibility="gone"
+        android:padding="12dp"
+        android:textColor="@android:color/holo_red_dark"
+        android:text="Incorrect card information, check information provided then try again."
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+    <LinearLayout
+        android:layout_marginStart="4dp"
+        android:paddingStart="12dp"
+        android:paddingEnd="12dp"
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <EditText
+            android:hint="First Name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+        <EditText
+            android:hint="Last Name"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+    </LinearLayout>
+
+
+    <EditText
+        android:visibility="gone"
+        android:layout_marginStart="18dp"
+        android:paddingStart="12dp"
+        android:hint="Address"
+        android:layout_marginEnd="12dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+    <com.stripe.android.view.CardMultilineWidget
+        android:paddingStart="18dp"
+        android:paddingEnd="12dp"
+        android:id="@+id/card_widget"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+    <Button
+        android:id="@+id/submit_card_payment_button"
+        android:layout_margin="12dp"
+        android:background="@drawable/blue_curved_background"
+        android:textColor="@android:color/white"
+        android:text="Pay"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+</LinearLayout>

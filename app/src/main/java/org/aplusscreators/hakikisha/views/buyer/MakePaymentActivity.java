@@ -6,6 +6,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
@@ -22,6 +23,10 @@ import java.util.Locale;
 
 public class MakePaymentActivity extends AppCompatActivity {
 
+    private static final String M_PESA_PAYMENT_METHOD = "m-pesa";
+    private static final String GOOGLE_PAY_PAYMENT_METHOD = "g_pay";
+    private static final String CARD_PAYMENT_METHOD = "card_pay";
+
     Purchase purchaseData = new Purchase();
     ObjectMapper objectMapper = new ObjectMapper();
     View closeFormView;
@@ -35,7 +40,8 @@ public class MakePaymentActivity extends AppCompatActivity {
     View creditCardView;
     ImageView creditCardSelectedView;
     Button submitButton;
-
+    String selectedPaymentMethod;
+    String purchaseSerialized;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -57,13 +63,32 @@ public class MakePaymentActivity extends AppCompatActivity {
         submitButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                switch (selectedPaymentMethod) {
+                    case M_PESA_PAYMENT_METHOD:
+                        Toast.makeText(MakePaymentActivity.this,"Payment was successfull",Toast.LENGTH_LONG).show();
+                        Intent mPesaIntent = new Intent(MakePaymentActivity.this, BuyerDashboard.class);
+                        startActivity(mPesaIntent);
+                        break;
+                    case CARD_PAYMENT_METHOD:
+                        Intent intent = new Intent(MakePaymentActivity.this, CardPaymentActivity.class);
+                        intent.putExtra(RegisterPurchaseForm.PURCHASE_SERIALIZED_KEY,purchaseSerialized);
+                        startActivity(intent);
+                        break;
+                    case GOOGLE_PAY_PAYMENT_METHOD:
+                        Toast.makeText(MakePaymentActivity.this,"Payment was successfull",Toast.LENGTH_LONG).show();
+                        Intent GPayIntent = new Intent(MakePaymentActivity.this, BuyerDashboard.class);
+                        startActivity(GPayIntent);
+                        break;
+                    default:
+                        break;
+                }
             }
         });
 
         mpesaPaymentMethodView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                selectedPaymentMethod = M_PESA_PAYMENT_METHOD;
                 submitButton.setVisibility(View.VISIBLE);
                 mpesaSelectedImageView.setVisibility(View.VISIBLE);
                 googlePaySelectedImageView.setVisibility(View.GONE);
@@ -74,19 +99,23 @@ public class MakePaymentActivity extends AppCompatActivity {
         googlePayMethodView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                selectedPaymentMethod = GOOGLE_PAY_PAYMENT_METHOD;
                 submitButton.setVisibility(View.VISIBLE);
                 mpesaSelectedImageView.setVisibility(View.GONE);
                 googlePaySelectedImageView.setVisibility(View.VISIBLE);
-                creditCardSelectedView.setVisibility(View.GONE);            }
+                creditCardSelectedView.setVisibility(View.GONE);
+            }
         });
 
         creditCardView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                selectedPaymentMethod = CARD_PAYMENT_METHOD;
                 submitButton.setVisibility(View.VISIBLE);
                 mpesaSelectedImageView.setVisibility(View.GONE);
                 googlePaySelectedImageView.setVisibility(View.GONE);
-                creditCardSelectedView.setVisibility(View.VISIBLE);            }
+                creditCardSelectedView.setVisibility(View.VISIBLE);
+            }
         });
 
         closeFormView.setOnClickListener(new View.OnClickListener() {
@@ -101,7 +130,7 @@ public class MakePaymentActivity extends AppCompatActivity {
     @Override
     public void onBackPressed() {
         super.onBackPressed();
-        ExitPurchaseFormDialog exitPurchaseFormDialog = new ExitPurchaseFormDialog(MakePaymentActivity.this,MakePaymentActivity.this,BuyerDashboard.class);
+        ExitPurchaseFormDialog exitPurchaseFormDialog = new ExitPurchaseFormDialog(MakePaymentActivity.this, MakePaymentActivity.this, BuyerDashboard.class);
         exitPurchaseFormDialog.show();
     }
 
@@ -109,12 +138,12 @@ public class MakePaymentActivity extends AppCompatActivity {
     protected void onStart() {
         super.onStart();
         Intent data = getIntent();
-        String purchaseSerialized = data.getStringExtra(RegisterPurchaseForm.PURCHASE_SERIALIZED_KEY);
+        purchaseSerialized = data.getStringExtra(RegisterPurchaseForm.PURCHASE_SERIALIZED_KEY);
         if (purchaseSerialized != null) {
             purchaseData = deserializePurchaseData(purchaseSerialized);
-            productDetailsTextView.setText(String.format(Locale.ENGLISH,"Buy %s, %s on %s",purchaseData.getQuantity(),purchaseData.getName(),purchaseData.getPlatform()));
-            totalCostTextView.setText(String.format(Locale.ENGLISH,"Ksh. %.2f",purchaseData.getCost()));
-            deliveryInfoTextView.setText(String.format(Locale.ENGLISH,"This product will be delivered to: %s " , purchaseData.getDeliveryAddress()));
+            productDetailsTextView.setText(String.format(Locale.ENGLISH, "Buy %s, %s on %s", purchaseData.getQuantity(), purchaseData.getName(), purchaseData.getPlatform()));
+            totalCostTextView.setText(String.format(Locale.ENGLISH, "Ksh. %.2f", purchaseData.getCost()));
+            deliveryInfoTextView.setText(String.format(Locale.ENGLISH, "This product will be delivered to: %s ", purchaseData.getDeliveryAddress()));
         }
 
     }
