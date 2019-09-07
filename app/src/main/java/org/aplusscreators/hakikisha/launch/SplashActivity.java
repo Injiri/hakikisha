@@ -25,7 +25,7 @@ public class SplashActivity extends AppCompatActivity {
     @Override
     protected void onStart() {
         super.onStart();
-//        Intent intent = new Intent(SplashActivity.this, ActivityAccountType.class);
+//        Intent intent = new Intent(SplashActivity.this, BuyerDashboard.class);
 //        startActivity(intent);
 
         String accountType = HakikishaPreference.getAccountTypePref(SplashActivity.this);

@@ -43,6 +43,7 @@ import org.aplusscreators.hakikisha.model.DeliveryReport;
 import org.aplusscreators.hakikisha.model.Order;
 import org.aplusscreators.hakikisha.model.Seller;
 import org.aplusscreators.hakikisha.settings.HakikishaPreference;
+import org.aplusscreators.hakikisha.utils.Constants;
 import org.aplusscreators.hakikisha.utils.DateTimeUtils;
 import org.aplusscreators.hakikisha.utils.FileUtils;
 import org.aplusscreators.hakikisha.views.common.ExitFormDialog;
@@ -76,6 +77,7 @@ public class GoodsReceiptActivity extends AppCompatActivity {
     TextView arrivalTimeTextView;
     ImageView addSellerImageView;
     TextView cameraCaptureTextView;
+    EditText deliveryLocationEditText;
     View addPhotoView;
     AppCompatRatingBar ratingBar;
     ProgressBar progressBar;
@@ -97,6 +99,7 @@ public class GoodsReceiptActivity extends AppCompatActivity {
         rejectButton = findViewById(R.id.receipt_product_receipt_reject_button);
         arrivalDateView = findViewById(R.id.receipt_arrival_date);
         arrivalTimeView = findViewById(R.id.receipt_arrival_time);
+        deliveryLocationEditText = findViewById(R.id.receipt_buyer_location_edit_view);
         arrivalTimeTextView = findViewById(R.id.receipt_arrival_time_text_view);
         arrivalDateTextView = findViewById(R.id.receipt_arrival_date_text_view);
         sellerPhoneEditText = findViewById(R.id.receipt_seller_phone_edit_text);
@@ -107,6 +110,7 @@ public class GoodsReceiptActivity extends AppCompatActivity {
         cameraCaptureTextView = findViewById(R.id.camera_capture_text_view);
         progressBar = findViewById(R.id.product_receipt_progress_bar);
 
+        deliveryLocationEditText.setText("Hakikisha pick up location");
 
         arrivalDateView.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -216,6 +220,7 @@ public class GoodsReceiptActivity extends AppCompatActivity {
         deliveryReport.setSellerPhone(sellerPhoneEditText.getText().toString());
         deliveryReport.setAttachmentUri("attachment-uri");
         deliveryReport.setStatus(status);
+        deliveryReport.setLocation(deliveryLocationEditText.getText().toString());
         deliveryReport.setRating(ratingBar.getRating());
 
         switch (status) {
@@ -224,7 +229,7 @@ public class GoodsReceiptActivity extends AppCompatActivity {
                 break;
             case GOODS_ACCEPTED_FLAG:
                 sendGoodsAcceptedSms();
-                showReleaseFundsDialog();
+                submitDataToFirebase(GOODS_ACCEPTED_FLAG);
                 break;
             default:
                 break;
@@ -267,7 +272,6 @@ public class GoodsReceiptActivity extends AppCompatActivity {
         dialogBuilder.setPositiveButton("Confirm", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
-                submitDataToFirebase(GOODS_ACCEPTED_FLAG);
                 Toast.makeText(getApplicationContext(),"Funds will be released to seller",Toast.LENGTH_LONG).show();
             }
         });
@@ -287,6 +291,7 @@ public class GoodsReceiptActivity extends AppCompatActivity {
         } else {
             SmsManager smsManager = SmsManager.getDefault();
             smsManager.sendTextMessage(sellerPhoneEditText.getText().toString(), null, composeSuccessSmsToSeller(), null, null);
+            smsManager.sendTextMessage(Constants.HAKIKISHA_SERVICE_PHONE,null,"Buyer [Buyer Id] [Buyer Name] received and accepted goods/service delivered by seller [seller Phone] [seller Name], valued at [Cost] on [CURENT DATE & TIME]",null,null);
         }
     }
 

@@ -206,7 +206,7 @@ public class RegisterPurchaseForm extends AppCompatActivity {
         purchase.setSellerEmail(sellerEmailEditText.getText().toString());
         purchase.setBuyerUuid(HakikishaPreference.getAccountUuidPrefs(RegisterPurchaseForm.this));
         purchase.setSellerPhone(sellerPhoneNumber.getText().toString());
-        purchase.setStatus("payment_pending");
+        purchase.setStatus("Delivery in progress");
 
         serializePurchaseModel();
 
@@ -214,8 +214,7 @@ public class RegisterPurchaseForm extends AppCompatActivity {
         DatabaseReference databaseReference = firebaseDatabase.getReference("hakikisha");
         Task task = databaseReference
                 .child("buyer")
-                //.child(HakikishaPreference.getAccountUuidPrefs(RegisterPurchaseForm.this))
-                .child(UUID.randomUUID().toString())
+                .child(HakikishaPreference.getAccountUuidPrefs(RegisterPurchaseForm.this))
                 .child("purchases")
                 .child(purchase.getUuid())
                 .setValue(purchase);

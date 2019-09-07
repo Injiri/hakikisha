@@ -3,7 +3,6 @@ package org.aplusscreators.hakikisha.adapters;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.CheckBox;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -16,8 +15,8 @@ import org.aplusscreators.hakikisha.model.Purchase;
 import org.aplusscreators.hakikisha.utils.ColorTool;
 
 import java.text.SimpleDateFormat;
-import java.util.Calendar;
 import java.util.List;
+import java.util.Locale;
 
 public class PurchasesAdapter extends RecyclerView.Adapter<PurchasesAdapter.ViewHolder> {
 
@@ -44,6 +43,9 @@ public class PurchasesAdapter extends RecyclerView.Adapter<PurchasesAdapter.View
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         ViewHolder viewHolder = (ViewHolder) holder;
         final Purchase purchase = purchaseList.get(viewHolder.getAdapterPosition());
+        viewHolder.productNameTextView.setText(purchase.getName());
+        viewHolder.purchaseStatusTextView.setText(purchase.getStatus());
+        viewHolder.costTextView.setText(String.format(Locale.ENGLISH,"Ksh. %.2f",purchase.getCost()));
     }
 
     @Override
@@ -54,22 +56,22 @@ public class PurchasesAdapter extends RecyclerView.Adapter<PurchasesAdapter.View
     public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
 
         CardView cardView;
-        TextView taskTimePeriodTextView;
-        TextView taskDateTextView;
-        TextView purchaseTextView;
-        OnTaskClickedListener onTaskClickedListener;
+        TextView productNameTextView;
+        TextView costTextView;
+        TextView purchaseStatusTextView;
+        OnTaskClickedListener onPurchaseClickedListener;
 
-        public ViewHolder(@NonNull View itemView, OnTaskClickedListener onTaskClickedListener) {
+        public ViewHolder(@NonNull View itemView, OnTaskClickedListener onPurchaseClickedListener) {
             super(itemView);
 
-            this.onTaskClickedListener = onTaskClickedListener;
+            this.onPurchaseClickedListener = onPurchaseClickedListener;
 
-            purchaseTextView = itemView.findViewById(R.id.item_list_checkbox);
+            purchaseStatusTextView = itemView.findViewById(R.id.item_purchase_status_text_view);
             cardView = itemView.findViewById(R.id.task_parent_card_view);
-            taskDateTextView = itemView.findViewById(R.id.task_date_textView);
-            taskTimePeriodTextView = itemView.findViewById(R.id.task_event_time);
+            costTextView = itemView.findViewById(R.id.item_purchase_cost_text_view);
+            productNameTextView = itemView.findViewById(R.id.item_purchase_name_text_view);
 
-            purchaseTextView.setOnClickListener(this);
+            purchaseStatusTextView.setOnClickListener(this);
 
             cardView.setCardBackgroundColor(ColorTool.getRandomDarkColor());
 
@@ -77,7 +79,7 @@ public class PurchasesAdapter extends RecyclerView.Adapter<PurchasesAdapter.View
 
         @Override
         public void onClick(View v) {
-            onTaskClickedListener.onTaskClicked(getAdapterPosition(), purchaseTextView);
+            onPurchaseClickedListener.onTaskClicked(getAdapterPosition(), purchaseStatusTextView);
         }
     }
 

@@ -3,7 +3,6 @@ package org.aplusscreators.hakikisha.adapters;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.CheckBox;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -13,11 +12,9 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import org.aplusscreators.hakikisha.R;
 import org.aplusscreators.hakikisha.model.Order;
-import org.aplusscreators.hakikisha.model.Purchase;
 import org.aplusscreators.hakikisha.utils.ColorTool;
 
 import java.text.SimpleDateFormat;
-import java.util.Calendar;
 import java.util.List;
 
 public class OrdersAdapter extends RecyclerView.Adapter<OrdersAdapter.ViewHolder> {
@@ -65,10 +62,10 @@ public class OrdersAdapter extends RecyclerView.Adapter<OrdersAdapter.ViewHolder
 
             this.onTaskClickedListener = onTaskClickedListener;
 
-            checkBox = itemView.findViewById(R.id.item_list_checkbox);
+            checkBox = itemView.findViewById(R.id.item_purchase_name_text_view);
             cardView = itemView.findViewById(R.id.task_parent_card_view);
-            taskDateTextView = itemView.findViewById(R.id.task_date_textView);
-            taskTimePeriodTextView = itemView.findViewById(R.id.task_event_time);
+            taskDateTextView = itemView.findViewById(R.id.item_purchase_status_text_view);
+            taskTimePeriodTextView = itemView.findViewById(R.id.item_purchase_cost_text_view);
 
             checkBox.setOnClickListener(this);
 

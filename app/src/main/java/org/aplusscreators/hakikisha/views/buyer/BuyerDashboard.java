@@ -4,8 +4,12 @@ import android.Manifest;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Color;
+import android.os.AsyncTask;
 import android.os.Bundle;
+import android.util.Log;
+import android.view.View;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
@@ -14,6 +18,11 @@ import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 import com.wangjie.rapidfloatingactionbutton.RapidFloatingActionButton;
 import com.wangjie.rapidfloatingactionbutton.RapidFloatingActionHelper;
 import com.wangjie.rapidfloatingactionbutton.RapidFloatingActionLayout;
@@ -25,18 +34,22 @@ import org.aplusscreators.hakikisha.adapters.PurchasesAdapter;
 import org.aplusscreators.hakikisha.fab.ABShape;
 import org.aplusscreators.hakikisha.fab.ABTextUtil;
 import org.aplusscreators.hakikisha.model.Purchase;
+import org.aplusscreators.hakikisha.settings.HakikishaPreference;
 import org.aplusscreators.hakikisha.utils.HakikishaUtils;
 import org.aplusscreators.hakikisha.views.seller.SellerDashboard;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
 
 public class BuyerDashboard extends AppCompatActivity implements RapidFloatingActionContentLabelList.OnRapidFloatingActionContentLabelListListener {
-
+    private static final String TAG = "BuyerDashboard";
     RecyclerView purchasesRecyclerView;
     PurchasesAdapter purchasesAdapter;
     List<Purchase> purchaseList = new ArrayList<>();
     Toolbar toolbar;
+    View noDataView;
+    View dataView;
 
     private RapidFloatingActionButton rfaBtn;
     private RapidFloatingActionHelper rfabHelper;
@@ -49,8 +62,10 @@ public class BuyerDashboard extends AppCompatActivity implements RapidFloatingAc
 
         purchasesRecyclerView = findViewById(R.id.purchases_recycler_view);
         toolbar = findViewById(R.id.buyer_dashboard_toolbar);
+        dataView = findViewById(R.id.buyer_dashboard_data_view);
         rfaBtn = findViewById(R.id.activity_buyer_dashboard_rfab);
         rfaLayout = findViewById(R.id.activity_buyer_dashboard_rfal);
+        noDataView = findViewById(R.id.buyer_dashboard_no_data_layout);
 
         purchasesAdapter = new PurchasesAdapter(BuyerDashboard.this, purchaseList, null);
         purchasesRecyclerView.setAdapter(purchasesAdapter);
@@ -62,18 +77,26 @@ public class BuyerDashboard extends AppCompatActivity implements RapidFloatingAc
             getSupportActionBar().setTitle(getResources().getString(R.string.app_name));
         }
 
-        populatePurchaseList();
-
         intializeExpandableFab();
 
         sendEmailSmsIfNeccessary();
 
         hakikishaPermissionsRequest();
+
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        if (HakikishaPreference.getAccountUuidPrefs(BuyerDashboard.this) == null)
+            HakikishaPreference.setAccountUuidPrefs(BuyerDashboard.this, UUID.randomUUID().toString());
+
+        downloadPurchaseDataIfPossible();
     }
 
     private void hakikishaPermissionsRequest() {
         if (ContextCompat.checkSelfPermission(BuyerDashboard.this, Manifest.permission.SEND_SMS) == PackageManager.PERMISSION_DENIED) {
-            ActivityCompat.requestPermissions(BuyerDashboard.this,new String[]{Manifest.permission.SEND_SMS},1111);
+            ActivityCompat.requestPermissions(BuyerDashboard.this, new String[]{Manifest.permission.SEND_SMS}, 1111);
         }
     }
 
@@ -131,15 +154,43 @@ public class BuyerDashboard extends AppCompatActivity implements RapidFloatingAc
         ).build();
     }
 
-    private void populatePurchaseList() {
-        Purchase purchase = new Purchase();
-        purchaseList.add(purchase);
-        purchasesAdapter.notifyDataSetChanged();
+    private void downloadPurchaseDataIfPossible() {
+        if (HakikishaPreference.getAccountUuidPrefs(BuyerDashboard.this) == null) return;
+
+        FirebaseDatabase firebaseDatabase = FirebaseDatabase.getInstance();
+        DatabaseReference databaseReference = firebaseDatabase.getReference("hakikisha")
+                .child("buyer")
+                .child(HakikishaPreference.getAccountUuidPrefs(BuyerDashboard.this))
+                .child("purchases");
+
+        databaseReference.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                for (DataSnapshot child : dataSnapshot.getChildren()) {
+                    Purchase purchase = child.getValue(Purchase.class);
+                    purchaseList.add(purchase);
+
+                    Log.e(TAG, "onDataChange: Purchase" + purchase);
+                }
+
+                purchasesAdapter.notifyDataSetChanged();
+
+                if (!purchaseList.isEmpty()) {
+                    noDataView.setVisibility(View.GONE);
+                    dataView.setVisibility(View.VISIBLE);
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
     }
 
     @Override
     public void onBackPressed() {
-        //todo add system exit code here
+        finishAffinity();
     }
 
     @Override
@@ -177,4 +228,5 @@ public class BuyerDashboard extends AppCompatActivity implements RapidFloatingAc
                 break;
         }
     }
+
 }

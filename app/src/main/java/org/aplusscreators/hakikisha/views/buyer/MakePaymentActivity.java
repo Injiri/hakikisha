@@ -137,7 +137,7 @@ public class MakePaymentActivity extends AppCompatActivity {
     }
 
     private String composeSmsMessage(String buyerNames, String amount, String productName) {
-        return String.format("Dear Seller, %s has deposited %s on Hakikisha... Please deliver % to complete the transaction on your end.", buyerNames, amount, productName);
+        return String.format("Dear Seller, %s has deposited %s on Hakikisha... Please deliver %s to complete the transaction on your end.", buyerNames, amount, productName);
     }
 
     @Override

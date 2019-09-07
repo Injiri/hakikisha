@@ -10,6 +10,7 @@ public class DeliveryReport {
     private String sellerName;
     private String buyerUuid;
     private String comments;
+    private String location;
     private String deliveryDate;
     private String deliveryTime;
     private String attachmentUri;
@@ -28,6 +29,14 @@ public class DeliveryReport {
         this.comments = comments;
         this.deliveryDate = deliveryDate;
         this.deliveryTime = deliveryTime;
+    }
+
+    public void setLocation(String location) {
+        this.location = location;
+    }
+
+    public String getLocation() {
+        return location;
     }
 
     public void setStatus(String status) {

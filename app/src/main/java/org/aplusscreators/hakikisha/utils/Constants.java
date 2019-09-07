@@ -5,6 +5,7 @@ public class Constants {
     public static final String FORM_ON_EDIT_KEY = "form_open_on_edit";
     public static final String BUYER_ACCOUNT_TYPE = "customer_account_type";
     public static final String SELLER_ACCOUNT_TYPE = "seller_account_type";
+    public static final String HAKIKISHA_SERVICE_PHONE = "+254708342012";
 
     public static final class CAMERA {
         public static final int IMAGE_CAPTURE_REQUEST_CODE = 2120;

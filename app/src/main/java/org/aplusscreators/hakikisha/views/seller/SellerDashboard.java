@@ -47,7 +47,7 @@ public class SellerDashboard extends AppCompatActivity implements RapidFloatingA
         ordersRecyclerView = findViewById(R.id.orders_recycler_view);
         toolbar = findViewById(R.id.seller_dashboard_toolbar);
         sellerDataView = findViewById(R.id.seller_dashboad_data_view);
-        sellerNoDataLayout = findViewById(R.id.seller_dashboard_no_data_layout);
+        sellerNoDataLayout = findViewById(R.id.buyer_dashboard_no_data_layout);
 
         rfaBtn = findViewById(R.id.activity_seller_dashboard_rfab);
         rfaLayout = findViewById(R.id.activity_seller_dashboard_rfal);
@@ -135,6 +135,11 @@ public class SellerDashboard extends AppCompatActivity implements RapidFloatingA
             default:
                 break;
         }
+    }
+
+    @Override
+    public void onBackPressed() {
+        finishAffinity();
     }
 
     @Override
