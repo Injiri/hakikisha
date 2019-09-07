@@ -1,12 +1,16 @@
 package org.aplusscreators.hakikisha.views.buyer;
 
+import android.Manifest;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.graphics.Color;
 import android.os.Bundle;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -63,18 +67,26 @@ public class BuyerDashboard extends AppCompatActivity implements RapidFloatingAc
         intializeExpandableFab();
 
         sendEmailSmsIfNeccessary();
+
+        hakikishaPermissionsRequest();
+    }
+
+    private void hakikishaPermissionsRequest() {
+        if (ContextCompat.checkSelfPermission(BuyerDashboard.this, Manifest.permission.SEND_SMS) == PackageManager.PERMISSION_DENIED) {
+            ActivityCompat.requestPermissions(BuyerDashboard.this,new String[]{Manifest.permission.SEND_SMS},1111);
+        }
     }
 
 
-    private void sendEmailSmsIfNeccessary(){
+    private void sendEmailSmsIfNeccessary() {
         Intent data = getIntent();
         String sellerPhone = data.getStringExtra("send_purchase_sms");
         String sellerEmail = data.getStringExtra("send_purchase_email");
 
         if (sellerPhone != null && !sellerPhone.isEmpty())
-            HakikishaUtils.sendSms(BuyerDashboard.this,"Sms Message",sellerPhone);
+            HakikishaUtils.sendSms(BuyerDashboard.this, "Sms Message", sellerPhone);
         else if (sellerEmail != null && !sellerEmail.isEmpty())
-            HakikishaUtils.sendEmail(BuyerDashboard.this,"from@gmail",sellerEmail,"PURCHASE EMAIL","Purchase message...");
+            HakikishaUtils.sendEmail(BuyerDashboard.this, "from@gmail", sellerEmail, "PURCHASE EMAIL", "Purchase message...");
 
     }
 
@@ -134,12 +146,12 @@ public class BuyerDashboard extends AppCompatActivity implements RapidFloatingAc
     public void onRFACItemLabelClick(int position, RFACLabelItem item) {
         switch (position) {
             case 0:
-                Intent launchPurchaseIntent = new Intent(BuyerDashboard.this,RegisterPurchaseForm.class);
+                Intent launchPurchaseIntent = new Intent(BuyerDashboard.this, RegisterPurchaseForm.class);
                 startActivity(launchPurchaseIntent);
                 finish();
                 break;
             case 1:
-                Intent intent = new Intent(BuyerDashboard.this,GoodsReceiptActivity.class);
+                Intent intent = new Intent(BuyerDashboard.this, GoodsReceiptActivity.class);
                 startActivity(intent);
                 finish();
                 break;
@@ -152,12 +164,12 @@ public class BuyerDashboard extends AppCompatActivity implements RapidFloatingAc
     public void onRFACItemIconClick(int position, RFACLabelItem item) {
         switch (position) {
             case 0:
-                Intent launchPurchaseIntent = new Intent(BuyerDashboard.this,RegisterPurchaseForm.class);
+                Intent launchPurchaseIntent = new Intent(BuyerDashboard.this, RegisterPurchaseForm.class);
                 startActivity(launchPurchaseIntent);
                 finish();
                 break;
             case 1:
-                Intent intent = new Intent(BuyerDashboard.this,GoodsReceiptActivity.class);
+                Intent intent = new Intent(BuyerDashboard.this, GoodsReceiptActivity.class);
                 startActivity(intent);
                 finish();
                 break;

@@ -3,7 +3,7 @@ package org.aplusscreators.hakikisha.utils;
 public class Constants {
 
     public static final String FORM_ON_EDIT_KEY = "form_open_on_edit";
-    public static final String CUSTOMER_ACCOUNT_TYPE = "customer_account_type";
+    public static final String BUYER_ACCOUNT_TYPE = "customer_account_type";
     public static final String SELLER_ACCOUNT_TYPE = "seller_account_type";
 
     public static final class CAMERA {

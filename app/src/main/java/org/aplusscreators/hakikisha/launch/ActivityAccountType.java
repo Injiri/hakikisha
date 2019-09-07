@@ -8,6 +8,7 @@ import android.widget.Button;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
+
 import org.aplusscreators.hakikisha.R;
 import org.aplusscreators.hakikisha.settings.HakikishaPreference;
 import org.aplusscreators.hakikisha.utils.Constants;
@@ -15,10 +16,14 @@ import org.aplusscreators.hakikisha.views.common.LoginActivity;
 
 public class ActivityAccountType extends AppCompatActivity {
 
+    private static final String BUYER_ACCOUNT_TYPE = "buyer_account";
+    private static final String SELLER_ACCOUNT_TYPE = "seller_account";
+    private static final String NO_ACCOUNT_TYPE = "no_account_type";
+
     Button buyOptionButton;
     Button sellOptionButton;
     View proceedView;
-    boolean isBuyer;
+    String accountType = NO_ACCOUNT_TYPE;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -35,18 +40,24 @@ public class ActivityAccountType extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 proceedView.setVisibility(View.VISIBLE);
-                if (!isBuyer) {
-                    isBuyer = true;
+                if (accountType.equalsIgnoreCase(BUYER_ACCOUNT_TYPE)) {
+                    accountType = BUYER_ACCOUNT_TYPE;
                     buyOptionButton.setTextColor(getResources().getColor(android.R.color.white));
                     buyOptionButton.setBackground(getResources().getDrawable(R.drawable.deep_blue_medium_curved_background));
                     sellOptionButton.setTextColor(getResources().getColor(android.R.color.black));
                     sellOptionButton.setBackground(getResources().getDrawable(R.drawable.curved_light_gray_background));
-                } else {
-                    isBuyer = false;
-                    buyOptionButton.setTextColor(getResources().getColor(android.R.color.black));
-                    buyOptionButton.setBackground(getResources().getDrawable(R.drawable.curved_light_gray_background));
-                    sellOptionButton.setTextColor(getResources().getColor(android.R.color.white));
-                    sellOptionButton.setBackground(getResources().getDrawable(R.drawable.deep_blue_medium_curved_background));
+                } else if (accountType.equalsIgnoreCase(SELLER_ACCOUNT_TYPE)){
+                    accountType = BUYER_ACCOUNT_TYPE;
+                    buyOptionButton.setTextColor(getResources().getColor(android.R.color.white));
+                    buyOptionButton.setBackground(getResources().getDrawable(R.drawable.deep_blue_medium_curved_background));
+                    sellOptionButton.setTextColor(getResources().getColor(android.R.color.black));
+                    sellOptionButton.setBackground(getResources().getDrawable(R.drawable.curved_light_gray_background));
+                } else if (accountType.equalsIgnoreCase(NO_ACCOUNT_TYPE)){
+                    accountType = BUYER_ACCOUNT_TYPE;
+                    buyOptionButton.setTextColor(getResources().getColor(android.R.color.white));
+                    buyOptionButton.setBackground(getResources().getDrawable(R.drawable.deep_blue_medium_curved_background));
+                    sellOptionButton.setTextColor(getResources().getColor(android.R.color.black));
+                    sellOptionButton.setBackground(getResources().getDrawable(R.drawable.curved_light_gray_background));
                 }
             }
         });
@@ -55,18 +66,24 @@ public class ActivityAccountType extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 proceedView.setVisibility(View.VISIBLE);
-                if (isBuyer) {
-                    isBuyer = false;
+                if (accountType.equalsIgnoreCase(SELLER_ACCOUNT_TYPE)) {
+                    accountType = SELLER_ACCOUNT_TYPE;
                     buyOptionButton.setTextColor(getResources().getColor(android.R.color.black));
                     buyOptionButton.setBackground(getResources().getDrawable(R.drawable.curved_light_gray_background));
                     sellOptionButton.setTextColor(getResources().getColor(android.R.color.white));
                     sellOptionButton.setBackground(getResources().getDrawable(R.drawable.deep_blue_medium_curved_background));
-                } else {
-                    isBuyer = true;
-                    buyOptionButton.setTextColor(getResources().getColor(android.R.color.white));
-                    buyOptionButton.setBackground(getResources().getDrawable(R.drawable.deep_blue_medium_curved_background));
-                    sellOptionButton.setTextColor(getResources().getColor(android.R.color.black));
-                    sellOptionButton.setBackground(getResources().getDrawable(R.drawable.curved_light_gray_background));
+                } else if (accountType.equalsIgnoreCase(BUYER_ACCOUNT_TYPE)){
+                    accountType = SELLER_ACCOUNT_TYPE;
+                    buyOptionButton.setTextColor(getResources().getColor(android.R.color.black));
+                    buyOptionButton.setBackground(getResources().getDrawable(R.drawable.curved_light_gray_background));
+                    sellOptionButton.setTextColor(getResources().getColor(android.R.color.white));
+                    sellOptionButton.setBackground(getResources().getDrawable(R.drawable.deep_blue_medium_curved_background));
+                } else if (accountType.equalsIgnoreCase(NO_ACCOUNT_TYPE)){
+                    accountType = SELLER_ACCOUNT_TYPE;
+                    buyOptionButton.setTextColor(getResources().getColor(android.R.color.black));
+                    buyOptionButton.setBackground(getResources().getDrawable(R.drawable.curved_light_gray_background));
+                    sellOptionButton.setTextColor(getResources().getColor(android.R.color.white));
+                    sellOptionButton.setBackground(getResources().getDrawable(R.drawable.deep_blue_medium_curved_background));
                 }
             }
         });
@@ -74,10 +91,10 @@ public class ActivityAccountType extends AppCompatActivity {
         proceedView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (isBuyer){
+                if (accountType.equalsIgnoreCase(SELLER_ACCOUNT_TYPE)){
                     HakikishaPreference.setAccountTypePref(ActivityAccountType.this, Constants.SELLER_ACCOUNT_TYPE);
-                } else {
-                    HakikishaPreference.setAccountTypePref(ActivityAccountType.this,Constants.CUSTOMER_ACCOUNT_TYPE);
+                } else if (accountType.equalsIgnoreCase(BUYER_ACCOUNT_TYPE)){
+                    HakikishaPreference.setAccountTypePref(ActivityAccountType.this,Constants.BUYER_ACCOUNT_TYPE);
                 }
 
                 Intent intent = new Intent(ActivityAccountType.this, LoginActivity.class);

@@ -101,7 +101,7 @@
                     android:id="@+id/register_purchase_seller_phone"
                     android:inputType="phone"
                     android:background="@null"
-                    android:layout_width="wrap_content"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="18dp"
                     android:hint="Seller phone number"
@@ -182,7 +182,7 @@
             </LinearLayout>
 
             <LinearLayout
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
                 android:paddingStart="12dp"
@@ -196,7 +196,7 @@
 
                 <EditText
                     android:id="@+id/register_purchase_delivery_address_edit_text"
-                    android:layout_width="wrap_content"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="18dp"
                     android:background="@null"
@@ -207,7 +207,7 @@
             </LinearLayout>
 
             <LinearLayout
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
                 android:paddingStart="12dp"
@@ -221,7 +221,7 @@
 
                 <EditText
                     android:id="@+id/register_purchase_qty_edit_text"
-                    android:layout_width="wrap_content"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="18dp"
                     android:background="@null"

@@ -1,12 +1,17 @@
 package org.aplusscreators.hakikisha.views.buyer;
 
+import android.Manifest;
+import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.DatePickerDialog;
 import android.app.TimePickerDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.net.Uri;
 import android.os.Bundle;
+import android.provider.MediaStore;
 import android.telephony.SmsManager;
 import android.view.View;
 import android.widget.Button;
@@ -22,10 +27,14 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.AppCompatRatingBar;
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
+import androidx.core.content.FileProvider;
 
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
+import com.google.android.material.snackbar.Snackbar;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
@@ -35,17 +44,25 @@ import org.aplusscreators.hakikisha.model.Order;
 import org.aplusscreators.hakikisha.model.Seller;
 import org.aplusscreators.hakikisha.settings.HakikishaPreference;
 import org.aplusscreators.hakikisha.utils.DateTimeUtils;
+import org.aplusscreators.hakikisha.utils.FileUtils;
 import org.aplusscreators.hakikisha.views.common.ExitFormDialog;
 
+import java.io.File;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Locale;
+import java.util.Random;
 import java.util.UUID;
 
 public class GoodsReceiptActivity extends AppCompatActivity {
 
     private static final String GOODS_REJECTED_FLAG = "goods_rejected";
     private static final String GOODS_ACCEPTED_FLAG = "goods_accepted";
+    private static final int SEND_SMS_REJECT_PERMISSION_CODE = 1232;
+    private static final int SEND_SMS_ACCEPT_PERMISSION_CODE = 2343;
+    private static final int CAMERA_PERMISSION_REQUEST_CODE = 3345;
+    private static final int CAMERA_IMAGE_CAPTURE_REQUEST_CODE = 4455;
+
     SimpleDateFormat simpleDateFormat = new SimpleDateFormat("EEE MMM dd, yyyy");
 
     ImageView cancelButton;
@@ -58,6 +75,7 @@ public class GoodsReceiptActivity extends AppCompatActivity {
     TextView arrivalDateTextView;
     TextView arrivalTimeTextView;
     ImageView addSellerImageView;
+    TextView cameraCaptureTextView;
     View addPhotoView;
     AppCompatRatingBar ratingBar;
     ProgressBar progressBar;
@@ -66,6 +84,8 @@ public class GoodsReceiptActivity extends AppCompatActivity {
 
     Order selectedOrder = new Order();
     Seller selectedSeller = new Seller();
+    private Uri photoUri;
+    private File imageFile;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -84,6 +104,7 @@ public class GoodsReceiptActivity extends AppCompatActivity {
         addSellerImageView = findViewById(R.id.receipt_add_seller_view);
         addPhotoView = findViewById(R.id.delivery_photo_image_view);
         ratingBar = findViewById(R.id.receipt_ratings_bar);
+        cameraCaptureTextView = findViewById(R.id.camera_capture_text_view);
         progressBar = findViewById(R.id.product_receipt_progress_bar);
 
 
@@ -161,6 +182,26 @@ public class GoodsReceiptActivity extends AppCompatActivity {
                 exitFormDialog.show();
             }
         });
+
+        addPhotoView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (ContextCompat.checkSelfPermission(GoodsReceiptActivity.this,Manifest.permission.CAMERA) == PackageManager.PERMISSION_GRANTED){
+                    launchCamera();
+                } else {
+                    ActivityCompat.requestPermissions(GoodsReceiptActivity.this,new String[]{Manifest.permission.CAMERA},CAMERA_PERMISSION_REQUEST_CODE);
+                }
+            }
+        });
+    }
+
+    private void launchCamera() {
+        Intent mediaCaptureIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+        imageFile = FileUtils.createImageFile(GoodsReceiptActivity.this, "hakikisha_delivery_" + new Random().nextInt(), ".png");
+        photoUri = FileProvider.getUriForFile(GoodsReceiptActivity.this, "org.aplusscreators.hakikisha.fileProvider", imageFile);
+        mediaCaptureIntent.putExtra(MediaStore.EXTRA_OUTPUT,photoUri);
+
+        startActivityForResult(mediaCaptureIntent,CAMERA_IMAGE_CAPTURE_REQUEST_CODE);
     }
 
     private void extractAndSubmitData(String status) {
@@ -177,9 +218,6 @@ public class GoodsReceiptActivity extends AppCompatActivity {
         deliveryReport.setStatus(status);
         deliveryReport.setRating(ratingBar.getRating());
 
-        FirebaseDatabase firebaseDatabase = FirebaseDatabase.getInstance();
-        DatabaseReference databaseReference = firebaseDatabase.getReference("hakikisha");
-
         switch (status) {
             case GOODS_REJECTED_FLAG:
                 sendGoodsRejectSms();
@@ -192,6 +230,11 @@ public class GoodsReceiptActivity extends AppCompatActivity {
                 break;
         }
 
+    }
+
+    private void submitDataToFirebase(String status) {
+        FirebaseDatabase firebaseDatabase = FirebaseDatabase.getInstance();
+        DatabaseReference databaseReference = firebaseDatabase.getReference("hakikisha");
         Task task = databaseReference
                 .child("goods_report")
                 .child(status)
@@ -220,17 +263,18 @@ public class GoodsReceiptActivity extends AppCompatActivity {
 
     private void showReleaseFundsDialog() {
         AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(GoodsReceiptActivity.this);
-        dialogBuilder.setMessage("Please Confirm Fundds Release to Seller.");
+        dialogBuilder.setMessage("Please confirm funds release to seller.");
         dialogBuilder.setPositiveButton("Confirm", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
-
+                submitDataToFirebase(GOODS_ACCEPTED_FLAG);
+                Toast.makeText(getApplicationContext(),"Funds will be released to seller",Toast.LENGTH_LONG).show();
             }
         });
         dialogBuilder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
-
+                //do nothing
             }
         });
 
@@ -238,13 +282,24 @@ public class GoodsReceiptActivity extends AppCompatActivity {
     }
 
     private void sendGoodsAcceptedSms() {
-        SmsManager smsManager = SmsManager.getDefault();
-        smsManager.sendTextMessage(sellerPhoneEditText.getText().toString(),null,composeSuccessSmsToSeller(),null,null);
+        if (ContextCompat.checkSelfPermission(GoodsReceiptActivity.this, Manifest.permission.SEND_SMS) == PackageManager.PERMISSION_DENIED) {
+            ActivityCompat.requestPermissions(GoodsReceiptActivity.this,new String[]{Manifest.permission.SEND_SMS},SEND_SMS_ACCEPT_PERMISSION_CODE);
+        } else {
+            SmsManager smsManager = SmsManager.getDefault();
+            smsManager.sendTextMessage(sellerPhoneEditText.getText().toString(), null, composeSuccessSmsToSeller(), null, null);
+        }
     }
 
     private void sendGoodsRejectSms() {
-        SmsManager smsManager = SmsManager.getDefault();
-        smsManager.sendTextMessage(sellerPhoneEditText.getText().toString(),null,composeFailureSmsToSeller("Buyer Joel"),null,null);
+        if (ContextCompat.checkSelfPermission(GoodsReceiptActivity.this, Manifest.permission.SEND_SMS) == PackageManager.PERMISSION_DENIED) {
+            ActivityCompat.requestPermissions(GoodsReceiptActivity.this, new String[]{Manifest.permission.SEND_SMS}, SEND_SMS_REJECT_PERMISSION_CODE);
+        } else {
+            SmsManager smsManager = SmsManager.getDefault();
+            smsManager.sendTextMessage(sellerPhoneEditText.getText().toString(), null, composeFailureSmsToSeller("Buyer Joel"), null, null);
+        }
+
+        submitDataToFirebase(GOODS_REJECTED_FLAG);
+
     }
 
     private String composeSuccessSmsToSeller() {
@@ -254,5 +309,28 @@ public class GoodsReceiptActivity extends AppCompatActivity {
 
     private String composeFailureSmsToSeller(String buyerName) {
         return String.format(Locale.ENGLISH, "Dear Seller, Goods delivered to your customer %s , has been rejected by the customer, the said goods will be delivered back to you.", buyerName);
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        if (requestCode == SEND_SMS_REJECT_PERMISSION_CODE && grantResults[0] == PackageManager.PERMISSION_GRANTED){
+            sendGoodsRejectSms();
+        }
+
+        if (requestCode == SEND_SMS_ACCEPT_PERMISSION_CODE && grantResults[0] == PackageManager.PERMISSION_GRANTED){
+            sendGoodsAcceptedSms();
+        }
+
+        if (requestCode == CAMERA_PERMISSION_REQUEST_CODE && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+            launchCamera();
+        }
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == CAMERA_IMAGE_CAPTURE_REQUEST_CODE && resultCode == Activity.RESULT_OK){
+            cameraCaptureTextView.append(imageFile.getName() + " \n");
+        }
     }
 }

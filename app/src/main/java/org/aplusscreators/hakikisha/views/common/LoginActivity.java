@@ -1,14 +1,11 @@
 package org.aplusscreators.hakikisha.views.common;
 
-import android.app.VoiceInteractor;
 import android.content.Intent;
 import android.os.Bundle;
-import android.os.Handler;
 import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ProgressBar;
-import android.widget.Switch;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -21,15 +18,15 @@ import com.google.firebase.auth.PhoneAuthCredential;
 import com.google.firebase.auth.PhoneAuthProvider;
 
 import org.aplusscreators.hakikisha.R;
-import org.aplusscreators.hakikisha.launch.SplashActivity;
 import org.aplusscreators.hakikisha.settings.HakikishaPreference;
+import org.aplusscreators.hakikisha.utils.Constants;
 import org.aplusscreators.hakikisha.utils.ExternalAddressFormatter;
 import org.aplusscreators.hakikisha.views.buyer.BuyerDashboard;
+import org.aplusscreators.hakikisha.views.buyer.GoodsReceiptActivity;
+import org.aplusscreators.hakikisha.views.buyer.RegisterPurchaseForm;
+import org.aplusscreators.hakikisha.views.seller.SellerDashboard;
 
 import java.util.concurrent.TimeUnit;
-
-import static org.aplusscreators.hakikisha.utils.Constants.CUSTOMER_ACCOUNT_TYPE;
-import static org.aplusscreators.hakikisha.utils.Constants.SELLER_ACCOUNT_TYPE;
 
 public class LoginActivity extends AppCompatActivity {
     private static final String TAG = "LoginActivity";
@@ -51,9 +48,16 @@ public class LoginActivity extends AppCompatActivity {
             @Override
             public void onVerificationCompleted(@NonNull PhoneAuthCredential phoneAuthCredential) {
                 progressBar.setVisibility(View.GONE);
-                Intent intent = new Intent(LoginActivity.this, BuyerDashboard.class);
-                startActivity(intent);
-                finish();
+                if (HakikishaPreference.getAccountTypePref(LoginActivity.this).equalsIgnoreCase(Constants.BUYER_ACCOUNT_TYPE)){
+                    Intent intent = new Intent(LoginActivity.this, RegisterPurchaseForm.class);
+                    startActivity(intent);
+                    finish();
+                } else if (HakikishaPreference.getAccountTypePref(LoginActivity.this).equalsIgnoreCase(Constants.SELLER_ACCOUNT_TYPE)){
+                    Intent intent = new Intent(LoginActivity.this, SellerDashboard.class);
+                    startActivity(intent);
+                    finish();
+                }
+
             }
 
             @Override
