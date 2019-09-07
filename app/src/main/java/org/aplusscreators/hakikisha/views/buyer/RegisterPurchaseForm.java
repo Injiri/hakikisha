@@ -179,12 +179,12 @@ public class RegisterPurchaseForm extends AppCompatActivity {
             return false;
         }
 
-        if (qtyEditText.getText().toString().isEmpty()) {
-            qtyEditText.setError("Please tell us how much/how many of the products is to be delivered");
-            qtyEditText.requestFocus();
-            Sound.vibrateDevice(RegisterPurchaseForm.this);
-            return false;
-        }
+//        if (qtyEditText.getText().toString().isEmpty()) {
+//            qtyEditText.setError("Please tell us how much/how many of the products is to be delivered");
+//            qtyEditText.requestFocus();
+//            Sound.vibrateDevice(RegisterPurchaseForm.this);
+//            return false;
+//        }
 
         return true;
     }
@@ -214,7 +214,8 @@ public class RegisterPurchaseForm extends AppCompatActivity {
         DatabaseReference databaseReference = firebaseDatabase.getReference("hakikisha");
         Task task = databaseReference
                 .child("buyer")
-                .child(HakikishaPreference.getAccountUuidPrefs(RegisterPurchaseForm.this))
+                //.child(HakikishaPreference.getAccountUuidPrefs(RegisterPurchaseForm.this))
+                .child(UUID.randomUUID().toString())
                 .child("purchases")
                 .child(purchase.getUuid())
                 .setValue(purchase);

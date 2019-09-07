@@ -15,22 +15,18 @@
             android:layout_height="wrap_content"
             android:orientation="vertical">
 
-            <TextView
+            <EditText
+                android:id="@+id/delivery_product_id_edit_text"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:padding="22dp"
-                android:text="Select Order"
+                android:background="@null"
+                android:hint="Enter product id"
                 android:textColor="@android:color/black"
                 android:textSize="16sp" />
 
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/receipt_order_recycler_view"
-                android:layout_marginStart="12dp"
-                android:layout_marginEnd="12dp"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"/>
-
             <LinearLayout
+                android:id="@+id/receipt_arrival_date"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
@@ -44,7 +40,7 @@
                     android:src="@drawable/ic_action_date_light" />
 
                 <TextView
-                    android:id="@+id/receipt_arrival_date"
+                    android:id="@+id/receipt_arrival_date_text_view"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="18dp"
@@ -56,6 +52,7 @@
             </LinearLayout>
 
             <LinearLayout
+                android:id="@+id/receipt_arrival_time"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
@@ -69,7 +66,7 @@
                     android:src="@drawable/ic_action_time_light" />
 
                 <TextView
-                    android:id="@+id/receipt_arrival_time"
+                    android:id="@+id/receipt_arrival_time_text_view"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="18dp"
@@ -93,15 +90,18 @@
                     android:layout_height="24dp"
                     android:src="@drawable/ic_action_seller_light" />
 
-                <TextView
+                <EditText
+                    android:id="@+id/receipt_seller_phone_edit_text"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="18dp"
-                    android:text="Select Seller"
+                    android:background="@null"
+                    android:hint="Enter Seller Phone"
                     android:textColor="@android:color/black"
                     android:textSize="16sp" />
 
                 <ImageView
+                    android:visibility="gone"
                     android:id="@+id/receipt_add_seller_view"
                     android:layout_width="24dp"
                     android:layout_height="24dp"
@@ -118,12 +118,14 @@
                 android:paddingTop="8dp"
                 android:paddingBottom="2dp">
 
-                <androidx.recyclerview.widget.RecyclerView
-                    android:id="@+id/receipt_seller_recycler_view"
+                <EditText
+                    android:id="@+id/receipt_seller_name_text_view"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="4dp"
+                    android:layout_marginStart="44dp"
                     android:layout_marginEnd="22dp"
+                    android:background="@null"
+                    android:hint="Enter seller name (optional)"
                     android:textColor="@android:color/black"
                     android:textSize="16sp" />
 
@@ -131,7 +133,7 @@
             </LinearLayout>
 
             <LinearLayout
-                android:id="@+id/receipt_attachments"
+                android:id="@+id/delivery_photo_image_view"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
@@ -142,14 +144,14 @@
                 <ImageView
                     android:layout_width="24dp"
                     android:layout_height="24dp"
-                    android:src="@drawable/ic_action_attachment_light" />
+                    android:src="@drawable/ic_arrow_camera_light" />
 
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="18dp"
                     android:background="@null"
-                    android:hint="Add Attachments ... Receipts ... Delivery notes ... photos"
+                    android:hint="Add Photos"
                     android:textColor="@color/dark_grey"
                     android:textSize="16sp" />
 
@@ -173,7 +175,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginStart="18dp"
                     android:background="@null"
-                    android:hint="Rate Quality of Service"
+                    android:text="Rate Quality of Service"
                     android:textColor="@color/dark_grey"
                     android:textSize="16sp" />
 

@@ -179,7 +179,7 @@ public class BuyerProfileFormActivity extends AppCompatActivity {
         task.addOnSuccessListener(new OnSuccessListener() {
             @Override
             public void onSuccess(Object o) {
-                Intent intent = new Intent(BuyerProfileFormActivity.this, BuyerDashboard.class);
+                Intent intent = new Intent(BuyerProfileFormActivity.this, RegisterPurchaseForm.class);
                 startActivity(intent);
                 finish();
             }

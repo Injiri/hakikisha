@@ -18,9 +18,20 @@
         android:layout_height="wrap_content" />
 
     <Button
-        android:id="@+id/receipt_product_receipt_submit_button"
+        android:id="@+id/receipt_product_receipt_reject_button"
         android:layout_marginEnd="12dp"
-        android:text="Save"
+        android:text="Reject"
+        android:textAllCaps="false"
+        android:layout_toLeftOf="@+id/receipt_product_receipt_accept_button"
+        android:textColor="@android:color/white"
+        android:background="@drawable/curved_edge_red"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+
+    <Button
+        android:id="@+id/receipt_product_receipt_accept_button"
+        android:layout_marginEnd="12dp"
+        android:text="Accept"
         android:textAllCaps="false"
         android:textColor="@android:color/white"
         android:background="@drawable/deep_blue_medium_curved_background"
@@ -30,8 +41,9 @@
 
     <TextView
         android:layout_marginStart="22dp"
+        android:layout_marginTop="18dp"
         android:id="@+id/product_receipt_title"
-        android:layout_below="@+id/receipt_product_receipt_submit_button"
+        android:layout_below="@+id/receipt_product_receipt_accept_button"
         android:textColor="@android:color/black"
         android:textSize="24sp"
         android:text="Product Receipt Form"

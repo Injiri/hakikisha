@@ -175,7 +175,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginStart="18dp"
                     android:background="@null"
-                    android:hint="Enter Product Description"
+                    android:hint="Enter Product/Service Description"
                     android:textColor="@color/dark_grey"
                     android:textSize="16sp" />
 
@@ -225,7 +225,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginStart="18dp"
                     android:background="@null"
-                    android:hint="Enter Quantity"
+                    android:hint="Enter Quantity (if applicable)"
                     android:textColor="@color/dark_grey"
                     android:textSize="16sp" />
 

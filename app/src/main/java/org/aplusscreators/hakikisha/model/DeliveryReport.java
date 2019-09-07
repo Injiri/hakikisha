@@ -3,29 +3,47 @@ package org.aplusscreators.hakikisha.model;
 public class DeliveryReport {
 
     private String uuid;
-    private String order_id;
+    private String productId;
     private float rating;
     private String reportType;
-    private String sellerUuid;
+    private String sellerPhone;
+    private String sellerName;
     private String buyerUuid;
     private String comments;
     private String deliveryDate;
     private String deliveryTime;
     private String attachmentUri;
+    private String status;
 
     public DeliveryReport() {
     }
 
-    public DeliveryReport(String uuid, String order_id, float rating, String reportType, String sellerUuid, String buyerUuid, String comments, String deliveryDate, String deliveryTime) {
+    public DeliveryReport(String uuid, String productId, float rating, String reportType, String sellerPhone, String buyerUuid, String comments, String deliveryDate, String deliveryTime) {
         this.uuid = uuid;
-        this.order_id = order_id;
+        this.productId = productId;
         this.rating = rating;
         this.reportType = reportType;
-        this.sellerUuid = sellerUuid;
+        this.sellerPhone = sellerPhone;
         this.buyerUuid = buyerUuid;
         this.comments = comments;
         this.deliveryDate = deliveryDate;
         this.deliveryTime = deliveryTime;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
+    }
+
+    public String getStatus() {
+        return status;
+    }
+
+    public void setSellerName(String sellerName) {
+        this.sellerName = sellerName;
+    }
+
+    public String getSellerName() {
+        return sellerName;
     }
 
     public String getAttachmentUri() {
@@ -44,12 +62,12 @@ public class DeliveryReport {
         this.uuid = uuid;
     }
 
-    public String getOrder_id() {
-        return order_id;
+    public String getProductId() {
+        return productId;
     }
 
-    public void setOrder_id(String order_id) {
-        this.order_id = order_id;
+    public void setProductId(String productId) {
+        this.productId = productId;
     }
 
     public float getRating() {
@@ -68,12 +86,12 @@ public class DeliveryReport {
         this.reportType = reportType;
     }
 
-    public String getSellerUuid() {
-        return sellerUuid;
+    public String getSellerPhone() {
+        return sellerPhone;
     }
 
-    public void setSellerUuid(String sellerUuid) {
-        this.sellerUuid = sellerUuid;
+    public void setSellerPhone(String sellerPhone) {
+        this.sellerPhone = sellerPhone;
     }
 
     public String getBuyerUuid() {

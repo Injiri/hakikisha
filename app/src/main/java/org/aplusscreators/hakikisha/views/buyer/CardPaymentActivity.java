@@ -73,6 +73,7 @@ public class CardPaymentActivity extends AppCompatActivity {
 
     private void tokenizeCard(Card cardToSave) {
         final Card card = Card.create(cardToSave.getNumber(), cardToSave.getExpMonth(), cardToSave.getExpYear(), cardToSave.getCVC());
+
         if (!card.validateCard()) {
             // Do not continue token creation.
             cardErrorInfoTextView.setVisibility(View.VISIBLE);

@@ -44,7 +44,7 @@ public class DeliveryReportAdapter extends RecyclerView.Adapter<DeliveryReportAd
         final DeliveryReport deliveryReport = deliveryReports.get(viewHolder.getAdapterPosition());
         viewHolder.deliveryStatusTextView.setText(deliveryReport.getReportType());
         viewHolder.deliveryStatusImageView.setImageResource(R.drawable.ic_action_delivery_accepted_light);
-        viewHolder.deliveryOrderIdTextView.setText(deliveryReport.getOrder_id());
+        viewHolder.deliveryOrderIdTextView.setText(deliveryReport.getProductId());
     }
 
     @Override
