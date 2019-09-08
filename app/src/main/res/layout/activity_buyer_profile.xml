@@ -137,6 +137,7 @@
 
 
         <LinearLayout
+            android:visibility="gone"
             android:id="@+id/buyer_dob_view"
             android:paddingTop="22dp"
             android:paddingBottom="22dp"

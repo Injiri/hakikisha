@@ -98,11 +98,12 @@ public class LoginActivity extends AppCompatActivity {
                     return;
                 }
 
-
                 progressBar.setVisibility(View.VISIBLE);
                 String phoneNumber = "+254" + phoneNumberEditText.getText().toString();
                 phoneNumber = formatE1PhoneNumber(phoneNumber);
                 requestVerificationCode(phoneNumber, phoneAuthCallback);
+
+                HakikishaPreference.setAccountPhoneNumberPref(LoginActivity.this,phoneNumber);
             }
         });
 

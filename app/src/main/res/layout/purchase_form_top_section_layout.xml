@@ -30,7 +30,7 @@
         android:paddingBottom="18dp"
         android:id="@+id/purchase_product_name_editText"
         android:layout_marginTop="38dp"
-        android:hint="Product name"
+        android:hint="Product/Service Descrption"
         android:textColor="@color/dark_grey"
         android:textSize="24sp"
         android:background="@null"

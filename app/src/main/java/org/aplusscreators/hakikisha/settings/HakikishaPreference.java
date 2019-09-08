@@ -20,6 +20,41 @@ public class HakikishaPreference {
     private final static String MONTHLY_SUBSCRIPTION_ACTIVATED = "monthly_subscription_activated";
     private final static String USER_SWIPE_CARD_ONBOARDING_COMPLETE = "user_swipe_onboarding_complete";
     private final static String USER_PROFILE_URI = "usere_profile_uri_prefs";
+    private static final String ACCOUNT_PHONE_NUMBER_PREFS = "account_phone_prefs";
+    private static final String ACCOUNT_FULL_NAMES_PREFS = "account_full_names_prefs";
+    private static final String ACCOUNT_ADDRESS_1_PREFS = "account_address_1_prefs";
+    private static final String ACCOUNT_ADDRESS_2_PREFS = "account_address_2_prefs";
+
+    public static void setAccountFullNamesPrefs(Context context,String names){
+        setStringPref(context,ACCOUNT_FULL_NAMES_PREFS,names);
+    }
+
+    public static String getAccountFullNamesPrefs(Context context){
+        return getStringPrefs(context,ACCOUNT_FULL_NAMES_PREFS,null);
+    }
+
+    public static void setAccountAddress1Prefs(Context context,String address_1){
+        setStringPref(context,ACCOUNT_ADDRESS_1_PREFS,address_1);
+    }
+
+    public static String getAccountAddress1Prefs(Context context){
+        return getStringPrefs(context,ACCOUNT_ADDRESS_1_PREFS,null);
+    }
+
+    public static void setAccountAddress2Prefs(Context context,String address_2){
+        setStringPref(context,ACCOUNT_ADDRESS_2_PREFS,address_2);
+    }
+
+    public static String getAccountAddress2Prefs(Context context){
+        return getStringPrefs(context,ACCOUNT_ADDRESS_2_PREFS,null);
+    }
+
+    public static void setAccountPhoneNumberPref(Context context,String phoneNumber) {
+        setStringPref(context,ACCOUNT_PHONE_NUMBER_PREFS,phoneNumber);
+    }
+    public static String getAccountPhoneNumberPref(Context context){
+        return getStringPrefs(context,ACCOUNT_PHONE_NUMBER_PREFS,null);
+    }
 
     public static void setBuyerNamesPrefs(Context context,String names){
         setStringPref(context,BUYER_NAMES_PREFS,names);
@@ -190,4 +225,5 @@ public class HakikishaPreference {
         }
 
     }
+
 }
