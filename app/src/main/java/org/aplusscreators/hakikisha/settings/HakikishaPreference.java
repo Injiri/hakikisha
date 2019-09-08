@@ -56,14 +56,6 @@ public class HakikishaPreference {
         return getStringPrefs(context,ACCOUNT_PHONE_NUMBER_PREFS,null);
     }
 
-    public static void setBuyerNamesPrefs(Context context,String names){
-        setStringPref(context,BUYER_NAMES_PREFS,names);
-    }
-
-    public static String getBuyerNamesPrefs(Context context){
-        return getStringPrefs(context,BUYER_NAMES_PREFS,null);
-    }
-
     public static void setAccountUuidPrefs(Context context,String uuid){
         setStringPref(context,ACCOUNT_UUID_PREFS,uuid);
     }

@@ -112,6 +112,23 @@ public class GoodsReceiptActivity extends AppCompatActivity {
 
         deliveryLocationEditText.setText("Hakikisha pick up location");
 
+        deliveryLocationEditText.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String address1 = HakikishaPreference.getAccountAddress1Prefs(GoodsReceiptActivity.this);
+                String address2 = HakikishaPreference.getAccountAddress2Prefs(GoodsReceiptActivity.this);
+
+                if (address1 != null){
+                    deliveryLocationEditText.setText(address1);
+                    return;
+                }
+
+                if (address2 != null){
+                    deliveryLocationEditText.setText(address2);
+                }
+            }
+        });
+
         arrivalDateView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

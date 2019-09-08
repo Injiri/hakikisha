@@ -34,6 +34,7 @@ import com.squareup.picasso.Picasso;
 
 import org.aplusscreators.hakikisha.R;
 import org.aplusscreators.hakikisha.model.Seller;
+import org.aplusscreators.hakikisha.settings.HakikishaPreference;
 import org.aplusscreators.hakikisha.utils.Constants;
 import org.aplusscreators.hakikisha.utils.FileUtils;
 import org.aplusscreators.hakikisha.views.buyer.BuyerProfileFormActivity;
@@ -41,6 +42,7 @@ import org.aplusscreators.hakikisha.views.buyer.BuyerProfileFormActivity;
 import java.io.File;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import java.util.Locale;
 import java.util.UUID;
 
 import de.hdodenhof.circleimageview.CircleImageView;
@@ -185,6 +187,11 @@ public class SellerProfileFormActivity extends AppCompatActivity {
         task.addOnSuccessListener(new OnSuccessListener() {
             @Override
             public void onSuccess(Object o) {
+                HakikishaPreference.setAccountFullNamesPrefs(SellerProfileFormActivity.this,
+                        String.format(Locale.ENGLISH,"%s %s",seller.getFirstName(),seller.getLastName()));
+                HakikishaPreference.setAccountAddress1Prefs(SellerProfileFormActivity.this,seller.getAddress_1());
+                HakikishaPreference.setAccountAddress2Prefs(SellerProfileFormActivity.this,seller.getAddress_2());
+
                 Intent intent = new Intent(SellerProfileFormActivity.this, SellerDashboard.class);
                 startActivity(intent);
                 finish();

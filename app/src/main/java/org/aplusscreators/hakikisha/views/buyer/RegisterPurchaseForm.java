@@ -91,6 +91,24 @@ public class RegisterPurchaseForm extends AppCompatActivity {
         registerPurchaseProgressBar = findViewById(R.id.register_purchase_progress_bar);
         productNameEditText = findViewById(R.id.purchase_product_name_editText);
 
+        addressEditText.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String address1 = HakikishaPreference.getAccountAddress1Prefs(RegisterPurchaseForm.this);
+                String address2 = HakikishaPreference.getAccountAddress2Prefs(RegisterPurchaseForm.this);
+
+                if (address1 != null) {
+                    addressEditText.setText(address1);
+                    return;
+                }
+
+                if (address2 != null) {
+                    addressEditText.setText(address2);
+                    return;
+                }
+            }
+        });
+
         submitButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
