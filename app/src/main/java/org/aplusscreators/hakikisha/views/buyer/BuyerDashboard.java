@@ -1,6 +1,7 @@
 package org.aplusscreators.hakikisha.views.buyer;
 
 import android.Manifest;
+import android.app.PendingIntent;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Color;
@@ -102,12 +103,15 @@ public class BuyerDashboard extends AppCompatActivity implements RapidFloatingAc
 
 
     private void sendEmailSmsIfNeccessary() {
+
+        PendingIntent pendingIntent = PendingIntent.getBroadcast(BuyerDashboard.this,0,new Intent("Filter"),0);
+
         Intent data = getIntent();
         String sellerPhone = data.getStringExtra("send_purchase_sms");
         String sellerEmail = data.getStringExtra("send_purchase_email");
 
         if (sellerPhone != null && !sellerPhone.isEmpty())
-            HakikishaUtils.sendSms(BuyerDashboard.this, "Sms Message", sellerPhone);
+            HakikishaUtils.sendSms(BuyerDashboard.this, "Sms Message", sellerPhone,pendingIntent);
         else if (sellerEmail != null && !sellerEmail.isEmpty())
             HakikishaUtils.sendEmail(BuyerDashboard.this, "from@gmail", sellerEmail, "PURCHASE EMAIL", "Purchase message...");
 
@@ -156,6 +160,9 @@ public class BuyerDashboard extends AppCompatActivity implements RapidFloatingAc
 
     private void downloadPurchaseDataIfPossible() {
         if (HakikishaPreference.getAccountUuidPrefs(BuyerDashboard.this) == null) return;
+
+        purchaseList.clear();
+        purchasesAdapter.notifyDataSetChanged();
 
         FirebaseDatabase firebaseDatabase = FirebaseDatabase.getInstance();
         DatabaseReference databaseReference = firebaseDatabase.getReference("hakikisha")

@@ -185,6 +185,7 @@ public class BuyerProfileFormActivity extends AppCompatActivity {
                         String.format(Locale.ENGLISH,"%s %s",buyer.getFirstName(),buyer.getLastName()));
                 HakikishaPreference.setAccountAddress1Prefs(BuyerProfileFormActivity.this,buyer.getAddress_1());
                 HakikishaPreference.setAccountAddress2Prefs(BuyerProfileFormActivity.this,buyer.getAddress_2());
+                HakikishaPreference.setAccountUuidPrefs(BuyerProfileFormActivity.this,buyer.getUuid());
 
                 Intent intent = new Intent(BuyerProfileFormActivity.this, RegisterPurchaseForm.class);
                 startActivity(intent);

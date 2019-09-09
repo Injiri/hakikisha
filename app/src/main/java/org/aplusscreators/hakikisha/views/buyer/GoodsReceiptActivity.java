@@ -73,6 +73,7 @@ public class GoodsReceiptActivity extends AppCompatActivity {
     View arrivalTimeView;
     EditText sellerPhoneEditText;
     EditText sellerNameEditText;
+    EditText productIdEditText;
     TextView arrivalDateTextView;
     TextView arrivalTimeTextView;
     ImageView addSellerImageView;
@@ -109,6 +110,7 @@ public class GoodsReceiptActivity extends AppCompatActivity {
         ratingBar = findViewById(R.id.receipt_ratings_bar);
         cameraCaptureTextView = findViewById(R.id.camera_capture_text_view);
         progressBar = findViewById(R.id.product_receipt_progress_bar);
+        productIdEditText = findViewById(R.id.delivery_product_id_edit_text);
 
         deliveryLocationEditText.setText("Hakikisha pick up location");
 
@@ -118,12 +120,12 @@ public class GoodsReceiptActivity extends AppCompatActivity {
                 String address1 = HakikishaPreference.getAccountAddress1Prefs(GoodsReceiptActivity.this);
                 String address2 = HakikishaPreference.getAccountAddress2Prefs(GoodsReceiptActivity.this);
 
-                if (address1 != null){
+                if (address1 != null) {
                     deliveryLocationEditText.setText(address1);
                     return;
                 }
 
-                if (address2 != null){
+                if (address2 != null) {
                     deliveryLocationEditText.setText(address2);
                 }
             }
@@ -184,7 +186,7 @@ public class GoodsReceiptActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 progressBar.setVisibility(View.VISIBLE);
-                extractAndSubmitData(GOODS_ACCEPTED_FLAG);
+                extractAndSubmitData(Constants.PURCHASE_STATUS_FLAGS.PURCHASE_COMPLETE);
             }
         });
 
@@ -192,37 +194,81 @@ public class GoodsReceiptActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 progressBar.setVisibility(View.GONE);
-                extractAndSubmitData(GOODS_REJECTED_FLAG);
+                boolean valideForm = validateReceiptForm();
+                if (valideForm)
+                    extractAndSubmitData(Constants.PURCHASE_STATUS_FLAGS.DELIVERY_REJECTED);
             }
         });
 
         cancelButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                ExitFormDialog exitFormDialog = new ExitFormDialog(GoodsReceiptActivity.this, GoodsReceiptActivity.this, BuyerDashboard.class);
-                exitFormDialog.show();
+                AlertDialog.Builder alertBuilder = new AlertDialog.Builder(GoodsReceiptActivity.this);
+                alertBuilder.setMessage("You have unsaved changes, do you want to keep editing ?");
+                alertBuilder.setPositiveButton("Discard", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.dismiss();
+                        Intent intent = new Intent(GoodsReceiptActivity.this, BuyerDashboard.class);
+                        startActivity(intent);
+                        finish();
+                    }
+                });
+
+                alertBuilder.setNegativeButton("Keep editing", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.dismiss();
+                    }
+                });
+
+                alertBuilder.show();
             }
         });
 
         addPhotoView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (ContextCompat.checkSelfPermission(GoodsReceiptActivity.this,Manifest.permission.CAMERA) == PackageManager.PERMISSION_GRANTED){
+                if (ContextCompat.checkSelfPermission(GoodsReceiptActivity.this, Manifest.permission.CAMERA) == PackageManager.PERMISSION_GRANTED) {
                     launchCamera();
                 } else {
-                    ActivityCompat.requestPermissions(GoodsReceiptActivity.this,new String[]{Manifest.permission.CAMERA},CAMERA_PERMISSION_REQUEST_CODE);
+                    ActivityCompat.requestPermissions(GoodsReceiptActivity.this, new String[]{Manifest.permission.CAMERA}, CAMERA_PERMISSION_REQUEST_CODE);
                 }
             }
         });
+    }
+
+    private boolean validateReceiptForm() {
+        if (productIdEditText.getText().toString().isEmpty()) {
+            productIdEditText.setError("Required field");
+            productIdEditText.requestFocus();
+
+            return false;
+        }
+
+        if (sellerPhoneEditText.getText().toString().isEmpty()) {
+            sellerPhoneEditText.setText("Phone number is required");
+            sellerPhoneEditText.requestFocus();
+
+            return false;
+        }
+
+        if (deliveryLocationEditText.getText().toString().isEmpty()) {
+            deliveryLocationEditText.setText("Delivery location is required");
+            deliveryLocationEditText.requestFocus();
+            return false;
+        }
+
+        return true;
     }
 
     private void launchCamera() {
         Intent mediaCaptureIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
         imageFile = FileUtils.createImageFile(GoodsReceiptActivity.this, "hakikisha_delivery_" + new Random().nextInt(), ".png");
         photoUri = FileProvider.getUriForFile(GoodsReceiptActivity.this, "org.aplusscreators.hakikisha.fileProvider", imageFile);
-        mediaCaptureIntent.putExtra(MediaStore.EXTRA_OUTPUT,photoUri);
+        mediaCaptureIntent.putExtra(MediaStore.EXTRA_OUTPUT, photoUri);
 
-        startActivityForResult(mediaCaptureIntent,CAMERA_IMAGE_CAPTURE_REQUEST_CODE);
+        startActivityForResult(mediaCaptureIntent, CAMERA_IMAGE_CAPTURE_REQUEST_CODE);
     }
 
     private void extractAndSubmitData(String status) {
@@ -289,7 +335,7 @@ public class GoodsReceiptActivity extends AppCompatActivity {
         dialogBuilder.setPositiveButton("Confirm", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
-                Toast.makeText(getApplicationContext(),"Funds will be released to seller",Toast.LENGTH_LONG).show();
+                Toast.makeText(getApplicationContext(), "Funds will be released to seller", Toast.LENGTH_LONG).show();
             }
         });
         dialogBuilder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
@@ -304,11 +350,11 @@ public class GoodsReceiptActivity extends AppCompatActivity {
 
     private void sendGoodsAcceptedSms() {
         if (ContextCompat.checkSelfPermission(GoodsReceiptActivity.this, Manifest.permission.SEND_SMS) == PackageManager.PERMISSION_DENIED) {
-            ActivityCompat.requestPermissions(GoodsReceiptActivity.this,new String[]{Manifest.permission.SEND_SMS},SEND_SMS_ACCEPT_PERMISSION_CODE);
+            ActivityCompat.requestPermissions(GoodsReceiptActivity.this, new String[]{Manifest.permission.SEND_SMS}, SEND_SMS_ACCEPT_PERMISSION_CODE);
         } else {
             SmsManager smsManager = SmsManager.getDefault();
             smsManager.sendTextMessage(sellerPhoneEditText.getText().toString(), null, composeSuccessSmsToSeller(), null, null);
-            smsManager.sendTextMessage(Constants.HAKIKISHA_SERVICE_PHONE,null,"Buyer [Buyer Id] [Buyer Name] received and accepted goods/service delivered by seller [seller Phone] [seller Name], valued at [Cost] on [CURENT DATE & TIME]",null,null);
+            smsManager.sendTextMessage(Constants.HAKIKISHA_SERVICE_PHONE, null, "Buyer [Buyer Id] [Buyer Name] received and accepted goods/service delivered by seller [seller Phone] [seller Name], valued at [Cost] on [CURENT DATE & TIME]", null, null);
         }
     }
 
@@ -335,11 +381,11 @@ public class GoodsReceiptActivity extends AppCompatActivity {
 
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
-        if (requestCode == SEND_SMS_REJECT_PERMISSION_CODE && grantResults[0] == PackageManager.PERMISSION_GRANTED){
+        if (requestCode == SEND_SMS_REJECT_PERMISSION_CODE && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
             sendGoodsRejectSms();
         }
 
-        if (requestCode == SEND_SMS_ACCEPT_PERMISSION_CODE && grantResults[0] == PackageManager.PERMISSION_GRANTED){
+        if (requestCode == SEND_SMS_ACCEPT_PERMISSION_CODE && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
             sendGoodsAcceptedSms();
         }
 
@@ -351,7 +397,7 @@ public class GoodsReceiptActivity extends AppCompatActivity {
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        if (requestCode == CAMERA_IMAGE_CAPTURE_REQUEST_CODE && resultCode == Activity.RESULT_OK){
+        if (requestCode == CAMERA_IMAGE_CAPTURE_REQUEST_CODE && resultCode == Activity.RESULT_OK) {
             cameraCaptureTextView.append(imageFile.getName() + " \n");
         }
     }

@@ -29,7 +29,7 @@
     <EditText
         android:paddingBottom="18dp"
         android:id="@+id/purchase_product_name_editText"
-        android:layout_marginTop="38dp"
+        android:layout_marginTop="58dp"
         android:hint="Product/Service Descrption"
         android:textColor="@color/dark_grey"
         android:textSize="24sp"

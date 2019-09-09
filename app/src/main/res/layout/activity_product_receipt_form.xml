@@ -93,6 +93,7 @@
                     android:src="@drawable/ic_action_seller_light" />
 
                 <EditText
+                    android:inputType="number"
                     android:id="@+id/receipt_seller_phone_edit_text"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"

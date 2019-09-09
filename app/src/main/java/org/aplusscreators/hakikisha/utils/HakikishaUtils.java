@@ -1,5 +1,6 @@
 package org.aplusscreators.hakikisha.utils;
 
+import android.app.PendingIntent;
 import android.content.ActivityNotFoundException;
 import android.content.Context;
 import android.content.Intent;
@@ -28,9 +29,9 @@ public class HakikishaUtils {
         }
     }
 
-    public static void sendSms(Context context, String sms, String phoneNumber) {
+    public static void sendSms(Context context, String sms, String phoneNumber, PendingIntent sentPendingIntent) {
         SmsManager smsManager = SmsManager.getDefault();
-        smsManager.sendTextMessage(phoneNumber,null,sms,null,null);
+        smsManager.sendTextMessage(phoneNumber,null,sms,sentPendingIntent,null);
 
     }
 }

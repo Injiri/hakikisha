@@ -1,6 +1,8 @@
 package org.aplusscreators.hakikisha.views.buyer;
 
 import android.Manifest;
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
@@ -34,6 +36,7 @@ import org.aplusscreators.hakikisha.R;
 import org.aplusscreators.hakikisha.model.Purchase;
 import org.aplusscreators.hakikisha.model.Seller;
 import org.aplusscreators.hakikisha.settings.HakikishaPreference;
+import org.aplusscreators.hakikisha.utils.Constants;
 import org.aplusscreators.hakikisha.utils.HakikishaUtils;
 import org.aplusscreators.hakikisha.utils.Sound;
 import org.aplusscreators.hakikisha.views.common.ExitFormDialog;
@@ -65,6 +68,7 @@ public class RegisterPurchaseForm extends AppCompatActivity {
     EditText addressEditText;
     EditText qtyEditText;
     ProgressBar registerPurchaseProgressBar;
+    View deliveryAddressView;
     Purchase purchase = new Purchase();
     ArrayAdapter<String> platformsArrayAdapter;
     Seller selectedSeller = new Seller();
@@ -90,22 +94,23 @@ public class RegisterPurchaseForm extends AppCompatActivity {
         qtyEditText = findViewById(R.id.register_purchase_qty_edit_text);
         registerPurchaseProgressBar = findViewById(R.id.register_purchase_progress_bar);
         productNameEditText = findViewById(R.id.purchase_product_name_editText);
+        deliveryAddressView = findViewById(R.id.register_purchase_delivery_address_view);
+
+        autofillAddressField();
+
+        deliveryAddressView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                autofillAddressField();
+            }
+        });
+
+
 
         addressEditText.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String address1 = HakikishaPreference.getAccountAddress1Prefs(RegisterPurchaseForm.this);
-                String address2 = HakikishaPreference.getAccountAddress2Prefs(RegisterPurchaseForm.this);
-
-                if (address1 != null) {
-                    addressEditText.setText(address1);
-                    return;
-                }
-
-                if (address2 != null) {
-                    addressEditText.setText(address2);
-                    return;
-                }
+                autofillAddressField();
             }
         });
 
@@ -126,8 +131,27 @@ public class RegisterPurchaseForm extends AppCompatActivity {
         cancelButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                ExitFormDialog exitFormDialog = new ExitFormDialog(RegisterPurchaseForm.this, RegisterPurchaseForm.this, BuyerDashboard.class);
-                exitFormDialog.show();
+
+                AlertDialog.Builder alertBuilder = new AlertDialog.Builder(RegisterPurchaseForm.this);
+                alertBuilder.setMessage("You have unsaved changes, do you want to keep editing ?");
+                alertBuilder.setPositiveButton("Discard", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.dismiss();
+                        Intent intent = new Intent(RegisterPurchaseForm.this, BuyerDashboard.class);
+                        startActivity(intent);
+                        finish();
+                    }
+                });
+
+                alertBuilder.setNegativeButton("Keep editing", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.dismiss();
+                    }
+                });
+
+                alertBuilder.show();
             }
         });
 
@@ -139,6 +163,21 @@ public class RegisterPurchaseForm extends AppCompatActivity {
 
         requestSmsPermission();
 
+    }
+
+    private void autofillAddressField() {
+        String address1 = HakikishaPreference.getAccountAddress1Prefs(RegisterPurchaseForm.this);
+        String address2 = HakikishaPreference.getAccountAddress2Prefs(RegisterPurchaseForm.this);
+
+        if (address1 != null) {
+            addressEditText.setText(address1);
+            return;
+        }
+
+        if (address2 != null) {
+            addressEditText.setText(address2);
+            return;
+        }
     }
 
     @Override
@@ -224,7 +263,7 @@ public class RegisterPurchaseForm extends AppCompatActivity {
         purchase.setSellerEmail(sellerEmailEditText.getText().toString());
         purchase.setBuyerUuid(HakikishaPreference.getAccountUuidPrefs(RegisterPurchaseForm.this));
         purchase.setSellerPhone(sellerPhoneNumber.getText().toString());
-        purchase.setStatus("Delivery in progress");
+        purchase.setStatus(Constants.PURCHASE_STATUS_FLAGS.PAYMENT_PENDING);
 
         serializePurchaseModel();
 

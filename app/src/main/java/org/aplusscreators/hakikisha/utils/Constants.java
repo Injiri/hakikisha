@@ -20,4 +20,13 @@ public class Constants {
         public static final String GOODS_REJECTED_REPORT_TYPE = "goods_rejected_report";
     }
 
+    public static final class PURCHASE_STATUS_FLAGS {
+        public static final String PAYMENT_PENDING = "Payment Pending";
+        public static final String BUYER_PAID = "Buyer Paid";
+        public static final String DELIVERY_IN_PROGRESS = "Delivery in progress";
+        public static final String PURCHASE_COMPLETE = "Purchase Complete";
+        public static final String DELIVERY_REJECTED = "Delivery Rejected";
+        public static final String SMS_DELIVERY_FAILED = "SMS Delivery Failed";
+    }
+
 }
