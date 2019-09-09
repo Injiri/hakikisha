@@ -11,6 +11,8 @@ import android.widget.Toast;
 
 import org.aplusscreators.hakikisha.views.buyer.RegisterPurchaseForm;
 
+import java.util.UUID;
+
 public class HakikishaUtils {
 
     private static final String TAG = "HakikishaUtils";
@@ -33,5 +35,14 @@ public class HakikishaUtils {
         SmsManager smsManager = SmsManager.getDefault();
         smsManager.sendTextMessage(phoneNumber,null,sms,sentPendingIntent,null);
 
+    }
+
+    public static String generateMpesaStyleAlphanumeric(){
+        String uuid = UUID.randomUUID().toString();
+        String stripped = uuid.replaceAll("-","");
+        String alphaLength = stripped.substring(0,11);
+        String upperCaseAlphanum = alphaLength.toUpperCase();
+
+        return upperCaseAlphanum;
     }
 }

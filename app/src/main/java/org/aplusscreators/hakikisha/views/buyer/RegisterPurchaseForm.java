@@ -67,10 +67,12 @@ public class RegisterPurchaseForm extends AppCompatActivity {
     EditText descriptionEditText;
     EditText addressEditText;
     EditText qtyEditText;
+    Spinner deliveryOptionsSpinner;
     ProgressBar registerPurchaseProgressBar;
     View deliveryAddressView;
     Purchase purchase = new Purchase();
     ArrayAdapter<String> platformsArrayAdapter;
+    ArrayAdapter<String> deliveryOptionsSpinnerAdapter;
     Seller selectedSeller = new Seller();
     String purchaseSerialized;
 
@@ -95,6 +97,7 @@ public class RegisterPurchaseForm extends AppCompatActivity {
         registerPurchaseProgressBar = findViewById(R.id.register_purchase_progress_bar);
         productNameEditText = findViewById(R.id.purchase_product_name_editText);
         deliveryAddressView = findViewById(R.id.register_purchase_delivery_address_view);
+        deliveryOptionsSpinner = findViewById(R.id.register_purchase_delivery_option_spinner);
 
         autofillAddressField();
 
@@ -159,7 +162,12 @@ public class RegisterPurchaseForm extends AppCompatActivity {
                 RegisterPurchaseForm.this, android.R.layout.simple_spinner_dropdown_item, getResources().getStringArray(R.array.purchase_eplatforms)
         );
 
+        deliveryOptionsSpinnerAdapter = new ArrayAdapter<>(
+                RegisterPurchaseForm.this,android.R.layout.simple_spinner_dropdown_item,getResources().getStringArray(R.array.delivery_options_array)
+        );
+
         purchasePlatformSpinner.setAdapter(platformsArrayAdapter);
+        deliveryOptionsSpinner.setAdapter(deliveryOptionsSpinnerAdapter);
 
         requestSmsPermission();
 

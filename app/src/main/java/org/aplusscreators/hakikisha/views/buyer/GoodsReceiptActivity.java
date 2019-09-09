@@ -46,6 +46,7 @@ import org.aplusscreators.hakikisha.settings.HakikishaPreference;
 import org.aplusscreators.hakikisha.utils.Constants;
 import org.aplusscreators.hakikisha.utils.DateTimeUtils;
 import org.aplusscreators.hakikisha.utils.FileUtils;
+import org.aplusscreators.hakikisha.utils.HakikishaUtils;
 import org.aplusscreators.hakikisha.views.common.ExitFormDialog;
 
 import java.io.File;
@@ -354,7 +355,7 @@ public class GoodsReceiptActivity extends AppCompatActivity {
         } else {
             SmsManager smsManager = SmsManager.getDefault();
             smsManager.sendTextMessage(sellerPhoneEditText.getText().toString(), null, composeSuccessSmsToSeller(), null, null);
-            smsManager.sendTextMessage(Constants.HAKIKISHA_SERVICE_PHONE, null, "Buyer [Buyer Id] [Buyer Name] received and accepted goods/service delivered by seller [seller Phone] [seller Name], valued at [Cost] on [CURENT DATE & TIME]", null, null);
+            smsManager.sendTextMessage(Constants.HAKIKISHA_SERVICE_PHONE, null, "[Transaction Code]\nBuyer [Buyer Id] [Buyer Name] received and accepted goods/service delivered by seller [seller Phone] [seller Name], valued at [Cost] on [CURENT DATE & TIME]", null, null);
         }
     }
 
@@ -371,7 +372,8 @@ public class GoodsReceiptActivity extends AppCompatActivity {
     }
 
     private String composeSuccessSmsToSeller() {
-        String message = String.format(Locale.ENGLISH, "Dear Seller, your customer has received and accepted the goods/service you have provided. You will receive payments soon.");
+        String message = String.format(Locale.ENGLISH, "%s \nDear Seller, your customer has received and accepted the goods/service you have provided. You will receive payments soon.",
+                HakikishaUtils.generateMpesaStyleAlphanumeric());
         return message;
     }
 

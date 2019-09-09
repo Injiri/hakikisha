@@ -25,5 +25,9 @@
         <item>Olx</item>
         <item>Other</item>
     </string-array>
+    <string-array name="delivery_options_array">
+        <item>Delivery by seller</item>
+        <item>Delivery by Hakikisha</item>
+    </string-array>
 
 </resources>
