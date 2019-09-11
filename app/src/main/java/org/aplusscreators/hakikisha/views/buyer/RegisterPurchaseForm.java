@@ -272,6 +272,7 @@ public class RegisterPurchaseForm extends AppCompatActivity {
         purchase.setBuyerUuid(HakikishaPreference.getAccountUuidPrefs(RegisterPurchaseForm.this));
         purchase.setSellerPhone(sellerPhoneNumber.getText().toString());
         purchase.setStatus(Constants.PURCHASE_STATUS_FLAGS.PAYMENT_PENDING);
+        purchase.setDeliveryOption(deliveryOptionsSpinner.getSelectedItem().toString());
 
         serializePurchaseModel();
 

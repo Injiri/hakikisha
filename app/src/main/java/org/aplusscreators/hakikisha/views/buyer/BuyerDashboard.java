@@ -2,6 +2,7 @@ package org.aplusscreators.hakikisha.views.buyer;
 
 import android.Manifest;
 import android.app.PendingIntent;
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Color;
@@ -68,7 +69,13 @@ public class BuyerDashboard extends AppCompatActivity implements RapidFloatingAc
         rfaLayout = findViewById(R.id.activity_buyer_dashboard_rfal);
         noDataView = findViewById(R.id.buyer_dashboard_no_data_layout);
 
-        purchasesAdapter = new PurchasesAdapter(BuyerDashboard.this, purchaseList, null);
+        purchasesAdapter = new PurchasesAdapter(BuyerDashboard.this, purchaseList, new PurchasesAdapter.OnPurchaseClickedListener() {
+            @Override
+            public void onPurchaseClicked(int position) {
+                //todo design response.
+            }
+        });
+
         purchasesRecyclerView.setAdapter(purchasesAdapter);
         purchasesRecyclerView.setLayoutManager(new LinearLayoutManager(BuyerDashboard.this, RecyclerView.VERTICAL, false));
 

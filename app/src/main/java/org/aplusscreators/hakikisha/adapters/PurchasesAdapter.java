@@ -24,19 +24,19 @@ public class PurchasesAdapter extends RecyclerView.Adapter<PurchasesAdapter.View
 
     AppCompatActivity context;
     List<Purchase> purchaseList;
-    OnTaskClickedListener onTaskClickedListener;
+    OnPurchaseClickedListener onPurchaseClickedListener;
 
-    public PurchasesAdapter(AppCompatActivity context, List<Purchase> purchaseList, OnTaskClickedListener onTaskClickedListener) {
+    public PurchasesAdapter(AppCompatActivity context, List<Purchase> purchaseList, OnPurchaseClickedListener onPurchaseClickedListener) {
         this.context = context;
         this.purchaseList = purchaseList;
-        this.onTaskClickedListener = onTaskClickedListener;
+        this.onPurchaseClickedListener = onPurchaseClickedListener;
     }
 
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_purchase_layout, parent, false);
-        return new ViewHolder(view, onTaskClickedListener);
+        return new ViewHolder(view, onPurchaseClickedListener);
     }
 
     @Override
@@ -59,9 +59,9 @@ public class PurchasesAdapter extends RecyclerView.Adapter<PurchasesAdapter.View
         TextView productNameTextView;
         TextView costTextView;
         TextView purchaseStatusTextView;
-        OnTaskClickedListener onPurchaseClickedListener;
+        OnPurchaseClickedListener onPurchaseClickedListener;
 
-        public ViewHolder(@NonNull View itemView, OnTaskClickedListener onPurchaseClickedListener) {
+        public ViewHolder(@NonNull View itemView, OnPurchaseClickedListener onPurchaseClickedListener) {
             super(itemView);
 
             this.onPurchaseClickedListener = onPurchaseClickedListener;
@@ -71,7 +71,7 @@ public class PurchasesAdapter extends RecyclerView.Adapter<PurchasesAdapter.View
             costTextView = itemView.findViewById(R.id.item_purchase_cost_text_view);
             productNameTextView = itemView.findViewById(R.id.item_purchase_name_text_view);
 
-            purchaseStatusTextView.setOnClickListener(this);
+            cardView.setOnClickListener(this);
 
             cardView.setCardBackgroundColor(ColorTool.getRandomDarkColor());
 
@@ -79,12 +79,12 @@ public class PurchasesAdapter extends RecyclerView.Adapter<PurchasesAdapter.View
 
         @Override
         public void onClick(View v) {
-            onPurchaseClickedListener.onTaskClicked(getAdapterPosition(), purchaseStatusTextView);
+            onPurchaseClickedListener.onPurchaseClicked(getAdapterPosition());
         }
     }
 
-    public interface OnTaskClickedListener {
+    public interface OnPurchaseClickedListener {
 
-        public void onTaskClicked(int position, TextView checkBox);
+        public void onPurchaseClicked(int position);
     }
 }

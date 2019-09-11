@@ -155,7 +155,7 @@ public class MakePaymentActivity extends AppCompatActivity {
                     }
                 });
 
-                alertBuilder.setNegativeButton("Add Payment Method", new DialogInterface.OnClickListener() {
+                alertBuilder.setNegativeButton("Continue", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         dialog.dismiss();
@@ -234,6 +234,9 @@ public class MakePaymentActivity extends AppCompatActivity {
                     alertBuilder.show();
                     isSmsFailDialogVisible = true;
                 }
+
+                unregisterReceiver(this);
+
             }
         }, new IntentFilter(SMS_SENT_INTENT_FILTER));
 

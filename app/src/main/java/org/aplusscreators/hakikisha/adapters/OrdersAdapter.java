@@ -23,19 +23,19 @@ public class OrdersAdapter extends RecyclerView.Adapter<OrdersAdapter.ViewHolder
 
     AppCompatActivity context;
     List<Order> orderList;
-    PurchasesAdapter.OnTaskClickedListener onTaskClickedListener;
+    PurchasesAdapter.OnPurchaseClickedListener onPurchaseClickedListener;
 
-    public OrdersAdapter(AppCompatActivity context, List<Order> orderList, PurchasesAdapter.OnTaskClickedListener onTaskClickedListener) {
+    public OrdersAdapter(AppCompatActivity context, List<Order> orderList, PurchasesAdapter.OnPurchaseClickedListener onPurchaseClickedListener) {
         this.context = context;
         this.orderList = orderList;
-        this.onTaskClickedListener = onTaskClickedListener;
+        this.onPurchaseClickedListener = onPurchaseClickedListener;
     }
 
     @NonNull
     @Override
     public OrdersAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_orders_layout, parent, false);
-        return new OrdersAdapter.ViewHolder(view, onTaskClickedListener);
+        return new OrdersAdapter.ViewHolder(view, onPurchaseClickedListener);
     }
 
     @Override
@@ -55,12 +55,12 @@ public class OrdersAdapter extends RecyclerView.Adapter<OrdersAdapter.ViewHolder
         TextView taskTimePeriodTextView;
         TextView taskDateTextView;
         TextView checkBox;
-        PurchasesAdapter.OnTaskClickedListener onTaskClickedListener;
+        PurchasesAdapter.OnPurchaseClickedListener onPurchaseClickedListener;
 
-        public ViewHolder(@NonNull View itemView, PurchasesAdapter.OnTaskClickedListener onTaskClickedListener) {
+        public ViewHolder(@NonNull View itemView, PurchasesAdapter.OnPurchaseClickedListener onPurchaseClickedListener) {
             super(itemView);
 
-            this.onTaskClickedListener = onTaskClickedListener;
+            this.onPurchaseClickedListener = onPurchaseClickedListener;
 
             checkBox = itemView.findViewById(R.id.item_purchase_name_text_view);
             cardView = itemView.findViewById(R.id.task_parent_card_view);
@@ -75,7 +75,7 @@ public class OrdersAdapter extends RecyclerView.Adapter<OrdersAdapter.ViewHolder
 
         @Override
         public void onClick(View v) {
-            onTaskClickedListener.onTaskClicked(getAdapterPosition(), checkBox);
+            onPurchaseClickedListener.onPurchaseClicked(getAdapterPosition());
         }
     }
 

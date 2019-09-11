@@ -37,6 +37,7 @@ public class ConfirmationCodesActivity extends AppCompatActivity {
     TextView confirmMessageTextView;
     Button submitCodeButton;
     ImageView wrongCodeImageView;
+    View smsCodesView;
     EditText codeOne;
     EditText codeTwo;
     EditText codeThree;
@@ -57,6 +58,7 @@ public class ConfirmationCodesActivity extends AppCompatActivity {
         codeFour = findViewById(R.id.code_four);
         codeFive = findViewById(R.id.code_five);
         codeZero = findViewById(R.id.code_zero);
+        smsCodesView = findViewById(R.id.sms_codes_view);
         wrongCodeImageView = findViewById(R.id.wrong_code_image_view);
 
         wrongCodeImageView.setVisibility(View.GONE);
@@ -76,6 +78,7 @@ public class ConfirmationCodesActivity extends AppCompatActivity {
                 if (verification_id == null) {
                     throw new AssertionError("Verification Id is null");
                 }
+
                 confirmVerificationCode(verification_id, code);
             }
         });

@@ -16,6 +16,7 @@ public class Purchase {
     private String buyerUuid;
     private String status;
     private String paymentMethod;
+    private String deliveryOption;
 
     public Purchase() {
     }
@@ -147,5 +148,13 @@ public class Purchase {
 
     public void setQuantity(String quantity) {
         this.quantity = quantity;
+    }
+
+    public void setDeliveryOption(String deliveryOption) {
+        this.deliveryOption = deliveryOption;
+    }
+
+    public String getDeliveryOption() {
+        return deliveryOption;
     }
 }
