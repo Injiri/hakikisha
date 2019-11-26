@@ -21,11 +21,6 @@ import org.aplusscreators.hakikisha.R;
 import org.aplusscreators.hakikisha.settings.HakikishaPreference;
 import org.aplusscreators.hakikisha.utils.Constants;
 import org.aplusscreators.hakikisha.utils.ExternalAddressFormatter;
-import org.aplusscreators.hakikisha.views.buyer.BuyerDashboard;
-import org.aplusscreators.hakikisha.views.buyer.BuyerProfileFormActivity;
-import org.aplusscreators.hakikisha.views.buyer.GoodsReceiptActivity;
-import org.aplusscreators.hakikisha.views.buyer.RegisterPurchaseForm;
-import org.aplusscreators.hakikisha.views.seller.SellerDashboard;
 import org.aplusscreators.hakikisha.views.seller.SellerProfileFormActivity;
 
 import java.util.concurrent.TimeUnit;
@@ -51,7 +46,7 @@ public class LoginActivity extends AppCompatActivity {
             public void onVerificationCompleted(@NonNull PhoneAuthCredential phoneAuthCredential) {
                 progressBar.setVisibility(View.GONE);
                 if (HakikishaPreference.getAccountTypePref(LoginActivity.this).equalsIgnoreCase(Constants.BUYER_ACCOUNT_TYPE)){
-                    Intent intent = new Intent(LoginActivity.this, BuyerProfileFormActivity.class);
+                    Intent intent = new Intent(LoginActivity.this, ProfileFormActivity.class);
                     startActivity(intent);
                     finish();
                 } else if (HakikishaPreference.getAccountTypePref(LoginActivity.this).equalsIgnoreCase(Constants.SELLER_ACCOUNT_TYPE)){

@@ -1,4 +1,4 @@
-package org.aplusscreators.hakikisha.views.buyer;
+package org.aplusscreators.hakikisha.views.common;
 
 import android.Manifest;
 import android.app.Activity;
@@ -36,7 +36,7 @@ import org.aplusscreators.hakikisha.model.Buyer;
 import org.aplusscreators.hakikisha.settings.HakikishaPreference;
 import org.aplusscreators.hakikisha.utils.Constants;
 import org.aplusscreators.hakikisha.utils.FileUtils;
-import org.aplusscreators.hakikisha.views.seller.SellerDashboard;
+import org.aplusscreators.hakikisha.views.buyer.RegisterPurchaseForm;
 
 import java.io.File;
 import java.text.SimpleDateFormat;
@@ -46,7 +46,7 @@ import java.util.UUID;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 
-public class BuyerProfileFormActivity extends AppCompatActivity {
+public class ProfileFormActivity extends AppCompatActivity {
 
     private static final int CAMERA_PERMISSION_REQUEST_CODE = 2342;
     SimpleDateFormat simpleDateFormat = new SimpleDateFormat("EEE MMM dd, yyyy");
@@ -111,7 +111,7 @@ public class BuyerProfileFormActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 DatePickerDialog datePickerDialog = new DatePickerDialog(
-                        BuyerProfileFormActivity.this, new DatePickerDialog.OnDateSetListener() {
+                        ProfileFormActivity.this, new DatePickerDialog.OnDateSetListener() {
                     @Override
                     public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
                         Calendar calendar = Calendar.getInstance();
@@ -130,16 +130,16 @@ public class BuyerProfileFormActivity extends AppCompatActivity {
     }
 
     private void launchCamera() {
-        if (ContextCompat.checkSelfPermission(BuyerProfileFormActivity.this, Manifest.permission.CAMERA) ==
+        if (ContextCompat.checkSelfPermission(ProfileFormActivity.this, Manifest.permission.CAMERA) ==
                 PackageManager.PERMISSION_GRANTED) {
             Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-            imageFile = FileUtils.createImageFile(BuyerProfileFormActivity.this, "hakikisha_profile", ".png");
-            photoUri = FileProvider.getUriForFile(BuyerProfileFormActivity.this, "org.aplusscreators.hakikisha.fileProvider", imageFile);
+            imageFile = FileUtils.createImageFile(ProfileFormActivity.this, "hakikisha_profile", ".png");
+            photoUri = FileProvider.getUriForFile(ProfileFormActivity.this, "org.aplusscreators.hakikisha.fileProvider", imageFile);
 
             intent.putExtra(MediaStore.EXTRA_OUTPUT, photoUri);
             startActivityForResult(intent, Constants.CAMERA.IMAGE_CAPTURE_REQUEST_CODE);
         } else {
-            ActivityCompat.requestPermissions(BuyerProfileFormActivity.this, new String[]{Manifest.permission.CAMERA}, CAMERA_PERMISSION_REQUEST_CODE);
+            ActivityCompat.requestPermissions(ProfileFormActivity.this, new String[]{Manifest.permission.CAMERA}, CAMERA_PERMISSION_REQUEST_CODE);
         }
     }
 
@@ -181,13 +181,13 @@ public class BuyerProfileFormActivity extends AppCompatActivity {
         task.addOnSuccessListener(new OnSuccessListener() {
             @Override
             public void onSuccess(Object o) {
-                HakikishaPreference.setAccountFullNamesPrefs(BuyerProfileFormActivity.this,
+                HakikishaPreference.setAccountFullNamesPrefs(ProfileFormActivity.this,
                         String.format(Locale.ENGLISH,"%s %s",buyer.getFirstName(),buyer.getLastName()));
-                HakikishaPreference.setAccountAddress1Prefs(BuyerProfileFormActivity.this,buyer.getAddress_1());
-                HakikishaPreference.setAccountAddress2Prefs(BuyerProfileFormActivity.this,buyer.getAddress_2());
-                HakikishaPreference.setAccountUuidPrefs(BuyerProfileFormActivity.this,buyer.getUuid());
+                HakikishaPreference.setAccountAddress1Prefs(ProfileFormActivity.this,buyer.getAddress_1());
+                HakikishaPreference.setAccountAddress2Prefs(ProfileFormActivity.this,buyer.getAddress_2());
+                HakikishaPreference.setAccountUuidPrefs(ProfileFormActivity.this,buyer.getUuid());
 
-                Intent intent = new Intent(BuyerProfileFormActivity.this, RegisterPurchaseForm.class);
+                Intent intent = new Intent(ProfileFormActivity.this, RegisterPurchaseForm.class);
                 startActivity(intent);
                 finish();
             }
@@ -197,7 +197,7 @@ public class BuyerProfileFormActivity extends AppCompatActivity {
             @Override
             public void onFailure(@NonNull Exception e) {
                 progressBar.setVisibility(View.GONE);
-                Toast.makeText(BuyerProfileFormActivity.this, "Unable to complete registration", Toast.LENGTH_LONG).show();
+                Toast.makeText(ProfileFormActivity.this, "Unable to complete registration", Toast.LENGTH_LONG).show();
             }
         });
 

@@ -1,21 +1,39 @@
 <?xml version="1.0" encoding="utf-8"?>
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
-    android:background="@android:color/white"
+    android:background="@color/colorPrimary"
     android:layout_height="match_parent"
     android:layout_width="match_parent">
+
 
     <LinearLayout
         android:orientation="vertical"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
-        <ImageView
-            android:id="@+id/buyer_profile_image_view"
-            android:layout_marginTop="42dp"
+        <androidx.appcompat.widget.Toolbar
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"/>
+
+        <RelativeLayout
+            android:background="@drawable/circle_background"
+            android:layout_marginBottom="32dp"
+            android:layout_marginTop="12dp"
             android:layout_gravity="center_horizontal"
-            android:src="@drawable/user_add_photo"
-            android:layout_width="100dp"
-            android:layout_height="100dp" />
+            android:layout_width="110dp"
+            android:layout_height="110dp">
+
+            <ImageView
+                android:id="@+id/buyer_profile_image_view"
+                android:layout_marginTop="42dp"
+                android:layout_centerVertical="true"
+                android:layout_centerHorizontal="true"
+                android:src="@drawable/personicon"
+                android:layout_width="15dp"
+                android:layout_height="15dp" />
+
+        </RelativeLayout>
+
+
 
         <de.hdodenhof.circleimageview.CircleImageView
             android:id="@+id/buyer_profile"
@@ -26,114 +44,70 @@
             android:layout_height="100dp" />
 
         <LinearLayout
+            android:background="@drawable/text_field_background"
+            android:layout_marginStart="40dp"
+            android:layout_marginEnd="40dp"
+            android:padding="12dp"
             android:paddingTop="22dp"
             android:paddingBottom="22dp"
-            android:paddingStart="12dp"
-            android:orientation="horizontal"
+            android:orientation="vertical"
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
-            <ImageView
-                android:src="@drawable/ic_action_person_light"
-                android:layout_width="24dp"
-                android:layout_height="24dp" />
-
-            <EditText
-                android:id="@+id/buyer_first_name"
-                android:textColor="@color/dark_grey"
-                android:textSize="16sp"
-                android:layout_marginStart="18dp"
-                android:hint="First Name..."
+            <TextView
+                android:text="Your name"
+                android:textColor="@android:color/darker_gray"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content" />
 
             <EditText
-                android:id="@+id/buyer_last_name"
-                android:textColor="@color/dark_grey"
-                android:textSize="16sp"
-                android:layout_marginStart="18dp"
-                android:hint="Last Name"
+                android:id="@+id/buyer_first_name"
+                android:textColor="@android:color/white"
+                android:textSize="18sp"
+                android:background="@null"
+                android:text="Joel Munroe"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content" />
 
         </LinearLayout>
 
-
         <LinearLayout
-            android:paddingTop="22dp"
-            android:paddingBottom="22dp"
+            android:layout_marginTop="50dp"
+            android:background="@drawable/text_field_background"
+            android:paddingTop="12dp"
+            android:paddingBottom="12dp"
             android:paddingStart="12dp"
-            android:orientation="horizontal"
+            android:layout_marginStart="40dp"
+            android:layout_marginEnd="40dp"
+            android:orientation="vertical"
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
-            <ImageView
-                android:src="@drawable/ic_action_address_light"
-                android:layout_width="24dp"
-                android:layout_height="24dp" />
-
-            <EditText
-                android:id="@+id/buyer_address_1"
-                android:textColor="@color/dark_grey"
-                android:textSize="16sp"
-                android:background="@null"
-                android:layout_marginStart="18dp"
-                android:hint="Address 1"
+            <TextView
+                android:text="Email Address"
+                android:textColor="@android:color/darker_gray"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content" />
-
-        </LinearLayout>
-
-        <LinearLayout
-            android:paddingTop="22dp"
-            android:paddingBottom="22dp"
-            android:paddingStart="12dp"
-            android:orientation="horizontal"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-
-            <ImageView
-                android:visibility="invisible"
-                android:src="@drawable/ic_action_person_light"
-                android:layout_width="24dp"
-                android:layout_height="24dp" />
-
-            <EditText
-                android:id="@+id/buyer_address_2"
-                android:textColor="@color/dark_grey"
-                android:textSize="16sp"
-                android:background="@null"
-                android:layout_marginStart="18dp"
-                android:hint="Address 2"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content" />
-
-        </LinearLayout>
-
-        <LinearLayout
-            android:paddingTop="22dp"
-            android:paddingBottom="22dp"
-            android:paddingStart="12dp"
-            android:orientation="horizontal"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-
-            <ImageView
-                android:src="@drawable/ic_action_email"
-                android:layout_width="24dp"
-                android:layout_height="24dp" />
 
             <EditText
                 android:id="@+id/buyer_email_edit_text"
-                android:textColor="@color/dark_grey"
-                android:textSize="16sp"
+                android:textColor="@android:color/white"
+                android:textSize="18sp"
                 android:background="@null"
-                android:layout_marginStart="18dp"
-                android:hint="Email...  account@email.com"
+                android:text="account@email.com"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content" />
 
         </LinearLayout>
+
+        <TextView
+            android:layout_marginTop="12dp"
+            android:layout_marginStart="40dp"
+            android:layout_marginEnd="40dp"
+            android:textColor="@android:color/darker_gray"
+            android:text="We'll email you a verification link"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
 
 
         <LinearLayout
@@ -174,12 +148,13 @@
             android:id="@+id/submit_buyer_profile_button"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginStart="40dp"
+            android:layout_marginEnd="40dp"
             android:layout_gravity="end"
-            android:layout_marginStart="12dp"
-            android:layout_marginEnd="12dp"
+            android:layout_marginTop="160dp"
             android:layout_marginBottom="16dp"
             android:background="@drawable/blue_curved_background"
-            android:text="Submit"
+            android:text="Next"
             android:textColor="@android:color/white" />
 
     </LinearLayout>

@@ -22,6 +22,7 @@ import com.stripe.android.view.CardMultilineWidget;
 import org.aplusscreators.hakikisha.R;
 import org.aplusscreators.hakikisha.model.Purchase;
 import org.aplusscreators.hakikisha.utils.Sound;
+import org.aplusscreators.hakikisha.views.common.DashboardActivity;
 
 public class CardPaymentActivity extends AppCompatActivity {
 
@@ -56,7 +57,7 @@ public class CardPaymentActivity extends AppCompatActivity {
         submitButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(CardPaymentActivity.this,BuyerDashboard.class);
+                Intent intent = new Intent(CardPaymentActivity.this, DashboardActivity.class);
                 startActivity(intent);
 
                 Toast.makeText(CardPaymentActivity.this,"Payment was successfull",Toast.LENGTH_LONG).show();

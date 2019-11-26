@@ -33,14 +33,11 @@ import org.aplusscreators.hakikisha.settings.HakikishaPreference;
 import org.aplusscreators.hakikisha.utils.Constants;
 import org.aplusscreators.hakikisha.utils.HakikishaUtils;
 import org.aplusscreators.hakikisha.views.buyer.dialog.ExitPurchaseFormDialog;
-import org.aplusscreators.hakikisha.views.common.ExitFormDialog;
+import org.aplusscreators.hakikisha.views.common.DashboardActivity;
 import org.aplusscreators.hakikisha.views.seller.SellerDashboard;
 
 import java.io.IOException;
 import java.util.Locale;
-
-import static android.telephony.SmsManager.RESULT_ERROR_GENERIC_FAILURE;
-import static android.telephony.SmsManager.RESULT_ERROR_RADIO_OFF;
 
 public class MakePaymentActivity extends AppCompatActivity {
 
@@ -259,7 +256,7 @@ public class MakePaymentActivity extends AppCompatActivity {
             @Override
             public void onSuccess(Object o) {
                 Toast.makeText(MakePaymentActivity.this, "Payment was successfull", Toast.LENGTH_LONG).show();
-                Intent mPesaIntent = new Intent(MakePaymentActivity.this, BuyerDashboard.class);
+                Intent mPesaIntent = new Intent(MakePaymentActivity.this, DashboardActivity.class);
                 startActivity(mPesaIntent);
             }
         });
@@ -280,7 +277,7 @@ public class MakePaymentActivity extends AppCompatActivity {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         Toast.makeText(MakePaymentActivity.this, "Payment was successfull", Toast.LENGTH_LONG).show();
-                        Intent mPesaIntent = new Intent(MakePaymentActivity.this, BuyerDashboard.class);
+                        Intent mPesaIntent = new Intent(MakePaymentActivity.this, DashboardActivity.class);
                         startActivity(mPesaIntent);
                     }
                 });
@@ -306,7 +303,7 @@ public class MakePaymentActivity extends AppCompatActivity {
             @Override
             public void onSuccess(Object o) {
                 Toast.makeText(MakePaymentActivity.this, "Payment was successfull", Toast.LENGTH_LONG).show();
-                Intent mPesaIntent = new Intent(MakePaymentActivity.this, BuyerDashboard.class);
+                Intent mPesaIntent = new Intent(MakePaymentActivity.this, DashboardActivity.class);
                 startActivity(mPesaIntent);
             }
         });
@@ -327,7 +324,7 @@ public class MakePaymentActivity extends AppCompatActivity {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         Toast.makeText(MakePaymentActivity.this, "Payment was successfull", Toast.LENGTH_LONG).show();
-                        Intent mPesaIntent = new Intent(MakePaymentActivity.this, BuyerDashboard.class);
+                        Intent mPesaIntent = new Intent(MakePaymentActivity.this, DashboardActivity.class);
                         startActivity(mPesaIntent);
                     }
                 });
@@ -353,7 +350,7 @@ public class MakePaymentActivity extends AppCompatActivity {
     @Override
     public void onBackPressed() {
         super.onBackPressed();
-        ExitPurchaseFormDialog exitPurchaseFormDialog = new ExitPurchaseFormDialog(MakePaymentActivity.this, MakePaymentActivity.this, BuyerDashboard.class);
+        ExitPurchaseFormDialog exitPurchaseFormDialog = new ExitPurchaseFormDialog(MakePaymentActivity.this, MakePaymentActivity.this, DashboardActivity.class);
         exitPurchaseFormDialog.show();
     }
 

@@ -17,7 +17,6 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import androidx.annotation.MainThread;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
@@ -37,7 +36,6 @@ import org.aplusscreators.hakikisha.model.Seller;
 import org.aplusscreators.hakikisha.settings.HakikishaPreference;
 import org.aplusscreators.hakikisha.utils.Constants;
 import org.aplusscreators.hakikisha.utils.FileUtils;
-import org.aplusscreators.hakikisha.views.buyer.BuyerProfileFormActivity;
 
 import java.io.File;
 import java.text.SimpleDateFormat;

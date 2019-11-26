@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    android:background="@color/colorPrimary"
+    android:orientation="vertical"
+    android:padding="40dp"
+    android:layout_height="match_parent"
+    android:layout_width="match_parent"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <androidx.appcompat.widget.Toolbar
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"/>
+
+    <ImageView
+        android:src="@drawable/logo"
+        android:layout_width="70dp"
+        android:layout_height="70dp"/>
+
+    <TextView
+        android:text="Terms and Conditions"
+        android:layout_marginTop="16dp"
+        android:textSize="18sp"
+        android:textColor="@android:color/white"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
+
+    <TextView
+        android:layout_marginTop="16dp"
+        android:text="Lorem ipsum dolor sit amet, consectetur adipisicingli elit, sed do eiusmod tempor incididunt ut lallibore etd dolore magna aliqua. Ut enim ad minim veniam, quisl nostrud exercitation ullamco lallboris nisi ut aliquip e ex ea commodo consequat. Duis auiite irure dolior in reprehenderit in voluptate veiiilit esse cillum dolore el eu fugiat nulla pariatur. Excepteur sint occaecat cupil cupidatat non proident, sunt in culpa qui officia desm deserunt mollit anim id est laborum."
+        android:textColor="@android:color/white"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
+
+    <LinearLayout
+        android:layout_marginTop="46dp"
+        android:background="@drawable/blue_curved_background"
+        android:padding="12dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:gravity="center"
+            android:textColor="@android:color/white"
+            android:text="I Agree"
+            android:textSize="16sp"
+            android:textAllCaps="true"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+
+    </LinearLayout>
+
+</LinearLayout>

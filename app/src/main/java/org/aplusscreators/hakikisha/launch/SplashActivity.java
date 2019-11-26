@@ -6,12 +6,11 @@ import android.os.Bundle;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.google.android.gms.common.internal.AccountType;
 import com.google.firebase.FirebaseApp;
 
 import org.aplusscreators.hakikisha.settings.HakikishaPreference;
 import org.aplusscreators.hakikisha.utils.Constants;
-import org.aplusscreators.hakikisha.views.buyer.BuyerDashboard;
+import org.aplusscreators.hakikisha.views.common.DashboardActivity;
 import org.aplusscreators.hakikisha.views.seller.SellerDashboard;
 
 public class SplashActivity extends AppCompatActivity {
@@ -25,7 +24,7 @@ public class SplashActivity extends AppCompatActivity {
     @Override
     protected void onStart() {
         super.onStart();
-//        Intent intent = new Intent(SplashActivity.this, BuyerDashboard.class);
+//        Intent intent = new Intent(SplashActivity.this, DashboardActivity.class);
 //        startActivity(intent);
 
         String accountType = HakikishaPreference.getAccountTypePref(SplashActivity.this);
@@ -37,7 +36,7 @@ public class SplashActivity extends AppCompatActivity {
         }
 
         if (accountType.equalsIgnoreCase(Constants.BUYER_ACCOUNT_TYPE)) {
-            Intent intent = new Intent(SplashActivity.this, BuyerDashboard.class);
+            Intent intent = new Intent(SplashActivity.this, DashboardActivity.class);
             startActivity(intent);
         } else if (accountType.equalsIgnoreCase(Constants.SELLER_ACCOUNT_TYPE)) {
             Intent intent = new Intent(SplashActivity.this, SellerDashboard.class);

@@ -26,7 +26,6 @@ import com.google.firebase.auth.PhoneAuthProvider;
 import org.aplusscreators.hakikisha.R;
 import org.aplusscreators.hakikisha.settings.HakikishaPreference;
 import org.aplusscreators.hakikisha.utils.Sound;
-import org.aplusscreators.hakikisha.views.buyer.BuyerProfileFormActivity;
 import org.aplusscreators.hakikisha.views.seller.SellerProfileFormActivity;
 
 import static org.aplusscreators.hakikisha.utils.Constants.BUYER_ACCOUNT_TYPE;
@@ -229,7 +228,7 @@ public class ConfirmationCodesActivity extends AppCompatActivity {
             public void onSuccess(Object o) {
                 Toast.makeText(ConfirmationCodesActivity.this, "Registration Successful", Toast.LENGTH_LONG).show();
                 if (HakikishaPreference.getAccountTypePref(ConfirmationCodesActivity.this).equalsIgnoreCase(BUYER_ACCOUNT_TYPE)){
-                    Intent intent = new Intent(ConfirmationCodesActivity.this, BuyerProfileFormActivity.class);
+                    Intent intent = new Intent(ConfirmationCodesActivity.this, ProfileFormActivity.class);
                     startActivity(intent);
                 } else if (HakikishaPreference.getAccountTypePref(ConfirmationCodesActivity.this).equalsIgnoreCase(SELLER_ACCOUNT_TYPE)){
                     Intent intent = new Intent(ConfirmationCodesActivity.this, SellerProfileFormActivity.class);

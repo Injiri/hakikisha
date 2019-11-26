@@ -34,11 +34,11 @@ import org.aplusscreators.hakikisha.R;
 import org.aplusscreators.hakikisha.adapters.OrdersFormAdapter;
 import org.aplusscreators.hakikisha.adapters.SellerFormAdapter;
 import org.aplusscreators.hakikisha.model.BadGoodsReport;
-import org.aplusscreators.hakikisha.model.Buyer;
 import org.aplusscreators.hakikisha.model.Order;
 import org.aplusscreators.hakikisha.model.Seller;
 import org.aplusscreators.hakikisha.settings.HakikishaPreference;
 import org.aplusscreators.hakikisha.utils.DateTimeUtils;
+import org.aplusscreators.hakikisha.views.common.DashboardActivity;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -220,7 +220,7 @@ public class GoodsRejectActivity extends AppCompatActivity implements OrdersForm
             public void onSuccess(Object o) {
                 progressBar.setVisibility(View.GONE);
                 Toast.makeText(GoodsRejectActivity.this, "Delivery Report Sent Successfully...", Toast.LENGTH_LONG).show();
-                Intent intent = new Intent(GoodsRejectActivity.this,BuyerDashboard.class);
+                Intent intent = new Intent(GoodsRejectActivity.this, DashboardActivity.class);
                 startActivity(intent);
                 finish();
             }

@@ -1,12 +1,10 @@
-package org.aplusscreators.hakikisha.views.buyer;
+package org.aplusscreators.hakikisha.views.common;
 
 import android.Manifest;
 import android.app.PendingIntent;
-import android.app.ProgressDialog;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Color;
-import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -38,14 +36,15 @@ import org.aplusscreators.hakikisha.fab.ABTextUtil;
 import org.aplusscreators.hakikisha.model.Purchase;
 import org.aplusscreators.hakikisha.settings.HakikishaPreference;
 import org.aplusscreators.hakikisha.utils.HakikishaUtils;
-import org.aplusscreators.hakikisha.views.seller.SellerDashboard;
+import org.aplusscreators.hakikisha.views.buyer.GoodsReceiptActivity;
+import org.aplusscreators.hakikisha.views.buyer.RegisterPurchaseForm;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
-public class BuyerDashboard extends AppCompatActivity implements RapidFloatingActionContentLabelList.OnRapidFloatingActionContentLabelListListener {
-    private static final String TAG = "BuyerDashboard";
+public class DashboardActivity extends AppCompatActivity implements RapidFloatingActionContentLabelList.OnRapidFloatingActionContentLabelListListener {
+    private static final String TAG = "DashboardActivity";
     RecyclerView purchasesRecyclerView;
     PurchasesAdapter purchasesAdapter;
     List<Purchase> purchaseList = new ArrayList<>();
@@ -69,7 +68,7 @@ public class BuyerDashboard extends AppCompatActivity implements RapidFloatingAc
         rfaLayout = findViewById(R.id.activity_buyer_dashboard_rfal);
         noDataView = findViewById(R.id.buyer_dashboard_no_data_layout);
 
-        purchasesAdapter = new PurchasesAdapter(BuyerDashboard.this, purchaseList, new PurchasesAdapter.OnPurchaseClickedListener() {
+        purchasesAdapter = new PurchasesAdapter(DashboardActivity.this, purchaseList, new PurchasesAdapter.OnPurchaseClickedListener() {
             @Override
             public void onPurchaseClicked(int position) {
                 //todo design response.
@@ -77,7 +76,7 @@ public class BuyerDashboard extends AppCompatActivity implements RapidFloatingAc
         });
 
         purchasesRecyclerView.setAdapter(purchasesAdapter);
-        purchasesRecyclerView.setLayoutManager(new LinearLayoutManager(BuyerDashboard.this, RecyclerView.VERTICAL, false));
+        purchasesRecyclerView.setLayoutManager(new LinearLayoutManager(DashboardActivity.this, RecyclerView.VERTICAL, false));
 
 
         setSupportActionBar(toolbar);
@@ -96,36 +95,36 @@ public class BuyerDashboard extends AppCompatActivity implements RapidFloatingAc
     @Override
     protected void onStart() {
         super.onStart();
-        if (HakikishaPreference.getAccountUuidPrefs(BuyerDashboard.this) == null)
-            HakikishaPreference.setAccountUuidPrefs(BuyerDashboard.this, UUID.randomUUID().toString());
+        if (HakikishaPreference.getAccountUuidPrefs(DashboardActivity.this) == null)
+            HakikishaPreference.setAccountUuidPrefs(DashboardActivity.this, UUID.randomUUID().toString());
 
         downloadPurchaseDataIfPossible();
     }
 
     private void hakikishaPermissionsRequest() {
-        if (ContextCompat.checkSelfPermission(BuyerDashboard.this, Manifest.permission.SEND_SMS) == PackageManager.PERMISSION_DENIED) {
-            ActivityCompat.requestPermissions(BuyerDashboard.this, new String[]{Manifest.permission.SEND_SMS}, 1111);
+        if (ContextCompat.checkSelfPermission(DashboardActivity.this, Manifest.permission.SEND_SMS) == PackageManager.PERMISSION_DENIED) {
+            ActivityCompat.requestPermissions(DashboardActivity.this, new String[]{Manifest.permission.SEND_SMS}, 1111);
         }
     }
 
 
     private void sendEmailSmsIfNeccessary() {
 
-        PendingIntent pendingIntent = PendingIntent.getBroadcast(BuyerDashboard.this,0,new Intent("Filter"),0);
+        PendingIntent pendingIntent = PendingIntent.getBroadcast(DashboardActivity.this,0,new Intent("Filter"),0);
 
         Intent data = getIntent();
         String sellerPhone = data.getStringExtra("send_purchase_sms");
         String sellerEmail = data.getStringExtra("send_purchase_email");
 
         if (sellerPhone != null && !sellerPhone.isEmpty())
-            HakikishaUtils.sendSms(BuyerDashboard.this, "Sms Message", sellerPhone,pendingIntent);
+            HakikishaUtils.sendSms(DashboardActivity.this, "Sms Message", sellerPhone,pendingIntent);
         else if (sellerEmail != null && !sellerEmail.isEmpty())
-            HakikishaUtils.sendEmail(BuyerDashboard.this, "from@gmail", sellerEmail, "PURCHASE EMAIL", "Purchase message...");
+            HakikishaUtils.sendEmail(DashboardActivity.this, "from@gmail", sellerEmail, "PURCHASE EMAIL", "Purchase message...");
 
     }
 
     private void intializeExpandableFab() {
-        RapidFloatingActionContentLabelList rfaContent = new RapidFloatingActionContentLabelList(BuyerDashboard.this);
+        RapidFloatingActionContentLabelList rfaContent = new RapidFloatingActionContentLabelList(DashboardActivity.this);
         rfaContent.setOnRapidFloatingActionContentLabelListListener(this);
 
         List<RFACLabelItem> items = new ArrayList<>();
@@ -147,18 +146,18 @@ public class BuyerDashboard extends AppCompatActivity implements RapidFloatingAc
                 .setIconPressedColor(0xff3e2723)
                 .setLabelColor(Color.WHITE)
                 .setLabelSizeSp(14)
-                .setLabelBackgroundDrawable(ABShape.generateCornerShapeDrawable(0xaa000000, ABTextUtil.dip2px(BuyerDashboard.this, 4)))
+                .setLabelBackgroundDrawable(ABShape.generateCornerShapeDrawable(0xaa000000, ABTextUtil.dip2px(DashboardActivity.this, 4)))
                 .setWrapper(1)
         );
 
         rfaContent
                 .setItems(items)
-                .setIconShadowRadius(ABTextUtil.dip2px(BuyerDashboard.this, 5))
+                .setIconShadowRadius(ABTextUtil.dip2px(DashboardActivity.this, 5))
                 .setIconShadowColor(0xff888888)
-                .setIconShadowDy(ABTextUtil.dip2px(BuyerDashboard.this, 5));
+                .setIconShadowDy(ABTextUtil.dip2px(DashboardActivity.this, 5));
 
         rfabHelper = new RapidFloatingActionHelper(
-                BuyerDashboard.this,
+                DashboardActivity.this,
                 rfaLayout,
                 rfaBtn,
                 rfaContent
@@ -166,7 +165,7 @@ public class BuyerDashboard extends AppCompatActivity implements RapidFloatingAc
     }
 
     private void downloadPurchaseDataIfPossible() {
-        if (HakikishaPreference.getAccountUuidPrefs(BuyerDashboard.this) == null) return;
+        if (HakikishaPreference.getAccountUuidPrefs(DashboardActivity.this) == null) return;
 
         purchaseList.clear();
         purchasesAdapter.notifyDataSetChanged();
@@ -174,7 +173,7 @@ public class BuyerDashboard extends AppCompatActivity implements RapidFloatingAc
         FirebaseDatabase firebaseDatabase = FirebaseDatabase.getInstance();
         DatabaseReference databaseReference = firebaseDatabase.getReference("hakikisha")
                 .child("buyer")
-                .child(HakikishaPreference.getAccountUuidPrefs(BuyerDashboard.this))
+                .child(HakikishaPreference.getAccountUuidPrefs(DashboardActivity.this))
                 .child("purchases");
 
         databaseReference.addValueEventListener(new ValueEventListener() {
@@ -211,12 +210,12 @@ public class BuyerDashboard extends AppCompatActivity implements RapidFloatingAc
     public void onRFACItemLabelClick(int position, RFACLabelItem item) {
         switch (position) {
             case 0:
-                Intent launchPurchaseIntent = new Intent(BuyerDashboard.this, RegisterPurchaseForm.class);
+                Intent launchPurchaseIntent = new Intent(DashboardActivity.this, RegisterPurchaseForm.class);
                 startActivity(launchPurchaseIntent);
                 finish();
                 break;
             case 1:
-                Intent intent = new Intent(BuyerDashboard.this, GoodsReceiptActivity.class);
+                Intent intent = new Intent(DashboardActivity.this, GoodsReceiptActivity.class);
                 startActivity(intent);
                 finish();
                 break;
@@ -229,12 +228,12 @@ public class BuyerDashboard extends AppCompatActivity implements RapidFloatingAc
     public void onRFACItemIconClick(int position, RFACLabelItem item) {
         switch (position) {
             case 0:
-                Intent launchPurchaseIntent = new Intent(BuyerDashboard.this, RegisterPurchaseForm.class);
+                Intent launchPurchaseIntent = new Intent(DashboardActivity.this, RegisterPurchaseForm.class);
                 startActivity(launchPurchaseIntent);
                 finish();
                 break;
             case 1:
-                Intent intent = new Intent(BuyerDashboard.this, GoodsReceiptActivity.class);
+                Intent intent = new Intent(DashboardActivity.this, GoodsReceiptActivity.class);
                 startActivity(intent);
                 finish();
                 break;

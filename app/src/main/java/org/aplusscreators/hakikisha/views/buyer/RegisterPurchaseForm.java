@@ -37,9 +37,8 @@ import org.aplusscreators.hakikisha.model.Purchase;
 import org.aplusscreators.hakikisha.model.Seller;
 import org.aplusscreators.hakikisha.settings.HakikishaPreference;
 import org.aplusscreators.hakikisha.utils.Constants;
-import org.aplusscreators.hakikisha.utils.HakikishaUtils;
 import org.aplusscreators.hakikisha.utils.Sound;
-import org.aplusscreators.hakikisha.views.common.ExitFormDialog;
+import org.aplusscreators.hakikisha.views.common.DashboardActivity;
 
 import java.util.UUID;
 
@@ -141,7 +140,7 @@ public class RegisterPurchaseForm extends AppCompatActivity {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         dialog.dismiss();
-                        Intent intent = new Intent(RegisterPurchaseForm.this, BuyerDashboard.class);
+                        Intent intent = new Intent(RegisterPurchaseForm.this, DashboardActivity.class);
                         startActivity(intent);
                         finish();
                     }

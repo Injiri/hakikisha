@@ -5,7 +5,6 @@ import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.DatePickerDialog;
 import android.app.TimePickerDialog;
-import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
@@ -34,7 +33,6 @@ import androidx.core.content.FileProvider;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
-import com.google.android.material.snackbar.Snackbar;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
@@ -47,7 +45,7 @@ import org.aplusscreators.hakikisha.utils.Constants;
 import org.aplusscreators.hakikisha.utils.DateTimeUtils;
 import org.aplusscreators.hakikisha.utils.FileUtils;
 import org.aplusscreators.hakikisha.utils.HakikishaUtils;
-import org.aplusscreators.hakikisha.views.common.ExitFormDialog;
+import org.aplusscreators.hakikisha.views.common.DashboardActivity;
 
 import java.io.File;
 import java.text.SimpleDateFormat;
@@ -210,7 +208,7 @@ public class GoodsReceiptActivity extends AppCompatActivity {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         dialog.dismiss();
-                        Intent intent = new Intent(GoodsReceiptActivity.this, BuyerDashboard.class);
+                        Intent intent = new Intent(GoodsReceiptActivity.this, DashboardActivity.class);
                         startActivity(intent);
                         finish();
                     }
@@ -315,7 +313,7 @@ public class GoodsReceiptActivity extends AppCompatActivity {
             public void onSuccess(Object o) {
                 progressBar.setVisibility(View.GONE);
                 Toast.makeText(GoodsReceiptActivity.this, "Delivery Report Sent Successfully...", Toast.LENGTH_LONG).show();
-                Intent intent = new Intent(GoodsReceiptActivity.this, BuyerDashboard.class);
+                Intent intent = new Intent(GoodsReceiptActivity.this, DashboardActivity.class);
                 startActivity(intent);
                 finish();
             }
