@@ -12,6 +12,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.google.android.material.snackbar.Snackbar;
 import com.google.firebase.FirebaseApp;
 import com.google.firebase.FirebaseException;
 import com.google.firebase.auth.PhoneAuthCredential;
@@ -45,22 +46,17 @@ public class LoginActivity extends AppCompatActivity {
             @Override
             public void onVerificationCompleted(@NonNull PhoneAuthCredential phoneAuthCredential) {
                 progressBar.setVisibility(View.GONE);
-                if (HakikishaPreference.getAccountTypePref(LoginActivity.this).equalsIgnoreCase(Constants.BUYER_ACCOUNT_TYPE)){
-                    Intent intent = new Intent(LoginActivity.this, ProfileFormActivity.class);
-                    startActivity(intent);
-                    finish();
-                } else if (HakikishaPreference.getAccountTypePref(LoginActivity.this).equalsIgnoreCase(Constants.SELLER_ACCOUNT_TYPE)){
-                    Intent intent = new Intent(LoginActivity.this, SellerProfileFormActivity.class);
-                    startActivity(intent);
-                    finish();
-                }
+                HakikishaPreference.setUserAuthenticatedPref(LoginActivity.this,true);
+                Intent intent = new Intent(LoginActivity.this, ProfileFormActivity.class);
+                startActivity(intent);
+                finish();
 
             }
 
             @Override
             public void onVerificationFailed(@NonNull FirebaseException e) {
                 progressBar.setVisibility(View.GONE);
-                Toast.makeText(getApplicationContext(), "Verification Failed", Toast.LENGTH_LONG).show();
+                Snackbar.make(findViewById(R.id.activity_sign_in), "Verification failed", Snackbar.LENGTH_LONG).show();
                 Log.e(TAG, "onVerificationFailed: " + e);
             }
 
@@ -72,7 +68,7 @@ public class LoginActivity extends AppCompatActivity {
                 intent.putExtra("verification_id", verificationId);
                 startActivity(intent);
 
-                Toast.makeText(getApplicationContext(), "Code is Sent", Toast.LENGTH_LONG).show();
+                Snackbar.make(findViewById(R.id.activity_sign_in), "Verification code sent", Snackbar.LENGTH_LONG).show();
             }
 
             @Override
@@ -80,27 +76,28 @@ public class LoginActivity extends AppCompatActivity {
                 super.onCodeAutoRetrievalTimeOut(s);
                 Toast.makeText(getApplicationContext(), "Code Auto Retrieval Timeout", Toast.LENGTH_LONG).show();
             }
+
         };
 
         submitView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (phoneNumberEditText.getText().toString().isEmpty()){
-                    Toast.makeText(LoginActivity.this,"Enter a valid phone number",Toast.LENGTH_LONG).show();
+                if (phoneNumberEditText.getText().toString().isEmpty()) {
+                    Toast.makeText(LoginActivity.this, "Enter a valid phone number", Toast.LENGTH_LONG).show();
                     return;
                 }
 
-                if (phoneNumberEditText.getText().toString().length() < 9){
-                    Toast.makeText(LoginActivity.this,"Enter a valid phone number",Toast.LENGTH_LONG).show();
+                if (phoneNumberEditText.getText().toString().length() < 9) {
+                    Toast.makeText(LoginActivity.this, "Enter a valid phone number", Toast.LENGTH_LONG).show();
                     return;
                 }
 
                 progressBar.setVisibility(View.VISIBLE);
-                String phoneNumber = "+254" + phoneNumberEditText.getText().toString();
+                String phoneNumber = phoneNumberEditText.getText().toString();
                 phoneNumber = formatE1PhoneNumber(phoneNumber);
                 requestVerificationCode(phoneNumber, phoneAuthCallback);
 
-                HakikishaPreference.setAccountPhoneNumberPref(LoginActivity.this,phoneNumber);
+                HakikishaPreference.setAccountPhoneNumberPref(LoginActivity.this, phoneNumber);
             }
         });
 

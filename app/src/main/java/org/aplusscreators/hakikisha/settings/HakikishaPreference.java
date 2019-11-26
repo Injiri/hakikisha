@@ -5,6 +5,7 @@ import android.util.Log;
 
 public class HakikishaPreference {
 
+    private final static String USER_AUTHENTICATED_PRE = "user_auth_pref";
     private final static String BUYER_NAMES_PREFS = "buyer_names_prefs";
     private final static String ACCOUNT_UUID_PREFS = "account_uuid_prefs";
     private final static String CONTACTS_RETRIEVE_PREF = "contact_retrieve_pref";
@@ -24,6 +25,14 @@ public class HakikishaPreference {
     private static final String ACCOUNT_FULL_NAMES_PREFS = "account_full_names_prefs";
     private static final String ACCOUNT_ADDRESS_1_PREFS = "account_address_1_prefs";
     private static final String ACCOUNT_ADDRESS_2_PREFS = "account_address_2_prefs";
+
+    public static void setUserAuthenticatedPref(Context context,boolean authenticated){
+        setBooleanPrefs(context,USER_AUTHENTICATED_PRE,authenticated);
+    }
+
+    public static boolean getUserAuthenticatedPref(Context context){
+        return getBooleanPrefs(context,USER_AUTHENTICATED_PRE,false);
+    }
 
     public static void setAccountFullNamesPrefs(Context context,String names){
         setStringPref(context,ACCOUNT_FULL_NAMES_PREFS,names);

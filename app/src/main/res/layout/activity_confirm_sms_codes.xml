@@ -30,6 +30,7 @@
     <include layout="@layout/verification_code_view"/>
 
     <TextView
+        android:id="@+id/verification_code_text_view"
         android:layout_marginTop="16dp"
         android:padding="6dp"
         android:textColor="@android:color/darker_gray"

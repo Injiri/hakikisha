@@ -30,13 +30,6 @@
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/dashboard_recycler_view"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-
-        <com.google.android.material.tabs.TabLayout
-            android:id="@+id/dashboard_transactions_tab_layout"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"/>
-
-    </androidx.recyclerview.widget.RecyclerView>
+        android:layout_height="wrap_content"/>
 
 </LinearLayout>

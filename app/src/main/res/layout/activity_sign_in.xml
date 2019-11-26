@@ -1,27 +1,37 @@
 <?xml version="1.0" encoding="utf-8"?>
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/activity_sign_in"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:padding="25dp"
     android:background="@color/colorPrimary">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_centerVertical="true"
-        android:layout_marginTop="62dp"
-        android:orientation="vertical"
-        android:padding="12dp">
+        android:orientation="vertical">
+
+        <ProgressBar
+            android:id="@+id/sign_in_progress_bar"
+            style="@style/Widget.AppCompat.ProgressBar.Horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="12dp"
+            android:indeterminate="true"
+            android:visibility="gone" />
 
         <ImageView
+            android:layout_marginStart="25dp"
             android:layout_width="70dp"
             android:layout_height="70dp"
             android:layout_gravity="start"
-            android:layout_marginTop="16dp"
+            android:layout_marginTop="72dp"
             android:layout_marginBottom="18dp"
             android:src="@mipmap/ic_launcher" />
 
         <LinearLayout
+            android:layout_marginEnd="25dp"
+            android:layout_marginStart="25dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@drawable/text_field_background"
@@ -49,6 +59,8 @@
         </LinearLayout>
 
         <LinearLayout
+            android:layout_marginEnd="25dp"
+            android:layout_marginStart="25dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@drawable/text_field_background"
@@ -77,6 +89,8 @@
         </LinearLayout>
 
         <TextView
+            android:layout_marginEnd="25dp"
+            android:layout_marginStart="25dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="16dp"
@@ -84,14 +98,11 @@
             android:textColor="@android:color/white"
             android:textSize="12sp" />
 
-        <ProgressBar
-            android:id="@+id/sign_in_progress_bar"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="12dp"
-            android:visibility="gone" />
+
 
         <RelativeLayout
+            android:layout_marginStart="25dp"
+            android:layout_marginEnd="25dp"
             android:id="@+id/submit_phone_view"
             android:layout_marginTop="20dp"
             android:layout_width="match_parent"

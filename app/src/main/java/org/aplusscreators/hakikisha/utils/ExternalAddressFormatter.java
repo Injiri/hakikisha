@@ -1,6 +1,7 @@
 package org.aplusscreators.hakikisha.utils;
 
 import android.util.Log;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -25,8 +26,8 @@ public class ExternalAddressFormatter {
         add("AC");
     }};
 
-    private final String localNumberString;
-    private final String localCountryCode;
+    private String localNumberString;
+    private String localCountryCode;
 
     private final PhoneNumberUtil phoneNumberUtil = PhoneNumberUtil.getInstance();
     private final Pattern ALPHA_PATTERN = Pattern.compile("[a-zA-Z]");
@@ -38,7 +39,7 @@ public class ExternalAddressFormatter {
             this.localNumberString = localNumberString;
             this.localCountryCode = phoneNumberUtil.getRegionCodeForNumber(localNumber);
         } catch (NumberParseException e) {
-            throw new AssertionError(e);
+            Log.e(TAG, "ExternalAddressFormatter: " + e);
         }
     }
 

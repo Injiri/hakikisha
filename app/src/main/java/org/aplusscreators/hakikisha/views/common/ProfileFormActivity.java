@@ -51,12 +51,9 @@ public class ProfileFormActivity extends AppCompatActivity {
     private static final int CAMERA_PERMISSION_REQUEST_CODE = 2342;
     SimpleDateFormat simpleDateFormat = new SimpleDateFormat("EEE MMM dd, yyyy");
 
-    ImageView profileImageView;
+    View profileImageView;
     CircleImageView circleImageView;
-    EditText firstNameEditText;
-    EditText lastNameEditText;
-    EditText address_1_ediEditText;
-    EditText address_2_ediEditText;
+    EditText userNamesEditText;
     EditText emailEditText;
     TextView dobTextView;
     View dobView;
@@ -71,16 +68,13 @@ public class ProfileFormActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_buyer_profile);
 
-        firstNameEditText = findViewById(R.id.buyer_first_name);
-        lastNameEditText = findViewById(R.id.buyer_last_name);
-        address_1_ediEditText = findViewById(R.id.buyer_address_1);
-        address_2_ediEditText = findViewById(R.id.buyer_address_2);
+        userNamesEditText = findViewById(R.id.buyer_first_name);
         emailEditText = findViewById(R.id.buyer_email_edit_text);
         dobView = findViewById(R.id.buyer_dob_view);
         dobTextView = findViewById(R.id.dob_text_view);
         progressBar = findViewById(R.id.buyer_progress_bar);
         submit = findViewById(R.id.submit_buyer_profile_button);
-        profileImageView = findViewById(R.id.buyer_profile_image_view);
+        profileImageView = findViewById(R.id.profile_image_placeholder_image_view);
         circleImageView = findViewById(R.id.buyer_profile);
 
         buyer = new Buyer();
@@ -163,10 +157,7 @@ public class ProfileFormActivity extends AppCompatActivity {
 
     private void extractAndSubmitFormData() {
         buyer.setUuid(UUID.randomUUID().toString());
-        buyer.setFirstName(firstNameEditText.getText().toString());
-        buyer.setLastName(lastNameEditText.getText().toString());
-        buyer.setAddress_1(address_1_ediEditText.getText().toString());
-        buyer.setAddress_2(address_2_ediEditText.getText().toString());
+        buyer.setFirstName(userNamesEditText.getText().toString());
         buyer.setEmail(emailEditText.getText().toString());
         buyer.setDob(dobTextView.getText().toString());
 
@@ -187,7 +178,7 @@ public class ProfileFormActivity extends AppCompatActivity {
                 HakikishaPreference.setAccountAddress2Prefs(ProfileFormActivity.this,buyer.getAddress_2());
                 HakikishaPreference.setAccountUuidPrefs(ProfileFormActivity.this,buyer.getUuid());
 
-                Intent intent = new Intent(ProfileFormActivity.this, RegisterPurchaseForm.class);
+                Intent intent = new Intent(ProfileFormActivity.this, DashboardActivity.class);
                 startActivity(intent);
                 finish();
             }

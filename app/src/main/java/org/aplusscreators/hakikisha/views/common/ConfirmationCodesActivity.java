@@ -66,7 +66,7 @@ public class ConfirmationCodesActivity extends AppCompatActivity {
         String phoneNumber = data.getStringExtra("phone_number");
         String verification_id = data.getStringExtra("verification_id");
 
-        confirmMessageTextView.setText(String.format("Please enter the verification code sent to %s.", phoneNumber));
+        confirmMessageTextView.setText(String.format("Waiting to automatically detect an SMS sent to %s.", phoneNumber));
 
         submitCodeButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -204,9 +204,6 @@ public class ConfirmationCodesActivity extends AppCompatActivity {
 
     private void confirmVerificationCode(String verification_id, String code) {
 
-        Log.e(TAG, "confirmVerificationCode: verirification id " + verification_id);
-        Log.e(TAG, "confirmVerificationCode: code " + code);
-
         try {
             PhoneAuthCredential credential = PhoneAuthProvider.getCredential(verification_id, code);
             signInUser(credential);
@@ -227,19 +224,17 @@ public class ConfirmationCodesActivity extends AppCompatActivity {
             @Override
             public void onSuccess(Object o) {
                 Toast.makeText(ConfirmationCodesActivity.this, "Registration Successful", Toast.LENGTH_LONG).show();
-                if (HakikishaPreference.getAccountTypePref(ConfirmationCodesActivity.this).equalsIgnoreCase(BUYER_ACCOUNT_TYPE)){
-                    Intent intent = new Intent(ConfirmationCodesActivity.this, ProfileFormActivity.class);
-                    startActivity(intent);
-                } else if (HakikishaPreference.getAccountTypePref(ConfirmationCodesActivity.this).equalsIgnoreCase(SELLER_ACCOUNT_TYPE)){
-                    Intent intent = new Intent(ConfirmationCodesActivity.this, SellerProfileFormActivity.class);
-                    startActivity(intent);
-                }
+                HakikishaPreference.setUserAuthenticatedPref(ConfirmationCodesActivity.this,true);
+                Intent intent = new Intent(ConfirmationCodesActivity.this, ProfileFormActivity.class);
+                startActivity(intent);
+
             }
         });
 
         task.addOnFailureListener(new OnFailureListener() {
             @Override
             public void onFailure(@NonNull Exception e) {
+                HakikishaPreference.setUserAuthenticatedPref(ConfirmationCodesActivity.this,false);
                 Toast.makeText(ConfirmationCodesActivity.this, "Registration Failed", Toast.LENGTH_LONG).show();
             }
         });

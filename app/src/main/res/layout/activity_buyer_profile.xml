@@ -4,17 +4,26 @@
     android:layout_height="match_parent"
     android:layout_width="match_parent">
 
-
     <LinearLayout
         android:orientation="vertical"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
+
+        <ProgressBar
+            android:id="@+id/buyer_progress_bar"
+            android:visibility="gone"
+            style="@style/Widget.AppCompat.ProgressBar.Horizontal"
+            android:indeterminate="true"
+            android:layout_marginBottom="12dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
 
         <androidx.appcompat.widget.Toolbar
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize"/>
 
         <RelativeLayout
+            android:id="@+id/profile_image_placeholder_image_view"
             android:background="@drawable/circle_background"
             android:layout_marginBottom="32dp"
             android:layout_marginTop="12dp"
@@ -39,7 +48,8 @@
             android:id="@+id/buyer_profile"
             android:visibility="gone"
             android:layout_gravity="center_horizontal"
-            android:layout_marginTop="42dp"
+            android:layout_marginBottom="32dp"
+            android:layout_marginTop="12dp"
             android:layout_width="100dp"
             android:layout_height="100dp" />
 
@@ -136,13 +146,6 @@
                 android:layout_height="wrap_content" />
 
         </LinearLayout>
-
-        <ProgressBar
-            android:id="@+id/buyer_progress_bar"
-            android:visibility="gone"
-            android:layout_marginBottom="12dp"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
 
         <Button
             android:id="@+id/submit_buyer_profile_button"
