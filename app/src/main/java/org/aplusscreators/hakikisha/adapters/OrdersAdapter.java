@@ -3,6 +3,7 @@ package org.aplusscreators.hakikisha.adapters;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -16,6 +17,7 @@ import org.aplusscreators.hakikisha.utils.ColorTool;
 
 import java.text.SimpleDateFormat;
 import java.util.List;
+import java.util.Locale;
 
 public class OrdersAdapter extends RecyclerView.Adapter<OrdersAdapter.ViewHolder> {
 
@@ -23,25 +25,29 @@ public class OrdersAdapter extends RecyclerView.Adapter<OrdersAdapter.ViewHolder
 
     AppCompatActivity context;
     List<Order> orderList;
-    PurchasesAdapter.OnPurchaseClickedListener onPurchaseClickedListener;
+    OnOrderClickedListener onOrderClickedListener;
 
-    public OrdersAdapter(AppCompatActivity context, List<Order> orderList, PurchasesAdapter.OnPurchaseClickedListener onPurchaseClickedListener) {
+    public OrdersAdapter(AppCompatActivity context, List<Order> orderList, OnOrderClickedListener onOrderClickedListener) {
         this.context = context;
         this.orderList = orderList;
-        this.onPurchaseClickedListener = onPurchaseClickedListener;
+        this.onOrderClickedListener = onOrderClickedListener;
     }
 
     @NonNull
     @Override
     public OrdersAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_orders_layout, parent, false);
-        return new OrdersAdapter.ViewHolder(view, onPurchaseClickedListener);
+        return new ViewHolder(view, onOrderClickedListener);
     }
 
     @Override
     public void onBindViewHolder(@NonNull OrdersAdapter.ViewHolder holder, int position) {
-        OrdersAdapter.ViewHolder viewHolder = (OrdersAdapter.ViewHolder) holder;
+        OrdersAdapter.ViewHolder viewHolder = (ViewHolder) holder;
         final Order order = orderList.get(viewHolder.getAdapterPosition());
+        if (order == null)return;
+        viewHolder.orderTitleTextView.setText(order.getOrderTitle());
+        viewHolder.orderTransactionTextView.setText(String.format(Locale.getDefault(),"%d",order.getTransactionId()));
+        viewHolder.orderImageView.setImageDrawable(context.getResources().getDrawable(order.getDrawableResourceId()));
     }
 
     @Override
@@ -52,35 +58,32 @@ public class OrdersAdapter extends RecyclerView.Adapter<OrdersAdapter.ViewHolder
     public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
 
         CardView cardView;
-        TextView taskTimePeriodTextView;
-        TextView taskDateTextView;
-        TextView checkBox;
-        PurchasesAdapter.OnPurchaseClickedListener onPurchaseClickedListener;
+        TextView orderTitleTextView;
+        TextView orderTransactionTextView;
+        ImageView orderImageView;
 
-        public ViewHolder(@NonNull View itemView, PurchasesAdapter.OnPurchaseClickedListener onPurchaseClickedListener) {
+        OnOrderClickedListener onOrderClickedListener;
+
+        public ViewHolder(@NonNull View itemView, OnOrderClickedListener onOrderClickedListener) {
             super(itemView);
 
-            this.onPurchaseClickedListener = onPurchaseClickedListener;
+            this.onOrderClickedListener = onOrderClickedListener;
 
-            checkBox = itemView.findViewById(R.id.item_purchase_name_text_view);
-            cardView = itemView.findViewById(R.id.task_parent_card_view);
-            taskDateTextView = itemView.findViewById(R.id.item_purchase_status_text_view);
-            taskTimePeriodTextView = itemView.findViewById(R.id.item_purchase_cost_text_view);
-
-            checkBox.setOnClickListener(this);
-
-            cardView.setCardBackgroundColor(ColorTool.getRandomDarkColor());
+            cardView = itemView.findViewById(R.id.item_orders_container_layout);
+            orderTitleTextView = itemView.findViewById(R.id.item_order_title_text_view);
+            orderTransactionTextView = itemView.findViewById(R.id.item_order_transaction_id_text_view);
+            orderImageView = itemView.findViewById(R.id.item_order_transaction_image_view);
 
         }
 
         @Override
         public void onClick(View v) {
-            onPurchaseClickedListener.onPurchaseClicked(getAdapterPosition());
+            onOrderClickedListener.onOrderClicked(getAdapterPosition());
         }
     }
 
-    public interface OnTaskClickedListener {
+    public interface OnOrderClickedListener {
 
-        public void onTaskClicked(int position, TextView checkBox);
+        public void onOrderClicked(int position);
     }
 }

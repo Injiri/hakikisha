@@ -8,14 +8,20 @@ public class Order {
     private String seller_uuid;
     private String product_uuid;
     private int status;
+    private String title;
+    private long transactionId;
+    private int drawableResourceId;
 
-    public Order(String uuid, String order_id, String customer_uuid, String seller_uuid, String product_uuid, int status) {
+    public Order(String uuid, String order_id, String customer_uuid, String seller_uuid, String product_uuid, int status, String title, long transactionId, int drawableResourceId) {
         this.uuid = uuid;
         this.order_id = order_id;
         this.customer_uuid = customer_uuid;
         this.seller_uuid = seller_uuid;
         this.product_uuid = product_uuid;
         this.status = status;
+        this.title = title;
+        this.transactionId = transactionId;
+        this.drawableResourceId = drawableResourceId;
     }
 
     public Order() {
@@ -67,5 +73,25 @@ public class Order {
 
     public void setStatus(int status) {
         this.status = status;
+    }
+
+    public String getOrderTitle() {
+        return title;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
+    }
+
+    public Long getTransactionId() {
+        return transactionId;
+    }
+
+    public void setTransactionId(long transactionId) {
+        this.transactionId = transactionId;
+    }
+
+    public int getDrawableResourceId() {
+        return drawableResourceId;
     }
 }

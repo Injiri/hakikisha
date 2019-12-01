@@ -26,37 +26,37 @@ public class SplashActivity extends AppCompatActivity {
     @Override
     protected void onStart() {
         super.onStart();
-//        Intent intent = new Intent(SplashActivity.this, ProfileFormActivity.class);
-//        startActivity(intent);
+        Intent intent = new Intent(SplashActivity.this, DashboardActivity.class);
+        startActivity(intent);
 
-        boolean authenticated = HakikishaPreference.getUserAuthenticatedPref(SplashActivity.this);
-        if (!authenticated){
-            HakikishaPreference.setAccountTypePref(SplashActivity.this, Constants.BUYER_ACCOUNT_TYPE);
-            Intent intent = new Intent(SplashActivity.this, LoginActivity.class);
-            startActivity(intent);
-            finish();
-
-            return;
-        }
-
-
-        String accountType = HakikishaPreference.getAccountTypePref(SplashActivity.this);
-        if (accountType == null) {
-            HakikishaPreference.setAccountTypePref(SplashActivity.this, Constants.BUYER_ACCOUNT_TYPE);
-            Intent intent = new Intent(SplashActivity.this, LoginActivity.class);
-            startActivity(intent);
-            finish();
-
-            return;
-        }
-
-        if (accountType.equalsIgnoreCase(Constants.BUYER_ACCOUNT_TYPE)) {
-            Intent intent = new Intent(SplashActivity.this, DashboardActivity.class);
-            startActivity(intent);
-        } else if (accountType.equalsIgnoreCase(Constants.SELLER_ACCOUNT_TYPE)) {
-            Intent intent = new Intent(SplashActivity.this, SellerDashboard.class);
-            startActivity(intent);
-        }
+//        boolean authenticated = HakikishaPreference.getUserAuthenticatedPref(SplashActivity.this);
+//        if (!authenticated){
+//            HakikishaPreference.setAccountTypePref(SplashActivity.this, Constants.BUYER_ACCOUNT_TYPE);
+//            Intent intent = new Intent(SplashActivity.this, LoginActivity.class);
+//            startActivity(intent);
+//            finish();
+//
+//            return;
+//        }
+//
+//
+//        String accountType = HakikishaPreference.getAccountTypePref(SplashActivity.this);
+//        if (accountType == null) {
+//            HakikishaPreference.setAccountTypePref(SplashActivity.this, Constants.BUYER_ACCOUNT_TYPE);
+//            Intent intent = new Intent(SplashActivity.this, LoginActivity.class);
+//            startActivity(intent);
+//            finish();
+//
+//            return;
+//        }
+//
+//        if (accountType.equalsIgnoreCase(Constants.BUYER_ACCOUNT_TYPE)) {
+//            Intent intent = new Intent(SplashActivity.this, DashboardActivity.class);
+//            startActivity(intent);
+//        } else if (accountType.equalsIgnoreCase(Constants.SELLER_ACCOUNT_TYPE)) {
+//            Intent intent = new Intent(SplashActivity.this, SellerDashboard.class);
+//            startActivity(intent);
+//        }
 
     }
 }

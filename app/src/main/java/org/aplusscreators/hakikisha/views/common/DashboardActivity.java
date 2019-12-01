@@ -8,6 +8,7 @@ import android.graphics.Color;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -17,7 +18,10 @@ import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.viewpager.widget.ViewPager;
 
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.google.android.material.tabs.TabLayout;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -33,6 +37,7 @@ import org.aplusscreators.hakikisha.R;
 import org.aplusscreators.hakikisha.adapters.PurchasesAdapter;
 import org.aplusscreators.hakikisha.fab.ABShape;
 import org.aplusscreators.hakikisha.fab.ABTextUtil;
+import org.aplusscreators.hakikisha.model.Order;
 import org.aplusscreators.hakikisha.model.Purchase;
 import org.aplusscreators.hakikisha.settings.HakikishaPreference;
 import org.aplusscreators.hakikisha.utils.HakikishaUtils;
@@ -43,28 +48,45 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
+import de.hdodenhof.circleimageview.CircleImageView;
+
 public class DashboardActivity extends AppCompatActivity implements RapidFloatingActionContentLabelList.OnRapidFloatingActionContentLabelListListener {
     private static final String TAG = "DashboardActivity";
 
+    private CircleImageView userProfileImageView;
+    private TextView welcomeMessageTExtView;
+    private FloatingActionButton actionsFab;
+    private RecyclerView pendingTransactionsRecyclerView;
+    private ViewPager transactionsViewPager;
+    private TabLayout transactionsTabLayout;
+    private View expandTransactionsView;
+
+    private List<Order> orderList = new ArrayList<>();
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_customer_dashboard);
 
-        if (getSupportActionBar() != null) {
-            getSupportActionBar().setTitle(getResources().getString(R.string.app_name));
-        }
+        initializeResources();
 
-        sendEmailSmsIfNeccessary();
+    }
 
-        hakikishaPermissionsRequest();
-
+    private void initializeResources() {
+        this.userProfileImageView = findViewById(R.id.dashboard_user_profile_image_view);
+        this.welcomeMessageTExtView = findViewById(R.id.dashboard_user_welcome_text_view);
+        this.actionsFab = findViewById(R.id.dashboard_actions_fab);
+        this.pendingTransactionsRecyclerView = findViewById(R.id.pending_transactions_recycler_view);
+        this.transactionsViewPager = findViewById(R.id.dashboard_transaction_view_page);
+        this.transactionsTabLayout = findViewById(R.id.dashboard_transaction_tablayout_view);
+        this.expandTransactionsView = findViewById(R.id.dashboard_expand_transactions_view);
     }
 
     @Override
     protected void onStart() {
         super.onStart();
+        hakikishaPermissionsRequest();
+        sendEmailSmsIfNeccessary();
         if (HakikishaPreference.getAccountUuidPrefs(DashboardActivity.this) == null)
             HakikishaPreference.setAccountUuidPrefs(DashboardActivity.this, UUID.randomUUID().toString());
 
