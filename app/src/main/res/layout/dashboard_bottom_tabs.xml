@@ -1,11 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical"
     android:layout_marginTop="14dp"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="wrap_content">
 
     <RelativeLayout
+        android:id="@+id/dahboard_transaction_bottom_container"
+        android:layout_alignParentTop="true"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
@@ -28,8 +30,8 @@
 
     </RelativeLayout>
 
-
     <androidx.viewpager.widget.ViewPager
+        android:layout_below="@+id/dahboard_transaction_bottom_container"
         android:id="@+id/dashboard_transaction_view_page"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
@@ -41,4 +43,4 @@
 
     </androidx.viewpager.widget.ViewPager>
 
-</LinearLayout>
+</RelativeLayout>

@@ -16,6 +16,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
+import androidx.fragment.app.FragmentStatePagerAdapter;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.viewpager.widget.ViewPager;
@@ -36,6 +37,7 @@ import com.wangjie.rapidfloatingactionbutton.contentimpl.labellist.RapidFloating
 import org.aplusscreators.hakikisha.R;
 import org.aplusscreators.hakikisha.adapters.OrdersAdapter;
 import org.aplusscreators.hakikisha.adapters.PurchasesAdapter;
+import org.aplusscreators.hakikisha.adapters.viewpager.TransactionsViewPagerAdapter;
 import org.aplusscreators.hakikisha.fab.ABShape;
 import org.aplusscreators.hakikisha.fab.ABTextUtil;
 import org.aplusscreators.hakikisha.model.Order;
@@ -65,6 +67,7 @@ public class DashboardActivity extends AppCompatActivity implements RapidFloatin
     private View expandTransactionsView;
 
     private OrdersAdapter ordersAdapter;
+    private TransactionsViewPagerAdapter transactionsViewPagerAdapter;
 
     private List<Order> orderList = new ArrayList<>();
 
@@ -113,6 +116,10 @@ public class DashboardActivity extends AppCompatActivity implements RapidFloatin
         });
         this.pendingTransactionsRecyclerView.setLayoutManager( new LinearLayoutManager(DashboardActivity.this,RecyclerView.HORIZONTAL,false));
         this.pendingTransactionsRecyclerView.setAdapter(ordersAdapter);
+
+        this.transactionsViewPagerAdapter = new TransactionsViewPagerAdapter(getSupportFragmentManager());
+        this.transactionsTabLayout.setupWithViewPager(transactionsViewPager);
+        this.transactionsViewPager.setAdapter(transactionsViewPagerAdapter);
     }
 
     @Override
