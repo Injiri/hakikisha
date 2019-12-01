@@ -4,53 +4,34 @@ import android.Manifest;
 import android.app.PendingIntent;
 import android.content.Intent;
 import android.content.pm.PackageManager;
-import android.graphics.Color;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
 
-import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.Toolbar;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
-import androidx.fragment.app.FragmentStatePagerAdapter;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.viewpager.widget.ViewPager;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.tabs.TabLayout;
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.ValueEventListener;
-import com.wangjie.rapidfloatingactionbutton.RapidFloatingActionButton;
-import com.wangjie.rapidfloatingactionbutton.RapidFloatingActionHelper;
-import com.wangjie.rapidfloatingactionbutton.RapidFloatingActionLayout;
 import com.wangjie.rapidfloatingactionbutton.contentimpl.labellist.RFACLabelItem;
 import com.wangjie.rapidfloatingactionbutton.contentimpl.labellist.RapidFloatingActionContentLabelList;
 
 import org.aplusscreators.hakikisha.R;
-import org.aplusscreators.hakikisha.adapters.OrdersAdapter;
-import org.aplusscreators.hakikisha.adapters.PurchasesAdapter;
+import org.aplusscreators.hakikisha.adapters.PendingOrdersAdapter;
 import org.aplusscreators.hakikisha.adapters.viewpager.TransactionsViewPagerAdapter;
-import org.aplusscreators.hakikisha.fab.ABShape;
-import org.aplusscreators.hakikisha.fab.ABTextUtil;
 import org.aplusscreators.hakikisha.model.Order;
-import org.aplusscreators.hakikisha.model.Purchase;
 import org.aplusscreators.hakikisha.settings.HakikishaPreference;
 import org.aplusscreators.hakikisha.utils.HakikishaUtils;
 import org.aplusscreators.hakikisha.views.buyer.GoodsReceiptActivity;
 import org.aplusscreators.hakikisha.views.buyer.RegisterPurchaseForm;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
-import java.util.Random;
 import java.util.UUID;
 
 import de.hdodenhof.circleimageview.CircleImageView;
@@ -66,7 +47,7 @@ public class DashboardActivity extends AppCompatActivity implements RapidFloatin
     private TabLayout transactionsTabLayout;
     private View expandTransactionsView;
 
-    private OrdersAdapter ordersAdapter;
+    private PendingOrdersAdapter pendingOrdersAdapter;
     private TransactionsViewPagerAdapter transactionsViewPagerAdapter;
 
     private List<Order> orderList = new ArrayList<>();
@@ -95,7 +76,7 @@ public class DashboardActivity extends AppCompatActivity implements RapidFloatin
         orders.add(olxOrder);
 
         orderList.addAll(orders);
-        ordersAdapter.notifyDataSetChanged();
+        pendingOrdersAdapter.notifyDataSetChanged();
 
     }
 
@@ -108,14 +89,14 @@ public class DashboardActivity extends AppCompatActivity implements RapidFloatin
         this.transactionsTabLayout = findViewById(R.id.dashboard_transaction_tablayout_view);
         this.expandTransactionsView = findViewById(R.id.dashboard_expand_transactions_view);
 
-        this.ordersAdapter = new OrdersAdapter(DashboardActivity.this, orderList, new OrdersAdapter.OnOrderClickedListener() {
+        this.pendingOrdersAdapter = new PendingOrdersAdapter(DashboardActivity.this, orderList, new PendingOrdersAdapter.OnOrderClickedListener() {
             @Override
             public void onOrderClicked(int position) {
 
             }
         });
         this.pendingTransactionsRecyclerView.setLayoutManager( new LinearLayoutManager(DashboardActivity.this,RecyclerView.HORIZONTAL,false));
-        this.pendingTransactionsRecyclerView.setAdapter(ordersAdapter);
+        this.pendingTransactionsRecyclerView.setAdapter(pendingOrdersAdapter);
 
         this.transactionsViewPagerAdapter = new TransactionsViewPagerAdapter(getSupportFragmentManager());
         this.transactionsTabLayout.setupWithViewPager(transactionsViewPager);

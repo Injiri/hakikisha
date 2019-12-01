@@ -18,15 +18,15 @@ import java.text.SimpleDateFormat;
 import java.util.List;
 import java.util.Locale;
 
-public class OrdersAdapter extends RecyclerView.Adapter<OrdersAdapter.ViewHolder> {
+public class PendingOrdersAdapter extends RecyclerView.Adapter<PendingOrdersAdapter.ViewHolder> {
 
     private SimpleDateFormat simpleDateFormat = new SimpleDateFormat("EEE MMM dd, yyyy");
 
     AppCompatActivity context;
     List<Order> orderList;
-    OrdersAdapter.OnOrderClickedListener onOrderClickedListener;
+    OnOrderClickedListener onOrderClickedListener;
 
-    public OrdersAdapter(AppCompatActivity context, List<Order> orderList, OrdersAdapter.OnOrderClickedListener onOrderClickedListener) {
+    public PendingOrdersAdapter(AppCompatActivity context, List<Order> orderList, OnOrderClickedListener onOrderClickedListener) {
         this.context = context;
         this.orderList = orderList;
         this.onOrderClickedListener = onOrderClickedListener;
@@ -34,14 +34,14 @@ public class OrdersAdapter extends RecyclerView.Adapter<OrdersAdapter.ViewHolder
 
     @NonNull
     @Override
-    public OrdersAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_orders_layout, parent, false);
-        return new OrdersAdapter.ViewHolder(view, onOrderClickedListener);
+    public PendingOrdersAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_pending_orders_layout, parent, false);
+        return new ViewHolder(view, onOrderClickedListener);
     }
 
     @Override
-    public void onBindViewHolder(@NonNull OrdersAdapter.ViewHolder holder, int position) {
-        OrdersAdapter.ViewHolder viewHolder = (OrdersAdapter.ViewHolder) holder;
+    public void onBindViewHolder(@NonNull PendingOrdersAdapter.ViewHolder holder, int position) {
+        PendingOrdersAdapter.ViewHolder viewHolder = (ViewHolder) holder;
         final Order order = orderList.get(viewHolder.getAdapterPosition());
         if (order == null)return;
         viewHolder.orderTitleTextView.setText(order.getOrderTitle());
@@ -61,9 +61,9 @@ public class OrdersAdapter extends RecyclerView.Adapter<OrdersAdapter.ViewHolder
         TextView orderTransactionTextView;
         ImageView orderImageView;
 
-        OrdersAdapter.OnOrderClickedListener onOrderClickedListener;
+        OnOrderClickedListener onOrderClickedListener;
 
-        public ViewHolder(@NonNull View itemView, OrdersAdapter.OnOrderClickedListener onOrderClickedListener) {
+        public ViewHolder(@NonNull View itemView, OnOrderClickedListener onOrderClickedListener) {
             super(itemView);
 
             this.onOrderClickedListener = onOrderClickedListener;

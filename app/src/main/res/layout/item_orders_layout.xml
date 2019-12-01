@@ -1,57 +1,53 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.cardview.widget.CardView
-    android:layout_width="wrap_content"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    app:cardCornerRadius="4dp"
-    android:layout_marginStart="12dp"
-    android:layout_marginEnd="12dp"
-    android:layout_marginBottom="12dp"
-    android:layout_marginTop="12dp"
-    android:id="@+id/item_orders_container_layout"
-    app:cardBackgroundColor="@android:color/white"
-    app:cardElevation="6dp"
-    android:layout_height="wrap_content"
-    xmlns:android="http://schemas.android.com/apk/res/android">
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="horizontal"
+    android:padding="12dp"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
 
-   <RelativeLayout
-       android:padding="14dp"
-       android:layout_width="wrap_content"
-       android:layout_height="wrap_content">
+    <ImageView
+        android:id="@+id/order_item_image_view"
+        android:layout_alignParentStart="true"
+        android:src="@drawable/jumia"
+        android:layout_width="60dp"
+        android:layout_height="60dp"/>
 
-       <LinearLayout
-           android:id="@+id/item_order_description_view"
-           android:layout_alignParentStart="true"
-           android:orientation="vertical"
-           android:layout_width="wrap_content"
-           android:layout_height="wrap_content">
+    <LinearLayout
+        android:layout_toRightOf="@+id/order_item_image_view"
+        android:layout_marginStart="12dp"
+        android:orientation="vertical"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
 
-           <TextView
-               android:id="@+id/item_order_title_text_view"
-               android:layout_marginBottom="14dp"
-               android:text="Olx Kenya"
-               android:textSize="21sp"
-               android:textColor="@android:color/black"
-               android:layout_width="wrap_content"
-               android:layout_height="wrap_content"/>
+        <TextView
+            android:text="Jumia Kenya"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
 
-           <TextView
-               android:id="@+id/item_order_transaction_id_text_view"
-               android:textSize="16sp"
-               android:text="TID 123456789876543123"
-               android:layout_width="wrap_content"
-               android:layout_height="wrap_content"/>
+        <TextView
+            android:text="Jumia Kenya"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
 
-       </LinearLayout>
+    </LinearLayout>
 
-       <ImageView
-           android:id="@+id/item_order_transaction_image_view"
-           android:layout_toRightOf="@+id/item_order_description_view"
-           android:layout_marginStart="62dp"
-           android:src="@drawable/jumia"
-           android:layout_width="62dp"
-           android:layout_height="62dp"/>
+    <LinearLayout
+        android:layout_alignParentEnd="true"
+        android:layout_marginStart="12dp"
+        android:orientation="vertical"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
 
-   </RelativeLayout>
+        <TextView
+            android:text="Jumia Kenya"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
 
-</androidx.cardview.widget.CardView>
+        <TextView
+            android:text="Jumia Kenya"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
 
+    </LinearLayout>
+
+</RelativeLayout>

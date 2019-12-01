@@ -18,7 +18,7 @@ import com.wangjie.rapidfloatingactionbutton.contentimpl.labellist.RFACLabelItem
 import com.wangjie.rapidfloatingactionbutton.contentimpl.labellist.RapidFloatingActionContentLabelList;
 
 import org.aplusscreators.hakikisha.R;
-import org.aplusscreators.hakikisha.adapters.OrdersAdapter;
+import org.aplusscreators.hakikisha.adapters.PendingOrdersAdapter;
 import org.aplusscreators.hakikisha.fab.ABShape;
 import org.aplusscreators.hakikisha.fab.ABTextUtil;
 import org.aplusscreators.hakikisha.model.Order;
@@ -29,7 +29,7 @@ import java.util.List;
 public class SellerDashboard extends AppCompatActivity implements RapidFloatingActionContentLabelList.OnRapidFloatingActionContentLabelListListener {
 
     RecyclerView ordersRecyclerView;
-    OrdersAdapter ordersAdapter;
+    PendingOrdersAdapter pendingOrdersAdapter;
     List<Order> ordersList = new ArrayList<>();
     Toolbar toolbar;
     View sellerNoDataLayout;
@@ -52,8 +52,8 @@ public class SellerDashboard extends AppCompatActivity implements RapidFloatingA
         rfaBtn = findViewById(R.id.activity_seller_dashboard_rfab);
         rfaLayout = findViewById(R.id.activity_seller_dashboard_rfal);
 
-        ordersAdapter = new OrdersAdapter(SellerDashboard.this, ordersList, null);
-        ordersRecyclerView.setAdapter(ordersAdapter);
+        pendingOrdersAdapter = new PendingOrdersAdapter(SellerDashboard.this, ordersList, null);
+        ordersRecyclerView.setAdapter(pendingOrdersAdapter);
         ordersRecyclerView.setLayoutManager(new LinearLayoutManager(SellerDashboard.this, RecyclerView.VERTICAL, false));
 
         setSupportActionBar(toolbar);
@@ -115,7 +115,7 @@ public class SellerDashboard extends AppCompatActivity implements RapidFloatingA
     private void populateOrdersList() {
         Order order = new Order();
         //ordersList.add(order);
-        ordersAdapter.notifyDataSetChanged();
+        pendingOrdersAdapter.notifyDataSetChanged();
     }
 
     @Override
