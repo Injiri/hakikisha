@@ -36,8 +36,8 @@ public class TransactionsExpandedActivity  extends AppCompatActivity {
         this.tabLayout = findViewById(R.id.expanded_transactions_tab_layout);
 
         this.viewPagerAdapter = new TransactionsViewPagerAdapter(getSupportFragmentManager());
-        this.viewPager.setAdapter(viewPagerAdapter);
         this.tabLayout.setupWithViewPager(viewPager);
+        this.viewPager.setAdapter(viewPagerAdapter);
 
         setSupportActionBar(this.toolbar);
         if (getSupportActionBar() != null){

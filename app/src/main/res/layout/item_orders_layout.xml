@@ -4,7 +4,7 @@
     android:padding="12dp"
     android:id="@+id/item_order_parent_container"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="wrap_content">
 
     <ImageView
         android:id="@+id/order_item_image_view"
