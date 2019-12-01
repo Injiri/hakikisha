@@ -16,6 +16,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.viewpager.widget.ViewPager;
 
+import com.google.android.material.bottomsheet.BottomSheetBehavior;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.tabs.TabLayout;
 import com.wangjie.rapidfloatingactionbutton.contentimpl.labellist.RFACLabelItem;
@@ -46,16 +47,19 @@ public class DashboardActivity extends AppCompatActivity implements RapidFloatin
     private ViewPager transactionsViewPager;
     private TabLayout transactionsTabLayout;
     private View expandTransactionsView;
+    private View bottomSheetsView;
+    private View bottomSheetsFog;
 
     private PendingOrdersAdapter pendingOrdersAdapter;
     private TransactionsViewPagerAdapter transactionsViewPagerAdapter;
+    private BottomSheetBehavior bottomSheetBehavior;
 
     private List<Order> orderList = new ArrayList<>();
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_customer_dashboard);
+        setContentView(R.layout.activity_dashboard_container_layout);
 
         initializeResources();
         fetchPendingOrders();
@@ -88,6 +92,8 @@ public class DashboardActivity extends AppCompatActivity implements RapidFloatin
         this.transactionsViewPager = findViewById(R.id.dashboard_transaction_view_page);
         this.transactionsTabLayout = findViewById(R.id.dashboard_transaction_tablayout_view);
         this.expandTransactionsView = findViewById(R.id.dashboard_expand_transactions_view);
+        this.bottomSheetsView = findViewById(R.id.activity_dashboard_bottom_sheets);
+        this.bottomSheetsFog = findViewById(R.id.dashboard_fog_view);
 
         this.pendingOrdersAdapter = new PendingOrdersAdapter(DashboardActivity.this, orderList, new PendingOrdersAdapter.OnOrderClickedListener() {
             @Override
@@ -108,6 +114,31 @@ public class DashboardActivity extends AppCompatActivity implements RapidFloatin
                 Intent intent = new Intent(DashboardActivity.this,TransactionsExpandedActivity.class);
                 startActivity(intent);
                 finish();
+            }
+        });
+
+        this.bottomSheetBehavior = BottomSheetBehavior.from(bottomSheetsView);
+        this.bottomSheetBehavior.setState(BottomSheetBehavior.STATE_HIDDEN);
+
+        this.actionsFab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (bottomSheetBehavior.getState() == BottomSheetBehavior.STATE_HIDDEN){
+                    bottomSheetBehavior.setState(BottomSheetBehavior.STATE_EXPANDED);
+                    bottomSheetsFog.setVisibility(View.VISIBLE);
+                } else if (bottomSheetBehavior.getState() == BottomSheetBehavior.STATE_EXPANDED){
+                    bottomSheetBehavior.setState(BottomSheetBehavior.STATE_HIDDEN);
+                    bottomSheetsFog.setVisibility(View.GONE);
+                }
+            }
+        });
+
+        this.bottomSheetsFog.setVisibility(View.GONE);
+        this.bottomSheetsFog.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                bottomSheetBehavior.setState(BottomSheetBehavior.STATE_HIDDEN);
+                bottomSheetsFog.setVisibility(View.GONE);
             }
         });
     }

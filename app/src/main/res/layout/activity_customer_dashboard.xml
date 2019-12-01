@@ -1,85 +1,90 @@
 <?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
 
-<RelativeLayout android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <View
+        android:id="@+id/dashboard_fog_view"
+        android:background="@drawable/dashboard_fog_cover"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
 
-        <LinearLayout
-            android:layout_alignParentTop="true"
-            android:orientation="vertical"
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:orientation="vertical">
+
+        <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="190dp"
+            android:background="@color/colorPrimary"
+            android:paddingStart="20dp">
 
-            <RelativeLayout
-                android:background="@color/colorPrimary"
-                android:paddingStart="20dp"
-                android:layout_width="match_parent"
-                android:layout_height="190dp">
+            <de.hdodenhof.circleimageview.CircleImageView
+                android:id="@+id/dashboard_user_profile_image_view"
+                android:layout_width="74dp"
+                android:layout_height="74dp"
+                android:layout_alignParentStart="true"
+                android:layout_marginTop="16dp"
+                android:layout_marginBottom="82dp"
+                android:src="@drawable/avatar"
+                app:civ_border_color="@android:color/white"
+                app:civ_border_width="1dp" />
 
-                <de.hdodenhof.circleimageview.CircleImageView
-                    android:id="@+id/dashboard_user_profile_image_view"
-                    android:layout_marginTop="16dp"
-                    android:layout_marginBottom="82dp"
-                    android:layout_alignParentStart="true"
-                    app:civ_border_width="1dp"
-                    app:civ_border_color="@android:color/white"
-                    android:src="@drawable/avatar"
-                    android:layout_width="74dp"
-                    android:layout_height="74dp"/>
-
-                <ImageView
-                    android:layout_marginTop="16dp"
-                    android:layout_alignParentEnd="true"
-                    android:src="@drawable/bell_white"
-                    android:layout_marginBottom="82dp"
-                    android:layout_marginEnd="20dp"
-                    android:layout_width="24dp"
-                    android:layout_height="24dp"/>
-
-                <TextView
-                    android:id="@+id/dashboard_user_welcome_text_view"
-                    android:layout_centerHorizontal="true"
-                    android:textColor="@android:color/white"
-                    android:layout_alignParentBottom="true"
-                    android:gravity="center"
-                    android:textSize="22sp"
-                    android:textStyle="bold"
-                    android:layout_marginBottom="30dp"
-                    android:text="Hello, John Doeia"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"/>
-
-            </RelativeLayout>
+            <ImageView
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:layout_alignParentEnd="true"
+                android:layout_marginTop="16dp"
+                android:layout_marginEnd="20dp"
+                android:layout_marginBottom="82dp"
+                android:src="@drawable/bell_white" />
 
             <TextView
-                android:textSize="21sp"
-                android:layout_marginTop="22dp"
-                android:layout_marginStart="12dp"
-                android:layout_marginBottom="12dp"
-                android:textColor="@android:color/black"
-                android:text="Pending"
+                android:id="@+id/dashboard_user_welcome_text_view"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"/>
+                android:layout_height="wrap_content"
+                android:layout_alignParentBottom="true"
+                android:layout_centerHorizontal="true"
+                android:layout_marginBottom="30dp"
+                android:gravity="center"
+                android:text="Hello, John Doeia"
+                android:textColor="@android:color/white"
+                android:textSize="22sp"
+                android:textStyle="bold" />
 
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/pending_transactions_recycler_view"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"/>
+        </RelativeLayout>
 
-            <include layout="@layout/dashboard_bottom_tabs"/>
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="12dp"
+            android:layout_marginTop="22dp"
+            android:layout_marginBottom="12dp"
+            android:text="Pending"
+            android:textColor="@android:color/black"
+            android:textSize="21sp" />
 
-        </LinearLayout>
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/pending_transactions_recycler_view"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
 
-        <com.google.android.material.floatingactionbutton.FloatingActionButton
-            android:id="@+id/dashboard_actions_fab"
-            android:layout_alignParentEnd="true"
-            android:src="@drawable/logo"
-            android:layout_marginEnd="20dp"
-            android:layout_marginTop="150dp"
-            app:fabCustomSize="65dp"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"/>
+        <include layout="@layout/dashboard_bottom_tabs" />
 
-    </RelativeLayout>
+    </LinearLayout>
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/dashboard_actions_fab"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_marginTop="150dp"
+        android:layout_marginEnd="20dp"
+        android:src="@drawable/logo"
+        app:fabCustomSize="65dp" />
+
+</RelativeLayout>
 
