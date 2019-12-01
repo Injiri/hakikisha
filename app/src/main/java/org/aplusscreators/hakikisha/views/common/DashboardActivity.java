@@ -49,6 +49,9 @@ public class DashboardActivity extends AppCompatActivity implements RapidFloatin
     private View expandTransactionsView;
     private View bottomSheetsView;
     private View bottomSheetsFog;
+    private View bottomSheetMakePaymentView;
+    private View bottomSheetRequestPaymentView;
+    private View bottomSheetsRequestDeliveryView;
 
     private PendingOrdersAdapter pendingOrdersAdapter;
     private TransactionsViewPagerAdapter transactionsViewPagerAdapter;
@@ -94,6 +97,9 @@ public class DashboardActivity extends AppCompatActivity implements RapidFloatin
         this.expandTransactionsView = findViewById(R.id.dashboard_expand_transactions_view);
         this.bottomSheetsView = findViewById(R.id.activity_dashboard_bottom_sheets);
         this.bottomSheetsFog = findViewById(R.id.dashboard_fog_view);
+        this.bottomSheetMakePaymentView = findViewById(R.id.make_payment_action_view);
+        this.bottomSheetRequestPaymentView = findViewById(R.id.request_payment_actions_view);
+        this.bottomSheetsRequestDeliveryView = findViewById(R.id.request_delivery_action_view);
 
         this.pendingOrdersAdapter = new PendingOrdersAdapter(DashboardActivity.this, orderList, new PendingOrdersAdapter.OnOrderClickedListener() {
             @Override
