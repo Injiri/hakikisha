@@ -1,5 +1,7 @@
 package org.aplusscreators.hakikisha.model;
 
+import java.util.Date;
+
 public class Order {
 
     private String uuid;
@@ -11,8 +13,10 @@ public class Order {
     private String title;
     private long transactionId;
     private int drawableResourceId;
+    private int amount;
+    private Date orderDate;
 
-    public Order(String uuid, String order_id, String customer_uuid, String seller_uuid, String product_uuid, int status, String title, long transactionId, int drawableResourceId) {
+    public Order(String uuid, String order_id, String customer_uuid, String seller_uuid, String product_uuid, int status, String title, long transactionId, int drawableResourceId, int amount, Date orderDate) {
         this.uuid = uuid;
         this.order_id = order_id;
         this.customer_uuid = customer_uuid;
@@ -22,6 +26,8 @@ public class Order {
         this.title = title;
         this.transactionId = transactionId;
         this.drawableResourceId = drawableResourceId;
+        this.amount = amount;
+        this.orderDate = orderDate;
     }
 
     public Order() {
@@ -97,5 +103,21 @@ public class Order {
 
     public void setDrawableResourceId(int drawableResourceId) {
         this.drawableResourceId = drawableResourceId;
+    }
+
+    public int getAmount() {
+        return amount;
+    }
+
+    public void setAmount(int amount) {
+        this.amount = amount;
+    }
+
+    public Date getDate() {
+        return orderDate;
+    }
+
+    public void setOrderDate(Date orderDate) {
+        this.orderDate = orderDate;
     }
 }

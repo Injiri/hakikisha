@@ -1,5 +1,6 @@
 package org.aplusscreators.hakikisha.adapters;
 
+import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -7,8 +8,6 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
 import org.aplusscreators.hakikisha.R;
@@ -22,11 +21,11 @@ public class OrdersAdapter extends RecyclerView.Adapter<OrdersAdapter.ViewHolder
 
     private SimpleDateFormat simpleDateFormat = new SimpleDateFormat("EEE MMM dd, yyyy");
 
-    AppCompatActivity context;
+    Context context;
     List<Order> orderList;
     OrdersAdapter.OnOrderClickedListener onOrderClickedListener;
 
-    public OrdersAdapter(AppCompatActivity context, List<Order> orderList, OrdersAdapter.OnOrderClickedListener onOrderClickedListener) {
+    public OrdersAdapter(Context context, List<Order> orderList, OrdersAdapter.OnOrderClickedListener onOrderClickedListener) {
         this.context = context;
         this.orderList = orderList;
         this.onOrderClickedListener = onOrderClickedListener;
@@ -47,6 +46,8 @@ public class OrdersAdapter extends RecyclerView.Adapter<OrdersAdapter.ViewHolder
         viewHolder.orderTitleTextView.setText(order.getOrderTitle());
         viewHolder.orderTransactionTextView.setText(String.format(Locale.getDefault(),"%d",order.getTransactionId()));
         viewHolder.orderImageView.setImageDrawable(context.getResources().getDrawable(order.getDrawableResourceId()));
+        viewHolder.amountTextView.setText(String.format(Locale.getDefault(),"%d",order.getAmount()));
+        viewHolder.orderDateTextView.setText(simpleDateFormat.format(order.getDate()));
     }
 
     @Override
@@ -56,10 +57,12 @@ public class OrdersAdapter extends RecyclerView.Adapter<OrdersAdapter.ViewHolder
 
     public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
 
-        CardView cardView;
+        View container;
         TextView orderTitleTextView;
         TextView orderTransactionTextView;
         ImageView orderImageView;
+        TextView amountTextView;
+        TextView orderDateTextView;
 
         OrdersAdapter.OnOrderClickedListener onOrderClickedListener;
 
@@ -68,10 +71,12 @@ public class OrdersAdapter extends RecyclerView.Adapter<OrdersAdapter.ViewHolder
 
             this.onOrderClickedListener = onOrderClickedListener;
 
-            cardView = itemView.findViewById(R.id.item_orders_container_layout);
+            container = itemView.findViewById(R.id.item_order_parent_container);
             orderTitleTextView = itemView.findViewById(R.id.item_order_title_text_view);
             orderTransactionTextView = itemView.findViewById(R.id.item_order_transaction_id_text_view);
-            orderImageView = itemView.findViewById(R.id.item_order_transaction_image_view);
+            orderImageView = itemView.findViewById(R.id.order_item_image_view);
+            amountTextView = itemView.findViewById(R.id.item_order_amount_text_view);
+            orderDateTextView = itemView.findViewById(R.id.item_order_transaction_date_text_view);
 
         }
 
