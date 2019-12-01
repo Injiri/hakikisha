@@ -94,4 +94,8 @@ public class Order {
     public int getDrawableResourceId() {
         return drawableResourceId;
     }
+
+    public void setDrawableResourceId(int drawableResourceId) {
+        this.drawableResourceId = drawableResourceId;
+    }
 }

@@ -34,6 +34,7 @@ import com.wangjie.rapidfloatingactionbutton.contentimpl.labellist.RFACLabelItem
 import com.wangjie.rapidfloatingactionbutton.contentimpl.labellist.RapidFloatingActionContentLabelList;
 
 import org.aplusscreators.hakikisha.R;
+import org.aplusscreators.hakikisha.adapters.OrdersAdapter;
 import org.aplusscreators.hakikisha.adapters.PurchasesAdapter;
 import org.aplusscreators.hakikisha.fab.ABShape;
 import org.aplusscreators.hakikisha.fab.ABTextUtil;
@@ -45,7 +46,9 @@ import org.aplusscreators.hakikisha.views.buyer.GoodsReceiptActivity;
 import org.aplusscreators.hakikisha.views.buyer.RegisterPurchaseForm;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
+import java.util.Random;
 import java.util.UUID;
 
 import de.hdodenhof.circleimageview.CircleImageView;
@@ -61,6 +64,8 @@ public class DashboardActivity extends AppCompatActivity implements RapidFloatin
     private TabLayout transactionsTabLayout;
     private View expandTransactionsView;
 
+    private OrdersAdapter ordersAdapter;
+
     private List<Order> orderList = new ArrayList<>();
 
     @Override
@@ -69,6 +74,25 @@ public class DashboardActivity extends AppCompatActivity implements RapidFloatin
         setContentView(R.layout.activity_customer_dashboard);
 
         initializeResources();
+        fetchPendingOrders();
+
+    }
+
+    private void fetchPendingOrders() {
+        List<Order> orders = new ArrayList<>();
+        Order olxOrder = new Order();
+        olxOrder.setOrder_id(UUID.randomUUID().toString());
+        olxOrder.setTransactionId(123456789123465L);
+        olxOrder.setTitle("Jumia Kenya");
+        olxOrder.setDrawableResourceId(R.drawable.jumia);
+
+        orders.add(olxOrder);
+        orders.add(olxOrder);
+        orders.add(olxOrder);
+        orders.add(olxOrder);
+
+        orderList.addAll(orders);
+        ordersAdapter.notifyDataSetChanged();
 
     }
 
@@ -80,6 +104,15 @@ public class DashboardActivity extends AppCompatActivity implements RapidFloatin
         this.transactionsViewPager = findViewById(R.id.dashboard_transaction_view_page);
         this.transactionsTabLayout = findViewById(R.id.dashboard_transaction_tablayout_view);
         this.expandTransactionsView = findViewById(R.id.dashboard_expand_transactions_view);
+
+        this.ordersAdapter = new OrdersAdapter(DashboardActivity.this, orderList, new OrdersAdapter.OnOrderClickedListener() {
+            @Override
+            public void onOrderClicked(int position) {
+
+            }
+        });
+        this.pendingTransactionsRecyclerView.setLayoutManager( new LinearLayoutManager(DashboardActivity.this,RecyclerView.HORIZONTAL,false));
+        this.pendingTransactionsRecyclerView.setAdapter(ordersAdapter);
     }
 
     @Override
