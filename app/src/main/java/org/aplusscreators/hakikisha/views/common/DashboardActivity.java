@@ -101,6 +101,15 @@ public class DashboardActivity extends AppCompatActivity implements RapidFloatin
         this.transactionsViewPagerAdapter = new TransactionsViewPagerAdapter(getSupportFragmentManager());
         this.transactionsTabLayout.setupWithViewPager(transactionsViewPager);
         this.transactionsViewPager.setAdapter(transactionsViewPagerAdapter);
+
+        this.expandTransactionsView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(DashboardActivity.this,TransactionsExpandedActivity.class);
+                startActivity(intent);
+                finish();
+            }
+        });
     }
 
     @Override
