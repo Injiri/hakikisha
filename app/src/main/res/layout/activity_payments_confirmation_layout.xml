@@ -6,6 +6,7 @@
     android:orientation="vertical">
 
     <ImageView
+        android:id="@+id/payments_confirmation_close_view"
         android:layout_width="42dp"
         android:layout_height="42dp"
         android:layout_margin="14dp"
@@ -14,6 +15,9 @@
     <androidx.cardview.widget.CardView
         android:layout_centerVertical="true"
         android:layout_width="300dp"
+        android:elevation="8dp"
+        app:cardCornerRadius="4dp"
+        app:cardElevation="6dp"
         android:layout_centerHorizontal="true"
         android:layout_height="wrap_content">
 
@@ -23,6 +27,7 @@
             android:orientation="vertical">
 
             <TextView
+                android:id="@+id/payment_confirmation_status_message_text_view"
                 android:layout_marginTop="42dp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -43,6 +48,7 @@
                 android:text="Transaction intiated" />
 
             <TextView
+                android:id="@+id/payment_confirmation_transaction_id_text_view"
                 android:layout_margin="12dp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -64,6 +70,7 @@
                 android:layout_height="wrap_content"/>
 
             <TextView
+                android:id="@+id/payment_confirmation_amount_text_view"
                 android:textColor="@android:color/black"
                 android:textStyle="bold"
                 android:textSize="24sp"
@@ -100,7 +107,7 @@
                     android:layout_height="wrap_content">
 
                     <TextView
-                        android:id="@+id/make_payment_vendor_name_text_view"
+                        android:id="@+id/payment_confirmation_vendor_name_text_view"
                         android:textSize="18sp"
                         android:textColor="@android:color/black"
                         android:text="Vendor Names"
@@ -108,7 +115,7 @@
                         android:layout_height="wrap_content"/>
 
                     <TextView
-                        android:id="@+id/make_payment_vendor_email_text_view"
+                        android:id="@+id/ayment_confirmation_vendor_email_text_view"
                         android:layout_marginTop="8dp"
                         android:text="vendor.email@gmail.com"
                         android:layout_width="wrap_content"
@@ -117,7 +124,7 @@
                 </LinearLayout>
 
                 <de.hdodenhof.circleimageview.CircleImageView
-                    android:id="@+id/make_payment_vendor_image_view"
+                    android:id="@+id/ayment_confirmation_vendor_image_view"
                     android:layout_alignParentEnd="true"
                     app:civ_border_color="@color/colorPrimary"
                     app:civ_border_width="1dp"
