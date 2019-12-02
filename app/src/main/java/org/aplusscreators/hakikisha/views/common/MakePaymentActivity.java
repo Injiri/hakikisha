@@ -101,6 +101,9 @@ public class MakePaymentActivity extends AppCompatActivity {
                 boolean allFieldsValid = validatefields();
                 if (allFieldsValid){
                     //todo proceed to make payments
+                    Intent intent = new Intent(MakePaymentActivity.this,PaymentConfirmationActivity.class);
+                    startActivity(intent);
+                    finish();
                 }
             }
         });
