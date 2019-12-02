@@ -1,5 +1,6 @@
 package org.aplusscreators.hakikisha.views.common;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -9,6 +10,7 @@ import android.widget.Spinner;
 import android.widget.TextView;
 
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
@@ -65,21 +67,54 @@ public class MakePaymentActivity extends AppCompatActivity {
         this.closeActionView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(MakePaymentActivity.this,DashboardActivity.class);
-                startActivity(intent);
-                finish();
+                AlertDialog.Builder alertBuilder = new AlertDialog.Builder(MakePaymentActivity.this)
+                        .setMessage("Are you sure you want to cancel this payment?")
+                        .setPositiveButton("No", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                dialog.dismiss();
+                            }
+                        })
+                        .setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                Intent intent = new Intent(MakePaymentActivity.this,DashboardActivity.class);
+                                startActivity(intent);
+                                finish();
+                            }
+                        });
+                alertBuilder.create().show();
             }
         });
 
         this.activatePaymentFab.requestFocus();
-
+        this.orderNumberEditText.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                orderNumberEditText.setText("");
+            }
+        });
     }
 
     @Override
     public void onBackPressed() {
-        super.onBackPressed();
-        Intent intent = new Intent(MakePaymentActivity.this,DashboardActivity.class);
-        startActivity(intent);
-        finish();
+        AlertDialog.Builder alertBuilder = new AlertDialog.Builder(MakePaymentActivity.this)
+                .setMessage("Are you sure you want to cancel this payment?")
+                .setPositiveButton("No", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.dismiss();
+                    }
+                })
+                .setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        Intent intent = new Intent(MakePaymentActivity.this,DashboardActivity.class);
+                        startActivity(intent);
+                        finish();
+                    }
+                });
+        alertBuilder.create().show();
+
     }
 }

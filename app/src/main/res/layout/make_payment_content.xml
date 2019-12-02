@@ -38,14 +38,14 @@
                     android:id="@+id/make_payment_vendor_name_text_view"
                     android:textSize="18sp"
                     android:textColor="@android:color/black"
-                    android:text="Wasula Benjamina"
+                    android:text="Vendor Names"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"/>
 
                 <TextView
                     android:id="@+id/make_payment_vendor_email_text_view"
                     android:layout_marginTop="8dp"
-                    android:text="wasulahbenjamin@gmail.com"
+                    android:text="vendor.email@gmail.com"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"/>
 
@@ -87,8 +87,9 @@
                 android:id="@+id/make_payments_order_number_edit_text"
                 android:layout_marginTop="12dp"
                 android:textSize="16sp"
+                android:focusedByDefault="false"
                 android:textColor="@android:color/black"
-                android:text="65836393212474633245"
+                android:hint="65836393212474633245"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"/>
 
@@ -130,9 +131,10 @@
                 <EditText
                     android:id="@+id/make_payment_amount_edit_text"
                     android:textSize="16sp"
+                    android:focusedByDefault="false"
                     android:inputType="numberDecimal"
                     android:textColor="@android:color/black"
-                    android:text="3200"
+                    android:hint="3200"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"/>
 
