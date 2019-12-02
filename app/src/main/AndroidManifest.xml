@@ -39,6 +39,7 @@
         <activity android:name=".views.buyer.CardPaymentActivity" />
         <activity android:name=".views.common.TermsActivity" />
         <activity android:name=".views.common.TransactionsExpandedActivity" />
+        <activity android:name=".views.common.MakePaymentActivity" />
 
         <provider
             android:name="androidx.core.content.FileProvider"
