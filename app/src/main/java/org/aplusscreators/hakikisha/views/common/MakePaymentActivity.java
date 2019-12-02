@@ -61,7 +61,7 @@ public class MakePaymentActivity extends AppCompatActivity {
         this.amountEntryEditText = findViewById(R.id.make_payment_amount_edit_text);
         this.deliveryOptionsSpinner = findViewById(R.id.payments_delivery_option_spinner);
 
-        this.deliveryOptionsAdapter = new ArrayAdapter<>(MakePaymentActivity.this,android.R.layout.simple_spinner_dropdown_item,deliveryOptions);
+        this.deliveryOptionsAdapter = new ArrayAdapter<>(MakePaymentActivity.this, android.R.layout.simple_spinner_dropdown_item, deliveryOptions);
         this.deliveryOptionsSpinner.setAdapter(this.deliveryOptionsAdapter);
 
         this.closeActionView.setOnClickListener(new View.OnClickListener() {
@@ -78,7 +78,7 @@ public class MakePaymentActivity extends AppCompatActivity {
                         .setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialog, int which) {
-                                Intent intent = new Intent(MakePaymentActivity.this,DashboardActivity.class);
+                                Intent intent = new Intent(MakePaymentActivity.this, DashboardActivity.class);
                                 startActivity(intent);
                                 finish();
                             }
@@ -94,6 +94,32 @@ public class MakePaymentActivity extends AppCompatActivity {
                 orderNumberEditText.setText("");
             }
         });
+
+        this.activatePaymentFab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                boolean allFieldsValid = validatefields();
+                if (allFieldsValid){
+                    //todo proceed to make payments
+                }
+            }
+        });
+    }
+
+    private boolean validatefields() {
+        if (orderNumberEditText.getText().toString().isEmpty()) {
+            orderNumberEditText.setError("Required field");
+            return false;
+        }
+        if (amountEntryEditText.getText().toString().isEmpty()) {
+            amountEntryEditText.setError("Required field");
+            return false;
+        }
+        if (amountEntryEditText.getText().toString().contains(",")) {
+            amountEntryEditText.setError("Invalid character [,]");
+            return false;
+        }
+        return true;
     }
 
     @Override
@@ -109,7 +135,7 @@ public class MakePaymentActivity extends AppCompatActivity {
                 .setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-                        Intent intent = new Intent(MakePaymentActivity.this,DashboardActivity.class);
+                        Intent intent = new Intent(MakePaymentActivity.this, DashboardActivity.class);
                         startActivity(intent);
                         finish();
                     }
