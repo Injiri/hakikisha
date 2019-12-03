@@ -24,6 +24,7 @@ public class AllTransactionsFragment extends Fragment {
 
     private OrdersAdapter adapter;
     private RecyclerView orderRecyclerView;
+    private View noDataView;
 
     private List<Order> orderList = new ArrayList<>();
 
@@ -33,7 +34,7 @@ public class AllTransactionsFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_all_transactions,container,false);
 
         initializeResources(view);
-        fetchAllOrders();
+        //fetchAllOrders();
 
         return view;
     }
@@ -60,6 +61,7 @@ public class AllTransactionsFragment extends Fragment {
 
     private void initializeResources(View view) {
         this.orderRecyclerView = view.findViewById(R.id.all_fragment_recycler_view);
+        this.noDataView = view.findViewById(R.id.transaction_no_data_layout_view);
         this.adapter = new OrdersAdapter(getActivity(), orderList, new OrdersAdapter.OnOrderClickedListener() {
             @Override
             public void onOrderClicked(int position) {
