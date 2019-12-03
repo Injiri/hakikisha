@@ -166,6 +166,15 @@ public class DashboardActivity extends AppCompatActivity implements RapidFloatin
             }
         });
 
+        this.bottomSheetsRequestDeliveryView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(DashboardActivity.this,DeliveryRequestActivity.class);
+                startActivity(intent);
+                finish();
+            }
+        });
+
 
     }
 
