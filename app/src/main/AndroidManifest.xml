@@ -43,6 +43,7 @@
         <activity android:name=".views.common.PaymentConfirmationActivity" />
         <activity android:name=".views.common.PaymentRequestActivity" />
         <activity android:name=".views.common.DeliveryRequestActivity" />
+        <activity android:name=".views.common.VendorFormActivity" />
 
         <provider
             android:name="androidx.core.content.FileProvider"

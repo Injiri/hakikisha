@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:background="@android:color/white"
+    android:layout_below="@+id/make_payment_headline_view"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <LinearLayout
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:orientation="vertical"
+        android:padding="14dp"
+        android:background="@android:color/white"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:textSize="16sp"
+            android:text="Recipient"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+
+        <TextView
+            android:layout_marginTop="18dp"
+            android:textSize="16sp"
+            android:text="Payment details"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+
+        <LinearLayout
+            android:id="@+id/make_payments_order_number_field_view"
+            android:background="@drawable/text_field_grey_background"
+            android:padding="12dp"
+            android:layout_marginTop="14dp"
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:text="Order number"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
+
+            <EditText
+                android:id="@+id/make_payments_order_number_edit_text"
+                android:layout_marginTop="12dp"
+                android:textSize="16sp"
+                android:focusedByDefault="false"
+                android:textColor="@android:color/black"
+                android:hint="65836393212474633245"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
+
+        </LinearLayout>
+
+        <TextView
+            android:textStyle="italic"
+            android:layout_marginTop="8dp"
+            android:text="Input order number provided by the vendor"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+
+        <LinearLayout
+            android:id="@+id/make_payment_amount_entry_view"
+            android:background="@drawable/text_field_grey_background"
+            android:padding="12dp"
+            android:layout_marginTop="14dp"
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:text="Amount"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
+
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:textColor="@android:color/black"
+                    android:textStyle="bold"
+                    android:text="Ksh. "
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"/>
+
+                <EditText
+                    android:id="@+id/make_payment_amount_edit_text"
+                    android:textSize="16sp"
+                    android:focusedByDefault="false"
+                    android:inputType="numberDecimal"
+                    android:textColor="@android:color/black"
+                    android:hint="3200"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"/>
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/make_payment_delivery_options_view"
+            android:background="@drawable/text_field_grey_background"
+            android:padding="12dp"
+            android:layout_marginTop="14dp"
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:text="Delivered by"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
+
+            <Spinner
+                android:id="@+id/payments_delivery_option_spinner"
+                android:layout_marginTop="12dp"
+                android:textSize="16sp"
+                android:textColor="@android:color/black"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+</ScrollView>
