@@ -2,6 +2,7 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:id="@+id/payment_confirmation_container_view"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical">
 
@@ -89,7 +90,7 @@
                 android:layout_height="wrap_content"/>
 
             <RelativeLayout
-                android:id="@+id/make_payment_vendor_entry_view"
+                android:id="@+id/payment_confirmation_vendor_details_view"
                 android:background="@drawable/border_grey_background"
                 android:padding="12dp"
                 android:layout_marginStart="21dp"
@@ -115,7 +116,7 @@
                         android:layout_height="wrap_content"/>
 
                     <TextView
-                        android:id="@+id/ayment_confirmation_vendor_email_text_view"
+                        android:id="@+id/payment_confirmation_vendor_email_text_view"
                         android:layout_marginTop="8dp"
                         android:text="vendor.email@gmail.com"
                         android:layout_width="wrap_content"
@@ -132,17 +133,21 @@
                     android:layout_width="62dp"
                     android:layout_height="62dp"/>
 
+
             </RelativeLayout>
 
         </LinearLayout>
 
     </androidx.cardview.widget.CardView>
 
+
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:src="@drawable/ic_action_person_under_dark"
-        android:layout_marginTop="102dp"
+        android:layout_marginTop="62dp"
         android:layout_centerHorizontal="true"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content" />
+
+
 
 </RelativeLayout>
