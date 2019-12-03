@@ -1,0 +1,154 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:background="@android:color/white"
+    android:layout_below="@+id/request_payment_headline_view"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <LinearLayout
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:orientation="vertical"
+        android:padding="14dp"
+        android:background="@android:color/white"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:textSize="16sp"
+            android:text="Customer Details"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+
+        <RelativeLayout
+            android:id="@+id/request_payment_vendor_entry_view"
+            android:background="@drawable/border_grey_background"
+            android:padding="16dp"
+            android:layout_marginTop="14dp"
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <LinearLayout
+                android:layout_alignParentStart="true"
+                android:orientation="vertical"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:id="@+id/request_payment_vendor_name_text_view"
+                    android:textSize="18sp"
+                    android:textColor="@android:color/black"
+                    android:text="Customer Names"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"/>
+
+                <TextView
+                    android:id="@+id/request_payment_vendor_email_text_view"
+                    android:layout_marginTop="8dp"
+                    android:text="customer.email@gmail.com"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"/>
+
+                <TextView
+                    android:id="@+id/request_payment_vendor_phone_number_text_view"
+                    android:layout_marginTop="8dp"
+                    android:text="+254712345678"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"/>
+
+            </LinearLayout>
+
+            <de.hdodenhof.circleimageview.CircleImageView
+                android:id="@+id/request_payment_vendor_image_view"
+                android:layout_alignParentEnd="true"
+                app:civ_border_color="@color/colorPrimary"
+                app:civ_border_width="1dp"
+                android:src="@drawable/avatar"
+                android:layout_width="62dp"
+                android:layout_height="62dp"/>
+
+        </RelativeLayout>
+
+        <TextView
+            android:layout_marginTop="18dp"
+            android:textSize="16sp"
+            android:text="Order details"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+
+        <LinearLayout
+            android:id="@+id/request_payments_order_number_field_view"
+            android:background="@drawable/text_field_grey_background"
+            android:padding="12dp"
+            android:layout_marginTop="14dp"
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:text="Order number"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
+
+            <EditText
+                android:id="@+id/request_payments_order_number_edit_text"
+                android:layout_marginTop="12dp"
+                android:textSize="16sp"
+                android:focusedByDefault="false"
+                android:textColor="@android:color/black"
+                android:hint="65836393212474633245"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
+
+        </LinearLayout>
+
+        <TextView
+            android:textStyle="italic"
+            android:layout_marginTop="8dp"
+            android:text="Input order number"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+
+        <LinearLayout
+            android:id="@+id/request_payment_amount_entry_view"
+            android:background="@drawable/text_field_grey_background"
+            android:padding="12dp"
+            android:layout_marginTop="14dp"
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:text="Amount"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
+
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:textColor="@android:color/black"
+                    android:textStyle="bold"
+                    android:text="Ksh. "
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"/>
+
+                <EditText
+                    android:id="@+id/request_payment_amount_edit_text"
+                    android:textSize="16sp"
+                    android:focusedByDefault="false"
+                    android:inputType="numberDecimal"
+                    android:textColor="@android:color/black"
+                    android:hint="3200"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"/>
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+</ScrollView>
