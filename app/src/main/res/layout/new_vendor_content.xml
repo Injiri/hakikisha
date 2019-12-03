@@ -90,7 +90,7 @@
                     android:id="@+id/vendor_phone_number_edit_text"
                     android:textSize="16sp"
                     android:focusedByDefault="false"
-                    android:inputType="numberDecimal"
+                    android:inputType="phone"
                     android:textColor="@android:color/black"
                     android:hint="+254 712 374 123"
                     android:layout_width="match_parent"
@@ -117,6 +117,7 @@
             <EditText
                 android:id="@+id/vendor_email_edit_text"
                 android:textSize="16sp"
+                android:inputType="textEmailAddress"
                 android:focusedByDefault="false"
                 android:textColor="@android:color/black"
                 android:hint="e.g vendor.email@gmail.com"
