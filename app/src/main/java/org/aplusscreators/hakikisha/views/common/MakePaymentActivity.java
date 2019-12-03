@@ -16,6 +16,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import org.aplusscreators.hakikisha.R;
+import org.aplusscreators.hakikisha.views.dialog.NewVendorDialog;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 
@@ -105,6 +106,14 @@ public class MakePaymentActivity extends AppCompatActivity {
                     startActivity(intent);
                     finish();
                 }
+            }
+        });
+
+        this.sellerDetailsView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                NewVendorDialog vendorDialog = new NewVendorDialog(MakePaymentActivity.this);
+                vendorDialog.show();
             }
         });
     }

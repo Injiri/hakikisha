@@ -1,6 +1,45 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical" android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:orientation="vertical"
+    android:padding="14dp"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <TextView
+        android:textSize="18sp"
+        android:layout_marginTop="12dp"
+        android:textColor="@android:color/black"
+        android:text="Choose vendor from the list"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
+
+    <Spinner
+        android:id="@+id/vendor_options_spinner"
+        android:layout_marginTop="12dp"
+        android:layout_marginBottom="16dp"
+        android:layout_width="400dp"
+        android:layout_height="wrap_content"/>
+
+    <RelativeLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:layout_toLeftOf="@+id/choose_vendor_new_vendor_button"
+            android:layout_marginEnd="12dp"
+            android:src="@drawable/ic_arrow_check_white"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/choose_vendor_new_vendor_button"
+            android:layout_alignParentEnd="true"
+            android:layout_gravity="end"
+            android:src="@drawable/ic_arrow_add_dark"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+
+    </RelativeLayout>
 
 </LinearLayout>
