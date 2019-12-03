@@ -24,6 +24,7 @@ public class IncomeTransactionsFragment extends Fragment {
 
     private OrdersAdapter adapter;
     private RecyclerView orderRecyclerView;
+    private View noDataView;
 
     private List<Order> orderList = new ArrayList<>();
 
@@ -60,6 +61,7 @@ public class IncomeTransactionsFragment extends Fragment {
 
     private void initializeResources(View view) {
         this.orderRecyclerView = view.findViewById(R.id.income_recycler_view);
+        this.noDataView = view.findViewById(R.id.transaction_no_data_layout_view);
         this.adapter = new OrdersAdapter(getActivity(), orderList, new OrdersAdapter.OnOrderClickedListener() {
             @Override
             public void onOrderClicked(int position) {
