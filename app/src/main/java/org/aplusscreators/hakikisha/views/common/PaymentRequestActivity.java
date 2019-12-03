@@ -38,6 +38,15 @@ public class PaymentRequestActivity extends AppCompatActivity {
 
     private void initializeResources() {
         this.closeActionView = findViewById(R.id.activity_request_payment_close_action_view);
-        this.sendRequestPaymentFab = findViewById(R.id.)
+        this.sendRequestPaymentFab = findViewById(R.id.activity_payments_pay_fab);
+        this.customerDetailsView = findViewById(R.id.request_payment_customer_entry_view);
+        this.customerNameTextView = findViewById(R.id.request_payment_customer_name_text_view);
+        this.customerEmailAddressTextView = findViewById(R.id.request_payment_customer_email_text_view);
+        this.customerImageView = findViewById(R.id.request_payment_customer_image_view);
+        this.orderNumberEntryView = findViewById(R.id.request_payments_order_number_field_view);
+        this.orderNumberEditText = findViewById(R.id.make_payments_order_number_edit_text);
+        this.orderNumberEntryView = findViewById(R.id.request_payments_order_number_field_view);
+        this.amountEntryFieldView = findViewById(R.id.request_payment_amount_entry_view);
+        this.amountEntryEditText = findViewById(R.id.request_payment_amount_edit_text);
     }
 }
