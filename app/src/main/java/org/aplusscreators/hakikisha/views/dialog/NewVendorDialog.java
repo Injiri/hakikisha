@@ -26,7 +26,7 @@ public class NewVendorDialog extends Dialog {
     private String[] vendors = {
             "Olx","Jumia","Alibaba"
     };
-    
+
     public NewVendorDialog(@NonNull Context context) {
         super(context);
     }
@@ -36,7 +36,7 @@ public class NewVendorDialog extends Dialog {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.choose_vendor_dialog);
 
-        this.addVendorFab = findViewById(R.id.activity_new_vendor_fab);
+        this.addVendorFab = findViewById(R.id.choose_vendor_new_vendor_button);
         this.submitVendorFab = findViewById(R.id.submit_vendor_button);
         this.vendorsSpinner = findViewById(R.id.vendor_options_spinner);
         this.vendorsAdapter = new ArrayAdapter<>(getContext(),android.R.layout.simple_spinner_dropdown_item,vendors);
@@ -45,6 +45,7 @@ public class NewVendorDialog extends Dialog {
         this.addVendorFab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                dismiss();
                 Intent intent = new Intent(getContext(), VendorFormActivity.class);
                 getContext().startActivity(intent);
             }
