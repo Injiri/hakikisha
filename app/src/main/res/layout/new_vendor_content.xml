@@ -15,14 +15,22 @@
 
         <TextView
             android:textSize="16sp"
-            android:text="Recipient"
+            android:text=""
             android:layout_width="match_parent"
             android:layout_height="wrap_content"/>
+
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:id="@+id/make_payment_vendor_image_view"
+            app:civ_border_color="@color/colorPrimary"
+            app:civ_border_width="1dp"
+            android:src="@drawable/avatar"
+            android:layout_width="62dp"
+            android:layout_height="62dp"/>
 
         <TextView
             android:layout_marginTop="18dp"
             android:textSize="16sp"
-            android:text="Payment details"
+            android:text="Vendor details"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"/>
 
@@ -36,7 +44,7 @@
             android:layout_height="wrap_content">
 
             <TextView
-                android:text="Order number"
+                android:text="Vendor Name"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"/>
 
@@ -46,7 +54,7 @@
                 android:textSize="16sp"
                 android:focusedByDefault="false"
                 android:textColor="@android:color/black"
-                android:hint="65836393212474633245"
+                android:hint="e.g. John Does"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"/>
 
@@ -55,7 +63,7 @@
         <TextView
             android:textStyle="italic"
             android:layout_marginTop="8dp"
-            android:text="Input order number provided by the vendor"
+            android:text="Input vendor name"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"/>
 
@@ -69,7 +77,7 @@
             android:layout_height="wrap_content">
 
             <TextView
-                android:text="Amount"
+                android:text="Phone number"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"/>
 
@@ -78,20 +86,13 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
 
-                <TextView
-                    android:textColor="@android:color/black"
-                    android:textStyle="bold"
-                    android:text="Ksh. "
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"/>
-
                 <EditText
                     android:id="@+id/make_payment_amount_edit_text"
                     android:textSize="16sp"
                     android:focusedByDefault="false"
                     android:inputType="numberDecimal"
                     android:textColor="@android:color/black"
-                    android:hint="3200"
+                    android:hint="+254 712 374 123"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"/>
 
@@ -109,15 +110,16 @@
             android:layout_height="wrap_content">
 
             <TextView
-                android:text="Delivered by"
+                android:text="Email"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"/>
 
-            <Spinner
-                android:id="@+id/payments_delivery_option_spinner"
-                android:layout_marginTop="12dp"
+            <EditText
+                android:id="@+id/make_payment_email_edit_text"
                 android:textSize="16sp"
+                android:focusedByDefault="false"
                 android:textColor="@android:color/black"
+                android:hint="e.g vendor.email@gmail.com"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"/>
 
