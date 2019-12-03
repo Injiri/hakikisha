@@ -69,6 +69,12 @@
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/pending_transactions_recycler_view"
+            android:visibility="gone"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/pending_transactions_no_data_recycler_view"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
 

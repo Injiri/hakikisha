@@ -23,6 +23,7 @@ import com.wangjie.rapidfloatingactionbutton.contentimpl.labellist.RFACLabelItem
 import com.wangjie.rapidfloatingactionbutton.contentimpl.labellist.RapidFloatingActionContentLabelList;
 
 import org.aplusscreators.hakikisha.R;
+import org.aplusscreators.hakikisha.adapters.PendingOrderNoDataAdapter;
 import org.aplusscreators.hakikisha.adapters.PendingOrdersAdapter;
 import org.aplusscreators.hakikisha.adapters.viewpager.TransactionsViewPagerAdapter;
 import org.aplusscreators.hakikisha.model.Order;
@@ -44,6 +45,7 @@ public class DashboardActivity extends AppCompatActivity implements RapidFloatin
     private TextView welcomeMessageTExtView;
     private FloatingActionButton actionsFab;
     private RecyclerView pendingTransactionsRecyclerView;
+    private RecyclerView pendingNoDataTransactionsRecyclerView;
     private ViewPager transactionsViewPager;
     private TabLayout transactionsTabLayout;
     private View expandTransactionsView;
@@ -54,6 +56,7 @@ public class DashboardActivity extends AppCompatActivity implements RapidFloatin
     private View bottomSheetsRequestDeliveryView;
 
     private PendingOrdersAdapter pendingOrdersAdapter;
+    private PendingOrderNoDataAdapter pendingOrderNoDataAdapter;
     private TransactionsViewPagerAdapter transactionsViewPagerAdapter;
     private BottomSheetBehavior bottomSheetBehavior;
 
@@ -83,7 +86,7 @@ public class DashboardActivity extends AppCompatActivity implements RapidFloatin
         orders.add(olxOrder);
 
         orderList.addAll(orders);
-        pendingOrdersAdapter.notifyDataSetChanged();
+       // pendingOrdersAdapter.notifyDataSetChanged();
 
     }
 
@@ -100,6 +103,7 @@ public class DashboardActivity extends AppCompatActivity implements RapidFloatin
         this.bottomSheetMakePaymentView = findViewById(R.id.make_payment_action_view);
         this.bottomSheetRequestPaymentView = findViewById(R.id.request_payment_actions_view);
         this.bottomSheetsRequestDeliveryView = findViewById(R.id.request_delivery_action_view);
+        this.pendingNoDataTransactionsRecyclerView = findViewById(R.id.pending_transactions_no_data_recycler_view);
 
         this.pendingOrdersAdapter = new PendingOrdersAdapter(DashboardActivity.this, orderList, new PendingOrdersAdapter.OnOrderClickedListener() {
             @Override
@@ -109,6 +113,10 @@ public class DashboardActivity extends AppCompatActivity implements RapidFloatin
         });
         this.pendingTransactionsRecyclerView.setLayoutManager( new LinearLayoutManager(DashboardActivity.this,RecyclerView.HORIZONTAL,false));
         this.pendingTransactionsRecyclerView.setAdapter(pendingOrdersAdapter);
+
+        this.pendingOrderNoDataAdapter = new PendingOrderNoDataAdapter(DashboardActivity.this);
+        this.pendingNoDataTransactionsRecyclerView.setLayoutManager( new LinearLayoutManager(DashboardActivity.this,RecyclerView.HORIZONTAL,false));
+        this.pendingNoDataTransactionsRecyclerView.setAdapter(pendingOrderNoDataAdapter);
 
         this.transactionsViewPagerAdapter = new TransactionsViewPagerAdapter(getSupportFragmentManager());
         this.transactionsTabLayout.setupWithViewPager(transactionsViewPager);
