@@ -166,7 +166,7 @@ public class DashboardActivity extends AppCompatActivity implements RapidFloatin
             }
         });
 
-        
+
     }
 
     @Override

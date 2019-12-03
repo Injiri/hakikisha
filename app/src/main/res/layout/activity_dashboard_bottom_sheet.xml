@@ -20,9 +20,9 @@
         android:layout_height="wrap_content">
 
         <ImageView
-            android:src="@drawable/cash_in_hand_480"
-            android:layout_width="32dp"
-            android:layout_height="32dp"/>
+            android:src="@drawable/pay_icon"
+            android:layout_width="26dp"
+            android:layout_height="26dp"/>
 
         <TextView
             android:textColor="@android:color/black"
@@ -43,9 +43,9 @@
         android:layout_height="wrap_content">
 
         <ImageView
-            android:src="@drawable/bank_card_480"
-            android:layout_width="32dp"
-            android:layout_height="32dp"/>
+            android:src="@drawable/pay_request"
+            android:layout_width="26dp"
+            android:layout_height="26dp"/>
 
         <TextView
             android:textColor="@android:color/black"
@@ -66,9 +66,9 @@
         android:layout_height="wrap_content">
 
         <ImageView
-            android:src="@drawable/logo"
-            android:layout_width="32dp"
-            android:layout_height="32dp"/>
+            android:src="@drawable/delivery_request"
+            android:layout_width="26dp"
+            android:layout_height="26dp"/>
 
         <TextView
             android:textColor="@android:color/black"
