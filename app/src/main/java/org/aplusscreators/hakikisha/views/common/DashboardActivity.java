@@ -156,6 +156,17 @@ public class DashboardActivity extends AppCompatActivity implements RapidFloatin
                 finish();
             }
         });
+
+        this.bottomSheetRequestPaymentView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(DashboardActivity.this,PaymentRequestActivity.class);
+                startActivity(intent);
+                finish();
+            }
+        });
+
+        
     }
 
     @Override

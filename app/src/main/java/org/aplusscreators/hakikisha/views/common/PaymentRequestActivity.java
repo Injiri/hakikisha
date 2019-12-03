@@ -1,5 +1,6 @@
 package org.aplusscreators.hakikisha.views.common;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
@@ -48,5 +49,13 @@ public class PaymentRequestActivity extends AppCompatActivity {
         this.orderNumberEntryView = findViewById(R.id.request_payments_order_number_field_view);
         this.amountEntryFieldView = findViewById(R.id.request_payment_amount_entry_view);
         this.amountEntryEditText = findViewById(R.id.request_payment_amount_edit_text);
+    }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        Intent intent = new Intent(PaymentRequestActivity.this,DashboardActivity.class);
+        startActivity(intent);
+        finish();
     }
 }
