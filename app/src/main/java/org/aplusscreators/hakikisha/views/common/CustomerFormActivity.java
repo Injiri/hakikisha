@@ -18,6 +18,7 @@ import de.hdodenhof.circleimageview.CircleImageView;
 public class CustomerFormActivity extends AppCompatActivity {
 
     CircleImageView customerProfileImageView;
+    View closeFormView;
     EditText customerNamesEditText;
     EditText customerPhoneEditText;
     EditText customerEmailEditText;
@@ -37,11 +38,21 @@ public class CustomerFormActivity extends AppCompatActivity {
         this.customerPhoneEditText = findViewById(R.id.customer_phone_number_edit_text);
         this.customerEmailEditText = findViewById(R.id.customer_email_edit_text);
         this.addCustomerFab = findViewById(R.id.activity_new_customer_fab);
+        this.closeFormView = findViewById(R.id.activity_add_customer_close_action_view);
 
         this.addCustomerFab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Toast.makeText(getApplicationContext(),"Customer added successfuly",Toast.LENGTH_LONG).show();
+                Intent intent = new Intent(CustomerFormActivity.this,DashboardActivity.class);
+                startActivity(intent);
+                finish();
+            }
+        });
+
+        this.closeFormView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
                 Intent intent = new Intent(CustomerFormActivity.this,DashboardActivity.class);
                 startActivity(intent);
                 finish();
