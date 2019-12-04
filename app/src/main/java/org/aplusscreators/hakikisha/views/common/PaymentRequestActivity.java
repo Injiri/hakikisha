@@ -67,6 +67,15 @@ public class PaymentRequestActivity extends AppCompatActivity {
                 finish();
             }
         });
+
+        this.customerDetailsView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(PaymentRequestActivity.this,CustomerFormActivity.class);
+                startActivity(intent);
+                finish();
+            }
+        });
     }
 
     private boolean validatefields() {

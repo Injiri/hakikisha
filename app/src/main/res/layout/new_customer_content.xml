@@ -20,7 +20,7 @@
             android:layout_height="wrap_content"/>
 
         <de.hdodenhof.circleimageview.CircleImageView
-            android:id="@+id/make_new_vendor_image_view"
+            android:id="@+id/make_new_customer_image_view"
             app:civ_border_color="@color/colorPrimary"
             app:civ_border_width="1dp"
             android:src="@drawable/avatar"
@@ -49,7 +49,7 @@
                 android:layout_height="wrap_content"/>
 
             <EditText
-                android:id="@+id/vendor_name_edit_text"
+                android:id="@+id/customer_name_edit_text"
                 android:layout_marginTop="12dp"
                 android:textSize="16sp"
                 android:focusedByDefault="false"
@@ -87,7 +87,7 @@
                 android:layout_height="wrap_content">
 
                 <EditText
-                    android:id="@+id/vendor_phone_number_edit_text"
+                    android:id="@+id/customer_phone_number_edit_text"
                     android:textSize="16sp"
                     android:focusedByDefault="false"
                     android:inputType="phone"
@@ -115,7 +115,7 @@
                 android:layout_height="wrap_content"/>
 
             <EditText
-                android:id="@+id/vendor_email_edit_text"
+                android:id="@+id/customer_email_edit_text"
                 android:textSize="16sp"
                 android:inputType="textEmailAddress"
                 android:focusedByDefault="false"
