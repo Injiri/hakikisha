@@ -110,8 +110,6 @@ public class CustomerFormActivity extends AppCompatActivity {
             try {
                 Picasso.get().load(photoUri).into(customerProfileImageView);
                 ObjectMapper objectMapper = new ObjectMapper();
-                String imageFileSerialized = objectMapper.writeValueAsString(imageFile);
-                HakikishaPreference.setUserProfileUriPref(CustomerFormActivity.this, imageFileSerialized);
             } catch (Exception ex) {
                 Log.e(TAG, "onActivityResult: " + ex);
             }
