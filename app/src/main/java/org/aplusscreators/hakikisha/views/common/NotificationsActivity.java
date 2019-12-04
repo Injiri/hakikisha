@@ -1,6 +1,10 @@
 package org.aplusscreators.hakikisha.views.common;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.widget.ProgressBar;
 
 import androidx.annotation.Nullable;
@@ -40,7 +44,15 @@ public class NotificationsActivity extends AppCompatActivity {
         fetchNotifications();
     }
 
-    public void fetchNotifications(){
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        Intent intent = new Intent(NotificationsActivity.this, DashboardActivity.class);
+        startActivity(intent);
+        finish();
+    }
+
+    public void fetchNotifications() {
         Notification notification = new Notification();
         notification.setUuid(UUID.randomUUID().toString());
         notification.setTitle("Thank you for joining hakikisha, check your email inbox to verify your account");
@@ -55,9 +67,34 @@ public class NotificationsActivity extends AppCompatActivity {
         this.notificationsRecyclerView = findViewById(R.id.notifications_recycler_view);
         this.progressBar = findViewById(R.id.notifications_progress_bar);
 
-        this.notificationsListAdapter = new NotificationsListAdapter(notificationList,NotificationsActivity.this);
-        this.notificationsRecyclerView.setLayoutManager( new LinearLayoutManager(NotificationsActivity.this));
+        this.notificationsListAdapter = new NotificationsListAdapter(notificationList, NotificationsActivity.this);
+        this.notificationsRecyclerView.setLayoutManager(new LinearLayoutManager(NotificationsActivity.this));
         this.notificationsRecyclerView.setAdapter(notificationsListAdapter);
 
+        setSupportActionBar(toolbar);
+
+        if (getSupportActionBar() != null) {
+            getSupportActionBar().setDisplayShowHomeEnabled(true);
+            getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        }
+
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case android.R.id.home:
+                Intent intent = new Intent(NotificationsActivity.this, DashboardActivity.class);
+                startActivity(intent);
+                finish();
+                break;
+        }
+        return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.notifications_menu,menu);
+        return super.onCreateOptionsMenu(menu);
     }
 }

@@ -2,15 +2,16 @@
 <androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     app:cardElevation="6dp"
+    android:background="@android:color/white"
     android:id="@+id/notification_parent_card_view"
-    android:layout_margin="8dp"
+    android:layout_margin="4dp"
     app:cardCornerRadius="4dp"
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
 
     <LinearLayout
         android:orientation="horizontal"
-        android:padding="12dp"
+        android:padding="2dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
@@ -24,6 +25,8 @@
         <TextView
             android:id="@+id/item_notification_message_text_view"
             android:layout_marginTop="12dp"
+            android:layout_marginBottom="16dp"
+            android:textSize="19sp"
             android:textColor="@android:color/black"
             android:text="Thank you for joining hakikisha, check your email inbox to verify your account"
             android:layout_width="wrap_content"

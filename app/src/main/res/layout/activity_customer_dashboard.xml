@@ -34,6 +34,7 @@
                 app:civ_border_width="1dp" />
 
             <ImageView
+                android:id="@+id/activity_dashboard_notifications_view"
                 android:layout_width="24dp"
                 android:layout_height="24dp"
                 android:layout_alignParentEnd="true"
