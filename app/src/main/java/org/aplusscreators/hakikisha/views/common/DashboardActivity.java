@@ -23,6 +23,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.viewpager.widget.ViewPager;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.google.android.material.bottomsheet.BottomSheetBehavior;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.tabs.TabLayout;
@@ -74,6 +75,7 @@ public class DashboardActivity extends AppCompatActivity implements RapidFloatin
 
     private List<Order> orderList = new ArrayList<>();
     private Uri photoUri;
+    private File imageFile;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -99,7 +101,7 @@ public class DashboardActivity extends AppCompatActivity implements RapidFloatin
         orders.add(olxOrder);
 
         orderList.addAll(orders);
-       // pendingOrdersAdapter.notifyDataSetChanged();
+        // pendingOrdersAdapter.notifyDataSetChanged();
 
     }
 
@@ -124,11 +126,11 @@ public class DashboardActivity extends AppCompatActivity implements RapidFloatin
 
             }
         });
-        this.pendingTransactionsRecyclerView.setLayoutManager( new LinearLayoutManager(DashboardActivity.this,RecyclerView.HORIZONTAL,false));
+        this.pendingTransactionsRecyclerView.setLayoutManager(new LinearLayoutManager(DashboardActivity.this, RecyclerView.HORIZONTAL, false));
         this.pendingTransactionsRecyclerView.setAdapter(pendingOrdersAdapter);
 
         this.pendingOrderNoDataAdapter = new PendingOrderNoDataAdapter(DashboardActivity.this);
-        this.pendingNoDataTransactionsRecyclerView.setLayoutManager( new LinearLayoutManager(DashboardActivity.this,RecyclerView.HORIZONTAL,false));
+        this.pendingNoDataTransactionsRecyclerView.setLayoutManager(new LinearLayoutManager(DashboardActivity.this, RecyclerView.HORIZONTAL, false));
         this.pendingNoDataTransactionsRecyclerView.setAdapter(pendingOrderNoDataAdapter);
 
         this.transactionsViewPagerAdapter = new TransactionsViewPagerAdapter(getSupportFragmentManager());
@@ -138,7 +140,7 @@ public class DashboardActivity extends AppCompatActivity implements RapidFloatin
         this.expandTransactionsView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(DashboardActivity.this,TransactionsExpandedActivity.class);
+                Intent intent = new Intent(DashboardActivity.this, TransactionsExpandedActivity.class);
                 startActivity(intent);
                 finish();
             }
@@ -150,10 +152,10 @@ public class DashboardActivity extends AppCompatActivity implements RapidFloatin
         this.actionsFab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (bottomSheetBehavior.getState() == BottomSheetBehavior.STATE_HIDDEN){
+                if (bottomSheetBehavior.getState() == BottomSheetBehavior.STATE_HIDDEN) {
                     bottomSheetBehavior.setState(BottomSheetBehavior.STATE_EXPANDED);
                     bottomSheetsFog.setVisibility(View.VISIBLE);
-                } else if (bottomSheetBehavior.getState() == BottomSheetBehavior.STATE_EXPANDED){
+                } else if (bottomSheetBehavior.getState() == BottomSheetBehavior.STATE_EXPANDED) {
                     bottomSheetBehavior.setState(BottomSheetBehavior.STATE_HIDDEN);
                     bottomSheetsFog.setVisibility(View.GONE);
                 }
@@ -172,7 +174,7 @@ public class DashboardActivity extends AppCompatActivity implements RapidFloatin
         this.bottomSheetMakePaymentView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(DashboardActivity.this,MakePaymentActivity.class);
+                Intent intent = new Intent(DashboardActivity.this, MakePaymentActivity.class);
                 startActivity(intent);
                 finish();
             }
@@ -181,7 +183,7 @@ public class DashboardActivity extends AppCompatActivity implements RapidFloatin
         this.bottomSheetRequestPaymentView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(DashboardActivity.this,PaymentRequestActivity.class);
+                Intent intent = new Intent(DashboardActivity.this, PaymentRequestActivity.class);
                 startActivity(intent);
                 finish();
             }
@@ -190,7 +192,7 @@ public class DashboardActivity extends AppCompatActivity implements RapidFloatin
         this.bottomSheetsRequestDeliveryView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(DashboardActivity.this,DeliveryRequestActivity.class);
+                Intent intent = new Intent(DashboardActivity.this, DeliveryRequestActivity.class);
                 startActivity(intent);
                 finish();
             }
@@ -206,33 +208,41 @@ public class DashboardActivity extends AppCompatActivity implements RapidFloatin
     }
 
     private void attemptCameraImageCapture() {
-        if (ActivityCompat.checkSelfPermission(DashboardActivity.this, Manifest.permission.CAMERA) == PackageManager.PERMISSION_GRANTED){
+        if (ActivityCompat.checkSelfPermission(DashboardActivity.this, Manifest.permission.CAMERA) == PackageManager.PERMISSION_GRANTED) {
             Intent camerCaptureIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-            File imageFile = FileUtils.createImageFile(getApplicationContext(),"haskikisha_profile_pic",",png");
-            photoUri = FileProvider.getUriForFile(getApplicationContext(),"org.aplusscreators.hakikisha.fileProvider",imageFile);
-            camerCaptureIntent.putExtra(MediaStore.EXTRA_OUTPUT,photoUri);
-            if (camerCaptureIntent.resolveActivity(getPackageManager()) == null){
-                Toast.makeText(getApplicationContext(),"Unable to open camera, try again later",Toast.LENGTH_LONG).show();
+            imageFile = FileUtils.createImageFile(getApplicationContext(), "haskikisha_profile_pic", ",png");
+            photoUri = FileProvider.getUriForFile(getApplicationContext(), "org.aplusscreators.hakikisha.fileProvider", imageFile);
+            camerCaptureIntent.putExtra(MediaStore.EXTRA_OUTPUT, photoUri);
+            if (camerCaptureIntent.resolveActivity(getPackageManager()) == null) {
+                Toast.makeText(getApplicationContext(), "Unable to open camera, try again later", Toast.LENGTH_LONG).show();
                 return;
             }
 
-            startActivityForResult(camerCaptureIntent,CAMERA_CAPTURE_REQUEST_CODE);
+            startActivityForResult(camerCaptureIntent, CAMERA_CAPTURE_REQUEST_CODE);
         } else {
-            ActivityCompat.requestPermissions(DashboardActivity.this,new String[]{Manifest.permission.CAMERA},CAMERA_PERMISSIONS_REQUEST_CODE);
+            ActivityCompat.requestPermissions(DashboardActivity.this, new String[]{Manifest.permission.CAMERA}, CAMERA_PERMISSIONS_REQUEST_CODE);
         }
     }
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
-        if (requestCode == CAMERA_CAPTURE_REQUEST_CODE && resultCode == Activity.RESULT_OK && photoUri != null){
-            Picasso.get().load(photoUri).into(userProfileImageView);
+        if (requestCode == CAMERA_CAPTURE_REQUEST_CODE && resultCode == Activity.RESULT_OK && photoUri != null) {
+            try {
+                Picasso.get().load(photoUri).into(userProfileImageView);
+                ObjectMapper objectMapper = new ObjectMapper();
+                String imageFileSerialized = objectMapper.writeValueAsString(imageFile);
+                HakikishaPreference.setUserProfileUriPref(DashboardActivity.this, imageFileSerialized);
+            } catch (Exception ex) {
+                Log.e(TAG, "onActivityResult: " + ex);
+            }
+
         }
         super.onActivityResult(requestCode, resultCode, data);
     }
 
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
-        if (requestCode == CAMERA_PERMISSIONS_REQUEST_CODE && grantResults[0] == PackageManager.PERMISSION_GRANTED){
+        if (requestCode == CAMERA_PERMISSIONS_REQUEST_CODE && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
             attemptCameraImageCapture();
         }
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
@@ -246,6 +256,18 @@ public class DashboardActivity extends AppCompatActivity implements RapidFloatin
         if (HakikishaPreference.getAccountUuidPrefs(DashboardActivity.this) == null)
             HakikishaPreference.setAccountUuidPrefs(DashboardActivity.this, UUID.randomUUID().toString());
 
+        String serializedProfileFile = HakikishaPreference.getUserProfileUriPref(DashboardActivity.this);
+        if (serializedProfileFile != null) {
+            try {
+                ObjectMapper objectMapper = new ObjectMapper();
+                File imageFile = objectMapper.readValue(serializedProfileFile, File.class);
+                Picasso.get().load(imageFile).into(userProfileImageView);
+            } catch (Exception ex) {
+                Log.e(TAG, "onStart: " + ex);
+            }
+
+        }
+
     }
 
     private void hakikishaPermissionsRequest() {
@@ -257,19 +279,18 @@ public class DashboardActivity extends AppCompatActivity implements RapidFloatin
 
     private void sendEmailSmsIfNeccessary() {
 
-        PendingIntent pendingIntent = PendingIntent.getBroadcast(DashboardActivity.this,0,new Intent("Filter"),0);
+        PendingIntent pendingIntent = PendingIntent.getBroadcast(DashboardActivity.this, 0, new Intent("Filter"), 0);
 
         Intent data = getIntent();
         String sellerPhone = data.getStringExtra("send_purchase_sms");
         String sellerEmail = data.getStringExtra("send_purchase_email");
 
         if (sellerPhone != null && !sellerPhone.isEmpty())
-            HakikishaUtils.sendSms(DashboardActivity.this, "Sms Message", sellerPhone,pendingIntent);
+            HakikishaUtils.sendSms(DashboardActivity.this, "Sms Message", sellerPhone, pendingIntent);
         else if (sellerEmail != null && !sellerEmail.isEmpty())
             HakikishaUtils.sendEmail(DashboardActivity.this, "from@gmail", sellerEmail, "PURCHASE EMAIL", "Purchase message...");
 
     }
-
 
 
     @Override
