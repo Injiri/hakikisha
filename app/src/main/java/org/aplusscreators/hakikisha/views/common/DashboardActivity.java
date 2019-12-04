@@ -18,6 +18,7 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
+import androidx.core.content.FileProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.viewpager.widget.ViewPager;
@@ -35,10 +36,12 @@ import org.aplusscreators.hakikisha.adapters.PendingOrdersAdapter;
 import org.aplusscreators.hakikisha.adapters.viewpager.TransactionsViewPagerAdapter;
 import org.aplusscreators.hakikisha.model.Order;
 import org.aplusscreators.hakikisha.settings.HakikishaPreference;
+import org.aplusscreators.hakikisha.utils.FileUtils;
 import org.aplusscreators.hakikisha.utils.HakikishaUtils;
 import org.aplusscreators.hakikisha.views.buyer.GoodsReceiptActivity;
 import org.aplusscreators.hakikisha.views.buyer.RegisterPurchaseForm;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
@@ -70,6 +73,7 @@ public class DashboardActivity extends AppCompatActivity implements RapidFloatin
     private BottomSheetBehavior bottomSheetBehavior;
 
     private List<Order> orderList = new ArrayList<>();
+    private Uri photoUri;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -199,12 +203,14 @@ public class DashboardActivity extends AppCompatActivity implements RapidFloatin
             }
         });
 
-
     }
 
     private void attemptCameraImageCapture() {
         if (ActivityCompat.checkSelfPermission(DashboardActivity.this, Manifest.permission.CAMERA) == PackageManager.PERMISSION_GRANTED){
             Intent camerCaptureIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+            File imageFile = FileUtils.createImageFile(getApplicationContext(),"haskikisha_profile_pic",",png");
+            photoUri = FileProvider.getUriForFile(getApplicationContext(),"org.aplusscreators.hakikisha.fileProvider",imageFile);
+            camerCaptureIntent.putExtra(MediaStore.EXTRA_OUTPUT,photoUri);
             if (camerCaptureIntent.resolveActivity(getPackageManager()) == null){
                 Toast.makeText(getApplicationContext(),"Unable to open camera, try again later",Toast.LENGTH_LONG).show();
                 return;
@@ -218,9 +224,8 @@ public class DashboardActivity extends AppCompatActivity implements RapidFloatin
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
-        if (requestCode == CAMERA_CAPTURE_REQUEST_CODE && resultCode == Activity.RESULT_OK && data != null){
-            Uri imageuri = data.getData();
-            Picasso.get().load(imageuri).into(userProfileImageView);
+        if (requestCode == CAMERA_CAPTURE_REQUEST_CODE && resultCode == Activity.RESULT_OK && photoUri != null){
+            Picasso.get().load(photoUri).into(userProfileImageView);
         }
         super.onActivityResult(requestCode, resultCode, data);
     }
