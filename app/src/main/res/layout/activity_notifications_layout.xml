@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
     android:background="@android:color/white"
@@ -16,6 +16,7 @@
         android:layout_height="?attr/actionBarSize"/>
 
     <ProgressBar
+        android:layout_below="@+id/notifications_activity_toolbar"
         android:layout_marginBottom="12dp"
         android:id="@+id/notifications_progress_bar"
         style="@style/Widget.AppCompat.ProgressBar.Horizontal"
@@ -23,8 +24,20 @@
         android:layout_height="wrap_content"/>
 
     <androidx.recyclerview.widget.RecyclerView
+        android:padding="6dp"
+        android:layout_below="@+id/notifications_progress_bar"
         android:id="@+id/notifications_recycler_view"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"/>
 
-</LinearLayout>
+    <TextView
+        android:layout_alignParentBottom="true"
+        android:layout_gravity="bottom"
+        android:layout_margin="12dp"
+        android:textColor="@android:color/black"
+        android:textSize="16sp"
+        android:text="To review or dismiss notifications, please login to Hakikisha in your web browser"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
+
+</RelativeLayout>
