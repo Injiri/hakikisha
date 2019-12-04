@@ -1,13 +1,18 @@
 package org.aplusscreators.hakikisha.views.common;
 
 import android.Manifest;
+import android.app.Activity;
 import android.app.PendingIntent;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.net.Uri;
 import android.os.Bundle;
+import android.provider.MediaStore;
 import android.view.View;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
@@ -19,6 +24,7 @@ import androidx.viewpager.widget.ViewPager;
 import com.google.android.material.bottomsheet.BottomSheetBehavior;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.tabs.TabLayout;
+import com.squareup.picasso.Picasso;
 import com.wangjie.rapidfloatingactionbutton.contentimpl.labellist.RFACLabelItem;
 import com.wangjie.rapidfloatingactionbutton.contentimpl.labellist.RapidFloatingActionContentLabelList;
 
@@ -40,6 +46,8 @@ import de.hdodenhof.circleimageview.CircleImageView;
 
 public class DashboardActivity extends AppCompatActivity implements RapidFloatingActionContentLabelList.OnRapidFloatingActionContentLabelListListener {
     private static final String TAG = "DashboardActivity";
+    private static final int CAMERA_CAPTURE_REQUEST_CODE = 4441;
+    private static final int CAMERA_PERMISSIONS_REQUEST_CODE = 3331;
 
     private CircleImageView userProfileImageView;
     private TextView welcomeMessageTExtView;
@@ -183,7 +191,45 @@ public class DashboardActivity extends AppCompatActivity implements RapidFloatin
             }
         });
 
+        this.userProfileImageView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                attemptCameraImageCapture();
+            }
+        });
 
+
+    }
+
+    private void attemptCameraImageCapture() {
+        if (ActivityCompat.checkSelfPermission(DashboardActivity.this, Manifest.permission.CAMERA) == PackageManager.PERMISSION_GRANTED){
+            Intent camerCaptureIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+            if (camerCaptureIntent.resolveActivity(getPackageManager()) == null){
+                Toast.makeText(getApplicationContext(),"Unable to open camera, try again later",Toast.LENGTH_LONG).show();
+                return;
+            }
+
+            startActivityForResult(camerCaptureIntent,CAMERA_CAPTURE_REQUEST_CODE);
+        } else {
+            ActivityCompat.requestPermissions(DashboardActivity.this,new String[]{Manifest.permission.CAMERA},CAMERA_PERMISSIONS_REQUEST_CODE);
+        }
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        if (requestCode == CAMERA_CAPTURE_REQUEST_CODE && resultCode == Activity.RESULT_OK && data != null){
+            Uri imageuri = data.getData();
+            Picasso.get().load(imageuri).into(userProfileImageView);
+        }
+        super.onActivityResult(requestCode, resultCode, data);
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        if (requestCode == CAMERA_PERMISSIONS_REQUEST_CODE && grantResults[0] == PackageManager.PERMISSION_GRANTED){
+            attemptCameraImageCapture();
+        }
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
     }
 
     @Override
