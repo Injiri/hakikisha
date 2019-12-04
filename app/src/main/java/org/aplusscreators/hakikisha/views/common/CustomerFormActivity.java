@@ -90,7 +90,7 @@ public class CustomerFormActivity extends AppCompatActivity {
     private void attemptCameraImageCapture() {
         if (ActivityCompat.checkSelfPermission(CustomerFormActivity.this, Manifest.permission.CAMERA) == PackageManager.PERMISSION_GRANTED) {
             Intent camerCaptureIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-            imageFile = FileUtils.createImageFile(getApplicationContext(), "hks_customer_"+ UUID.randomUUID().toString(), ",png");
+            imageFile = FileUtils.createImageFile(getApplicationContext(), "hks_customer_"+ UUID.randomUUID().toString(), ".png");
             photoUri = FileProvider.getUriForFile(getApplicationContext(), "org.aplusscreators.hakikisha.fileProvider", imageFile);
             camerCaptureIntent.putExtra(MediaStore.EXTRA_OUTPUT, photoUri);
             if (camerCaptureIntent.resolveActivity(getPackageManager()) == null) {

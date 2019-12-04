@@ -210,7 +210,7 @@ public class DashboardActivity extends AppCompatActivity implements RapidFloatin
     private void attemptCameraImageCapture() {
         if (ActivityCompat.checkSelfPermission(DashboardActivity.this, Manifest.permission.CAMERA) == PackageManager.PERMISSION_GRANTED) {
             Intent camerCaptureIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-            imageFile = FileUtils.createImageFile(getApplicationContext(), "haskikisha_profile_pic", ",png");
+            imageFile = FileUtils.createImageFile(getApplicationContext(), "haskikisha_profile_pic", ".png");
             photoUri = FileProvider.getUriForFile(getApplicationContext(), "org.aplusscreators.hakikisha.fileProvider", imageFile);
             camerCaptureIntent.putExtra(MediaStore.EXTRA_OUTPUT, photoUri);
             if (camerCaptureIntent.resolveActivity(getPackageManager()) == null) {
