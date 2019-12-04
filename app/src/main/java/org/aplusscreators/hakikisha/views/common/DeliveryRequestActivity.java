@@ -15,6 +15,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import org.aplusscreators.hakikisha.R;
+import org.aplusscreators.hakikisha.views.dialog.NewVendorDialog;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 
@@ -50,7 +51,7 @@ public class DeliveryRequestActivity extends AppCompatActivity {
     private void initializeResources() {
         this.closeActionView = findViewById(R.id.activity_request_payment_close_action_view);
         this.sendDeliveryRequestFab = findViewById(R.id.activity_delivery_request_fab);
-        this.sellerDetailsView = findViewById(R.id.request_payment_customer_entry_view);
+        this.sellerDetailsView = findViewById(R.id.request_delivery_vendor_data_entry_view);
         this.vendorNameTextView = findViewById(R.id.request_payment_vendor_name_text_view);
         this.vendorEmailAddressTextView = findViewById(R.id.request_payment_vendor_email_text_view);
         this.vendorPhoneTextView = findViewById(R.id.request_payment_vendor_phone_number_text_view);
@@ -70,6 +71,14 @@ public class DeliveryRequestActivity extends AppCompatActivity {
                 Intent intent = new Intent(DeliveryRequestActivity.this,DashboardActivity.class);
                 startActivity(intent);
                 finish();
+            }
+        });
+
+        this.sellerDetailsView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                NewVendorDialog vendorDialog = new NewVendorDialog(DeliveryRequestActivity.this);
+                vendorDialog.show();
             }
         });
 

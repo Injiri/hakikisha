@@ -20,7 +20,7 @@
             android:layout_height="wrap_content"/>
 
         <RelativeLayout
-            android:id="@+id/request_payment_customer_entry_view"
+            android:id="@+id/request_delivery_vendor_data_entry_view"
             android:background="@drawable/border_grey_background"
             android:padding="16dp"
             android:layout_marginTop="14dp"
