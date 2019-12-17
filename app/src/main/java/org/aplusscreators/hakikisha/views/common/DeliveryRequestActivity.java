@@ -1,5 +1,6 @@
 package org.aplusscreators.hakikisha.views.common;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -10,6 +11,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
@@ -61,6 +63,29 @@ public class DeliveryRequestActivity extends AppCompatActivity {
 
         this.deliveryOptionsAdapter = new ArrayAdapter<>(DeliveryRequestActivity.this,android.R.layout.simple_spinner_dropdown_item,deliveryOptions);
         this.deliveryOptionsSpinner.setAdapter(deliveryOptionsAdapter);
+
+        this.closeActionView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                AlertDialog.Builder alertBuilder = new AlertDialog.Builder(DeliveryRequestActivity.this)
+                        .setMessage("Are you sure you want to cancel ?")
+                        .setPositiveButton("Resume", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                dialog.dismiss();
+                            }
+                        })
+                        .setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                Intent intent = new Intent(DeliveryRequestActivity.this, DashboardActivity.class);
+                                startActivity(intent);
+                                finish();
+                            }
+                        });
+                alertBuilder.create().show();
+            }
+        });
 
         this.sendDeliveryRequestFab.setOnClickListener(new View.OnClickListener() {
             @Override
