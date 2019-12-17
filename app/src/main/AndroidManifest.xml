@@ -39,9 +39,9 @@
         <activity android:name=".views.buyer.CardPaymentActivity" />
         <activity android:name=".views.common.TermsActivity" />
         <activity android:name=".views.common.TransactionsExpandedActivity" />
-        <activity android:name=".views.common.MakePaymentActivity" />
+        <activity android:name=".views.common.RegisterPurchaseActivity" />
         <activity android:name=".views.common.PaymentConfirmationActivity" />
-        <activity android:name=".views.common.PaymentRequestActivity" />
+        <activity android:name=".views.common.MakeNewSaleActivity" />
         <activity android:name=".views.common.DeliveryRequestActivity" />
         <activity android:name=".views.common.VendorFormActivity" />
         <activity android:name=".views.common.CustomerFormActivity" />

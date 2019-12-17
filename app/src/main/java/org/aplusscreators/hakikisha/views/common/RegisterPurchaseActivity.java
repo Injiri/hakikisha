@@ -20,7 +20,7 @@ import org.aplusscreators.hakikisha.views.dialog.NewVendorDialog;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 
-public class MakePaymentActivity extends AppCompatActivity {
+public class RegisterPurchaseActivity extends AppCompatActivity {
 
     private View closeActionView;
     private FloatingActionButton activatePaymentFab;
@@ -62,15 +62,15 @@ public class MakePaymentActivity extends AppCompatActivity {
         this.amountEntryEditText = findViewById(R.id.make_payment_amount_edit_text);
         this.deliveryOptionsSpinner = findViewById(R.id.payments_delivery_option_spinner);
 
-        this.deliveryOptionsAdapter = new ArrayAdapter<>(MakePaymentActivity.this, android.R.layout.simple_spinner_dropdown_item, deliveryOptions);
+        this.deliveryOptionsAdapter = new ArrayAdapter<>(RegisterPurchaseActivity.this, android.R.layout.simple_spinner_dropdown_item, deliveryOptions);
         this.deliveryOptionsSpinner.setAdapter(this.deliveryOptionsAdapter);
 
         this.closeActionView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                AlertDialog.Builder alertBuilder = new AlertDialog.Builder(MakePaymentActivity.this)
+                AlertDialog.Builder alertBuilder = new AlertDialog.Builder(RegisterPurchaseActivity.this)
                         .setMessage("Are you sure you want to cancel this payment?")
-                        .setPositiveButton("No", new DialogInterface.OnClickListener() {
+                        .setPositiveButton("Resume", new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialog, int which) {
                                 dialog.dismiss();
@@ -79,7 +79,7 @@ public class MakePaymentActivity extends AppCompatActivity {
                         .setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialog, int which) {
-                                Intent intent = new Intent(MakePaymentActivity.this, DashboardActivity.class);
+                                Intent intent = new Intent(RegisterPurchaseActivity.this, DashboardActivity.class);
                                 startActivity(intent);
                                 finish();
                             }
@@ -102,7 +102,7 @@ public class MakePaymentActivity extends AppCompatActivity {
                 boolean allFieldsValid = validatefields();
                 if (allFieldsValid){
                     //todo proceed to make payments
-                    Intent intent = new Intent(MakePaymentActivity.this,PaymentConfirmationActivity.class);
+                    Intent intent = new Intent(RegisterPurchaseActivity.this,PaymentConfirmationActivity.class);
                     startActivity(intent);
                     finish();
                 }
@@ -112,7 +112,7 @@ public class MakePaymentActivity extends AppCompatActivity {
         this.sellerDetailsView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                NewVendorDialog vendorDialog = new NewVendorDialog(MakePaymentActivity.this);
+                NewVendorDialog vendorDialog = new NewVendorDialog(RegisterPurchaseActivity.this);
                 vendorDialog.show();
             }
         });
@@ -136,7 +136,7 @@ public class MakePaymentActivity extends AppCompatActivity {
 
     @Override
     public void onBackPressed() {
-        AlertDialog.Builder alertBuilder = new AlertDialog.Builder(MakePaymentActivity.this)
+        AlertDialog.Builder alertBuilder = new AlertDialog.Builder(RegisterPurchaseActivity.this)
                 .setMessage("Are you sure you want to cancel this payment?")
                 .setPositiveButton("No", new DialogInterface.OnClickListener() {
                     @Override
@@ -147,7 +147,7 @@ public class MakePaymentActivity extends AppCompatActivity {
                 .setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-                        Intent intent = new Intent(MakePaymentActivity.this, DashboardActivity.class);
+                        Intent intent = new Intent(RegisterPurchaseActivity.this, DashboardActivity.class);
                         startActivity(intent);
                         finish();
                     }

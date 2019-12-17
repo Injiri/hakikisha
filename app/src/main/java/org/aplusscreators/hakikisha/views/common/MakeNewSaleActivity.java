@@ -1,25 +1,25 @@
 package org.aplusscreators.hakikisha.views.common;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ProgressBar;
-import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
-import com.google.android.material.snackbar.Snackbar;
 
 import org.aplusscreators.hakikisha.R;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 
-public class PaymentRequestActivity extends AppCompatActivity {
+public class MakeNewSaleActivity extends AppCompatActivity {
 
     private View closeActionView;
     private FloatingActionButton sendRequestPaymentFab;
@@ -55,14 +55,37 @@ public class PaymentRequestActivity extends AppCompatActivity {
         this.amountEntryEditText = findViewById(R.id.request_payment_amount_edit_text);
         this.requestPaymentProgressBar = findViewById(R.id.request_payments_progress_bar);
 
+        this.closeActionView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                AlertDialog.Builder alertBuilder = new AlertDialog.Builder(MakeNewSaleActivity.this)
+                        .setMessage("Are you sure you want to cancel ?")
+                        .setPositiveButton("Resume", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                dialog.dismiss();
+                            }
+                        })
+                        .setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                Intent intent = new Intent(MakeNewSaleActivity.this, DashboardActivity.class);
+                                startActivity(intent);
+                                finish();
+                            }
+                        });
+                alertBuilder.create().show();
+            }
+        });
+
         this.sendRequestPaymentFab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 requestPaymentProgressBar.setVisibility(View.VISIBLE);
                 boolean valideFields = validatefields();
                 if (!valideFields)return;
-                Toast.makeText(PaymentRequestActivity.this,"Payment Request Sent", Toast.LENGTH_LONG).show();
-                Intent intent = new Intent(PaymentRequestActivity.this,DashboardActivity.class);
+                Toast.makeText(MakeNewSaleActivity.this,"Payment Request Sent", Toast.LENGTH_LONG).show();
+                Intent intent = new Intent(MakeNewSaleActivity.this,DashboardActivity.class);
                 startActivity(intent);
                 finish();
             }
@@ -71,7 +94,7 @@ public class PaymentRequestActivity extends AppCompatActivity {
         this.customerDetailsView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(PaymentRequestActivity.this,CustomerFormActivity.class);
+                Intent intent = new Intent(MakeNewSaleActivity.this,CustomerFormActivity.class);
                 startActivity(intent);
                 finish();
             }
@@ -97,7 +120,7 @@ public class PaymentRequestActivity extends AppCompatActivity {
     @Override
     public void onBackPressed() {
         super.onBackPressed();
-        Intent intent = new Intent(PaymentRequestActivity.this,DashboardActivity.class);
+        Intent intent = new Intent(MakeNewSaleActivity.this,DashboardActivity.class);
         startActivity(intent);
         finish();
     }

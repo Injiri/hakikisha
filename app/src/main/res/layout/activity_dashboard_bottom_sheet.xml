@@ -29,7 +29,7 @@
             android:textSize="18sp"
             android:gravity="center_vertical"
             android:layout_marginStart="14dp"
-            android:text="Make payment"
+            android:text="Register Purchase"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"/>
 
@@ -52,7 +52,7 @@
             android:textSize="18sp"
             android:gravity="center_vertical"
             android:layout_marginStart="14dp"
-            android:text="Request payment"
+            android:text="Make a Sale"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"/>
 
