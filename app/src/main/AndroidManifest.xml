@@ -40,7 +40,7 @@
         <activity android:name=".views.common.TransactionsExpandedActivity" />
         <activity android:name=".views.common.RegisterPurchaseActivity" />
         <activity android:name=".views.common.PaymentConfirmationActivity" />
-        <activity android:name=".views.common.MakeNewSaleActivity" />
+        <activity android:name=".views.common.HoldCashActivity" />
         <activity android:name=".views.common.DeliveryRequestActivity" />
         <activity android:name=".views.common.VendorFormActivity" />
         <activity android:name=".views.common.CustomerFormActivity" />

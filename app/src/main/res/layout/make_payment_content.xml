@@ -89,7 +89,7 @@
                 android:textSize="16sp"
                 android:focusedByDefault="false"
                 android:textColor="@android:color/black"
-                android:hint="65836393212474633245"
+                android:hint="Cool Goggles"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"/>
 

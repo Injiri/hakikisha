@@ -66,7 +66,7 @@ public class DashboardActivity extends AppCompatActivity implements RapidFloatin
     private View bottomSheetsFog;
     private View notificationsView;
     private View bottomSheetMakePaymentView;
-    private View bottomSheetRequestPaymentView;
+    private View bottomSheetHoldCashView;
     private View bottomSheetsRequestDeliveryView;
 
     private PendingOrdersAdapter pendingOrdersAdapter;
@@ -117,7 +117,7 @@ public class DashboardActivity extends AppCompatActivity implements RapidFloatin
         this.bottomSheetsView = findViewById(R.id.activity_dashboard_bottom_sheets);
         this.bottomSheetsFog = findViewById(R.id.dashboard_fog_view);
         this.bottomSheetMakePaymentView = findViewById(R.id.make_payment_action_view);
-        this.bottomSheetRequestPaymentView = findViewById(R.id.request_payment_actions_view);
+        this.bottomSheetHoldCashView = findViewById(R.id.hold_cash_action_view);
         this.bottomSheetsRequestDeliveryView = findViewById(R.id.request_delivery_action_view);
         this.notificationsView = findViewById(R.id.activity_dashboard_notifications_view);
         this.pendingNoDataTransactionsRecyclerView = findViewById(R.id.pending_transactions_no_data_recycler_view);
@@ -182,10 +182,10 @@ public class DashboardActivity extends AppCompatActivity implements RapidFloatin
             }
         });
 
-        this.bottomSheetRequestPaymentView.setOnClickListener(new View.OnClickListener() {
+        this.bottomSheetHoldCashView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(DashboardActivity.this, MakeNewSaleActivity.class);
+                Intent intent = new Intent(DashboardActivity.this, HoldCashActivity.class);
                 startActivity(intent);
                 finish();
             }

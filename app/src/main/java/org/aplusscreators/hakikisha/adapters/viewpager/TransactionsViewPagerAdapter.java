@@ -23,9 +23,9 @@ public class TransactionsViewPagerAdapter extends FragmentStatePagerAdapter {
             case 0:
                 return "All";
             case 1:
-                return "Income";
+                return "Sales";
             case 2:
-                return "Expenses";
+                return "Purchases";
             default:
                 return "Unknown";
         }

@@ -19,7 +19,7 @@ import org.aplusscreators.hakikisha.R;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 
-public class MakeNewSaleActivity extends AppCompatActivity {
+public class HoldCashActivity extends AppCompatActivity {
 
     private View closeActionView;
     private FloatingActionButton sendRequestPaymentFab;
@@ -36,7 +36,7 @@ public class MakeNewSaleActivity extends AppCompatActivity {
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_payment_request);
+        setContentView(R.layout.activity_hold_cash_request);
 
         initializeResources();
     }
@@ -44,10 +44,6 @@ public class MakeNewSaleActivity extends AppCompatActivity {
     private void initializeResources() {
         this.closeActionView = findViewById(R.id.activity_request_payment_close_action_view);
         this.sendRequestPaymentFab = findViewById(R.id.activity_payments_pay_fab);
-        this.customerDetailsView = findViewById(R.id.request_payment_customer_entry_view);
-        this.customerNameTextView = findViewById(R.id.request_payment_customer_name_text_view);
-        this.customerEmailAddressTextView = findViewById(R.id.request_payment_customer_email_text_view);
-        this.customerImageView = findViewById(R.id.request_payment_customer_image_view);
         this.orderNumberEntryView = findViewById(R.id.request_payments_order_number_field_view);
         this.orderNumberEditText = findViewById(R.id.request_payments_order_number_edit_text);
         this.orderNumberEntryView = findViewById(R.id.request_payments_order_number_field_view);
@@ -58,7 +54,7 @@ public class MakeNewSaleActivity extends AppCompatActivity {
         this.closeActionView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                AlertDialog.Builder alertBuilder = new AlertDialog.Builder(MakeNewSaleActivity.this)
+                AlertDialog.Builder alertBuilder = new AlertDialog.Builder(HoldCashActivity.this)
                         .setMessage("Are you sure you want to cancel ?")
                         .setPositiveButton("Resume", new DialogInterface.OnClickListener() {
                             @Override
@@ -69,7 +65,7 @@ public class MakeNewSaleActivity extends AppCompatActivity {
                         .setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialog, int which) {
-                                Intent intent = new Intent(MakeNewSaleActivity.this, DashboardActivity.class);
+                                Intent intent = new Intent(HoldCashActivity.this, DashboardActivity.class);
                                 startActivity(intent);
                                 finish();
                             }
@@ -84,28 +80,16 @@ public class MakeNewSaleActivity extends AppCompatActivity {
                 requestPaymentProgressBar.setVisibility(View.VISIBLE);
                 boolean valideFields = validatefields();
                 if (!valideFields)return;
-                Toast.makeText(MakeNewSaleActivity.this,"Payment Request Sent", Toast.LENGTH_LONG).show();
-                Intent intent = new Intent(MakeNewSaleActivity.this,DashboardActivity.class);
+                Toast.makeText(HoldCashActivity.this,"Payment Request Sent", Toast.LENGTH_LONG).show();
+                Intent intent = new Intent(HoldCashActivity.this,DashboardActivity.class);
                 startActivity(intent);
                 finish();
             }
         });
 
-        this.customerDetailsView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(MakeNewSaleActivity.this,CustomerFormActivity.class);
-                startActivity(intent);
-                finish();
-            }
-        });
     }
 
     private boolean validatefields() {
-        if (orderNumberEditText.getText().toString().isEmpty()) {
-            orderNumberEditText.setError("Required field");
-            return false;
-        }
         if (amountEntryEditText.getText().toString().isEmpty()) {
             amountEntryEditText.setError("Required field");
             return false;
@@ -120,7 +104,7 @@ public class MakeNewSaleActivity extends AppCompatActivity {
     @Override
     public void onBackPressed() {
         super.onBackPressed();
-        Intent intent = new Intent(MakeNewSaleActivity.this,DashboardActivity.class);
+        Intent intent = new Intent(HoldCashActivity.this,DashboardActivity.class);
         startActivity(intent);
         finish();
     }

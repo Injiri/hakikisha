@@ -29,14 +29,14 @@
             android:textSize="18sp"
             android:gravity="center_vertical"
             android:layout_marginStart="14dp"
-            android:text="Buy"
+            android:text="Buying"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"/>
 
     </LinearLayout>
 
     <LinearLayout
-        android:id="@+id/request_payment_actions_view"
+        android:id="@+id/hold_cash_action_view"
         android:layout_marginTop="12dp"
         android:orientation="horizontal"
         android:layout_width="match_parent"
@@ -52,7 +52,7 @@
             android:textSize="18sp"
             android:gravity="center_vertical"
             android:layout_marginStart="14dp"
-            android:text="Sell"
+            android:text="Hold Cash"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"/>
 
@@ -75,7 +75,7 @@
             android:textSize="18sp"
             android:gravity="center_vertical"
             android:layout_marginStart="14dp"
-            android:text="Make delivery"
+            android:text="Selling"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"/>
 

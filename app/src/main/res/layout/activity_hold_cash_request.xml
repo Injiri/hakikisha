@@ -32,14 +32,14 @@
             android:layout_centerHorizontal="true"
             android:layout_marginBottom="30dp"
             android:gravity="center"
-            android:text="Make new Sale"
+            android:text="Deposit Funds"
             android:textColor="@android:color/white"
             android:textSize="22sp"
             android:textStyle="bold" />
 
     </RelativeLayout>
 
-    <include layout="@layout/request_payment_content"/>
+    <include layout="@layout/hold_cash_request_content"/>
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/activity_payments_pay_fab"

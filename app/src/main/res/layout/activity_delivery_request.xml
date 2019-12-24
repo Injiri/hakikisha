@@ -32,7 +32,7 @@
             android:layout_centerHorizontal="true"
             android:layout_marginBottom="30dp"
             android:gravity="center"
-            android:text="Delivery Request"
+            android:text="Ensure your sale"
             android:textColor="@android:color/white"
             android:textSize="22sp"
             android:textStyle="bold" />
