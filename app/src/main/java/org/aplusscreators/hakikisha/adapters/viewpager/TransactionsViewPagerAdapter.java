@@ -21,11 +21,11 @@ public class TransactionsViewPagerAdapter extends FragmentStatePagerAdapter {
     public CharSequence getPageTitle(int position) {
         switch (position) {
             case 0:
-                return "All";
+                return "Buy";
             case 1:
-                return "Sales";
+                return "Hold Cash";
             case 2:
-                return "Purchases";
+                return "Delivery";
             default:
                 return "Unknown";
         }
