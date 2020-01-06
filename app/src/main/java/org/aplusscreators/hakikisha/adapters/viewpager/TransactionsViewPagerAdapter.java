@@ -9,6 +9,7 @@ import androidx.fragment.app.FragmentStatePagerAdapter;
 import org.aplusscreators.hakikisha.views.fragment.AllTransactionsFragment;
 import org.aplusscreators.hakikisha.views.fragment.ExpenseFragment;
 import org.aplusscreators.hakikisha.views.fragment.IncomeTransactionsFragment;
+import org.aplusscreators.hakikisha.views.fragment.SalesFragment;
 
 public class TransactionsViewPagerAdapter extends FragmentStatePagerAdapter {
 
@@ -23,8 +24,10 @@ public class TransactionsViewPagerAdapter extends FragmentStatePagerAdapter {
             case 0:
                 return "Buy";
             case 1:
-                return "Hold Cash";
+                return "Hold Cash (Pay)";
             case 2:
+                return "Sell";
+            case 3:
                 return "Delivery";
             default:
                 return "Unknown";
@@ -40,6 +43,8 @@ public class TransactionsViewPagerAdapter extends FragmentStatePagerAdapter {
             case 1:
                 return new IncomeTransactionsFragment();
             case 2:
+                return new SalesFragment();
+            case 3:
                 return new ExpenseFragment();
             default:
                 return new AllTransactionsFragment();
@@ -48,6 +53,6 @@ public class TransactionsViewPagerAdapter extends FragmentStatePagerAdapter {
 
     @Override
     public int getCount() {
-        return 3;
+        return 4;
     }
 }
